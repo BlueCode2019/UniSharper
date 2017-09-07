@@ -32,10 +32,10 @@ namespace UniSharper.Utils
     public static class LayerMaskUtil
     {
         /// <summary>
-        /// Determines whether the specified layer is in the <see cref="LayerMask"/>.
+        /// Determines whether the specific layer is in the <see cref="LayerMask"/>.
         /// </summary>
         /// <param name="layer">The layer.</param>
-        /// <param name="layerMask">The specified <see cref="LayerMask"/>.</param>
+        /// <param name="layerMask">The specific <see cref="LayerMask"/>.</param>
         /// <returns><c>true</c> if the layer is in the <see cref="LayerMask"/>; otherwise, <c>false</c>.</returns>
         public static bool IsInLayerMask(int layer, LayerMask layerMask)
         {

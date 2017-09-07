@@ -59,7 +59,7 @@ namespace UnityEngine
         /// <summary>
         /// Returns all components of the <see cref="Transform"/>.
         /// </summary>
-        /// <param name="gameObject">The specified <see cref="Transform"/>.</param>
+        /// <param name="gameObject">The specific <see cref="Transform"/>.</param>
         /// <returns>The array of all components.</returns>
         public static Component[] GetAllComponents(this Transform transform)
         {

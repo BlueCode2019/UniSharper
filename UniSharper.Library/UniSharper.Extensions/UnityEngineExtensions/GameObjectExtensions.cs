@@ -116,7 +116,7 @@ namespace UnityEngine
         /// <summary>
         /// Returns all components of the <see cref="GameObject"/>.
         /// </summary>
-        /// <param name="gameObject">The specified <see cref="GameObject"/>.</param>
+        /// <param name="gameObject">The specific <see cref="GameObject"/>.</param>
         /// <returns>The array of all components.</returns>
         public static Component[] GetAllComponents(this GameObject gameObject)
         {
@@ -124,7 +124,7 @@ namespace UnityEngine
         }
 
         /// <summary>
-        /// Copies all components values of the specified <see cref="GameObject"/> to the other <see cref="GameObject"/>.
+        /// Copies all components values of the specific <see cref="GameObject"/> to the other <see cref="GameObject"/>.
         /// </summary>
         /// <param name="gameObject">The original <see cref="GameObject"/>.</param>
         /// <param name="targetGameObject">The target <see cref="GameObject"/>.</param>
@@ -239,9 +239,9 @@ namespace UnityEngine
         }
 
         /// <summary>
-        /// Determines whether the layer of <see cref="GameObject"/> is in the specified <see cref="LayerMask"/>.
+        /// Determines whether the layer of <see cref="GameObject"/> is in the specific <see cref="LayerMask"/>.
         /// </summary>
-        /// <param name="gameObject">The specified <see cref="GameObject"/>.</param>
+        /// <param name="gameObject">The specific <see cref="GameObject"/>.</param>
         /// <param name="layerMask">The value of <see cref="LayerMask"/>.</param>
         /// <returns>
         /// <c>true</c> if the layer of <see cref="GameObject"/> is in the <see cref="LayerMask"/>;
