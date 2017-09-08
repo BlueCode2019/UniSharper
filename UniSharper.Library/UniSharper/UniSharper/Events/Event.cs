@@ -22,6 +22,8 @@
  *	SOFTWARE.
  */
 
+using System;
+
 namespace UniSharper.Events
 {
     /// <summary>
@@ -55,8 +57,14 @@ namespace UniSharper.Events
         /// </summary>
         /// <param name="eventType">The type of event.</param>
         /// <param name="context">The context object.</param>
+        /// <exception cref="ArgumentNullException"><c>eventType</c> is <c>null</c> or <c>empty</c>.</exception>
         public Event(string eventType, object context = null)
         {
+            if (string.IsNullOrEmpty(eventType))
+            {
+                throw new ArgumentNullException(nameof(eventType));
+            }
+
             EventType = eventType;
             Context = context;
         }

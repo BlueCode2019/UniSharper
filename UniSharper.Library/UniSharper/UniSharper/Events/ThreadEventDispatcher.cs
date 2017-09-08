@@ -24,6 +24,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace UniSharper.Events
 {
@@ -36,6 +37,7 @@ namespace UniSharper.Events
     {
         private Dictionary<string, List<Action<Event>>> listeners = null;
         private Dictionary<string, List<Action<Event>>> pendingListeners = null;
+        private Dictionary<string, List<Action<Event>>> pendingRemovedListeners = null;
 
         private Queue<Event> eventQueue;
         private Queue<Event> pendingEventQueue;
@@ -51,9 +53,22 @@ namespace UniSharper.Events
         {
             listeners = new Dictionary<string, List<Action<Event>>>();
             pendingListeners = new Dictionary<string, List<Action<Event>>>();
+            pendingRemovedListeners = new Dictionary<string, List<Action<Event>>>();
 
             eventQueue = new Queue<Event>();
             pendingEventQueue = new Queue<Event>();
+        }
+
+        /// <summary>
+        /// Finalizes an instance of the <see cref="ThreadEventDispatcher"/> class.
+        /// </summary>
+        ~ThreadEventDispatcher()
+        {
+            listeners = null;
+            pendingListeners = null;
+
+            eventQueue = null;
+            pendingEventQueue = null;
         }
 
         #region Interface IThreadEventDispatcher
@@ -63,8 +78,23 @@ namespace UniSharper.Events
         /// </summary>
         /// <param name="eventType">The type of event.</param>
         /// <param name="listener">The delegate to handle the event.</param>
+        /// <exception cref="ArgumentNullException">
+        /// <para><c>eventType</c> is <c>null</c> or <c>empty</c>.</para>
+        /// - or -
+        /// <para><c>listener</c> is <c>null</c>.</para>
+        /// </exception>
         public void AddEventListener(string eventType, Action<Event> listener)
         {
+            if (string.IsNullOrEmpty(eventType))
+            {
+                throw new ArgumentNullException(nameof(eventType));
+            }
+
+            if (listener == null)
+            {
+                throw new ArgumentNullException(nameof(listener));
+            }
+
             lock (syncRoot)
             {
                 if (pendingFlag)
@@ -86,11 +116,17 @@ namespace UniSharper.Events
         /// Dispatches en <see cref="Event"/>.
         /// </summary>
         /// <param name="e">The <see cref="Event"/> object.</param>
+        /// <exception cref="ArgumentNullException"><c>e</c> is <c>null</c>.</exception>
         public void DispatchEvent(Event e)
         {
+            if (e == null)
+            {
+                throw new ArgumentNullException(nameof(e));
+            }
+
             lock (syncRoot)
             {
-                if (!HasEventListener(e.EventType))
+                if (!HasEventListeners(e.EventType))
                 {
                     return;
                 }
@@ -107,21 +143,27 @@ namespace UniSharper.Events
         }
 
         /// <summary>
-        /// Checks whether this <see cref="ThreadEventDispatcher"/> has any listener registered for a
+        /// Checks whether this <see cref="ThreadEventDispatcher"/> has listeners registered for a
         /// specific type of event.
         /// </summary>
         /// <param name="eventType">The type of event.</param>
         /// <returns>
-        /// <c>true</c> if any listener of the specified type of event is registered; <c>false</c> otherwise.
+        /// <c>true</c> if listeners of the specified type of event are registered; <c>false</c> otherwise.
         /// </returns>
-        public bool HasEventListener(string eventType)
+        /// <exception cref="ArgumentNullException"><c>eventType</c> is <c>null</c> or <c>empty</c>.</exception>
+        public bool HasEventListeners(string eventType)
         {
+            if (string.IsNullOrEmpty(eventType))
+            {
+                throw new ArgumentNullException(nameof(eventType));
+            }
+
             return (listeners.ContainsKey(eventType) && listeners[eventType].Count > 0)
                 || (pendingListeners.ContainsKey(eventType) && pendingListeners[eventType].Count > 0);
         }
 
         /// <summary>
-        /// Checks whether this <see cref="IThreadEventDispatcher"/> has the delegate listener
+        /// Checks whether this <see cref="ThreadEventDispatcher"/> has the delegate listener
         /// registered for a specific type of event.
         /// </summary>
         /// <param name="eventType">The type of event.</param>
@@ -129,46 +171,203 @@ namespace UniSharper.Events
         /// <returns>
         /// <c>true</c> if a listener of the specified type of event is registered; <c>false</c> otherwise.
         /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <para><c>eventType</c> is <c>null</c> or <c>empty</c>.</para>
+        /// - or -
+        /// <para><c>listener</c> is <c>null</c>.</para>
+        /// </exception>
         public bool HasEventListener(string eventType, Action<Event> listener)
         {
+            if (string.IsNullOrEmpty(eventType))
+            {
+                throw new ArgumentNullException(nameof(eventType));
+            }
+
+            if (listener == null)
+            {
+                throw new ArgumentNullException(nameof(listener));
+            }
+
             return (listeners.ContainsKey(eventType) && listeners[eventType].Contains(listener))
                 || (pendingListeners.ContainsKey(eventType) && pendingListeners[eventType].Contains(listener));
         }
 
+        /// <summary>
+        /// Removes all event listeners of this <see cref="ThreadEventDispatcher"/>.
+        /// </summary>
         public void RemoveAllEventListeners()
         {
+            if (!HasEventListeners())
+            {
+                return;
+            }
+
             lock (syncRoot)
             {
                 if (pendingFlag)
                 {
+                    pendingListeners = new Dictionary<string, List<Action<Event>>>(listeners);
                 }
                 else
                 {
+                    listeners.Clear();
                 }
             }
         }
 
+        /// <summary>
+        /// Removes a listener.
+        /// </summary>
+        /// <param name="eventType">The type of event.</param>
+        /// <param name="listener">The delegate to be removed.</param>
+        /// <exception cref="ArgumentNullException">
+        /// <para><c>eventType</c> is <c>null</c> or <c>empty</c>.</para>
+        /// - or -
+        /// <para><c>listener</c> is <c>null</c>.</para>
+        /// </exception>
         public void RemoveEventListener(string eventType, Action<Event> listener)
         {
+            if (string.IsNullOrEmpty(eventType))
+            {
+                throw new ArgumentNullException(nameof(eventType));
+            }
+
+            if (listener == null)
+            {
+                throw new ArgumentNullException(nameof(listener));
+            }
+
             lock (syncRoot)
             {
+                if (pendingFlag)
+                {
+                    if (!pendingListeners.ContainsKey(eventType) || !pendingListeners[eventType].Contains(listener))
+                    {
+                        pendingListeners.AddUnique(eventType, new List<Action<Event>>());
+                        pendingListeners[eventType].AddUnique(listener);
+                    }
+                }
+                else
+                {
+                    if (listeners.ContainsKey(eventType))
+                    {
+                        List<Action<Event>> list = listeners[eventType];
+                        list.Remove(listener);
+                    }
+                }
             }
         }
 
+        /// <summary>
+        /// Removes the event listeners registered for the specific type of event.
+        /// </summary>
+        /// <param name="eventType">The type of event.</param>
+        /// <exception cref="ArgumentNullException"><c>eventType</c> is <c>null</c> or <c>empty</c>.</exception>
         public void RemoveEventListeners(string eventType)
         {
+            if (string.IsNullOrEmpty(eventType))
+            {
+                throw new ArgumentNullException(nameof(eventType));
+            }
+
             lock (syncRoot)
             {
+                if (pendingFlag)
+                {
+                    if (listeners.ContainsKey(eventType))
+                    {
+                        if (pendingListeners.ContainsKey(eventType))
+                        {
+                            pendingListeners.Remove(eventType);
+                        }
+
+                        pendingListeners.AddUnique(eventType, listeners[eventType]);
+                    }
+                }
+                else
+                {
+                    listeners.Remove(eventType);
+                }
             }
         }
 
+        /// <summary>
+        /// Update is called every frame or fixed frequency.
+        /// </summary>
         public void Update()
         {
             lock (syncRoot)
             {
+                RemovePendingEventListeners();
+                AddPendingEventListeners();
+                AddPendingEvents();
+
+                pendingFlag = true;
+
+                while (eventQueue.Count > 0)
+                {
+                    Event e = eventQueue.Dequeue();
+
+                    if (listeners.ContainsKey(e.EventType))
+                    {
+                        List<Action<Event>> handlers = listeners[e.EventType];
+
+                        handlers.ForEach(listener =>
+                        {
+                            listener.Invoke(e);
+                        });
+                    }
+                }
+
+                pendingFlag = false;
             }
         }
 
         #endregion Interface IThreadEventDispatcher
+
+        #region Private Methods
+
+        /// <summary>
+        /// Checks whether this <see cref="IThreadEventDispatcher"/> has listeners registered.
+        /// </summary>
+        /// <returns><c>true</c> if listeners are registered; <c>false</c> otherwise.</returns>
+        private bool HasEventListeners()
+        {
+            return listeners.Count > 0 || pendingListeners.Count > 0;
+        }
+
+        /// <summary>
+        /// Adds pending event listeners.
+        /// </summary>
+        private void AddPendingEventListeners()
+        {
+            listeners = listeners.Union(pendingListeners)
+                .ToDictionary(pair => pair.Key, pair => pair.Value);
+
+            pendingListeners.Clear();
+        }
+
+        /// <summary>
+        /// Adds pending events.
+        /// </summary>
+        private void AddPendingEvents()
+        {
+            while (pendingEventQueue.Count > 0)
+            {
+                Event e = pendingEventQueue.Dequeue();
+                eventQueue.Enqueue(e);
+            }
+        }
+
+        /// <summary>
+        /// Removes pending event listeners.
+        /// </summary>
+        private void RemovePendingEventListeners()
+        {
+            listeners = listeners.Except(pendingRemovedListeners)
+                .ToDictionary(pair => pair.Key, pair => pair.Value);
+        }
+
+        #endregion Private Methods
     }
 }
