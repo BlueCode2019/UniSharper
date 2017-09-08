@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpTOC>
+
+  <HelpTOCNode Id="3d537e63-6e35-4fb8-8338-817c7269efc1" Title="System Namespace" Url="html/850551159.htm">
+    <HelpTOCNode Id="a7891d34-1fa8-42ce-b7f9-81f0b4fb242a" Title="StringExtensions Class" Url="html/1004566956.htm">
+      <HelpTOCNode Title="StringExtensions Members" Url="html/1167518800.htm" />
+      <HelpTOCNode Id="e6838cee-c074-45bb-83fc-e1da41bf1c54" Title="StringExtensions Methods" Url="html/759259378.htm">
+        <HelpTOCNode Title="ToQuaternion Method " Url="html/590119731.htm" />
+        <HelpTOCNode Title="ToVector2 Method " Url="html/223325307.htm" />
+        <HelpTOCNode Title="ToVector3 Method " Url="html/439422086.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="058fba30-5eaa-410c-988d-f513dfae8198" Title="UniSharper Namespace" Url="html/228329255.htm">
+    <HelpTOCNode Id="10ffa04d-c581-47ac-8871-e734cc3b2fe7" Title="EnumFlagsFieldAttribute Class" Url="html/170321239.htm">
+      <HelpTOCNode Title="EnumFlagsFieldAttribute Members" Url="html/1316165684.htm" />
+      <HelpTOCNode Id="c652a56f-564f-4e8f-9970-7e51e903d8b8" Title="EnumFlagsFieldAttribute Constructor " Url="html/889323313.htm">
+        <HelpTOCNode Title="EnumFlagsFieldAttribute Constructor " Url="html/1564526771.htm" />
+        <HelpTOCNode Title="EnumFlagsFieldAttribute Constructor (String)" Url="html/1693791945.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="EnumFlagsFieldAttribute Methods" Url="html/1468525420.htm" />
+      <HelpTOCNode Id="81eaa3aa-bb31-4db7-a15d-386be7b39952" Title="EnumFlagsFieldAttribute Properties" Url="html/1190392084.htm">
+        <HelpTOCNode Title="Label Property " Url="html/1989408051.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="8a3bf425-2746-4c69-9a32-acf05496fce8" Title="ReadonlyFieldAttribute Class" Url="html/799465126.htm">
+      <HelpTOCNode Title="ReadonlyFieldAttribute Methods" Url="html/979807718.htm" />
+      <HelpTOCNode Title="ReadonlyFieldAttribute Properties" Url="html/1707973616.htm" />
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="92b2bcd4-cd4b-44e2-a162-f126c1e22f2a" Title="UniSharper.Events Namespace" Url="html/1493303532.htm">
+    <HelpTOCNode Id="9876556a-021d-405a-ab38-29cc6bc11aad" Title="Event Class" Url="html/1772186060.htm">
+      <HelpTOCNode Title="Event Members" Url="html/1336246994.htm" />
+      <HelpTOCNode Title="Event Constructor " Url="html/890181586.htm" />
+      <HelpTOCNode Title="Event Methods" Url="html/1320060220.htm" />
+      <HelpTOCNode Id="37ee8967-33a0-472d-bf2f-28c1452b5cee" Title="Event Properties" Url="html/1804457588.htm">
+        <HelpTOCNode Title="Context Property " Url="html/772819449.htm" />
+        <HelpTOCNode Title="EventType Property " Url="html/689041315.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="667955dd-8755-4ea0-95d0-311d217dd248" Title="IThreadEventDispatcher Interface" Url="html/1349437568.htm">
+      <HelpTOCNode Title="IThreadEventDispatcher Members" Url="html/752232645.htm" />
+      <HelpTOCNode Id="3acc6e93-e0a8-4145-9824-68a151ce9faa" Title="IThreadEventDispatcher Methods" Url="html/259671980.htm">
+        <HelpTOCNode Title="AddEventListener Method " Url="html/392215549.htm" />
+        <HelpTOCNode Title="DispatchEvent Method " Url="html/1339235412.htm" />
+        <HelpTOCNode Title="HasEventListener Method " Url="html/1752642048.htm" />
+        <HelpTOCNode Title="HasEventListeners Method " Url="html/624549965.htm" />
+        <HelpTOCNode Title="RemoveAllEventListeners Method " Url="html/1412766434.htm" />
+        <HelpTOCNode Title="RemoveEventListener Method " Url="html/930492038.htm" />
+        <HelpTOCNode Title="RemoveEventListeners Method " Url="html/653499509.htm" />
+        <HelpTOCNode Title="Update Method " Url="html/337453865.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="2be8895b-dcf4-4aad-8b68-ed9208ea58df" Title="ThreadEventDispatcher Class" Url="html/1338894927.htm">
+      <HelpTOCNode Title="ThreadEventDispatcher Members" Url="html/1474567213.htm" />
+      <HelpTOCNode Title="ThreadEventDispatcher Constructor " Url="html/612601552.htm" />
+      <HelpTOCNode Id="0b303681-af07-4165-ad37-46005716f4aa" Title="ThreadEventDispatcher Methods" Url="html/619767088.htm">
+        <HelpTOCNode Title="AddEventListener Method " Url="html/1855475150.htm" />
+        <HelpTOCNode Title="DispatchEvent Method " Url="html/309060837.htm" />
+        <HelpTOCNode Title="HasEventListener Method " Url="html/1980597642.htm" />
+        <HelpTOCNode Title="HasEventListeners Method (String)" Url="html/2105411102.htm" />
+        <HelpTOCNode Title="RemoveAllEventListeners Method " Url="html/1938952658.htm" />
+        <HelpTOCNode Title="RemoveEventListener Method " Url="html/411128206.htm" />
+        <HelpTOCNode Title="RemoveEventListeners Method " Url="html/980565582.htm" />
+        <HelpTOCNode Title="Update Method " Url="html/415083728.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="75ffd905-caaa-436d-be67-d4f8073c0c0a" Title="UniSharper.Patterns Namespace" Url="html/1861633978.htm">
+    <HelpTOCNode Id="cea0ee46-7e03-41e1-86f1-a105ec4f3710" Title="SingletonMonoBehaviour(T) Class" Url="html/1007032752.htm">
+      <HelpTOCNode Title="SingletonMonoBehaviour(T) Members" Url="html/469441680.htm" />
+      <HelpTOCNode Id="d587d164-a4e3-4c93-9a35-e003e20bf842" Title="SingletonMonoBehaviour(T) Methods" Url="html/1579308300.htm">
+        <HelpTOCNode Title="Awake Method " Url="html/1305796915.htm" />
+        <HelpTOCNode Title="OnDestroy Method " Url="html/292967318.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="0f89f358-c3dc-44b6-8b7d-ad80aa04754b" Title="SingletonMonoBehaviour(T) Properties" Url="html/1425857350.htm">
+        <HelpTOCNode Title="Instance Property " Url="html/1178114218.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="68179a67-6e70-4ad6-b510-9d2cd07c9bc5" Title="UniSharper.Utils Namespace" Url="html/1612437234.htm">
+    <HelpTOCNode Id="1fee3c1c-eab8-49cc-8349-d943c6e20451" Title="LayerMaskUtil Class" Url="html/1924892965.htm">
+      <HelpTOCNode Title="LayerMaskUtil Members" Url="html/344782830.htm" />
+      <HelpTOCNode Id="49c1cf98-c8f8-45f1-9922-52d297474c40" Title="LayerMaskUtil Methods" Url="html/1289174066.htm">
+        <HelpTOCNode Title="IsInLayerMask Method " Url="html/1620858427.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="03ddeca2-da87-4c34-b367-e117662bb53c" Title="MathfUtil Class" Url="html/1073412377.htm">
+      <HelpTOCNode Title="MathfUtil Members" Url="html/835644139.htm" />
+      <HelpTOCNode Id="4c3f498e-af93-44f1-ba8e-dcaba99a8336" Title="MathfUtil Methods" Url="html/210188050.htm">
+        <HelpTOCNode Title="ClampAngle Method " Url="html/709690942.htm" />
+        <HelpTOCNode Title="GetAngle Method " Url="html/533258648.htm" />
+        <HelpTOCNode Title="NormalizeAngle Method " Url="html/102407813.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="233680d3-442f-46a6-9592-7a815ef6fe86" Title="UnityEngine Namespace" Url="html/1136009998.htm">
+    <HelpTOCNode Id="e04b9d5b-8a44-473c-9370-f6b0ccefc111" Title="ComponentExtensions Class" Url="html/1385856512.htm">
+      <HelpTOCNode Title="ComponentExtensions Members" Url="html/1206786045.htm" />
+      <HelpTOCNode Id="cfec7427-2c7f-4b37-be27-b29e4390cf58" Title="ComponentExtensions Methods" Url="html/1944306917.htm">
+        <HelpTOCNode Title="CopyComponentValues Method " Url="html/1229745441.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="7b8f9c7b-f443-41ed-867d-40bf15bd8c10" Title="GameObjectExtensions Class" Url="html/1569660113.htm">
+      <HelpTOCNode Title="GameObjectExtensions Members" Url="html/281154418.htm" />
+      <HelpTOCNode Id="c8312559-573f-4aa1-ac58-befb5bb94820" Title="GameObjectExtensions Methods" Url="html/893990786.htm">
+        <HelpTOCNode Title="CopyAllComponentsValues Method " Url="html/742402556.htm" />
+        <HelpTOCNode Title="FindInChildren Method " Url="html/1316843764.htm" />
+        <HelpTOCNode Title="GetAllComponents Method " Url="html/569168458.htm" />
+        <HelpTOCNode Id="6be2c12d-f50b-4c42-8206-97f953b02df1" Title="Overload:UnityEngine.GameObjectExtensions.GetOrAddComponent">
+          <HelpTOCNode Title="GetOrAddComponent(T) Method (GameObject)" Url="html/1032904861.htm" />
+          <HelpTOCNode Title="GetOrAddComponent Method (GameObject, Type)" Url="html/663125300.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="IsInLayerMask Method " Url="html/348693075.htm" />
+        <HelpTOCNode Title="RemoveComponent(T) Method " Url="html/1215066924.htm" />
+        <HelpTOCNode Title="RemoveComponentImmediate(T) Method " Url="html/385383482.htm" />
+        <HelpTOCNode Id="3a1c4cc5-1ea1-448c-9015-65ba260d3e09" Title="SetChildrenLayer Method " Url="html/1105326640.htm">
+          <HelpTOCNode Title="SetChildrenLayer Method (GameObject, Int32, Boolean, Boolean)" Url="html/2082340368.htm" />
+          <HelpTOCNode Title="SetChildrenLayer Method (GameObject, String, Boolean, Boolean)" Url="html/734470059.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="6373c8d2-0026-4228-be03-b30e6a4ef10b" Title="QuaternionExtensions Class" Url="html/1094441063.htm">
+      <HelpTOCNode Title="QuaternionExtensions Members" Url="html/1890900241.htm" />
+      <HelpTOCNode Id="04a5105c-ee8d-415b-a195-cb3223cc8627" Title="QuaternionExtensions Methods" Url="html/1471353051.htm">
+        <HelpTOCNode Title="ToAccurateString Method " Url="html/1521382369.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="339228f2-d8b3-4da4-ba6d-72ab803915fe" Title="TransformExtensions Class" Url="html/441417836.htm">
+      <HelpTOCNode Title="TransformExtensions Members" Url="html/1947395076.htm" />
+      <HelpTOCNode Id="27beef6d-16c4-44e2-9437-d4bef200ec4e" Title="TransformExtensions Methods" Url="html/495231889.htm">
+        <HelpTOCNode Title="FindInChildren Method " Url="html/1545730629.htm" />
+        <HelpTOCNode Title="GetAllComponents Method " Url="html/337723913.htm" />
+        <HelpTOCNode Title="GetBackwardDirection Method " Url="html/1111443624.htm" />
+        <HelpTOCNode Title="GetDownDirection Method " Url="html/1901481199.htm" />
+        <HelpTOCNode Title="GetLeftDirection Method " Url="html/303814847.htm" />
+        <HelpTOCNode Title="GetLocalPositionX Method " Url="html/1765691819.htm" />
+        <HelpTOCNode Title="GetLocalPositionY Method " Url="html/401637638.htm" />
+        <HelpTOCNode Title="GetLocalPositionZ Method " Url="html/2119338869.htm" />
+        <HelpTOCNode Title="GetPositionX Method " Url="html/1556347739.htm" />
+        <HelpTOCNode Title="GetPositionY Method " Url="html/872350885.htm" />
+        <HelpTOCNode Title="GetPositionZ Method " Url="html/1348598620.htm" />
+        <HelpTOCNode Title="RemoveComponent(T) Method " Url="html/1114275089.htm" />
+        <HelpTOCNode Title="RemoveComponentImmediate(T) Method " Url="html/381704913.htm" />
+        <HelpTOCNode Id="a0e43f99-82d7-4339-8c59-41cf79ab4081" Title="SetChildrenLayer Method " Url="html/1272604821.htm">
+          <HelpTOCNode Title="SetChildrenLayer Method (Transform, Int32, Boolean, Boolean)" Url="html/1493196588.htm" />
+          <HelpTOCNode Title="SetChildrenLayer Method (Transform, String, Boolean, Boolean)" Url="html/637702186.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="SetLocalPositionX Method " Url="html/1046869144.htm" />
+        <HelpTOCNode Title="SetLocalPositionY Method " Url="html/1585375918.htm" />
+        <HelpTOCNode Title="SetLocalPositionZ Method " Url="html/1911153285.htm" />
+        <HelpTOCNode Title="SetPositionX Method " Url="html/451461538.htm" />
+        <HelpTOCNode Title="SetPositionY Method " Url="html/712994315.htm" />
+        <HelpTOCNode Title="SetPositionZ Method " Url="html/1974374561.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="8dd98033-66ea-43bb-b354-c29d1a4eaa3d" Title="Vector2Extensions Class" Url="html/689492910.htm">
+      <HelpTOCNode Title="Vector2Extensions Members" Url="html/171478726.htm" />
+      <HelpTOCNode Id="c80ea737-9ee0-473e-9012-f755c6228d2b" Title="Vector2Extensions Methods" Url="html/743236071.htm">
+        <HelpTOCNode Title="ToAccurateString Method " Url="html/352845038.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="ad34e851-9bd0-4a21-81d7-01e5401d4cf6" Title="Vector3Extensions Class" Url="html/689485017.htm">
+      <HelpTOCNode Title="Vector3Extensions Members" Url="html/1264087354.htm" />
+      <HelpTOCNode Id="842f9f43-b548-4c6a-ad79-21881c0e42e0" Title="Vector3Extensions Methods" Url="html/743235112.htm">
+        <HelpTOCNode Title="ToAccurateString Method " Url="html/510385475.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+</HelpTOC>

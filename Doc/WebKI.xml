@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="AddEventListener method">
+    <HelpKINode Title="AddEventListener Method " Url="html/392215549.htm" />
+    <HelpKINode Title="AddEventListener Method " Url="html/1855475150.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Awake method" Url="html/1305796915.htm" />
+  <HelpKINode Title="ClampAngle method" Url="html/709690942.htm" />
+  <HelpKINode Title="ComponentExtensions class">
+    <HelpKINode Title="ComponentExtensions Class" Url="html/1385856512.htm" />
+    <HelpKINode Title="ComponentExtensions Members" Url="html/1206786045.htm" />
+    <HelpKINode Title="about ComponentExtensions class" Url="html/1385856512.htm" />
+    <HelpKINode Title="all members" Url="html/1206786045.htm" />
+    <HelpKINode Title="methods" Url="html/1944306917.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ComponentExtensions.CopyComponentValues method" Url="html/1229745441.htm" />
+  <HelpKINode Title="Context property" Url="html/772819449.htm" />
+  <HelpKINode Title="CopyAllComponentsValues method" Url="html/742402556.htm" />
+  <HelpKINode Title="CopyComponentValues method" Url="html/1229745441.htm" />
+  <HelpKINode Title="DispatchEvent method">
+    <HelpKINode Title="DispatchEvent Method " Url="html/309060837.htm" />
+    <HelpKINode Title="DispatchEvent Method " Url="html/1339235412.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnumFlagsFieldAttribute class">
+    <HelpKINode Title="EnumFlagsFieldAttribute Class" Url="html/170321239.htm" />
+    <HelpKINode Title="EnumFlagsFieldAttribute Members" Url="html/1316165684.htm" />
+    <HelpKINode Title="about EnumFlagsFieldAttribute class" Url="html/170321239.htm" />
+    <HelpKINode Title="all members" Url="html/1316165684.htm" />
+    <HelpKINode Title="constructor" Url="html/889323313.htm" />
+    <HelpKINode Title="methods" Url="html/1468525420.htm" />
+    <HelpKINode Title="properties" Url="html/1190392084.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnumFlagsFieldAttribute.EnumFlagsFieldAttribute constructor" Url="html/889323313.htm" />
+  <HelpKINode Title="EnumFlagsFieldAttribute.Label property" Url="html/1989408051.htm" />
+  <HelpKINode Title="Event class">
+    <HelpKINode Title="Event Class" Url="html/1772186060.htm" />
+    <HelpKINode Title="Event Members" Url="html/1336246994.htm" />
+    <HelpKINode Title="about Event class" Url="html/1772186060.htm" />
+    <HelpKINode Title="all members" Url="html/1336246994.htm" />
+    <HelpKINode Title="constructor" Url="html/890181586.htm" />
+    <HelpKINode Title="methods" Url="html/1320060220.htm" />
+    <HelpKINode Title="properties" Url="html/1804457588.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Event.Context property" Url="html/772819449.htm" />
+  <HelpKINode Title="Event.Event constructor" Url="html/890181586.htm" />
+  <HelpKINode Title="Event.EventType property" Url="html/689041315.htm" />
+  <HelpKINode Title="EventType property" Url="html/689041315.htm" />
+  <HelpKINode Title="FindInChildren method">
+    <HelpKINode Title="FindInChildren Method " Url="html/1316843764.htm" />
+    <HelpKINode Title="FindInChildren Method " Url="html/1545730629.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GameObjectExtensions class">
+    <HelpKINode Title="GameObjectExtensions Class" Url="html/1569660113.htm" />
+    <HelpKINode Title="GameObjectExtensions Members" Url="html/281154418.htm" />
+    <HelpKINode Title="about GameObjectExtensions class" Url="html/1569660113.htm" />
+    <HelpKINode Title="all members" Url="html/281154418.htm" />
+    <HelpKINode Title="methods" Url="html/893990786.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GameObjectExtensions.CopyAllComponentsValues method" Url="html/742402556.htm" />
+  <HelpKINode Title="GameObjectExtensions.FindInChildren method" Url="html/1316843764.htm" />
+  <HelpKINode Title="GameObjectExtensions.GetAllComponents method" Url="html/569168458.htm" />
+  <HelpKINode Title="GameObjectExtensions.IsInLayerMask method" Url="html/348693075.htm" />
+  <HelpKINode Title="GameObjectExtensions.RemoveComponent(Of T) method" Url="html/1215066924.htm" />
+  <HelpKINode Title="GameObjectExtensions.RemoveComponent&lt;T&gt; method" Url="html/1215066924.htm" />
+  <HelpKINode Title="GameObjectExtensions.RemoveComponentImmediate(Of T) method" Url="html/385383482.htm" />
+  <HelpKINode Title="GameObjectExtensions.RemoveComponentImmediate&lt;T&gt; method" Url="html/385383482.htm" />
+  <HelpKINode Title="GameObjectExtensions.SetChildrenLayer method" Url="html/1105326640.htm" />
+  <HelpKINode Title="GetAllComponents method">
+    <HelpKINode Title="GetAllComponents Method " Url="html/569168458.htm" />
+    <HelpKINode Title="GetAllComponents Method " Url="html/337723913.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetAngle method" Url="html/533258648.htm" />
+  <HelpKINode Title="GetBackwardDirection method" Url="html/1111443624.htm" />
+  <HelpKINode Title="GetDownDirection method" Url="html/1901481199.htm" />
+  <HelpKINode Title="GetLeftDirection method" Url="html/303814847.htm" />
+  <HelpKINode Title="GetLocalPositionX method" Url="html/1765691819.htm" />
+  <HelpKINode Title="GetLocalPositionY method" Url="html/401637638.htm" />
+  <HelpKINode Title="GetLocalPositionZ method" Url="html/2119338869.htm" />
+  <HelpKINode Title="GetPositionX method" Url="html/1556347739.htm" />
+  <HelpKINode Title="GetPositionY method" Url="html/872350885.htm" />
+  <HelpKINode Title="GetPositionZ method" Url="html/1348598620.htm" />
+  <HelpKINode Title="HasEventListener method">
+    <HelpKINode Title="HasEventListener Method " Url="html/1752642048.htm" />
+    <HelpKINode Title="HasEventListener Method " Url="html/1980597642.htm" />
+  </HelpKINode>
+  <HelpKINode Title="HasEventListeners method" Url="html/624549965.htm" />
+  <HelpKINode Title="Instance property" Url="html/1178114218.htm" />
+  <HelpKINode Title="IsInLayerMask method">
+    <HelpKINode Title="IsInLayerMask Method " Url="html/348693075.htm" />
+    <HelpKINode Title="IsInLayerMask Method " Url="html/1620858427.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IThreadEventDispatcher interface">
+    <HelpKINode Title="IThreadEventDispatcher Interface" Url="html/1349437568.htm" />
+    <HelpKINode Title="IThreadEventDispatcher Members" Url="html/752232645.htm" />
+    <HelpKINode Title="about IThreadEventDispatcher interface" Url="html/1349437568.htm" />
+    <HelpKINode Title="all members" Url="html/752232645.htm" />
+    <HelpKINode Title="methods" Url="html/259671980.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IThreadEventDispatcher.AddEventListener method" Url="html/392215549.htm" />
+  <HelpKINode Title="IThreadEventDispatcher.DispatchEvent method" Url="html/1339235412.htm" />
+  <HelpKINode Title="IThreadEventDispatcher.HasEventListener method" Url="html/1752642048.htm" />
+  <HelpKINode Title="IThreadEventDispatcher.HasEventListeners method" Url="html/624549965.htm" />
+  <HelpKINode Title="IThreadEventDispatcher.RemoveAllEventListeners method" Url="html/1412766434.htm" />
+  <HelpKINode Title="IThreadEventDispatcher.RemoveEventListener method" Url="html/930492038.htm" />
+  <HelpKINode Title="IThreadEventDispatcher.RemoveEventListeners method" Url="html/653499509.htm" />
+  <HelpKINode Title="IThreadEventDispatcher.Update method" Url="html/337453865.htm" />
+  <HelpKINode Title="Label property" Url="html/1989408051.htm" />
+  <HelpKINode Title="LayerMaskUtil class">
+    <HelpKINode Title="LayerMaskUtil Class" Url="html/1924892965.htm" />
+    <HelpKINode Title="LayerMaskUtil Members" Url="html/344782830.htm" />
+    <HelpKINode Title="about LayerMaskUtil class" Url="html/1924892965.htm" />
+    <HelpKINode Title="all members" Url="html/344782830.htm" />
+    <HelpKINode Title="methods" Url="html/1289174066.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LayerMaskUtil.IsInLayerMask method" Url="html/1620858427.htm" />
+  <HelpKINode Title="MathfUtil class">
+    <HelpKINode Title="MathfUtil Class" Url="html/1073412377.htm" />
+    <HelpKINode Title="MathfUtil Members" Url="html/835644139.htm" />
+    <HelpKINode Title="about MathfUtil class" Url="html/1073412377.htm" />
+    <HelpKINode Title="all members" Url="html/835644139.htm" />
+    <HelpKINode Title="methods" Url="html/210188050.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MathfUtil.ClampAngle method" Url="html/709690942.htm" />
+  <HelpKINode Title="MathfUtil.GetAngle method" Url="html/533258648.htm" />
+  <HelpKINode Title="MathfUtil.NormalizeAngle method" Url="html/102407813.htm" />
+  <HelpKINode Title="NormalizeAngle method" Url="html/102407813.htm" />
+  <HelpKINode Title="OnDestroy method" Url="html/292967318.htm" />
+  <HelpKINode Title="QuaternionExtensions class">
+    <HelpKINode Title="QuaternionExtensions Class" Url="html/1094441063.htm" />
+    <HelpKINode Title="QuaternionExtensions Members" Url="html/1890900241.htm" />
+    <HelpKINode Title="about QuaternionExtensions class" Url="html/1094441063.htm" />
+    <HelpKINode Title="all members" Url="html/1890900241.htm" />
+    <HelpKINode Title="methods" Url="html/1471353051.htm" />
+  </HelpKINode>
+  <HelpKINode Title="QuaternionExtensions.ToAccurateString method" Url="html/1521382369.htm" />
+  <HelpKINode Title="ReadonlyFieldAttribute class">
+    <HelpKINode Title="ReadonlyFieldAttribute Class" Url="html/799465126.htm" />
+    <HelpKINode Title="ReadonlyFieldAttribute Members" Url="html/1775585631.htm" />
+    <HelpKINode Title="about ReadonlyFieldAttribute class" Url="html/799465126.htm" />
+    <HelpKINode Title="all members" Url="html/1775585631.htm" />
+    <HelpKINode Title="methods" Url="html/979807718.htm" />
+    <HelpKINode Title="properties" Url="html/1707973616.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoveAllEventListeners method">
+    <HelpKINode Title="RemoveAllEventListeners Method " Url="html/1412766434.htm" />
+    <HelpKINode Title="RemoveAllEventListeners Method " Url="html/1938952658.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoveComponent(Of T) method">
+    <HelpKINode Title="RemoveComponent(T) Method " Url="html/1114275089.htm" />
+    <HelpKINode Title="RemoveComponent(T) Method " Url="html/1215066924.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoveComponent&lt;T&gt; method">
+    <HelpKINode Title="RemoveComponent(T) Method " Url="html/1215066924.htm" />
+    <HelpKINode Title="RemoveComponent(T) Method " Url="html/1114275089.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoveComponentImmediate(Of T) method">
+    <HelpKINode Title="RemoveComponentImmediate(T) Method " Url="html/381704913.htm" />
+    <HelpKINode Title="RemoveComponentImmediate(T) Method " Url="html/385383482.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoveComponentImmediate&lt;T&gt; method">
+    <HelpKINode Title="RemoveComponentImmediate(T) Method " Url="html/385383482.htm" />
+    <HelpKINode Title="RemoveComponentImmediate(T) Method " Url="html/381704913.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoveEventListener method">
+    <HelpKINode Title="RemoveEventListener Method " Url="html/411128206.htm" />
+    <HelpKINode Title="RemoveEventListener Method " Url="html/930492038.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoveEventListeners method">
+    <HelpKINode Title="RemoveEventListeners Method " Url="html/980565582.htm" />
+    <HelpKINode Title="RemoveEventListeners Method " Url="html/653499509.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SetChildrenLayer method">
+    <HelpKINode Title="SetChildrenLayer Method " Url="html/1105326640.htm" />
+    <HelpKINode Title="SetChildrenLayer Method " Url="html/1272604821.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SetLocalPositionX method" Url="html/1046869144.htm" />
+  <HelpKINode Title="SetLocalPositionY method" Url="html/1585375918.htm" />
+  <HelpKINode Title="SetLocalPositionZ method" Url="html/1911153285.htm" />
+  <HelpKINode Title="SetPositionX method" Url="html/451461538.htm" />
+  <HelpKINode Title="SetPositionY method" Url="html/712994315.htm" />
+  <HelpKINode Title="SetPositionZ method" Url="html/1974374561.htm" />
+  <HelpKINode Title="SingletonMonoBehaviour(Of T) class">
+    <HelpKINode Title="SingletonMonoBehaviour(T) Class" Url="html/1007032752.htm" />
+    <HelpKINode Title="SingletonMonoBehaviour(T) Members" Url="html/469441680.htm" />
+    <HelpKINode Title="about SingletonMonoBehaviour(Of T) class" Url="html/1007032752.htm" />
+    <HelpKINode Title="all members" Url="html/469441680.htm" />
+    <HelpKINode Title="methods" Url="html/1579308300.htm" />
+    <HelpKINode Title="properties" Url="html/1425857350.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SingletonMonoBehaviour(Of T).Awake method" Url="html/1305796915.htm" />
+  <HelpKINode Title="SingletonMonoBehaviour(Of T).Instance property" Url="html/1178114218.htm" />
+  <HelpKINode Title="SingletonMonoBehaviour(Of T).OnDestroy method" Url="html/292967318.htm" />
+  <HelpKINode Title="SingletonMonoBehaviour&lt;T&gt; class">
+    <HelpKINode Title="SingletonMonoBehaviour(T) Class" Url="html/1007032752.htm" />
+    <HelpKINode Title="SingletonMonoBehaviour(T) Members" Url="html/469441680.htm" />
+    <HelpKINode Title="about SingletonMonoBehaviour&lt;T&gt; class" Url="html/1007032752.htm" />
+    <HelpKINode Title="all members" Url="html/469441680.htm" />
+    <HelpKINode Title="methods" Url="html/1579308300.htm" />
+    <HelpKINode Title="properties" Url="html/1425857350.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SingletonMonoBehaviour&lt;T&gt;.Awake method" Url="html/1305796915.htm" />
+  <HelpKINode Title="SingletonMonoBehaviour&lt;T&gt;.Instance property" Url="html/1178114218.htm" />
+  <HelpKINode Title="SingletonMonoBehaviour&lt;T&gt;.OnDestroy method" Url="html/292967318.htm" />
+  <HelpKINode Title="StringExtensions class">
+    <HelpKINode Title="StringExtensions Class" Url="html/1004566956.htm" />
+    <HelpKINode Title="StringExtensions Members" Url="html/1167518800.htm" />
+    <HelpKINode Title="about StringExtensions class" Url="html/1004566956.htm" />
+    <HelpKINode Title="all members" Url="html/1167518800.htm" />
+    <HelpKINode Title="methods" Url="html/759259378.htm" />
+  </HelpKINode>
+  <HelpKINode Title="StringExtensions.ToQuaternion method" Url="html/590119731.htm" />
+  <HelpKINode Title="StringExtensions.ToVector2 method" Url="html/223325307.htm" />
+  <HelpKINode Title="StringExtensions.ToVector3 method" Url="html/439422086.htm" />
+  <HelpKINode Title="System namespace" Url="html/850551159.htm" />
+  <HelpKINode Title="System.StringExtensions class">
+    <HelpKINode Title="StringExtensions Class" Url="html/1004566956.htm" />
+    <HelpKINode Title="StringExtensions Members" Url="html/1167518800.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ThreadEventDispatcher class">
+    <HelpKINode Title="ThreadEventDispatcher Class" Url="html/1338894927.htm" />
+    <HelpKINode Title="ThreadEventDispatcher Members" Url="html/1474567213.htm" />
+    <HelpKINode Title="about ThreadEventDispatcher class" Url="html/1338894927.htm" />
+    <HelpKINode Title="all members" Url="html/1474567213.htm" />
+    <HelpKINode Title="constructor" Url="html/612601552.htm" />
+    <HelpKINode Title="methods" Url="html/619767088.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ThreadEventDispatcher.AddEventListener method" Url="html/1855475150.htm" />
+  <HelpKINode Title="ThreadEventDispatcher.DispatchEvent method" Url="html/309060837.htm" />
+  <HelpKINode Title="ThreadEventDispatcher.HasEventListener method" Url="html/1980597642.htm" />
+  <HelpKINode Title="ThreadEventDispatcher.RemoveAllEventListeners method" Url="html/1938952658.htm" />
+  <HelpKINode Title="ThreadEventDispatcher.RemoveEventListener method" Url="html/411128206.htm" />
+  <HelpKINode Title="ThreadEventDispatcher.RemoveEventListeners method" Url="html/980565582.htm" />
+  <HelpKINode Title="ThreadEventDispatcher.ThreadEventDispatcher constructor" Url="html/612601552.htm" />
+  <HelpKINode Title="ThreadEventDispatcher.Update method" Url="html/415083728.htm" />
+  <HelpKINode Title="ToAccurateString method">
+    <HelpKINode Title="ToAccurateString Method " Url="html/510385475.htm" />
+    <HelpKINode Title="ToAccurateString Method " Url="html/1521382369.htm" />
+    <HelpKINode Title="ToAccurateString Method " Url="html/352845038.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ToQuaternion method" Url="html/590119731.htm" />
+  <HelpKINode Title="ToVector2 method" Url="html/223325307.htm" />
+  <HelpKINode Title="ToVector3 method" Url="html/439422086.htm" />
+  <HelpKINode Title="TransformExtensions class">
+    <HelpKINode Title="TransformExtensions Class" Url="html/441417836.htm" />
+    <HelpKINode Title="TransformExtensions Members" Url="html/1947395076.htm" />
+    <HelpKINode Title="about TransformExtensions class" Url="html/441417836.htm" />
+    <HelpKINode Title="all members" Url="html/1947395076.htm" />
+    <HelpKINode Title="methods" Url="html/495231889.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TransformExtensions.FindInChildren method" Url="html/1545730629.htm" />
+  <HelpKINode Title="TransformExtensions.GetAllComponents method" Url="html/337723913.htm" />
+  <HelpKINode Title="TransformExtensions.GetBackwardDirection method" Url="html/1111443624.htm" />
+  <HelpKINode Title="TransformExtensions.GetDownDirection method" Url="html/1901481199.htm" />
+  <HelpKINode Title="TransformExtensions.GetLeftDirection method" Url="html/303814847.htm" />
+  <HelpKINode Title="TransformExtensions.GetLocalPositionX method" Url="html/1765691819.htm" />
+  <HelpKINode Title="TransformExtensions.GetLocalPositionY method" Url="html/401637638.htm" />
+  <HelpKINode Title="TransformExtensions.GetLocalPositionZ method" Url="html/2119338869.htm" />
+  <HelpKINode Title="TransformExtensions.GetPositionX method" Url="html/1556347739.htm" />
+  <HelpKINode Title="TransformExtensions.GetPositionY method" Url="html/872350885.htm" />
+  <HelpKINode Title="TransformExtensions.GetPositionZ method" Url="html/1348598620.htm" />
+  <HelpKINode Title="TransformExtensions.RemoveComponent(Of T) method" Url="html/1114275089.htm" />
+  <HelpKINode Title="TransformExtensions.RemoveComponent&lt;T&gt; method" Url="html/1114275089.htm" />
+  <HelpKINode Title="TransformExtensions.RemoveComponentImmediate(Of T) method" Url="html/381704913.htm" />
+  <HelpKINode Title="TransformExtensions.RemoveComponentImmediate&lt;T&gt; method" Url="html/381704913.htm" />
+  <HelpKINode Title="TransformExtensions.SetChildrenLayer method" Url="html/1272604821.htm" />
+  <HelpKINode Title="TransformExtensions.SetLocalPositionX method" Url="html/1046869144.htm" />
+  <HelpKINode Title="TransformExtensions.SetLocalPositionY method" Url="html/1585375918.htm" />
+  <HelpKINode Title="TransformExtensions.SetLocalPositionZ method" Url="html/1911153285.htm" />
+  <HelpKINode Title="TransformExtensions.SetPositionX method" Url="html/451461538.htm" />
+  <HelpKINode Title="TransformExtensions.SetPositionY method" Url="html/712994315.htm" />
+  <HelpKINode Title="TransformExtensions.SetPositionZ method" Url="html/1974374561.htm" />
+  <HelpKINode Title="UniSharper namespace" Url="html/228329255.htm" />
+  <HelpKINode Title="UniSharper.EnumFlagsFieldAttribute class">
+    <HelpKINode Title="EnumFlagsFieldAttribute Class" Url="html/170321239.htm" />
+    <HelpKINode Title="EnumFlagsFieldAttribute Members" Url="html/1316165684.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UniSharper.Events namespace" Url="html/1493303532.htm" />
+  <HelpKINode Title="UniSharper.Events.Event class">
+    <HelpKINode Title="Event Class" Url="html/1772186060.htm" />
+    <HelpKINode Title="Event Members" Url="html/1336246994.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UniSharper.Events.IThreadEventDispatcher interface">
+    <HelpKINode Title="IThreadEventDispatcher Interface" Url="html/1349437568.htm" />
+    <HelpKINode Title="IThreadEventDispatcher Members" Url="html/752232645.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UniSharper.Events.ThreadEventDispatcher class">
+    <HelpKINode Title="ThreadEventDispatcher Class" Url="html/1338894927.htm" />
+    <HelpKINode Title="ThreadEventDispatcher Members" Url="html/1474567213.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UniSharper.Patterns namespace" Url="html/1861633978.htm" />
+  <HelpKINode Title="UniSharper.Patterns.SingletonMonoBehaviour(Of T) class">
+    <HelpKINode Title="SingletonMonoBehaviour(T) Class" Url="html/1007032752.htm" />
+    <HelpKINode Title="SingletonMonoBehaviour(T) Members" Url="html/469441680.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UniSharper.Patterns.SingletonMonoBehaviour&lt;T&gt; class">
+    <HelpKINode Title="SingletonMonoBehaviour(T) Class" Url="html/1007032752.htm" />
+    <HelpKINode Title="SingletonMonoBehaviour(T) Members" Url="html/469441680.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UniSharper.ReadonlyFieldAttribute class">
+    <HelpKINode Title="ReadonlyFieldAttribute Class" Url="html/799465126.htm" />
+    <HelpKINode Title="ReadonlyFieldAttribute Members" Url="html/1775585631.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UniSharper.Utils namespace" Url="html/1612437234.htm" />
+  <HelpKINode Title="UniSharper.Utils.LayerMaskUtil class">
+    <HelpKINode Title="LayerMaskUtil Class" Url="html/1924892965.htm" />
+    <HelpKINode Title="LayerMaskUtil Members" Url="html/344782830.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UniSharper.Utils.MathfUtil class">
+    <HelpKINode Title="MathfUtil Class" Url="html/1073412377.htm" />
+    <HelpKINode Title="MathfUtil Members" Url="html/835644139.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UnityEngine namespace" Url="html/1136009998.htm" />
+  <HelpKINode Title="UnityEngine.ComponentExtensions class">
+    <HelpKINode Title="ComponentExtensions Class" Url="html/1385856512.htm" />
+    <HelpKINode Title="ComponentExtensions Members" Url="html/1206786045.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UnityEngine.GameObjectExtensions class">
+    <HelpKINode Title="GameObjectExtensions Class" Url="html/1569660113.htm" />
+    <HelpKINode Title="GameObjectExtensions Members" Url="html/281154418.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UnityEngine.QuaternionExtensions class">
+    <HelpKINode Title="QuaternionExtensions Class" Url="html/1094441063.htm" />
+    <HelpKINode Title="QuaternionExtensions Members" Url="html/1890900241.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UnityEngine.TransformExtensions class">
+    <HelpKINode Title="TransformExtensions Class" Url="html/441417836.htm" />
+    <HelpKINode Title="TransformExtensions Members" Url="html/1947395076.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UnityEngine.Vector2Extensions class">
+    <HelpKINode Title="Vector2Extensions Class" Url="html/689492910.htm" />
+    <HelpKINode Title="Vector2Extensions Members" Url="html/171478726.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UnityEngine.Vector3Extensions class">
+    <HelpKINode Title="Vector3Extensions Class" Url="html/689485017.htm" />
+    <HelpKINode Title="Vector3Extensions Members" Url="html/1264087354.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Update method">
+    <HelpKINode Title="Update Method " Url="html/337453865.htm" />
+    <HelpKINode Title="Update Method " Url="html/415083728.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Vector2Extensions class">
+    <HelpKINode Title="Vector2Extensions Class" Url="html/689492910.htm" />
+    <HelpKINode Title="Vector2Extensions Members" Url="html/171478726.htm" />
+    <HelpKINode Title="about Vector2Extensions class" Url="html/689492910.htm" />
+    <HelpKINode Title="all members" Url="html/171478726.htm" />
+    <HelpKINode Title="methods" Url="html/743236071.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Vector2Extensions.ToAccurateString method" Url="html/352845038.htm" />
+  <HelpKINode Title="Vector3Extensions class">
+    <HelpKINode Title="Vector3Extensions Class" Url="html/689485017.htm" />
+    <HelpKINode Title="Vector3Extensions Members" Url="html/1264087354.htm" />
+    <HelpKINode Title="about Vector3Extensions class" Url="html/689485017.htm" />
+    <HelpKINode Title="all members" Url="html/1264087354.htm" />
+    <HelpKINode Title="methods" Url="html/743235112.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Vector3Extensions.ToAccurateString method" Url="html/510385475.htm" />
+</HelpKI>
