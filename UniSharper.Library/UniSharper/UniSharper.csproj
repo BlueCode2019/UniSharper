@@ -48,6 +48,7 @@
     <Compile Include="UniSharper\Events\Event.cs" />
     <Compile Include="UniSharper\Events\IThreadEventDispatcher.cs" />
     <Compile Include="UniSharper\Events\ThreadEventDispatcher.cs" />
+    <Compile Include="UniSharper\Miscs\DontDestroyOnLoad.cs" />
     <Compile Include="UniSharper\Patterns\SingletonMonoBehaviour.cs" />
     <Compile Include="UniSharper\Utils\LayerMaskUtil.cs" />
     <Compile Include="UniSharper\ReadonlyFieldAttribute.cs" />
