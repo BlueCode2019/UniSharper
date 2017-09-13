@@ -23,6 +23,7 @@
  */
 
 using System;
+using UnityEngine.Networking;
 
 namespace UniSharper.Net.Http
 {
@@ -33,13 +34,19 @@ namespace UniSharper.Net.Http
     /// <seealso cref="IDisposable"/>
     public class UnityHttpClient : IDisposable
     {
+        private UnityWebRequest webRequest;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="UnityHttpClient"/> class.
         /// </summary>
         public UnityHttpClient()
         {
+            webRequest = new UnityWebRequest();
         }
 
+        /// <summary>
+        /// Finalizes an instance of the <see cref="UnityHttpClient"/> class.
+        /// </summary>
         ~UnityHttpClient()
         {
             Dispose(false);
@@ -49,12 +56,23 @@ namespace UniSharper.Net.Http
 
         private bool disposed;
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting
+        /// unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing">
+        /// <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
+        /// unmanaged resources.
+        /// </param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposed)
