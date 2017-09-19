@@ -50,6 +50,8 @@
     <Compile Include="UniSharper\Events\ThreadEventDispatcher.cs" />
     <Compile Include="UniSharper\Miscs\DontDestroyOnLoad.cs" />
     <Compile Include="UniSharper\Patterns\SingletonMonoBehaviour.cs" />
+    <Compile Include="UniSharper\Rendering\PrefabLightmapData.cs" />
+    <Compile Include="UniSharper\Rendering\PrefabLightmapExcludedRenderer.cs" />
     <Compile Include="UniSharper\Utils\LayerMaskUtil.cs" />
     <Compile Include="UniSharper\ReadonlyFieldAttribute.cs" />
     <Compile Include="UniSharper\Utils\MathfUtil.cs" />
