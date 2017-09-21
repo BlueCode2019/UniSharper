@@ -55,7 +55,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>IF $(ConfigurationName)==Release xcopy "$(TargetPath)" "$(SolutionDir)..\Assets\UniSharper\Plugins" /s/e/y</PostBuildEvent>
+    <PostBuildEvent>IF $(ConfigurationName)==Release xcopy "$(TargetPath)" "$(SolutionDir)..\Assets\UniSharper\Plugins" /s/e/y
+IF $(ConfigurationName)==Release xcopy "$(TargetDir)UniSharper.Extensions.pdb" "$(SolutionDir)..\Assets\UniSharper\Plugins" /s/e/y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

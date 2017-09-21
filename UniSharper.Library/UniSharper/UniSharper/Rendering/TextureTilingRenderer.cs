@@ -22,15 +22,116 @@
  *	SOFTWARE.
  */
 
+using System.Collections.Generic;
+using UniSharper.Rendering.DataParsers;
 using UnityEngine;
 
 namespace UniSharper.Rendering
 {
+    /// <summary>
+    /// Specifies the data format for tiling sheet.
+    /// </summary>
+    public enum TilingSheetDataFormat
+    {
+        UnityJson
+    }
+
     /// <summary>
     /// The class <see cref="TextureTilingRenderer"/> provides rendering method for texture tiling.
     /// </summary>
     /// <seealso cref="MonoBehaviour"/>
     public class TextureTilingRenderer : MonoBehaviour
     {
+        [SerializeField]
+        private TilingSheetDataFormat dataFormat;
+
+        [SerializeField]
+        private TextAsset dataFileAsset;
+
+        [SerializeField]
+        private string textureTilingName;
+
+        private Dictionary<string, Rect> tilingData;
+
+        private Vector2[] meshOriginalUV;
+
+        private Mesh mesh;
+
+        private Mesh Mesh
+        {
+            get
+            {
+                if (!mesh)
+                {
+                    MeshFilter meshFilter = GetComponent<MeshFilter>();
+
+                    if (meshFilter)
+                    {
+                        mesh = meshFilter.mesh;
+                    }
+                }
+
+                return mesh;
+            }
+        }
+
+        #region Messages
+
+        /// <summary>
+        /// Called when the script instance is being loaded.
+        /// </summary>
+        private void Awake()
+        {
+            if (dataFileAsset)
+            {
+                LoadData(dataFileAsset.name, dataFileAsset.text);
+            }
+        }
+
+        private void Start()
+        {
+            UpdateMeshUV();
+        }
+
+        #endregion Messages
+
+        #region Public Methods
+
+        public void LoadData(string name, string data)
+        {
+            ITilingSheetDataParser parser = TilingSheetDataParser.CreateParser(dataFormat);
+            tilingData = parser.ParseData(name, data);
+        }
+
+        public void UpdateMeshUV()
+        {
+            if (Mesh)
+            {
+                if (meshOriginalUV == null)
+                {
+                    meshOriginalUV = Mesh.uv;
+                }
+
+                if (tilingData != null && !string.IsNullOrEmpty(textureTilingName))
+                {
+                    if (tilingData.ContainsKey(textureTilingName))
+                    {
+                        // Change UV
+                        Rect rect = tilingData[textureTilingName];
+                        Vector2[] uvs = new Vector2[Mesh.uv.Length];
+
+                        for (int i = 0, length = uvs.Length; i < length; i++)
+                        {
+                            uvs[i].x = rect.x + meshOriginalUV[i].x * rect.width;
+                            uvs[i].y = rect.y + meshOriginalUV[i].y * rect.height;
+                        }
+
+                        Mesh.uv = uvs;
+                    }
+                }
+            }
+        }
+
+        #endregion Public Methods
     }
 }

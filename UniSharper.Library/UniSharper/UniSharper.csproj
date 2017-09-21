@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JsonFx, Version=2.0.1209.2802, Culture=neutral, PublicKeyToken=315052dd637f8a52, processorArchitecture=MSIL">
+      <HintPath>..\packages\JsonFx.2.0.1209.2802\lib\net35\JsonFx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ReSharp">
       <HintPath>..\libs\ReSharp.dll</HintPath>
     </Reference>
@@ -50,19 +54,26 @@
     <Compile Include="UniSharper\Events\ThreadEventDispatcher.cs" />
     <Compile Include="UniSharper\Miscs\DontDestroyOnLoad.cs" />
     <Compile Include="UniSharper\Patterns\SingletonMonoBehaviour.cs" />
+    <Compile Include="UniSharper\Rendering\DataParsers\ITilingSheetDataParser.cs" />
+    <Compile Include="UniSharper\Rendering\DataParsers\UnityJsonDataParser.cs" />
     <Compile Include="UniSharper\Rendering\PrefabLightmapData.cs" />
     <Compile Include="UniSharper\Rendering\PrefabLightmapExcludedRenderer.cs" />
     <Compile Include="UniSharper\Rendering\TextureTilingRenderer.cs" />
+    <Compile Include="UniSharper\Rendering\DataParsers\TilingSheetDataParser.cs" />
     <Compile Include="UniSharper\Utils\LayerMaskUtil.cs" />
     <Compile Include="UniSharper\ReadonlyFieldAttribute.cs" />
     <Compile Include="UniSharper\Utils\MathfUtil.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>IF $(ConfigurationName)==Release xcopy "$(TargetPath)" "$(SolutionDir)..\Assets\UniSharper\Plugins" /s/e/y
+IF $(ConfigurationName)==Release xcopy "$(TargetDir)UniSharper.pdb" "$(SolutionDir)..\Assets\UniSharper\Plugins" /s/e/y
 IF $(ConfigurationName)==Release xcopy "$(TargetDir)ReSharp.dll" "$(SolutionDir)..\Assets\UniSharper\Plugins" /s/e/y
-IF $(ConfigurationName)==Release xcopy "$(TargetDir)ReSharp.CSharpExtensions.dll" "$(SolutionDir)..\Assets\UniSharper\Plugins" /s/e/y</PostBuildEvent>
+IF $(ConfigurationName)==Release xcopy "$(TargetDir)ReSharp.CSharpExtensions.dll" "$(SolutionDir)..\Assets\UniSharper\Plugins" /s/e/y
+IF $(ConfigurationName)==Release xcopy "$(TargetDir)JsonFx.dll" "$(SolutionDir)..\Assets\UniSharper\Plugins" /s/e/y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -50,7 +50,7 @@ namespace UniSharperEditor
         /// </summary>
         /// <returns><c>true</c> if one of selected items is scene asset, <c>false</c> otherwise.</returns>
         [MenuItem("Assets/Bake Lightmaps for Selected Scenes", true)]
-        [MenuItem("Assets/Bake Prefab Lightmaps In Selcted Scenes", true)]
+        [MenuItem("Assets/Rendering/Bake Prefab Lightmaps In Selected Scenes", true)]
         public static bool ValidateSelectedScenes()
         {
             Object[] objects = Selection.objects;
@@ -161,7 +161,7 @@ namespace UniSharperEditor
         /// <c>true</c> if got <see cref="PrefabLightmapData"/> component in open scenes,
         /// <c>false</c> otherwise.
         /// </returns>
-        [MenuItem("GameObject/Bake Prefab Lightmaps", true)]
+        [MenuItem("Tools/UniSharper/Rendering/Bake Prefab Lightmaps", true)]
         public static bool ValidatePrefabLightmapsBaking()
         {
             PrefabLightmapData[] prefabs = Object.FindObjectsOfType<PrefabLightmapData>();
@@ -188,7 +188,7 @@ namespace UniSharperEditor
         ///       Project Settings -&gt; Graphics", Set "Lightmap Modes" to "Manual' and uncheck
         ///       "Realtime Non-Directional" and "Realtime Directional".
         /// </summary>
-        [MenuItem("GameObject/Bake Prefab Lightmaps", false, 100)]
+        [MenuItem("Tools/UniSharper/Rendering/Bake Prefab Lightmaps", false, 100)]
         public static void BakePrefabLightmaps()
         {
             if (Lightmapping.giWorkflowMode != Lightmapping.GIWorkflowMode.OnDemand)

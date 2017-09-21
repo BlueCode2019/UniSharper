@@ -27,9 +27,9 @@ using System;
 namespace UniSharper.Events
 {
     /// <summary>
-    /// The IThreadEventDispatcher interface defines methods for adding or removing event listeners,
-    /// checks whether specific types of event listeners are registered, and dispatches events for
-    /// child thread.
+    /// The <see cref="IThreadEventDispatcher"/> interface defines methods for adding or removing
+    /// event listeners, checks whether specific types of event listeners are registered, and
+    /// dispatches events for child thread.
     /// </summary>
     public interface IThreadEventDispatcher
     {
