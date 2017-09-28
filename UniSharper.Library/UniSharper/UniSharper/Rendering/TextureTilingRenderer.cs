@@ -43,10 +43,10 @@ namespace UniSharper.Rendering
     public class TextureTilingRenderer : MonoBehaviour
     {
         [SerializeField]
-        private TilingSheetDataFormat dataFormat;
+        private TilingSheetDataFormat dataFormat = TilingSheetDataFormat.UnityJson;
 
         [SerializeField]
-        private TextAsset dataFileAsset;
+        private TextAsset dataFileAsset = null;
 
         [SerializeField]
         private string textureTilingName;

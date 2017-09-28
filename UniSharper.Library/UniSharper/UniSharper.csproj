@@ -63,6 +63,7 @@
     <Compile Include="UniSharper\Utils\LayerMaskUtil.cs" />
     <Compile Include="UniSharper\ReadonlyFieldAttribute.cs" />
     <Compile Include="UniSharper\Utils\MathfUtil.cs" />
+    <Compile Include="UniSharper\Version.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
