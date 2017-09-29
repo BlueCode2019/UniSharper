@@ -251,7 +251,8 @@ namespace UnityEngine
         {
             if (gameObject)
             {
-                return LayerMaskUtil.IsInLayerMask(gameObject.layer, layerMask);
+                int objectLayerMaskValue = (1 << gameObject.layer);
+                return (layerMask.value & objectLayerMaskValue) > 0;
             }
 
             return false;

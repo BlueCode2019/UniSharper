@@ -25,133 +25,23 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
-using UnityEditor.SceneManagement;
 using UniSharper.Rendering;
+using UniSharperEditor.Utils;
 
-namespace UniSharperEditor
+namespace UniSharperEditor.Rendering
 {
     /// <summary>
-    /// The class <see cref="GenerateLightmaps"/> provides menu items to bake lightmaps.
+    /// The class <see cref="Lightmapping"/> provides menu items to bake lightmaps.
     /// </summary>
     [InitializeOnEditorStartup]
-    internal static class GenerateLightmaps
+    internal static class Lightmapping
     {
         /// <summary>
-        /// Initializes static members of the <see cref="GenerateLightmaps"/> class.
+        /// Initializes static members of the <see cref="Lightmapping"/> class.
         /// </summary>
-        static GenerateLightmaps()
+        static Lightmapping()
         {
-            Lightmapping.completed += OnLightmappingCompleted;
-        }
-
-        /// <summary>
-        /// Validates that one of selected items is scene asset.
-        /// </summary>
-        /// <returns><c>true</c> if one of selected items is scene asset, <c>false</c> otherwise.</returns>
-        [MenuItem("Assets/Bake Lightmaps for Selected Scenes", true)]
-        [MenuItem("Assets/Rendering/Bake Prefab Lightmaps In Selected Scenes", true)]
-        public static bool ValidateSelectedScenes()
-        {
-            Object[] objects = Selection.objects;
-
-            if (objects.Length > 0)
-            {
-                for (int i = 0, length = objects.Length; i < length; i++)
-                {
-                    Object obj = objects[i];
-                    string path = AssetDatabase.GetAssetOrScenePath(obj);
-
-                    if (AssetUtil.IsSceneAsset(path))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Bakes the selected scenes.
-        /// </summary>
-        [MenuItem("Assets/Bake Lightmaps for Selected Scenes", false, 500)]
-        public static void BakeSelectedScenes()
-        {
-            List<string> toBakedScenes = new List<string>();
-            Object[] objects = Selection.objects;
-
-            if (objects.Length > 0)
-            {
-                for (int i = 0, length = objects.Length; i < length; i++)
-                {
-                    Object obj = objects[i];
-                    string path = AssetDatabase.GetAssetOrScenePath(obj);
-
-                    if (AssetUtil.IsSceneAsset(path))
-                    {
-                        toBakedScenes.AddUnique(path);
-                    }
-                }
-            }
-
-            if (toBakedScenes.Count == 0)
-            {
-                EditorUtility.DisplayDialog("Warning", "No scene to be baked!", "Ok");
-                return;
-            }
-
-            for (int i = 0, length = toBakedScenes.Count; i < length; i++)
-            {
-                string scenePath = toBakedScenes[i];
-                Scene scene = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
-                EditorUtility.DisplayProgressBar("Baking...", string.Format("Baking the scene {0}... {1}/{2}", scene.name, i + 1, length), (float)(i + 1) / length);
-                Lightmapping.Bake();
-                EditorSceneManager.SaveScene(scene);
-            }
-
-            EditorUtility.ClearProgressBar();
-        }
-
-        /// <summary>
-        /// Bakes the prefab lightmaps in selected scenes.
-        /// </summary>
-        [MenuItem("Assets/Bake Prefab Lightmaps In Selected Scenes", false, 500)]
-        public static void BakePrefabLightmapsInSelectedScenes()
-        {
-            List<string> scenePaths = new List<string>();
-            Object[] objects = Selection.objects;
-
-            if (objects.Length > 0)
-            {
-                for (int i = 0, length = objects.Length; i < length; i++)
-                {
-                    Object obj = objects[i];
-                    string path = AssetDatabase.GetAssetOrScenePath(obj);
-
-                    if (AssetUtil.IsSceneAsset(path))
-                    {
-                        scenePaths.AddUnique(path);
-                    }
-                }
-            }
-
-            if (scenePaths.Count == 0)
-            {
-                EditorUtility.DisplayDialog("Warning", "No scene to be check!", "Ok");
-                return;
-            }
-
-            for (int i = 0, length = scenePaths.Count; i < length; i++)
-            {
-                string scenePath = scenePaths[i];
-                Scene scene = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
-                EditorUtility.DisplayProgressBar("Baking...", string.Format("Baking the scene {0}... {1}/{2}", scene.name, i + 1, length), (float)(i + 1) / length);
-                BakePrefabLightmaps();
-                EditorSceneManager.SaveScene(scene);
-            }
-
-            EditorUtility.ClearProgressBar();
+            UnityEditor.Lightmapping.completed += OnLightmappingCompleted;
         }
 
         /// <summary>
@@ -191,7 +81,7 @@ namespace UniSharperEditor
         [MenuItem("Tools/UniSharper/Rendering/Bake Prefab Lightmaps", false, 100)]
         public static void BakePrefabLightmaps()
         {
-            if (Lightmapping.giWorkflowMode != Lightmapping.GIWorkflowMode.OnDemand)
+            if (UnityEditor.Lightmapping.giWorkflowMode != UnityEditor.Lightmapping.GIWorkflowMode.OnDemand)
             {
                 Debug.LogError("ExtractLightmapData requires that you have baked you lightmaps and Auto mode is disabled.");
                 return;
@@ -201,7 +91,7 @@ namespace UniSharperEditor
             MakeSureRendererGameObjectIsLightmapStatic(prefabs);
 
             // Bake lightmap for scene.
-            Lightmapping.Bake();
+            UnityEditor.Lightmapping.Bake();
         }
 
         /// <summary>

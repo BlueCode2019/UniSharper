@@ -25,7 +25,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace UniSharperEditor
+namespace UniSharperEditor.Utils
 {
     /// <summary>
     /// This class provides some useful prefab utilities.
