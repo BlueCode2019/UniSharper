@@ -78,7 +78,7 @@ namespace UniSharperEditor.Rendering
         ///       Project Settings -&gt; Graphics", Set "Lightmap Modes" to "Manual' and uncheck
         ///       "Realtime Non-Directional" and "Realtime Directional".
         /// </summary>
-        [MenuItem("Tools/UniSharper/Rendering/Bake Prefab Lightmaps", false, 100)]
+        [MenuItem("Tools/UniSharper/Rendering/Bake Prefab Lightmaps", false, MenuItemPriorities.RenderingMenuItemsPriority)]
         private static void BakePrefabLightmaps()
         {
             if (UnityEditor.Lightmapping.giWorkflowMode != UnityEditor.Lightmapping.GIWorkflowMode.OnDemand)

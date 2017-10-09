@@ -40,7 +40,7 @@ namespace UniSharperEditor.Rendering
 
         private List<SceneAsset> scenes = new List<SceneAsset>();
 
-        [MenuItem("Tools/UniSharper/Rendering/Generate Lighting for Scenes", false, 101)]
+        [MenuItem("Tools/UniSharper/Rendering/Generate Lighting for Scenes", false, MenuItemPriorities.RenderingMenuItemsPriority + 1)]
         public static void ShowWindow()
         {
             //Show existing window instance. If one doesn't exist, make one.

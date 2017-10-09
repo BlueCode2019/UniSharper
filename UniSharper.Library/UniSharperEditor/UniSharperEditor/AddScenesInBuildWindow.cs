@@ -38,7 +38,7 @@ namespace UniSharperEditor
 
         private List<SceneAsset> sceneAssets = new List<SceneAsset>();
 
-        [MenuItem("Tools/UniSharper/Add Scenes In Build")]
+        [MenuItem("Tools/UniSharper/Build Settings.../Add Scenes In Build", false, MenuItemPriorities.BuildSettingsMenuItemsPriority)]
         public static void ShowWindow()
         {
             //Show existing window instance. If one doesn't exist, make one.
