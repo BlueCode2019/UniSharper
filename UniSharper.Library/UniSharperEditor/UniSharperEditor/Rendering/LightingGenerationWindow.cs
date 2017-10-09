@@ -24,63 +24,77 @@
 
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-namespace UniSharperEditor
+namespace UniSharperEditor.Rendering
 {
     /// <summary>
-    /// Displays the window for adding scenes in build.
+    /// Displays the window for generating lightmap for adding scenes.
     /// </summary>
     /// <seealso cref="EditorWindow"/>
-    internal class AddScenesInBuildWindow : EditorWindow
+    internal class LightingGenerationWindow : EditorWindow
     {
         private Vector2 scrollPosition;
 
-        private List<SceneAsset> sceneAssets = new List<SceneAsset>();
+        private List<SceneAsset> scenes = new List<SceneAsset>();
 
-        [MenuItem("Tools/UniSharper/Add Scenes In Build")]
+        [MenuItem("Tools/UniSharper/Rendering/Generate Lighting for Scenes", false, 101)]
         public static void ShowWindow()
         {
             //Show existing window instance. If one doesn't exist, make one.
-            GetWindow(typeof(AddScenesInBuildWindow), true, "Add Scenes In Build");
+            LightingGenerationWindow window = GetWindow<LightingGenerationWindow>(true, "Lighting Generation", true);
+            window.position = new Rect(200, 200, 500, 500);
         }
 
         private void OnGUI()
         {
             scrollPosition = GUILayout.BeginScrollView(scrollPosition);
-            GUILayout.Label("Scenes to include in build:", EditorStyles.boldLabel);
-            for (int i = 0; i < sceneAssets.Count; ++i)
+            GUILayout.Label("Scenes to generate lighting:", EditorStyles.boldLabel);
+            for (int i = 0; i < scenes.Count; ++i)
             {
-                sceneAssets[i] = (SceneAsset)EditorGUILayout.ObjectField(sceneAssets[i], typeof(SceneAsset), false);
+                scenes[i] = (SceneAsset)EditorGUILayout.ObjectField(scenes[i], typeof(SceneAsset), false);
             }
             if (GUILayout.Button("Add"))
             {
-                sceneAssets.Add(null);
+                scenes.Add(null);
             }
 
             GUILayout.Space(8);
 
-            if (GUILayout.Button("Apply To Build Settings"))
+            if (GUILayout.Button("Generate Lighting for Scenes"))
             {
-                SetEditorBuildSettingsScenes();
+                GenerateLighting();
             }
 
             GUILayout.EndScrollView();
         }
 
-        public void SetEditorBuildSettingsScenes()
+        private void GenerateLighting()
         {
-            // Find valid Scene paths and make a list of EditorBuildSettingsScene
-            List<EditorBuildSettingsScene> editorBuildSettingsScenes = new List<EditorBuildSettingsScene>();
-            foreach (var sceneAsset in sceneAssets)
+            List<string> scenePaths = new List<string>();
+
+            foreach (var sceneAsset in scenes)
             {
                 string scenePath = AssetDatabase.GetAssetPath(sceneAsset);
+
                 if (!string.IsNullOrEmpty(scenePath))
-                    editorBuildSettingsScenes.Add(new EditorBuildSettingsScene(scenePath, true));
+                {
+                    scenePaths.Add(scenePath);
+                }
             }
 
-            // Set the Build Settings window Scene list
-            EditorBuildSettings.scenes = editorBuildSettingsScenes.ToArray();
+            for (int i = 0, length = scenePaths.Count; i < length; i++)
+            {
+                string scenePath = scenePaths[i];
+                Scene scene = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
+                EditorUtility.DisplayProgressBar("Baking...", string.Format("Baking the scene {0}... {1}/{2}", scene.name, i + 1, length), (float)(i + 1) / length);
+                UnityEditor.Lightmapping.Bake();
+                EditorSceneManager.SaveScene(scene);
+            }
+
+            EditorUtility.ClearProgressBar();
         }
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="UniSharperEditor\AboutWindow.cs" />
     <Compile Include="UniSharperEditor\AddScenesInBuildWindow.cs" />
     <Compile Include="UniSharperEditor\EnumFlagsFieldDrawer.cs" />
+    <Compile Include="UniSharperEditor\Rendering\LightingGenerationWindow.cs" />
     <Compile Include="UniSharperEditor\Rendering\Lightmapping.cs" />
     <Compile Include="UniSharperEditor\InitializeOnEditorStartupAttribute.cs" />
     <Compile Include="UniSharperEditor\ReadonlyFieldDrawer.cs" />

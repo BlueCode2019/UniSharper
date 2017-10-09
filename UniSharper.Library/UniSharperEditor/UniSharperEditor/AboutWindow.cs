@@ -29,8 +29,9 @@ using UnityEngine;
 namespace UniSharperEditor
 {
     /// <summary>
-    /// <see cref="EditorWindow"/> of about.
+    /// Displays the about information.
     /// </summary>
+    /// <seealso cref="EditorWindow"/>
     internal class AboutWindow : EditorWindow
     {
         /// <summary>
