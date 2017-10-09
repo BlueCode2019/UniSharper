@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UniSharperEditor\AboutWindow.cs" />
+    <Compile Include="UniSharperEditor\AddScenesInBuildWindow.cs" />
     <Compile Include="UniSharperEditor\EnumFlagsFieldDrawer.cs" />
     <Compile Include="UniSharperEditor\Rendering\Lightmapping.cs" />
     <Compile Include="UniSharperEditor\InitializeOnEditorStartupAttribute.cs" />

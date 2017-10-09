@@ -52,7 +52,7 @@ namespace UniSharperEditor.Rendering
         /// <c>false</c> otherwise.
         /// </returns>
         [MenuItem("Tools/UniSharper/Rendering/Bake Prefab Lightmaps", true)]
-        public static bool ValidatePrefabLightmapsBaking()
+        private static bool ValidatePrefabLightmapsBaking()
         {
             PrefabLightmapData[] prefabs = Object.FindObjectsOfType<PrefabLightmapData>();
 
@@ -79,7 +79,7 @@ namespace UniSharperEditor.Rendering
         ///       "Realtime Non-Directional" and "Realtime Directional".
         /// </summary>
         [MenuItem("Tools/UniSharper/Rendering/Bake Prefab Lightmaps", false, 100)]
-        public static void BakePrefabLightmaps()
+        private static void BakePrefabLightmaps()
         {
             if (UnityEditor.Lightmapping.giWorkflowMode != UnityEditor.Lightmapping.GIWorkflowMode.OnDemand)
             {

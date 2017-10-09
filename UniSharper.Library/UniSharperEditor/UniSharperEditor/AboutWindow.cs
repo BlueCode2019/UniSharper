@@ -39,10 +39,10 @@ namespace UniSharperEditor
         public const int MenuItemPriority = int.MaxValue;
 
         [MenuItem("Tools/UniSharper/Help/About UniSharper...", false, MenuItemPriority)]
-        public static void ShowAboutWindow()
+        private static void ShowAboutWindow()
         {
             AboutWindow windowWithRect = GetWindowWithRect<AboutWindow>(new Rect(100f, 100f, 230f, 150f), true, "About UniSharper");
-            windowWithRect.position = new Rect(100f, 100f, 570f, 340f);
+            windowWithRect.position = new Rect(200f, 200f, 570f, 340f);
         }
 
         #region Messages
