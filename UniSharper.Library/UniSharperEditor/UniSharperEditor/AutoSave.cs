@@ -23,7 +23,9 @@
  */
 
 using ReSharp.Patterns;
+using UniSharper.Timers;
 using UniSharper.Utils;
+using UniSharperEditor.Timers;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -112,7 +114,7 @@ namespace UniSharperEditor
         /// <summary>
         /// The timer of autosave.
         /// </summary>
-        //private Timer autosaveTimer;
+        private EditorTimer autosaveTimer;
 
         /// <summary>
         /// Whether the data is dirty.
@@ -312,12 +314,12 @@ namespace UniSharperEditor
                 initialized = true;
 
                 // Initialize autosave timer.
-                //if (autosaveTimer == null)
-                //{
-                //    autosaveTimer = new EditorTimer(1, AutoSaveTimeMinutes * 60);
-                //    autosaveTimer.TimerTicking += OnAutosaveTimerTicking;
-                //    autosaveTimer.TimerCompleted += OnAutosaveTimerCompleted;
-                //}
+                if (autosaveTimer == null)
+                {
+                    autosaveTimer = new EditorTimer(1, AutoSaveTimeMinutes * 60);
+                    autosaveTimer.TimerTicking += OnAutosaveTimerTicking;
+                    autosaveTimer.TimerCompleted += OnAutosaveTimerCompleted;
+                }
             }
         }
 
@@ -325,44 +327,48 @@ namespace UniSharperEditor
         /// Called when timer is ticking.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        //private void OnAutosaveTimerTicking(object sender, EventArgs e)
-        //{
-        //    if (isDirty)
-        //    {
-        //        autosaveTimer.Reset();
-        //        autosaveTimer.RepeatCount = AutoSaveTimeMinutes * 60;
-        //        isDirty = false;
-        //        autosaveTimer.Start();
-        //    }
-        //}
+        /// <param name="e">
+        /// The <see cref="TimerEventArgs"/> instance containing the timer event data.
+        /// </param>
+        private void OnAutosaveTimerTicking(object sender, TimerEventArgs e)
+        {
+            if (isDirty)
+            {
+                autosaveTimer.Reset();
+                autosaveTimer.RepeatCount = AutoSaveTimeMinutes * 60;
+                isDirty = false;
+                autosaveTimer.Start();
+            }
+        }
 
         /// <summary>
         /// Called when timer completed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        //private void OnAutosaveTimerCompleted(object sender, EventArgs e)
-        //{
-        //    if (isAutoSaveEnabled && !EditorApplication.isPlaying)
-        //    {
-        //        if (AskWhenSaving)
-        //        {
-        //            if (EditorUtility.DisplayDialog("Auto Save", "Do you want to save project?", "Yes", "No"))
-        //            {
-        //                AutoSaveProject();
-        //            }
-        //            else
-        //            {
-        //                autosaveTimer.Start();
-        //            }
-        //        }
-        //        else
-        //        {
-        //            AutoSaveProject();
-        //        }
-        //    }
-        //}
+        /// <param name="e">
+        /// The <see cref="TimerEventArgs"/> instance containing the timer event data.
+        /// </param>
+        private void OnAutosaveTimerCompleted(object sender, TimerEventArgs e)
+        {
+            if (isAutoSaveEnabled && !EditorApplication.isPlaying)
+            {
+                if (AskWhenSaving)
+                {
+                    if (EditorUtility.DisplayDialog("Auto Save", "Do you want to save project?", "Yes", "No"))
+                    {
+                        AutoSaveProject();
+                    }
+                    else
+                    {
+                        autosaveTimer.Start();
+                    }
+                }
+                else
+                {
+                    AutoSaveProject();
+                }
+            }
+        }
 
         /// <summary>
         /// Save project automatically.
