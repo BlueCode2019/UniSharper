@@ -50,7 +50,9 @@
 xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s/e/y
 del "%25TargetPath%25*.xml" /f/q
 del "%25TargetPath%25UniSharper.dll" /f/q
-del "%25TargetPath%25UnityEngine.dll" /f/q</PostBuildEvent>
+del "%25TargetPath%25UnityEngine.dll" /f/q
+del "%25TargetPath%25ReSharp.dll" /f/q
+del "%25TargetPath%25ReSharp.CSharpExtensions.dll" /f/q</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>SET ParentPath="$(SolutionDir)..\Assets\UniSharperLibs\UniSharper.Net\"

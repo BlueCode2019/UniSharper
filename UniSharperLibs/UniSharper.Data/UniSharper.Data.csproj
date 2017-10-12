@@ -66,7 +66,10 @@ del "%25TargetPath%25*.*" /f/q</PreBuildEvent>
 
 xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s/e/y
 del "%25TargetPath%25*.xml" /f/q
-del "%25TargetPath%25UnityEngine.dll" /f/q</PostBuildEvent>
+del "%25TargetPath%25UnityEngine.dll" /f/q
+del "%25TargetPath%25ReSharp.dll" /f/q
+del "%25TargetPath%25ReSharp.CSharpExtensions.dll" /f/q
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
