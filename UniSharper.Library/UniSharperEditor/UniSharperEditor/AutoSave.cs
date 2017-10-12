@@ -147,6 +147,14 @@ namespace UniSharperEditor
         private bool askWhenSaving = true;
 
         /// <summary>
+        /// Initializes static members of the <see cref="AutoSave"/> class.
+        /// </summary>
+        static AutoSave()
+        {
+            Instance.Initialize();
+        }
+
+        /// <summary>
         /// Prevents a default instance of the <see cref="AutoSave"/> class from being created.
         /// </summary>
         private AutoSave()
@@ -286,14 +294,6 @@ namespace UniSharperEditor
                     isDirty = true;
                 }
             }
-        }
-
-        /// <summary>
-        /// Initializes static members of the <see cref="AutoSave"/> class.
-        /// </summary>
-        static AutoSave()
-        {
-            Instance.Initialize();
         }
 
         /// <summary>

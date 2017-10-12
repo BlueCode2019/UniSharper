@@ -52,6 +52,7 @@
     <Compile Include="UniSharperEditor\AddScenesInBuildWindow.cs" />
     <Compile Include="UniSharperEditor\AutoSave.cs" />
     <Compile Include="UniSharperEditor\EditorConfig.cs" />
+    <Compile Include="UniSharperEditor\EditorInitializationOrderManager.cs" />
     <Compile Include="UniSharperEditor\EnumFlagsFieldDrawer.cs" />
     <Compile Include="UniSharperEditor\MenuItemPriorities.cs" />
     <Compile Include="UniSharperEditor\PreferencesWindow.cs" />
@@ -73,6 +74,10 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)..\Assets\UniSharper\Editor" /s/e/y</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

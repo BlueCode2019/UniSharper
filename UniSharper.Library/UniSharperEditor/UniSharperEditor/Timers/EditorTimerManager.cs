@@ -58,6 +58,13 @@ namespace UniSharperEditor.Timers
         }
 
         /// <summary>
+        /// Prevents a default instance of the <see cref="EditorTimerManager"/> class from being created.
+        /// </summary>
+        private EditorTimerManager()
+        {
+        }
+
+        /// <summary>
         /// Initializes this instance.
         /// </summary>
         public void Initialize()
