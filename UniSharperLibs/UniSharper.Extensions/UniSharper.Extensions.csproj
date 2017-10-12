@@ -57,12 +57,8 @@
   <PropertyGroup>
     <PostBuildEvent>SET TargetPath="$(SolutionDir)..\Assets\$(SolutionName)\$(ProjectName)\Plugins\"
 
-xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s/e/y
-del "%25TargetPath%25*.xml" /f/q
-del "%25TargetPath%25UniSharper.dll" /f/q
-del "%25TargetPath%25UnityEngine.dll" /f/q
-del "%25TargetPath%25ReSharp.dll" /f/q
-del "%25TargetPath%25ReSharp.CSharpExtensions.dll" /f/q</PostBuildEvent>
+xcopy "$(TargetPath)" "%25TargetPath%25" /y
+del "%25TargetPath%25JsonFx.dll" /f/q</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>SET ParentPath="$(SolutionDir)..\Assets\$(SolutionName)\$(ProjectName)\"
