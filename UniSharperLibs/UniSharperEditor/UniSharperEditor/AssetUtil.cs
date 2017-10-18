@@ -24,7 +24,7 @@
 
 using System.IO;
 
-namespace UniSharperEditor.Utils
+namespace UniSharperEditor
 {
     /// <summary>
     /// This class provides some useful asset utilities.

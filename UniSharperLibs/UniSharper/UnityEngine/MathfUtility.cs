@@ -22,14 +22,12 @@
  *	SOFTWARE.
  */
 
-using UnityEngine;
-
-namespace UniSharper.Utils
+namespace UnityEngine
 {
     /// <summary>
     /// This class provides some useful <see cref="Mathf"/> utilities.
     /// </summary>
-    public static class MathfUtil
+    public static class MathfUtility
     {
         /// <summary>
         /// Gets the angle between <see cref="Vector3"/> a and b.

@@ -24,7 +24,6 @@
 
 using ReSharp.Patterns;
 using UniSharper.Timers;
-using UniSharper.Utils;
 using UniSharperEditor.Timers;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -47,27 +46,27 @@ namespace UniSharperEditor
             /// <summary>
             /// The style of property isAutoSaveEnabled.
             /// </summary>
-            public static readonly GUIContent IsAutoSaveEnabledStyle = GuiUtil.TextContent("Enable AutoSave", "Whether to automatically save after a time interval");
+            public static readonly GUIContent IsAutoSaveEnabledStyle = new GUIContent("Enable AutoSave", "Whether to automatically save after a time interval");
 
             /// <summary>
             /// The style of property isAutoSaveScenesEnabled.
             /// </summary>
-            public static readonly GUIContent IsAutoSaveScenesEnabledStyle = GuiUtil.TextContent("Save Scenes", "Whether to automatically save scenes during an autosave");
+            public static readonly GUIContent IsAutoSaveScenesEnabledStyle = new GUIContent("Save Scenes", "Whether to automatically save scenes during an autosave");
 
             /// <summary>
             /// The style of property isAutoSaveAssetsEnabled.
             /// </summary>
-            public static readonly GUIContent IsAutoSaveAssetsEnabledStyle = GuiUtil.TextContent("Save Assets", "Whether to automatically save assets during an autosave");
+            public static readonly GUIContent IsAutoSaveAssetsEnabledStyle = new GUIContent("Save Assets", "Whether to automatically save assets during an autosave");
 
             /// <summary>
             /// The style of property frequencyInMinutes.
             /// </summary>
-            public static readonly GUIContent FrequencyInMinutesStyle = GuiUtil.TextContent("Frequency in Minutes", "The time interval after which to auto save");
+            public static readonly GUIContent FrequencyInMinutesStyle = new GUIContent("Frequency in Minutes", "The time interval after which to auto save");
 
             /// <summary>
             /// The style of property askWhenSaving.
             /// </summary>
-            public static readonly GUIContent AskWhenSavingStyle = GuiUtil.TextContent("Ask When Saving", "Whether to show confirm dialog when saving");
+            public static readonly GUIContent AskWhenSavingStyle = new GUIContent("Ask When Saving", "Whether to show confirm dialog when saving");
         }
 
         /// <summary>

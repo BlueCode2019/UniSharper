@@ -26,7 +26,6 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using UniSharper.Rendering;
-using UniSharperEditor.Utils;
 
 namespace UniSharperEditor.Rendering
 {

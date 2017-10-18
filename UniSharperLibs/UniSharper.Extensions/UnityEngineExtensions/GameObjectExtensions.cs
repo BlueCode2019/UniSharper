@@ -23,7 +23,6 @@
  */
 
 using System;
-using UniSharper.Utils;
 
 namespace UnityEngine
 {
