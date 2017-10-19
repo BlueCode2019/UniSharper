@@ -113,9 +113,8 @@ namespace UniSharperEditor
 
             try
             {
-                success = (bool)value.InvokeStaticMethod("TryParse", new Type[2] {
-                    typeof(string), targetType.MakeByRefType()
-                }, ref args);
+                Type[] types = new Type[2] { typeof(string), targetType.MakeByRefType() };
+                success = (bool)ReflectionUtility.InvokeStaticMethod<T>("TryParse", types, args);
                 result = (T)args[1];
             }
             catch (Exception)
