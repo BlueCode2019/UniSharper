@@ -56,8 +56,8 @@ namespace UniSharperEditor
             GUILayout.BeginVertical(new GUILayoutOption[0]);
             GUILayout.Label("UniSharper", new GUIStyle() { fontStyle = FontStyle.Bold, fontSize = 30, normal = new GUIStyleState() { textColor = Color.white } });
             GUILayout.BeginHorizontal(new GUILayoutOption[0]);
-            GUILayout.Space(110f);
-            GUILayout.Label(string.Format("Version {0}.{1}", Version.MajorVersion, Version.MinorVersion));
+            GUILayout.Space(90f);
+            GUILayout.Label(string.Format("Version {0}.{1}.{2}", Environment.Version.Major, Environment.Version.Minor, Environment.Version.Build));
             GUILayout.EndHorizontal();
             GUILayout.Space(30f);
             GUILayout.Label("Copyright (c) 2017 Jerry Lee");

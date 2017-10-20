@@ -22,18 +22,20 @@
  *	SOFTWARE.
  */
 
+using System;
+
 namespace UniSharper
 {
-    public static class Version
+    /// <summary>
+    /// Provides information about, and means to manipulate, the current environment. This class
+    /// cannot be inherited.
+    /// </summary>
+    public static class Environment
     {
         /// <summary>
-        /// The major version.
+        /// Gets a <see cref="Version"/> object that describes the major, minor, build, and revision
+        /// numbers of the library runtime.
         /// </summary>
-        public const int MajorVersion = 1;
-
-        /// <summary>
-        /// The minor version.
-        /// </summary>
-        public const int MinorVersion = 0;
+        public static readonly Version Version = typeof(Environment).Assembly.GetName().Version;
     }
 }
