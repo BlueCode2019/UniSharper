@@ -103,14 +103,8 @@ namespace UniSharper.Data
     /// <seealso cref="System.IDisposable"/>
     public class BoxDBAdapter : IDisposable
     {
-        /// <summary>
-        /// The default multi condition operator.
-        /// </summary>
         private const BoxDBMultiConditionOperator defaultMultiConditionOperator = BoxDBMultiConditionOperator.And;
 
-        /// <summary>
-        /// The query operator map.
-        /// </summary>
         private static readonly Dictionary<BoxDBQueryOperator, string> queryOperators =
             new Dictionary<BoxDBQueryOperator, string>()
         {
@@ -122,9 +116,6 @@ namespace UniSharper.Data
             { BoxDBQueryOperator.LessThanOrEqual, "<=" }
         };
 
-        /// <summary>
-        /// The multi-condition operator map.
-        /// </summary>
         private static readonly Dictionary<BoxDBMultiConditionOperator, string> multiConditionOperators =
             new Dictionary<BoxDBMultiConditionOperator, string>()
         {
@@ -132,15 +123,10 @@ namespace UniSharper.Data
                 { BoxDBMultiConditionOperator.Or, " |" }
         };
 
-        /// <summary>
-        /// The database server.
-        /// </summary>
         private DB dbServer;
-
-        /// <summary>
-        /// The database.
-        /// </summary>
         private AutoBox database;
+
+        private bool disposed;
 
         #region Constructors
 
@@ -180,6 +166,8 @@ namespace UniSharper.Data
             Dispose(false);
         }
 
+        #region Properties
+
         /// <summary>
         /// Gets the database server.
         /// </summary>
@@ -198,6 +186,8 @@ namespace UniSharper.Data
             get { return database; }
         }
 
+        #endregion Properties
+
         #region Public Methods
 
         /// <summary>
@@ -209,6 +199,8 @@ namespace UniSharper.Data
         /// <returns>The config of database.</returns>
         public DatabaseConfig.Config EnsureTable<T>(string tableName, params string[] names) where T : class
         {
+            CheckDisposed();
+
             try
             {
                 if (dbServer != null)
@@ -320,6 +312,8 @@ namespace UniSharper.Data
         /// <returns>The data return.</returns>
         public T Select<T>(string tableName, object primaryKeyValue) where T : class, new()
         {
+            CheckDisposed();
+
             try
             {
                 if (database != null)
@@ -346,6 +340,8 @@ namespace UniSharper.Data
         public List<T> Select<T>(string tableName, List<BoxDBQueryCondition> conditions,
             List<BoxDBMultiConditionOperator> multiConditionOperators = null) where T : class, new()
         {
+            CheckDisposed();
+
             try
             {
                 if (database != null)
@@ -376,6 +372,8 @@ namespace UniSharper.Data
         /// <returns>All data items of the table.</returns>
         public List<T> SelectAll<T>(string tableName) where T : class, new()
         {
+            CheckDisposed();
+
             try
             {
                 if (database != null)
@@ -407,6 +405,8 @@ namespace UniSharper.Data
         /// <returns><c>true</c> if insert data success, <c>false</c> otherwise.</returns>
         public bool Insert<T>(string tableName, params T[] values) where T : class
         {
+            CheckDisposed();
+
             try
             {
                 if (database != null && values != null)
@@ -449,6 +449,8 @@ namespace UniSharper.Data
         /// <returns><c>true</c> if update the list of data success, <c>false</c> otherwise.</returns>
         public bool Update<T>(string tableName, params T[] values) where T : class
         {
+            CheckDisposed();
+
             try
             {
                 if (database != null && values != null)
@@ -490,6 +492,8 @@ namespace UniSharper.Data
         /// <returns><c>true</c> if delete data success, <c>false</c> otherwise.</returns>
         public bool Delete(string tableName, params object[] primaryKeyValues)
         {
+            CheckDisposed();
+
             try
             {
                 if (database != null && primaryKeyValues != null)
@@ -555,8 +559,6 @@ namespace UniSharper.Data
 
         #endregion Public Methods
 
-        #region Protected Methods
-
         /// <summary>
         /// Generates the multi-condition query SQL statement.
         /// </summary>
@@ -605,7 +607,8 @@ namespace UniSharper.Data
         }
 
         /// <summary>
-        /// Releases unmanaged and - optionally - managed resources.
+        /// Releases the unmanaged resources used by the <see cref="BoxDBAdapter"/> and optionally
+        /// disposes of the managed resources.
         /// </summary>
         /// <param name="disposing">
         /// <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
@@ -613,7 +616,7 @@ namespace UniSharper.Data
         /// </param>
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && !disposed)
             {
                 Close();
 
@@ -621,11 +624,22 @@ namespace UniSharper.Data
                 {
                     dbServer.Dispose();
                 }
-
-                dbServer = null;
             }
         }
 
-        #endregion Protected Methods
+        /// <summary>
+        /// Throws an <see cref="ObjectDisposedException"/> if the <see cref="BoxDBAdapter"/> is in
+        /// the disposed state.
+        /// </summary>
+        /// <exception cref="ObjectDisposedException">
+        /// Cannot access a disposed object. Object name: 'UniSharper.Data.BoxDBAdapter'.
+        /// </exception>
+        private void CheckDisposed()
+        {
+            if (disposed)
+            {
+                throw new ObjectDisposedException(GetType().FullName);
+            }
+        }
     }
 }
