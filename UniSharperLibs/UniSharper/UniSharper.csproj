@@ -70,7 +70,7 @@
     <Compile Include="UniSharper\Timers\TimerListEventArgs.cs" />
     <Compile Include="UniSharper\Timers\TimerManager.cs" />
     <Compile Include="UniSharper\Timers\TimerState.cs" />
-    <Compile Include="UniSharper\Version.cs" />
+    <Compile Include="UniSharper\Environment.cs" />
     <Compile Include="UnityEngine\MathfUtility.cs" />
   </ItemGroup>
   <ItemGroup>
