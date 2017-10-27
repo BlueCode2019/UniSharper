@@ -126,7 +126,7 @@ namespace UniSharper.Data
         private DB dbServer;
         private AutoBox database;
 
-        private bool disposed;
+        private bool disposed = false;
 
         #region Constructors
 
