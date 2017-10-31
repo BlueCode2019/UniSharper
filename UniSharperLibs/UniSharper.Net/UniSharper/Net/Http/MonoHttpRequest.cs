@@ -23,7 +23,6 @@
  */
 
 using System;
-using System.Collections;
 using System.IO;
 using System.Net;
 
@@ -92,6 +91,8 @@ namespace UniSharper.Net.Http
 
         #region Pubic Methods
 
+        #region Static Methods
+
         /// <summary>
         /// Creates and sends a GET request.
         /// </summary>
@@ -132,6 +133,8 @@ namespace UniSharper.Net.Http
                 return respMessage;
             }
         }
+
+        #endregion Static Methods
 
         /// <summary>
         /// Sends the HTTP request.

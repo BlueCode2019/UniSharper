@@ -61,6 +61,8 @@
     <Compile Include="UniSharper\Rendering\TextureTilingRenderer.cs" />
     <Compile Include="UniSharper\Rendering\DataParsers\TilingSheetDataParser.cs" />
     <Compile Include="UniSharper\ReadonlyFieldAttribute.cs" />
+    <Compile Include="UniSharper\Threading\ISynchronizedObject.cs" />
+    <Compile Include="UniSharper\Threading\Synchronizer.cs" />
     <Compile Include="UniSharper\Timers\ITimer.cs" />
     <Compile Include="UniSharper\Timers\ITimerCollection.cs" />
     <Compile Include="UniSharper\Timers\ITimerList.cs" />

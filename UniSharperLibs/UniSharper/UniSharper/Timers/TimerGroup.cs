@@ -67,7 +67,7 @@ namespace UniSharper.Timers
         /// <summary>
         /// The timer collection.
         /// </summary>
-        private Collection<ITimer> timerCollection;
+        private LinkedList<ITimer> timers;
 
         #region Constructors
 
@@ -75,9 +75,8 @@ namespace UniSharper.Timers
         /// Initializes a new instance of the <see cref="TimerGroup"/> class.
         /// </summary>
         public TimerGroup()
-            : base()
         {
-            timerCollection = new Collection<ITimer>();
+            timers = new LinkedList<ITimer>();
         }
 
         /// <summary>
@@ -85,9 +84,8 @@ namespace UniSharper.Timers
         /// </summary>
         /// <param name="timers">The timers array.</param>
         public TimerGroup(params ITimer[] timers)
-            : base()
         {
-            timerCollection = new Collection<ITimer>(timers);
+            this.timers = new LinkedList<ITimer>(timers);
         }
 
         #endregion Constructors
@@ -102,9 +100,9 @@ namespace UniSharper.Timers
         {
             get
             {
-                if (timerCollection != null)
+                if (timers != null)
                 {
-                    return timerCollection.Count;
+                    return timers.Count;
                 }
 
                 return 0;
@@ -134,9 +132,9 @@ namespace UniSharper.Timers
         /// <param name="arrayIndex">The zero-based index in <c>array</c> at which copying begins.</param>
         void ICollection<ITimer>.CopyTo(ITimer[] array, int arrayIndex)
         {
-            if (timerCollection != null)
+            if (timers != null)
             {
-                timerCollection.CopyTo(array, arrayIndex);
+                timers.CopyTo(array, arrayIndex);
             }
         }
 
@@ -146,9 +144,9 @@ namespace UniSharper.Timers
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         IEnumerator<ITimer> IEnumerable<ITimer>.GetEnumerator()
         {
-            if (timerCollection != null)
+            if (timers != null)
             {
-                return timerCollection.GetEnumerator();
+                return timers.GetEnumerator();
             }
 
             return null;
@@ -160,9 +158,9 @@ namespace UniSharper.Timers
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            if (timerCollection != null)
+            if (timers != null)
             {
-                return timerCollection.GetEnumerator();
+                return timers.GetEnumerator();
             }
 
             return null;
@@ -174,9 +172,9 @@ namespace UniSharper.Timers
         /// <param name="item">The <see cref="ITimer"/> object to add to the <see cref="TimerGroup"/>.</param>
         public void Add(ITimer item)
         {
-            if (timerCollection != null && item != null)
+            if (timers != null && item != null)
             {
-                timerCollection.AddUnique(item);
+                timers.AddUnique(item);
             }
         }
 
@@ -185,9 +183,9 @@ namespace UniSharper.Timers
         /// </summary>
         public void Clear()
         {
-            if (timerCollection != null)
+            if (timers != null)
             {
-                timerCollection.Clear();
+                timers.Clear();
             }
         }
 
@@ -201,9 +199,9 @@ namespace UniSharper.Timers
         /// </returns>
         public bool Contains(ITimer item)
         {
-            if (timerCollection != null && item != null)
+            if (timers != null && item != null)
             {
-                return timerCollection.Contains(item);
+                return timers.Contains(item);
             }
 
             return false;
@@ -220,9 +218,9 @@ namespace UniSharper.Timers
         /// </returns>
         public bool Remove(ITimer item)
         {
-            if (timerCollection != null && item != null)
+            if (timers != null && item != null)
             {
-                return timerCollection.Remove(item);
+                return timers.Remove(item);
             }
 
             return false;
@@ -237,10 +235,8 @@ namespace UniSharper.Timers
         /// </param>
         public void ForEach(Action<ITimer> action)
         {
-            for (int i = 0, length = timerCollection.Count; i < length; ++i)
+            foreach (ITimer timer in timers)
             {
-                ITimer timer = timerCollection[i];
-
                 if (action != null && timer != null)
                 {
                     action.Invoke(timer);
