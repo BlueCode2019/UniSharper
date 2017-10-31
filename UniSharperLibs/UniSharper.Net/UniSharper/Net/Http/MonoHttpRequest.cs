@@ -93,6 +93,47 @@ namespace UniSharper.Net.Http
         #region Pubic Methods
 
         /// <summary>
+        /// Creates and sends a GET request.
+        /// </summary>
+        /// <param name="requestUriString">A URI string that identifies the Internet resource.</param>
+        /// <param name="query">A <see cref="HttpUrlQuery"/> representing URL query.</param>
+        /// <returns>
+        /// <see cref="HttpResponseMessage"/> containing all information about HTTP response.
+        /// </returns>
+        public static HttpResponseMessage Get(string requestUriString, HttpUrlQuery query = null)
+        {
+            HttpRequestMessage reqMessage = new HttpRequestMessage(requestUriString, query);
+
+            using (MonoHttpRequest request = new MonoHttpRequest(reqMessage))
+            {
+                HttpResponseMessage respMessage = request.SendRequest();
+                return respMessage;
+            }
+        }
+
+        /// <summary>
+        /// Creates and sends a POST request.
+        /// </summary>
+        /// <param name="requestUriString">A URI string that identifies the Internet resource.</param>
+        /// <param name="formData">
+        /// The <see cref="HttpFormData"/> representing the form data to POST to the server.
+        /// </param>
+        /// <returns>
+        /// <see cref="HttpResponseMessage"/> containing all information about HTTP response.
+        /// </returns>
+        public static HttpResponseMessage Post(string requestUriString, HttpFormData formData = null)
+        {
+            HttpRequestMessage reqMessage = new HttpRequestMessage(requestUriString, HttpMethod.Post);
+            reqMessage.Entity = new HttpRequestMessageEntity(formData);
+
+            using (MonoHttpRequest request = new MonoHttpRequest(reqMessage))
+            {
+                HttpResponseMessage respMessage = request.SendRequest();
+                return respMessage;
+            }
+        }
+
+        /// <summary>
         /// Sends the HTTP request.
         /// </summary>
         /// <param name="autoDispose">if set to <c>true</c> dispose this instance automatically.</param>

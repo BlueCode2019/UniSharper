@@ -85,15 +85,9 @@ namespace UniSharper.Net.Http
         /// <param name="requestUri">A <see cref="Uri"/> containing the URI of the requested resource.</param>
         /// <param name="query">A <see cref="HttpUrlQuery"/> representing URL query.</param>
         /// <param name="method">The HTTP method.</param>
-        /// <exception cref="ArgumentNullException"><c>query</c> is <c>null</c>.</exception>
         public HttpRequestMessage(Uri requestUri, HttpUrlQuery query, HttpMethod method = HttpMethod.Get)
             : this(requestUri, method)
         {
-            if (query == null)
-            {
-                throw new ArgumentNullException(nameof(query));
-            }
-
             UrlQuery = query;
         }
 

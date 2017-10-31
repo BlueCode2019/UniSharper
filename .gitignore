@@ -37,5 +37,8 @@ sysinfo.txt
 *.GhostDoc.xml
 
 /UsbWebServer/apache2/logs
-*.pid
 *.err
+*.pid
+/UsbWebServer/mysql/data/ib_logfile1
+/UsbWebServer/mysql/data/ibdata1
+/UsbWebServer/mysql/data/ib_logfile0

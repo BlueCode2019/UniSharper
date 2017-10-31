@@ -39,15 +39,18 @@ namespace UniSharper.Net.Http
         /// <param name="formData">
         /// The <see cref="HttpFormData"/> representing the form data to POST to the server.
         /// </param>
-        public HttpRequestMessageEntity(HttpFormData formData)
+        public HttpRequestMessageEntity(HttpFormData formData = null)
             : base()
         {
-            foreach (KeyValuePair<string, string> curent in formData.Headers)
+            if (formData != null)
             {
-                Headers.Add(curent.Key, curent.Value);
-            }
+                foreach (KeyValuePair<string, string> curent in formData.Headers)
+                {
+                    Headers.Add(curent.Key, curent.Value);
+                }
 
-            Data = formData.Data;
+                Data = formData.Data;
+            }
         }
     }
 }

@@ -95,5 +95,32 @@ namespace UniSharper.Net.Http
                 }
             }
         }
+
+        [Test]
+        public void SimplifiedGetTest()
+        {
+            string uri = "http://localhost:8080/httptest/SendGetRequestTest.php";
+            HttpResponseMessage respMessage = MonoHttpRequest.Get(uri, new HttpUrlQuery()
+            {
+                { "name", "test" }
+            });
+            string expected = "name=test";
+            string actual = respMessage.Entity.Text;
+            Assert.AreEqual(expected, actual);
+            respMessage.Dispose();
+        }
+
+        [Test]
+        public void SimplifiedPostTest()
+        {
+            string uri = "http://localhost:8080/httptest/SendPostRequestTest.php";
+            HttpFormData formData = new HttpFormData();
+            formData.AddField("name", "test");
+            HttpResponseMessage respMessage = MonoHttpRequest.Post(uri, formData);
+            string expected = "name=test";
+            string actual = respMessage.Entity.Text;
+            Assert.AreEqual(expected, actual);
+            respMessage.Dispose();
+        }
     }
 }
