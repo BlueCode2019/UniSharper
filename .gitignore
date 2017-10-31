@@ -35,3 +35,7 @@ sysinfo.txt
 
 # GhostDoc plugin setting file
 *.GhostDoc.xml
+
+/UsbWebServer/apache2/logs
+*.pid
+*.err
