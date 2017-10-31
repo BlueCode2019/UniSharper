@@ -165,11 +165,18 @@ namespace UniSharper.Net.Http
 
                 if (requestMessage.Headers.Count > 0)
                 {
-                    foreach (DictionaryEntry entry in requestMessage.Headers)
+                    foreach (string key in requestMessage.Headers.AllKeys)
                     {
-                        string key = entry.Key.ToString();
-                        string value = entry.Value.ToString();
-                        httpWebRequest.Headers.Add(key, value);
+                        string value = requestMessage.Headers[key];
+
+                        if (key.Equals("Content-Type"))
+                        {
+                            httpWebRequest.ContentType = value;
+                        }
+                        else
+                        {
+                            httpWebRequest.Headers.Add(key, value);
+                        }
                     }
                 }
 

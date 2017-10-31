@@ -226,7 +226,17 @@ namespace UniSharper.Net.Http
             set
             {
                 CheckDisposed();
-                entity = value;
+
+                if (value != null)
+                {
+                    entity = value;
+
+                    foreach (string key in entity.Headers.AllKeys)
+                    {
+                        string headerValue = entity.Headers[key];
+                        Headers.Add(key, headerValue);
+                    }
+                }
             }
         }
 

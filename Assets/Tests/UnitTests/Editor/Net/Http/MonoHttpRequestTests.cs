@@ -1,5 +1,8 @@
 ﻿using NUnit.Framework;
 using System;
+using System.IO;
+using System.Text;
+using UnityEngine;
 
 namespace UniSharper.Net.Http
 {
@@ -41,6 +44,52 @@ namespace UniSharper.Net.Http
                 using (HttpResponseMessage respMessage = request.SendRequest())
                 {
                     string expected = "name=test123&sex=male";
+                    string actual = respMessage.Entity.Text;
+                    Assert.AreEqual(expected, actual);
+                }
+            }
+        }
+
+        [Test]
+        public void SendPostRequestTest()
+        {
+            string uri = "http://localhost:8080/httptest/SendPostRequestTest.php";
+            HttpFormData formData = new HttpFormData();
+            formData.AddField("name", "test123");
+            formData.AddField("sex", "male");
+            HttpRequestMessage reqMessage = new HttpRequestMessage(uri, HttpMethod.Post);
+            reqMessage.Entity = new HttpRequestMessageEntity(formData);
+
+            using (MonoHttpRequest request = new MonoHttpRequest(reqMessage))
+            {
+                request.KeepAlive = false;
+
+                using (HttpResponseMessage respMessage = request.SendRequest())
+                {
+                    string expected = "name=test123&sex=male";
+                    string actual = respMessage.Entity.Text;
+                    Assert.AreEqual(expected, actual);
+                }
+            }
+        }
+
+        [Test]
+        public void SendFileRequestTest()
+        {
+            byte[] data = File.ReadAllBytes(Path.Combine(Application.streamingAssetsPath, "text.txt"));
+            HttpFormData formData = new HttpFormData();
+            formData.AddBinaryData("file", data, "text.txt");
+            string uri = "http://localhost:8080/httptest/SendFileRequestTest.php";
+            HttpRequestMessage reqMessage = new HttpRequestMessage(uri, HttpMethod.Post);
+            reqMessage.Entity = new HttpRequestMessageEntity(formData);
+
+            using (MonoHttpRequest request = new MonoHttpRequest(reqMessage))
+            {
+                request.KeepAlive = false;
+
+                using (HttpResponseMessage respMessage = request.SendRequest())
+                {
+                    string expected = Encoding.UTF8.GetString(data);
                     string actual = respMessage.Entity.Text;
                     Assert.AreEqual(expected, actual);
                 }

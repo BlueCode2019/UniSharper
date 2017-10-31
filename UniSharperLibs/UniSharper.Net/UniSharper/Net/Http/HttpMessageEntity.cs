@@ -22,6 +22,8 @@
  *	SOFTWARE.
  */
 
+using System;
+using System.Net;
 using System.Text;
 
 namespace UniSharper.Net.Http
@@ -31,7 +33,11 @@ namespace UniSharper.Net.Http
     /// </summary>
     public abstract class HttpMessageEntity
     {
+        private WebHeaderCollection headers;
+
         private byte[] data;
+
+        private Encoding encoding = Encoding.UTF8;
 
         #region Constructors
 
@@ -42,9 +48,71 @@ namespace UniSharper.Net.Http
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HttpMessageEntity"/> class with the <see
+        /// cref="Encoding"/> of the entity.
+        /// </summary>
+        /// <param name="encoding">The <see cref="Encoding"/> of the entity.</param>
+        /// <exception cref="ArgumentNullException"><c>encoding</c> is <c>null</c>.</exception>
+        internal HttpMessageEntity(Encoding encoding)
+            : this()
+        {
+            if (encoding == null)
+            {
+                throw new ArgumentNullException(nameof(encoding));
+            }
+
+            Encoding = encoding;
+        }
+
         #endregion Constructors
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the <see cref="Encoding"/> of the entity.
+        /// </summary>
+        /// <value>The <see cref="Encoding"/> of the entity.</value>
+        protected Encoding Encoding
+        {
+            get
+            {
+                return encoding;
+            }
+
+            set
+            {
+                if (value != null)
+                {
+                    encoding = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the headers of the entity.
+        /// </summary>
+        /// <value>The headers of the entity.</value>
+        public WebHeaderCollection Headers
+        {
+            get
+            {
+                if (headers == null)
+                {
+                    headers = new WebHeaderCollection();
+                }
+
+                return headers;
+            }
+
+            protected set
+            {
+                if (value != null)
+                {
+                    headers = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the binary data of the message entity.
@@ -64,16 +132,16 @@ namespace UniSharper.Net.Http
         }
 
         /// <summary>
-        /// Gets the bytes from data interpreted as a UTF8 string.
+        /// Gets the bytes from data interpreted as a string.
         /// </summary>
-        /// <value>The bytes from data interpreted as a UTF8 string.</value>
+        /// <value>The bytes from data interpreted as a string.</value>
         public string Text
         {
             get
             {
                 if (data != null)
                 {
-                    return Encoding.UTF8.GetString(data);
+                    return encoding.GetString(data);
                 }
 
                 return null;

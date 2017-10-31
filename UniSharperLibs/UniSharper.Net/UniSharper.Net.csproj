@@ -38,7 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UniSharper\Net\Http\HttpFormItem.cs" />
+    <Compile Include="UniSharper\Net\Http\HttpFormData.cs" />
     <Compile Include="UniSharper\Net\Http\HttpMessageEntity.cs" />
     <Compile Include="UniSharper\Net\Http\HttpMethod.cs" />
     <Compile Include="UniSharper\Net\Http\MonoHttpRequest.cs" />

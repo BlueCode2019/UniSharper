@@ -22,7 +22,6 @@
  *	SOFTWARE.
  */
 
-using System;
 using System.Collections.Generic;
 
 namespace UniSharper.Net.Http
@@ -35,26 +34,20 @@ namespace UniSharper.Net.Http
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpRequestMessageEntity"/> class with the
-        /// binary data content.
+        /// <see cref="HttpFormData"/>.
         /// </summary>
-        /// <param name="data">The binary data content.</param>
-        public HttpRequestMessageEntity(byte[] data)
+        /// <param name="formData">
+        /// The <see cref="HttpFormData"/> representing the form data to POST to the server.
+        /// </param>
+        public HttpRequestMessageEntity(HttpFormData formData)
+            : base()
         {
-            Data = data;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HttpRequestMessageEntity"/> class with a
-        /// list of <see cref="HttpFormItem"/>.
-        /// </summary>
-        /// <param name="formItems">A list of <see cref="HttpFormItem"/>.</param>
-        /// <exception cref="ArgumentNullException"><c>formItems</c> is <c>null</c>.</exception>
-        public HttpRequestMessageEntity(List<HttpFormItem> formItems)
-        {
-            if (formItems == null)
+            foreach (KeyValuePair<string, string> curent in formData.Headers)
             {
-                throw new ArgumentNullException(nameof(formItems));
+                Headers.Add(curent.Key, curent.Value);
             }
+
+            Data = formData.Data;
         }
     }
 }
