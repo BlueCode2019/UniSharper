@@ -25,8 +25,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UniSharper.Threading;
 
-namespace UniSharper.Events
+namespace UniSharper.Threading.Events
 {
     /// <summary>
     /// This class provides event dispatcher and listen between Unity main thread and sub-thread.
@@ -57,6 +58,11 @@ namespace UniSharper.Events
 
             eventQueue = new Queue<Event>();
             pendingEventQueue = new Queue<Event>();
+
+            if (Synchronizer.Instance != null)
+            {
+                Synchronizer.Instance.Add(this);
+            }
         }
 
         /// <summary>
@@ -69,9 +75,46 @@ namespace UniSharper.Events
 
             eventQueue = null;
             pendingEventQueue = null;
+
+            if (Synchronizer.Instance != null)
+            {
+                Synchronizer.Instance.Remove(this);
+            }
         }
 
         #region Interface IThreadEventDispatcher
+
+        /// <summary>
+        /// Synchronizes data between threads.
+        /// </summary>
+        public void Synchronize()
+        {
+            lock (syncRoot)
+            {
+                RemovePendingEventListeners();
+                AddPendingEventListeners();
+                AddPendingEvents();
+
+                pendingFlag = true;
+
+                while (eventQueue.Count > 0)
+                {
+                    Event e = eventQueue.Dequeue();
+
+                    if (listeners.ContainsKey(e.EventType))
+                    {
+                        List<Action<Event>> handlers = listeners[e.EventType];
+
+                        handlers.ForEach(listener =>
+                        {
+                            listener.Invoke(e);
+                        });
+                    }
+                }
+
+                pendingFlag = false;
+            }
+        }
 
         /// <summary>
         /// Registers an event listener to receive an event notification.
@@ -288,38 +331,6 @@ namespace UniSharper.Events
                 {
                     listeners.Remove(eventType);
                 }
-            }
-        }
-
-        /// <summary>
-        /// Update is called every frame or fixed frequency.
-        /// </summary>
-        public void Update()
-        {
-            lock (syncRoot)
-            {
-                RemovePendingEventListeners();
-                AddPendingEventListeners();
-                AddPendingEvents();
-
-                pendingFlag = true;
-
-                while (eventQueue.Count > 0)
-                {
-                    Event e = eventQueue.Dequeue();
-
-                    if (listeners.ContainsKey(e.EventType))
-                    {
-                        List<Action<Event>> handlers = listeners[e.EventType];
-
-                        handlers.ForEach(listener =>
-                        {
-                            listener.Invoke(e);
-                        });
-                    }
-                }
-
-                pendingFlag = false;
             }
         }
 

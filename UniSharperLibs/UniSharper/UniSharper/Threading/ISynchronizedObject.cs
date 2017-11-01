@@ -24,8 +24,15 @@
 
 namespace UniSharper.Threading
 {
+    /// <summary>
+    /// The <see cref="ISynchronizedObject"/> interface defines the object that need to synchronize
+    /// data between child threads and main thread.
+    /// </summary>
     public interface ISynchronizedObject
     {
+        /// <summary>
+        /// Synchronizes data between threads.
+        /// </summary>
         void Synchronize();
     }
 }

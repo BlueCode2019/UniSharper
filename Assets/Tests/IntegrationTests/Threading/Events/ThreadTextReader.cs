@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace UniSharper.Events.Tests
+namespace UniSharper.Threading.Events
 {
     /// <summary>
     /// Text reader by thread.

@@ -24,7 +24,7 @@
 
 using System;
 
-namespace UniSharper.Events
+namespace UniSharper.Threading.Events
 {
     /// <summary>
     /// The Event class is used as the base class for the creation of Event objects, which are passed

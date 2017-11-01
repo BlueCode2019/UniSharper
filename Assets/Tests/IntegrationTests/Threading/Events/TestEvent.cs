@@ -1,4 +1,4 @@
-﻿namespace UniSharper.Events.Tests
+﻿namespace UniSharper.Threading.Events
 {
     /// <summary>
     /// Test event object.

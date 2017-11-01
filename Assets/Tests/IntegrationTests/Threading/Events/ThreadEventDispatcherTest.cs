@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-namespace UniSharper.Events.Tests
+namespace UniSharper.Threading.Events
 {
     /// <summary>
     /// Integration test of class ThreadEventDispatcher.
     /// </summary>
     /// <seealso cref="UnityEngine.MonoBehaviour"/>
-    [IntegrationTest.DynamicTest("EventTests")]
+    [IntegrationTest.DynamicTest("ThreadEventTests")]
     [IntegrationTest.SucceedWithAssertions]
     internal class ThreadEventDispatcherTest : MonoBehaviour
     {
@@ -43,15 +43,6 @@ namespace UniSharper.Events.Tests
                 threadImageReader.RemoveEventListener(TestEvent.Complete, OnThreadImageReaderComplete);
                 threadImageReader = null;
             }
-        }
-
-        /// <summary>
-        /// Update is called every frame, if the MonoBehaviour is enabled.
-        /// </summary>
-        private void Update()
-        {
-            if (threadImageReader != null)
-                threadImageReader.Update();
         }
 
         /// <summary>

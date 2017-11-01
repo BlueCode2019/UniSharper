@@ -23,21 +23,18 @@
  */
 
 using System;
+using UniSharper.Threading;
 
-namespace UniSharper.Events
+namespace UniSharper.Threading.Events
 {
     /// <summary>
     /// The <see cref="IThreadEventDispatcher"/> interface defines methods for adding or removing
     /// event listeners, checks whether specific types of event listeners are registered, and
     /// dispatches events for child thread.
     /// </summary>
-    public interface IThreadEventDispatcher
+    /// <seealso cref="ISynchronizedObject"/>
+    public interface IThreadEventDispatcher : ISynchronizedObject
     {
-        /// <summary>
-        /// Update is called every frame or fixed frequency.
-        /// </summary>
-        void Update();
-
         /// <summary>
         /// Registers an event listener to receive an event notification.
         /// </summary>
