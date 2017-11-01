@@ -25,6 +25,7 @@
 using System;
 using System.IO;
 using System.Net;
+using UniSharper.Threading;
 
 namespace UniSharper.Net.Http
 {
@@ -32,8 +33,9 @@ namespace UniSharper.Net.Http
     /// Provides a base class for sending HTTP requests and receiving HTTP responses from a resource
     /// identified by a URI in Mono environment.
     /// </summary>
+    /// <seealso cref="ISyncObject"/>
     /// <seealso cref="IDisposable"/>
-    public class MonoHttpRequest : IDisposable
+    public class MonoHttpRequest : ISyncObject, IDisposable
     {
         private bool disposed;
 
@@ -43,14 +45,23 @@ namespace UniSharper.Net.Http
 
         private HttpWebResponse httpWebResponse;
 
+        private HttpResponseMessage responseMessage;
+
+        private Exception exceptionCaught;
+
+        private Action<HttpResponseMessage> responseCallback;
+
+        private Action<Exception> catchExceptionCallback;
+
         #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MonoHttpRequest"/> class with <see cref="HttpRequestMessage"/>.
         /// </summary>
         /// <param name="requestMessage">The request message.</param>
+        /// <param name="proxy">The proxy information for the request.</param>
         /// <exception cref="ArgumentNullException"><c>requestMessage</c> is <c>null</c>.</exception>
-        public MonoHttpRequest(HttpRequestMessage requestMessage)
+        public MonoHttpRequest(HttpRequestMessage requestMessage, IWebProxy proxy = null)
         {
             if (requestMessage == null)
             {
@@ -59,12 +70,56 @@ namespace UniSharper.Net.Http
 
             this.requestMessage = requestMessage;
             httpWebRequest = (HttpWebRequest)WebRequest.Create(requestMessage.RequestUri);
+            httpWebRequest.Method = requestMessage.MethodString;
+            httpWebRequest.Proxy = proxy;
+
             Initialize();
         }
 
         #endregion Constructors
 
         #region Properties
+
+        /// <summary>
+        /// Gets the message for sending the HTTP request.
+        /// </summary>
+        /// <value>The message for sending the HTTP request.</value>
+        protected HttpRequestMessage HttpRequestMessage
+        {
+            get
+            {
+                return requestMessage;
+            }
+        }
+
+        /// <summary>
+        /// Gets the <see cref="HttpWebRequest"/> for sending the HTTP request.
+        /// </summary>
+        /// <value>The <see cref="HttpWebRequest"/> for sending the HTTP request.</value>
+        protected HttpWebRequest HttpWebRequest
+        {
+            get
+            {
+                return httpWebRequest;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the <see cref="HttpWebResponse"/> of the HTTP request returned.
+        /// </summary>
+        /// <value>The <see cref="HttpWebResponse"/> of the HTTP request returned.</value>
+        protected HttpWebResponse HttpWebResponse
+        {
+            get
+            {
+                return httpWebResponse;
+            }
+
+            set
+            {
+                httpWebResponse = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets a value that indicates whether to make a persistent connection to the
@@ -113,6 +168,23 @@ namespace UniSharper.Net.Http
         }
 
         /// <summary>
+        /// Send a GET request to the specified Uri as an asynchronous operation.
+        /// </summary>
+        /// <param name="requestUriString">The request URI string.</param>
+        /// <param name="query">A <see cref="HttpUrlQuery"/> representing URL query.</param>
+        /// <param name="responseCallback">The response callback.</param>
+        /// <param name="catchExceptionCallback">The catch exception callback.</param>
+        /// <returns>The <see cref="MonoHttpRequest"/> to handle the HTTP request.</returns>
+        public static MonoHttpRequest GetAsync(string requestUriString, HttpUrlQuery query = null,
+            Action<HttpResponseMessage> responseCallback = null, Action<Exception> catchExceptionCallback = null)
+        {
+            HttpRequestMessage reqMessage = new HttpRequestMessage(requestUriString, query);
+            MonoHttpRequest request = new MonoHttpRequest(reqMessage);
+            request.SendRequestAsync(responseCallback, catchExceptionCallback);
+            return request;
+        }
+
+        /// <summary>
         /// Creates and sends a POST request.
         /// </summary>
         /// <param name="requestUriString">A URI string that identifies the Internet resource.</param>
@@ -134,7 +206,51 @@ namespace UniSharper.Net.Http
             }
         }
 
+        /// <summary>
+        /// Send a POST request to the specified Uri as an asynchronous operation.
+        /// </summary>
+        /// <param name="requestUriString">The request URI string.</param>
+        /// <param name="formData">
+        /// The <see cref="HttpFormData"/> representing the form data to POST to the server.
+        /// </param>
+        /// <param name="responseCallback">The response callback.</param>
+        /// <param name="catchExceptionCallback">The catch exception callback.</param>
+        /// <returns>The <see cref="MonoHttpRequest"/> to handle the HTTP request.</returns>
+        public static MonoHttpRequest PostAsync(string requestUriString, HttpFormData formData = null,
+            Action<HttpResponseMessage> responseCallback = null, Action<Exception> catchExceptionCallback = null)
+        {
+            HttpRequestMessage reqMessage = new HttpRequestMessage(requestUriString, HttpMethod.Post);
+            reqMessage.Entity = new HttpRequestMessageEntity(formData);
+            MonoHttpRequest request = new MonoHttpRequest(reqMessage);
+            request.SendRequestAsync(responseCallback, catchExceptionCallback);
+            return request;
+        }
+
         #endregion Static Methods
+
+        /// <summary>
+        /// Synchronizes data between threads.
+        /// </summary>
+        public void Synchronize()
+        {
+            // Invoke the callback of getting response
+            if (responseMessage != null && responseCallback != null)
+            {
+                responseCallback.Invoke(responseMessage);
+                responseMessage = null;
+                responseCallback = null;
+                Synchronizer.Instance.Remove(this);
+            }
+
+            // Invoke the callback of catching exception
+            if (exceptionCaught != null && catchExceptionCallback != null)
+            {
+                catchExceptionCallback.Invoke(exceptionCaught);
+                exceptionCaught = null;
+                catchExceptionCallback = null;
+                Synchronizer.Instance.Remove(this);
+            }
+        }
 
         /// <summary>
         /// Sends the HTTP request.
@@ -154,6 +270,22 @@ namespace UniSharper.Net.Http
             message.Headers = httpWebResponse.Headers;
             message.Entity = new HttpResponseMessageEntity(httpWebResponse.GetResponseStream(), httpWebResponse.ContentLength);
             return message;
+        }
+
+        /// <summary>
+        /// Sends the request asynchronously.
+        /// </summary>
+        /// <param name="responseCallback">The response callback.</param>
+        /// <param name="catchExceptionCallback">The catch exception callback.</param>
+        public void SendRequestAsync(Action<HttpResponseMessage> responseCallback, Action<Exception> catchExceptionCallback = null)
+        {
+            CheckDisposed();
+
+            this.responseCallback = responseCallback;
+            this.catchExceptionCallback = catchExceptionCallback;
+
+            Synchronizer.Instance.Add(this);
+            HttpWebRequest.BeginGetResponse(new AsyncCallback(GetResponseCallback), this);
         }
 
         /// <summary>
@@ -181,6 +313,11 @@ namespace UniSharper.Net.Http
             {
                 disposed = true;
 
+                responseCallback = null;
+                catchExceptionCallback = null;
+
+                Synchronizer.Instance.Remove(this);
+
                 if (requestMessage != null)
                 {
                     requestMessage.Dispose();
@@ -201,36 +338,47 @@ namespace UniSharper.Net.Http
         /// <summary>
         /// Initializes this instance.
         /// </summary>
-        private void Initialize()
+        protected virtual void Initialize()
         {
-            if (httpWebRequest != null)
+            KeepAlive = false;
+
+            SetRequestHeaders();
+            SetRequestMessageEntity();
+        }
+
+        /// <summary>
+        /// Sets the headers of HTTP request.
+        /// </summary>
+        protected void SetRequestHeaders()
+        {
+            if (requestMessage.Headers.Count > 0)
             {
-                httpWebRequest.Method = requestMessage.MethodString;
-
-                if (requestMessage.Headers.Count > 0)
+                foreach (string key in requestMessage.Headers.AllKeys)
                 {
-                    foreach (string key in requestMessage.Headers.AllKeys)
-                    {
-                        string value = requestMessage.Headers[key];
+                    string value = requestMessage.Headers[key];
 
-                        if (key.Equals("Content-Type"))
-                        {
-                            httpWebRequest.ContentType = value;
-                        }
-                        else
-                        {
-                            httpWebRequest.Headers.Add(key, value);
-                        }
+                    if (key.Equals("Content-Type"))
+                    {
+                        httpWebRequest.ContentType = value;
+                    }
+                    else
+                    {
+                        httpWebRequest.Headers.Add(key, value);
                     }
                 }
+            }
+        }
 
-                // Write the HTTP message entity
-                if (requestMessage.Entity != null && requestMessage.Entity.Data != null)
+        /// <summary>
+        /// Sets the message entity of the HTTP request.
+        /// </summary>
+        protected void SetRequestMessageEntity()
+        {
+            if (requestMessage.Entity != null && requestMessage.Entity.Data != null)
+            {
+                using (Stream requestStream = httpWebRequest.GetRequestStream())
                 {
-                    using (Stream requestStream = httpWebRequest.GetRequestStream())
-                    {
-                        requestStream.Write(requestMessage.Entity.Data, 0, requestMessage.Entity.Data.Length);
-                    }
+                    requestStream.Write(requestMessage.Entity.Data, 0, requestMessage.Entity.Data.Length);
                 }
             }
         }
@@ -242,11 +390,37 @@ namespace UniSharper.Net.Http
         /// <exception cref="ObjectDisposedException">
         /// Cannot access a disposed object. Object name: 'ReSharp.Net.Http.MonoHttpRequest'.
         /// </exception>
-        private void CheckDisposed()
+        protected void CheckDisposed()
         {
             if (disposed)
             {
                 throw new ObjectDisposedException(GetType().FullName);
+            }
+        }
+
+        /// <summary>
+        /// The callback of getting response.
+        /// </summary>
+        /// <param name="ar">The <see cref="IAsyncResult"/> object.</param>
+        private void GetResponseCallback(IAsyncResult ar)
+        {
+            try
+            {
+                HttpWebResponse = (HttpWebResponse)HttpWebRequest.EndGetResponse(ar);
+
+                if (HttpWebResponse != null)
+                {
+                    HttpResponseMessage message = new HttpResponseMessage(HttpWebResponse.StatusCode);
+                    message.Version = HttpWebResponse.ProtocolVersion;
+                    message.RequestMessage = HttpRequestMessage;
+                    message.Headers = HttpWebResponse.Headers;
+                    message.Entity = new HttpResponseMessageEntity(HttpWebResponse.GetResponseStream(), HttpWebResponse.ContentLength);
+                    responseMessage = message;
+                }
+            }
+            catch (Exception ex)
+            {
+                exceptionCaught = ex;
             }
         }
     }

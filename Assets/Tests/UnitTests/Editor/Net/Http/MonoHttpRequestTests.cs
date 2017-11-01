@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -17,8 +16,6 @@ namespace UniSharper.Net.Http
 
             using (MonoHttpRequest request = new MonoHttpRequest(reqMessage))
             {
-                request.KeepAlive = false;
-
                 using (HttpResponseMessage respMessage = request.SendRequest())
                 {
                     string expected = "SendRequestTest";
@@ -39,8 +36,6 @@ namespace UniSharper.Net.Http
 
             using (MonoHttpRequest request = new MonoHttpRequest(reqMessage))
             {
-                request.KeepAlive = false;
-
                 using (HttpResponseMessage respMessage = request.SendRequest())
                 {
                     string expected = "name=test123&sex=male";
@@ -62,8 +57,6 @@ namespace UniSharper.Net.Http
 
             using (MonoHttpRequest request = new MonoHttpRequest(reqMessage))
             {
-                request.KeepAlive = false;
-
                 using (HttpResponseMessage respMessage = request.SendRequest())
                 {
                     string expected = "name=test123&sex=male";
@@ -85,8 +78,6 @@ namespace UniSharper.Net.Http
 
             using (MonoHttpRequest request = new MonoHttpRequest(reqMessage))
             {
-                request.KeepAlive = false;
-
                 using (HttpResponseMessage respMessage = request.SendRequest())
                 {
                     string expected = Encoding.UTF8.GetString(data);

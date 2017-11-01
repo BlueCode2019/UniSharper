@@ -50,7 +50,12 @@
     <Compile Include="UniSharper\Net\Http\HttpUrlQuery.cs" />
     <Compile Include="UniSharper\Net\Http\HttpUtility.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\UniSharper\UniSharper.csproj">
+      <Project>{098F0E93-3177-4923-88CD-596C96F6E907}</Project>
+      <Name>UniSharper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>SET TargetPath="$(SolutionDir)..\Assets\UniSharperLibs\UniSharper.Net\Plugins\"
