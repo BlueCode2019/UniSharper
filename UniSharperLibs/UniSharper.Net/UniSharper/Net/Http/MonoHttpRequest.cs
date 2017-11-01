@@ -239,7 +239,11 @@ namespace UniSharper.Net.Http
                 responseCallback.Invoke(responseMessage);
                 responseMessage = null;
                 responseCallback = null;
-                Synchronizer.Instance.Remove(this);
+
+                if (Synchronizer.Instance)
+                {
+                    Synchronizer.Instance.Remove(this);
+                }
             }
 
             // Invoke the callback of catching exception
@@ -248,7 +252,11 @@ namespace UniSharper.Net.Http
                 catchExceptionCallback.Invoke(exceptionCaught);
                 exceptionCaught = null;
                 catchExceptionCallback = null;
-                Synchronizer.Instance.Remove(this);
+
+                if (Synchronizer.Instance)
+                {
+                    Synchronizer.Instance.Remove(this);
+                }
             }
         }
 
@@ -284,7 +292,11 @@ namespace UniSharper.Net.Http
             this.responseCallback = responseCallback;
             this.catchExceptionCallback = catchExceptionCallback;
 
-            Synchronizer.Instance.Add(this);
+            if (Synchronizer.Instance)
+            {
+                Synchronizer.Instance.Add(this);
+            }
+
             HttpWebRequest.BeginGetResponse(new AsyncCallback(GetResponseCallback), this);
         }
 
@@ -316,7 +328,10 @@ namespace UniSharper.Net.Http
                 responseCallback = null;
                 catchExceptionCallback = null;
 
-                Synchronizer.Instance.Remove(this);
+                if (Synchronizer.Instance)
+                {
+                    Synchronizer.Instance.Remove(this);
+                }
 
                 if (requestMessage != null)
                 {
