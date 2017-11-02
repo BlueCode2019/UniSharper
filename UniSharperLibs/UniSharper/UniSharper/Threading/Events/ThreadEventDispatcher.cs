@@ -25,7 +25,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UniSharper.Threading;
 
 namespace UniSharper.Threading.Events
 {
@@ -36,16 +35,19 @@ namespace UniSharper.Threading.Events
     /// <seealso cref="IThreadEventDispatcher"/>
     public class ThreadEventDispatcher : IThreadEventDispatcher
     {
+        #region Fields
+
+        private readonly object syncRoot = new object();
+        private Queue<Event> eventQueue;
         private Dictionary<string, List<Action<Event>>> listeners = null;
+        private Queue<Event> pendingEventQueue;
+        private bool pendingFlag = false;
         private Dictionary<string, List<Action<Event>>> pendingListeners = null;
         private Dictionary<string, List<Action<Event>>> pendingRemovedListeners = null;
 
-        private Queue<Event> eventQueue;
-        private Queue<Event> pendingEventQueue;
+        #endregion Fields
 
-        private bool pendingFlag = false;
-
-        private readonly object syncRoot = new object();
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadEventDispatcher"/> class.
@@ -65,6 +67,10 @@ namespace UniSharper.Threading.Events
             }
         }
 
+        #endregion Constructors
+
+        #region Destructors
+
         /// <summary>
         /// Finalizes an instance of the <see cref="ThreadEventDispatcher"/> class.
         /// </summary>
@@ -82,39 +88,9 @@ namespace UniSharper.Threading.Events
             }
         }
 
-        #region Interface IThreadEventDispatcher
+        #endregion Destructors
 
-        /// <summary>
-        /// Synchronizes data between threads.
-        /// </summary>
-        public void Synchronize()
-        {
-            lock (syncRoot)
-            {
-                RemovePendingEventListeners();
-                AddPendingEventListeners();
-                AddPendingEvents();
-
-                pendingFlag = true;
-
-                while (eventQueue.Count > 0)
-                {
-                    Event e = eventQueue.Dequeue();
-
-                    if (listeners.ContainsKey(e.EventType))
-                    {
-                        List<Action<Event>> handlers = listeners[e.EventType];
-
-                        handlers.ForEach(listener =>
-                        {
-                            listener.Invoke(e);
-                        });
-                    }
-                }
-
-                pendingFlag = false;
-            }
-        }
+        #region Methods
 
         /// <summary>
         /// Registers an event listener to receive an event notification.
@@ -186,26 +162,6 @@ namespace UniSharper.Threading.Events
         }
 
         /// <summary>
-        /// Checks whether this <see cref="ThreadEventDispatcher"/> has listeners registered for a
-        /// specific type of event.
-        /// </summary>
-        /// <param name="eventType">The type of event.</param>
-        /// <returns>
-        /// <c>true</c> if listeners of the specified type of event are registered; <c>false</c> otherwise.
-        /// </returns>
-        /// <exception cref="ArgumentNullException"><c>eventType</c> is <c>null</c> or <c>empty</c>.</exception>
-        public bool HasEventListeners(string eventType)
-        {
-            if (string.IsNullOrEmpty(eventType))
-            {
-                throw new ArgumentNullException(nameof(eventType));
-            }
-
-            return (listeners.ContainsKey(eventType) && listeners[eventType].Count > 0)
-                || (pendingListeners.ContainsKey(eventType) && pendingListeners[eventType].Count > 0);
-        }
-
-        /// <summary>
         /// Checks whether this <see cref="ThreadEventDispatcher"/> has the delegate listener
         /// registered for a specific type of event.
         /// </summary>
@@ -233,6 +189,26 @@ namespace UniSharper.Threading.Events
 
             return (listeners.ContainsKey(eventType) && listeners[eventType].Contains(listener))
                 || (pendingListeners.ContainsKey(eventType) && pendingListeners[eventType].Contains(listener));
+        }
+
+        /// <summary>
+        /// Checks whether this <see cref="ThreadEventDispatcher"/> has listeners registered for a
+        /// specific type of event.
+        /// </summary>
+        /// <param name="eventType">The type of event.</param>
+        /// <returns>
+        /// <c>true</c> if listeners of the specified type of event are registered; <c>false</c> otherwise.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><c>eventType</c> is <c>null</c> or <c>empty</c>.</exception>
+        public bool HasEventListeners(string eventType)
+        {
+            if (string.IsNullOrEmpty(eventType))
+            {
+                throw new ArgumentNullException(nameof(eventType));
+            }
+
+            return (listeners.ContainsKey(eventType) && listeners[eventType].Count > 0)
+                || (pendingListeners.ContainsKey(eventType) && pendingListeners[eventType].Count > 0);
         }
 
         /// <summary>
@@ -334,17 +310,36 @@ namespace UniSharper.Threading.Events
             }
         }
 
-        #endregion Interface IThreadEventDispatcher
-
-        #region Private Methods
-
         /// <summary>
-        /// Checks whether this <see cref="IThreadEventDispatcher"/> has listeners registered.
+        /// Synchronizes data between threads.
         /// </summary>
-        /// <returns><c>true</c> if listeners are registered; <c>false</c> otherwise.</returns>
-        private bool HasEventListeners()
+        public void Synchronize()
         {
-            return listeners.Count > 0 || pendingListeners.Count > 0;
+            lock (syncRoot)
+            {
+                RemovePendingEventListeners();
+                AddPendingEventListeners();
+                AddPendingEvents();
+
+                pendingFlag = true;
+
+                while (eventQueue.Count > 0)
+                {
+                    Event e = eventQueue.Dequeue();
+
+                    if (listeners.ContainsKey(e.EventType))
+                    {
+                        List<Action<Event>> handlers = listeners[e.EventType];
+
+                        handlers.ForEach(listener =>
+                        {
+                            listener.Invoke(e);
+                        });
+                    }
+                }
+
+                pendingFlag = false;
+            }
         }
 
         /// <summary>
@@ -371,6 +366,15 @@ namespace UniSharper.Threading.Events
         }
 
         /// <summary>
+        /// Checks whether this <see cref="IThreadEventDispatcher"/> has listeners registered.
+        /// </summary>
+        /// <returns><c>true</c> if listeners are registered; <c>false</c> otherwise.</returns>
+        private bool HasEventListeners()
+        {
+            return listeners.Count > 0 || pendingListeners.Count > 0;
+        }
+
+        /// <summary>
         /// Removes pending event listeners.
         /// </summary>
         private void RemovePendingEventListeners()
@@ -379,6 +383,6 @@ namespace UniSharper.Threading.Events
                 .ToDictionary(pair => pair.Key, pair => pair.Value);
         }
 
-        #endregion Private Methods
+        #endregion Methods
     }
 }

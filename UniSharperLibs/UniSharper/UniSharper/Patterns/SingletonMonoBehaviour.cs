@@ -33,10 +33,16 @@ namespace UniSharper.Patterns
     /// <seealso cref="MonoBehaviour"/>
     public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
+        #region Fields
+
+        private static bool destroyed = false;
         private static T instance = null;
 
         private static bool instantiated = false;
-        private static bool destroyed = false;
+
+        #endregion Fields
+
+        #region Properties
 
         /// <summary>
         /// Gets or sets the singleton instance.
@@ -96,7 +102,9 @@ namespace UniSharper.Patterns
             }
         }
 
-        #region Messages
+        #endregion Properties
+
+        #region Methods
 
         /// <summary>
         /// Called when script receive message Awake.
@@ -118,6 +126,6 @@ namespace UniSharper.Patterns
             destroyed = true;
         }
 
-        #endregion Messages
+        #endregion Methods
     }
 }

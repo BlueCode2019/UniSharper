@@ -37,70 +37,16 @@ namespace UniSharperEditor
     [InitializeOnLoad]
     internal sealed class EditorInitializationOrderManager
     {
-        /// <summary>
-        /// The comparer of initialization order.
-        /// </summary>
-        /// <seealso cref="IComparer{Type}"/>
-        private class InitializationOrderComparer : IComparer<Type>
-        {
-            /// <summary>
-            /// Compares the specified x with y.
-            /// </summary>
-            /// <param name="x">The first object to compare.</param>
-            /// <param name="y">The second object to compare.</param>
-            /// <returns>
-            /// A signed integer that indicates the relative values of x and y, as shown in the
-            /// following table.
-            /// </returns>
-            public int Compare(Type x, Type y)
-            {
-                InitializeOnEditorStartupAttribute[] xAttrs = x.GetCustomAttributes(typeof(InitializeOnEditorStartupAttribute), false) as InitializeOnEditorStartupAttribute[];
-                InitializeOnEditorStartupAttribute[] yAttrs = y.GetCustomAttributes(typeof(InitializeOnEditorStartupAttribute), false) as InitializeOnEditorStartupAttribute[];
-
-                if (xAttrs[0].ExecutionOrder > yAttrs[0].ExecutionOrder)
-                {
-                    return -1;
-                }
-                else if (xAttrs[0].ExecutionOrder < yAttrs[0].ExecutionOrder)
-                {
-                    return 1;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-        }
+        #region Fields
 
         /// <summary>
         /// The loaded types.
         /// </summary>
         private static Type[] loadedTypes;
 
-        /// <summary>
-        /// Gets the loaded types.
-        /// </summary>
-        /// <value>The loaded types.</value>
-        internal static Type[] LoadedTypes
-        {
-            get
-            {
-                if (loadedTypes == null)
-                {
-                    try
-                    {
-                        Assembly assembly = Assembly.GetExecutingAssembly();
-                        loadedTypes = assembly.GetTypes();
-                    }
-                    catch (ReflectionTypeLoadException)
-                    {
-                        return new Type[0];
-                    }
-                }
+        #endregion Fields
 
-                return loadedTypes;
-            }
-        }
+        #region Constructors
 
         /// <summary>
         /// Initializes static members of the <see cref="EditorInitializationOrderManager"/> class.
@@ -132,5 +78,79 @@ namespace UniSharperEditor
                 }
             });
         }
+
+        #endregion Constructors
+
+        #region Properties
+
+        /// <summary>
+        /// Gets the loaded types.
+        /// </summary>
+        /// <value>The loaded types.</value>
+        internal static Type[] LoadedTypes
+        {
+            get
+            {
+                if (loadedTypes == null)
+                {
+                    try
+                    {
+                        Assembly assembly = Assembly.GetExecutingAssembly();
+                        loadedTypes = assembly.GetTypes();
+                    }
+                    catch (ReflectionTypeLoadException)
+                    {
+                        return new Type[0];
+                    }
+                }
+
+                return loadedTypes;
+            }
+        }
+
+        #endregion Properties
+
+        #region Classes
+
+        /// <summary>
+        /// The comparer of initialization order.
+        /// </summary>
+        /// <seealso cref="IComparer{Type}"/>
+        private class InitializationOrderComparer : IComparer<Type>
+        {
+            #region Methods
+
+            /// <summary>
+            /// Compares the specified x with y.
+            /// </summary>
+            /// <param name="x">The first object to compare.</param>
+            /// <param name="y">The second object to compare.</param>
+            /// <returns>
+            /// A signed integer that indicates the relative values of x and y, as shown in the
+            /// following table.
+            /// </returns>
+            public int Compare(Type x, Type y)
+            {
+                InitializeOnEditorStartupAttribute[] xAttrs = x.GetCustomAttributes(typeof(InitializeOnEditorStartupAttribute), false) as InitializeOnEditorStartupAttribute[];
+                InitializeOnEditorStartupAttribute[] yAttrs = y.GetCustomAttributes(typeof(InitializeOnEditorStartupAttribute), false) as InitializeOnEditorStartupAttribute[];
+
+                if (xAttrs[0].ExecutionOrder > yAttrs[0].ExecutionOrder)
+                {
+                    return -1;
+                }
+                else if (xAttrs[0].ExecutionOrder < yAttrs[0].ExecutionOrder)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+
+            #endregion Methods
+        }
+
+        #endregion Classes
     }
 }

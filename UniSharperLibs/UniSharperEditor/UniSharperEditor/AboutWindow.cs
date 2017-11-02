@@ -34,10 +34,16 @@ namespace UniSharperEditor
     /// <seealso cref="EditorWindow"/>
     internal class AboutWindow : EditorWindow
     {
+        #region Fields
+
         /// <summary>
         /// The menu item priority.
         /// </summary>
         public const int MenuItemPriority = int.MaxValue;
+
+        #endregion Fields
+
+        #region Methods
 
         [MenuItem("Tools/UniSharper/Help/About UniSharper...", false, MenuItemPriorities.HelpMenuItemsPriority)]
         private static void ShowAboutWindow()
@@ -45,8 +51,6 @@ namespace UniSharperEditor
             AboutWindow windowWithRect = GetWindowWithRect<AboutWindow>(new Rect(100f, 100f, 230f, 150f), true, "About UniSharper");
             windowWithRect.position = new Rect(200f, 200f, 570f, 340f);
         }
-
-        #region Messages
 
         private void OnGUI()
         {
@@ -68,6 +72,6 @@ namespace UniSharperEditor
             GUILayout.Space(10f);
         }
 
-        #endregion Messages
+        #endregion Methods
     }
 }

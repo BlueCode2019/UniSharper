@@ -29,16 +29,7 @@ namespace UnityEngine
     /// </summary>
     public static class MathfUtility
     {
-        /// <summary>
-        /// Gets the angle between <see cref="Vector3"/> a and b.
-        /// </summary>
-        /// <param name="a">The <see cref="Vector3"/> a.</param>
-        /// <param name="b">The <see cref="Vector3"/> b.</param>
-        /// <returns>The angle between <see cref="Vector3"/> a and b.</returns>
-        public static float GetAngle(Vector3 a, Vector3 b)
-        {
-            return Mathf.Acos(Vector3.Dot(a.normalized, b.normalized)) * Mathf.Rad2Deg;
-        }
+        #region Methods
 
         /// <summary>
         /// Clamps the angle between -180 and 180.
@@ -86,6 +77,17 @@ namespace UnityEngine
         }
 
         /// <summary>
+        /// Gets the angle between <see cref="Vector3"/> a and b.
+        /// </summary>
+        /// <param name="a">The <see cref="Vector3"/> a.</param>
+        /// <param name="b">The <see cref="Vector3"/> b.</param>
+        /// <returns>The angle between <see cref="Vector3"/> a and b.</returns>
+        public static float GetAngle(Vector3 a, Vector3 b)
+        {
+            return Mathf.Acos(Vector3.Dot(a.normalized, b.normalized)) * Mathf.Rad2Deg;
+        }
+
+        /// <summary>
         /// Normalizes the angle.
         /// </summary>
         /// <param name="angle">The angle.</param>
@@ -104,5 +106,7 @@ namespace UnityEngine
 
             return angle;
         }
+
+        #endregion Methods
     }
 }

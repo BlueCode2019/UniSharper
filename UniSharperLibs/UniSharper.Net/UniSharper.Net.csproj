@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UniSharper\Net\Http\HttpMethod.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UniSharper\UniSharper.csproj">
@@ -45,9 +46,7 @@
       <Name>UniSharper</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UniSharper\Net\Http\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>SET TargetPath="$(SolutionDir)..\Assets\UniSharperLibs\UniSharper.Net\Plugins\"

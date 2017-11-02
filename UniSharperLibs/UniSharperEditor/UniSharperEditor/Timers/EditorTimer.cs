@@ -32,6 +32,8 @@ namespace UniSharperEditor.Timers
     /// <seealso cref="QuickUnity.Timers.Timer"/>
     internal class EditorTimer : Timer
     {
+        #region Constructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EditorTimer"/> class.
         /// </summary>
@@ -50,7 +52,9 @@ namespace UniSharperEditor.Timers
         {
         }
 
-        #region ITimer Interface
+        #endregion Constructors
+
+        #region Methods
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting
@@ -61,10 +65,6 @@ namespace UniSharperEditor.Timers
             EditorTimerManager.Instance.Remove(this);
         }
 
-        #endregion ITimer Interface
-
-        #region Protected Methods
-
         /// <summary>
         /// Initializes this instance.
         /// </summary>
@@ -73,6 +73,6 @@ namespace UniSharperEditor.Timers
             EditorTimerManager.Instance.Add(this);
         }
 
-        #endregion Protected Methods
+        #endregion Methods
     }
 }

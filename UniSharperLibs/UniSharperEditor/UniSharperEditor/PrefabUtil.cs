@@ -32,6 +32,8 @@ namespace UniSharperEditor
     /// </summary>
     internal sealed class PrefabUtil
     {
+        #region Methods
+
         /// <summary>
         /// Saves the prefab.
         /// </summary>
@@ -49,5 +51,7 @@ namespace UniSharperEditor
 
             return null;
         }
+
+        #endregion Methods
     }
 }

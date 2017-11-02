@@ -38,67 +38,7 @@ namespace UniSharperEditor
     [InitializeOnEditorStartup]
     internal class AutoSave : Singleton<AutoSave>
     {
-        /// <summary>
-        /// The collections of text <see cref="GUIContent"/> s.
-        /// </summary>
-        public static class TextStyles
-        {
-            /// <summary>
-            /// The style of property isAutoSaveEnabled.
-            /// </summary>
-            public static readonly GUIContent IsAutoSaveEnabledStyle = new GUIContent("Enable AutoSave", "Whether to automatically save after a time interval");
-
-            /// <summary>
-            /// The style of property isAutoSaveScenesEnabled.
-            /// </summary>
-            public static readonly GUIContent IsAutoSaveScenesEnabledStyle = new GUIContent("Save Scenes", "Whether to automatically save scenes during an autosave");
-
-            /// <summary>
-            /// The style of property isAutoSaveAssetsEnabled.
-            /// </summary>
-            public static readonly GUIContent IsAutoSaveAssetsEnabledStyle = new GUIContent("Save Assets", "Whether to automatically save assets during an autosave");
-
-            /// <summary>
-            /// The style of property frequencyInMinutes.
-            /// </summary>
-            public static readonly GUIContent FrequencyInMinutesStyle = new GUIContent("Frequency in Minutes", "The time interval after which to auto save");
-
-            /// <summary>
-            /// The style of property askWhenSaving.
-            /// </summary>
-            public static readonly GUIContent AskWhenSavingStyle = new GUIContent("Ask When Saving", "Whether to show confirm dialog when saving");
-        }
-
-        /// <summary>
-        /// Class contains all config keys.
-        /// </summary>
-        private class ConfigKeys
-        {
-            /// <summary>
-            /// The key of config parameter "isAutoSaveEnabled".
-            /// </summary>
-            public const string IsAutoSaveEnabledKey = "isAutoSaveEnabled";
-
-            /// <summary>
-            /// The key of config parameter "isAutoSaveScenesEnabled".
-            /// </summary>
-            public const string IsAutoSaveScenesEnabledKey = "isAutoSaveScenesEnabled";
-
-            /// <summary>
-            /// The key of config parameter "isAutoSaveAssetsEnabled".
-            /// </summary>
-            public const string IsAutoSaveAssetsEnabledKey = "isAutoSaveAssetsEnabled";
-
-            /// <summary>
-            /// The key of config parameter "autoSaveTimeMinutes".
-            /// </summary>
-            public const string AutoSaveTimeMinutesKey = "autoSaveTimeMinutes";
-
-            /// <summary>
-            /// The key of config parameter "askWhenSaving".
-            /// </summary>
-            public const string AskWhenSavingKey = "askWhenSaving";
-        }
+        #region Fields
 
         /// <summary>
         /// The configuration section.
@@ -106,9 +46,14 @@ namespace UniSharperEditor
         private const string configSection = "AutoSave";
 
         /// <summary>
-        /// Whether initialize is complete.
+        /// Whether to show confirm dialog when autosave.
         /// </summary>
-        private bool initialized = false;
+        private bool askWhenSaving = true;
+
+        /// <summary>
+        /// The time interval after which to autosave.
+        /// </summary>
+        private uint autoSaveTimeMinutes = 10;
 
         /// <summary>
         /// The timer of autosave.
@@ -116,9 +61,14 @@ namespace UniSharperEditor
         private EditorTimer autosaveTimer;
 
         /// <summary>
-        /// Whether the data is dirty.
+        /// Whether initialize is complete.
         /// </summary>
-        private bool isDirty = false;
+        private bool initialized = false;
+
+        /// <summary>
+        /// Whether to save assets automatically.
+        /// </summary>
+        private bool isAutoSaveAssetsEnabled = true;
 
         /// <summary>
         /// Whether to enable AutoSave feature.
@@ -131,19 +81,13 @@ namespace UniSharperEditor
         private bool isAutoSaveScenesEnabled = true;
 
         /// <summary>
-        /// Whether to save assets automatically.
+        /// Whether the data is dirty.
         /// </summary>
-        private bool isAutoSaveAssetsEnabled = true;
+        private bool isDirty = false;
 
-        /// <summary>
-        /// The time interval after which to autosave.
-        /// </summary>
-        private uint autoSaveTimeMinutes = 10;
+        #endregion Fields
 
-        /// <summary>
-        /// Whether to show confirm dialog when autosave.
-        /// </summary>
-        private bool askWhenSaving = true;
+        #region Constructors
 
         /// <summary>
         /// Initializes static members of the <see cref="AutoSave"/> class.
@@ -158,6 +102,91 @@ namespace UniSharperEditor
         /// </summary>
         private AutoSave()
         {
+        }
+
+        #endregion Constructors
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [show confirm dialog].
+        /// </summary>
+        /// <value><c>true</c> if [show confirm dialog]; otherwise, <c>false</c>.</value>
+        public bool AskWhenSaving
+        {
+            get
+            {
+                if (!initialized)
+                {
+                    askWhenSaving = EditorConfig.GetConfigValue(configSection, ConfigKeys.AskWhenSavingKey, true);
+                }
+
+                return askWhenSaving;
+            }
+
+            set
+            {
+                if (askWhenSaving != value)
+                {
+                    askWhenSaving = value;
+                    EditorConfig.SetConfigValue(configSection, ConfigKeys.AskWhenSavingKey, value);
+                    isDirty = true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the automatic save time minutes.
+        /// </summary>
+        /// <value>The automatic save time minutes.</value>
+        public uint AutoSaveTimeMinutes
+        {
+            get
+            {
+                if (!initialized)
+                {
+                    autoSaveTimeMinutes = EditorConfig.GetConfigValue<uint>(configSection, ConfigKeys.AutoSaveTimeMinutesKey, 10);
+                }
+
+                return autoSaveTimeMinutes;
+            }
+
+            set
+            {
+                if (autoSaveTimeMinutes != value)
+                {
+                    autoSaveTimeMinutes = value;
+                    EditorConfig.SetConfigValue(configSection, ConfigKeys.AutoSaveTimeMinutesKey, value);
+                    isDirty = true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether it is automatic save assets enabled.
+        /// </summary>
+        /// <value><c>true</c> if it is automatic save assets enabled; otherwise, <c>false</c>.</value>
+        public bool IsAutoSaveAssetsEnabled
+        {
+            get
+            {
+                if (!initialized)
+                {
+                    isAutoSaveAssetsEnabled = EditorConfig.GetConfigValue(configSection, ConfigKeys.IsAutoSaveAssetsEnabledKey, true);
+                }
+
+                return isAutoSaveAssetsEnabled;
+            }
+
+            set
+            {
+                if (isAutoSaveAssetsEnabled != value)
+                {
+                    isAutoSaveAssetsEnabled = value;
+                    EditorConfig.SetConfigValue(configSection, ConfigKeys.IsAutoSaveAssetsEnabledKey, value);
+                    isDirty = true;
+                }
+            }
         }
 
         /// <summary>
@@ -214,86 +243,9 @@ namespace UniSharperEditor
             }
         }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether it is automatic save assets enabled.
-        /// </summary>
-        /// <value><c>true</c> if it is automatic save assets enabled; otherwise, <c>false</c>.</value>
-        public bool IsAutoSaveAssetsEnabled
-        {
-            get
-            {
-                if (!initialized)
-                {
-                    isAutoSaveAssetsEnabled = EditorConfig.GetConfigValue(configSection, ConfigKeys.IsAutoSaveAssetsEnabledKey, true);
-                }
+        #endregion Properties
 
-                return isAutoSaveAssetsEnabled;
-            }
-
-            set
-            {
-                if (isAutoSaveAssetsEnabled != value)
-                {
-                    isAutoSaveAssetsEnabled = value;
-                    EditorConfig.SetConfigValue(configSection, ConfigKeys.IsAutoSaveAssetsEnabledKey, value);
-                    isDirty = true;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the automatic save time minutes.
-        /// </summary>
-        /// <value>The automatic save time minutes.</value>
-        public uint AutoSaveTimeMinutes
-        {
-            get
-            {
-                if (!initialized)
-                {
-                    autoSaveTimeMinutes = EditorConfig.GetConfigValue<uint>(configSection, ConfigKeys.AutoSaveTimeMinutesKey, 10);
-                }
-
-                return autoSaveTimeMinutes;
-            }
-
-            set
-            {
-                if (autoSaveTimeMinutes != value)
-                {
-                    autoSaveTimeMinutes = value;
-                    EditorConfig.SetConfigValue(configSection, ConfigKeys.AutoSaveTimeMinutesKey, value);
-                    isDirty = true;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether [show confirm dialog].
-        /// </summary>
-        /// <value><c>true</c> if [show confirm dialog]; otherwise, <c>false</c>.</value>
-        public bool AskWhenSaving
-        {
-            get
-            {
-                if (!initialized)
-                {
-                    askWhenSaving = EditorConfig.GetConfigValue(configSection, ConfigKeys.AskWhenSavingKey, true);
-                }
-
-                return askWhenSaving;
-            }
-
-            set
-            {
-                if (askWhenSaving != value)
-                {
-                    askWhenSaving = value;
-                    EditorConfig.SetConfigValue(configSection, ConfigKeys.AskWhenSavingKey, value);
-                    isDirty = true;
-                }
-            }
-        }
+        #region Methods
 
         /// <summary>
         /// Initializes this instance.
@@ -323,21 +275,23 @@ namespace UniSharperEditor
         }
 
         /// <summary>
-        /// Called when timer is ticking.
+        /// Save project automatically.
         /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">
-        /// The <see cref="TimerEventArgs"/> instance containing the timer event data.
-        /// </param>
-        private void OnAutosaveTimerTicking(object sender, TimerEventArgs e)
+        private void AutoSaveProject()
         {
-            if (isDirty)
+            if (IsAutoSaveScenesEnabled)
             {
-                autosaveTimer.Reset();
-                autosaveTimer.RepeatCount = AutoSaveTimeMinutes * 60;
-                isDirty = false;
-                autosaveTimer.Start();
+                // Save scenes.
+                EditorSceneManager.SaveOpenScenes();
             }
+
+            if (isAutoSaveAssetsEnabled)
+            {
+                // Save assets.
+                AssetDatabase.SaveAssets();
+            }
+
+            //autosaveTimer.Start();
         }
 
         /// <summary>
@@ -370,23 +324,97 @@ namespace UniSharperEditor
         }
 
         /// <summary>
-        /// Save project automatically.
+        /// Called when timer is ticking.
         /// </summary>
-        private void AutoSaveProject()
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">
+        /// The <see cref="TimerEventArgs"/> instance containing the timer event data.
+        /// </param>
+        private void OnAutosaveTimerTicking(object sender, TimerEventArgs e)
         {
-            if (IsAutoSaveScenesEnabled)
+            if (isDirty)
             {
-                // Save scenes.
-                EditorSceneManager.SaveOpenScenes();
+                autosaveTimer.Reset();
+                autosaveTimer.RepeatCount = AutoSaveTimeMinutes * 60;
+                isDirty = false;
+                autosaveTimer.Start();
             }
-
-            if (isAutoSaveAssetsEnabled)
-            {
-                // Save assets.
-                AssetDatabase.SaveAssets();
-            }
-
-            //autosaveTimer.Start();
         }
+
+        #endregion Methods
+
+        #region Classes
+
+        /// <summary>
+        /// The collections of text <see cref="GUIContent"/> s.
+        /// </summary>
+        public static class TextStyles
+        {
+            #region Fields
+
+            /// <summary>
+            /// The style of property askWhenSaving.
+            /// </summary>
+            public static readonly GUIContent AskWhenSavingStyle = new GUIContent("Ask When Saving", "Whether to show confirm dialog when saving");
+
+            /// <summary>
+            /// The style of property frequencyInMinutes.
+            /// </summary>
+            public static readonly GUIContent FrequencyInMinutesStyle = new GUIContent("Frequency in Minutes", "The time interval after which to auto save");
+
+            /// <summary>
+            /// The style of property isAutoSaveAssetsEnabled.
+            /// </summary>
+            public static readonly GUIContent IsAutoSaveAssetsEnabledStyle = new GUIContent("Save Assets", "Whether to automatically save assets during an autosave");
+
+            /// <summary>
+            /// The style of property isAutoSaveEnabled.
+            /// </summary>
+            public static readonly GUIContent IsAutoSaveEnabledStyle = new GUIContent("Enable AutoSave", "Whether to automatically save after a time interval");
+
+            /// <summary>
+            /// The style of property isAutoSaveScenesEnabled.
+            /// </summary>
+            public static readonly GUIContent IsAutoSaveScenesEnabledStyle = new GUIContent("Save Scenes", "Whether to automatically save scenes during an autosave");
+
+            #endregion Fields
+        }
+
+        /// <summary>
+        /// Class contains all config keys.
+        /// </summary>
+        private class ConfigKeys
+        {
+            #region Fields
+
+            /// <summary>
+            /// The key of config parameter "askWhenSaving".
+            /// </summary>
+            public const string AskWhenSavingKey = "askWhenSaving";
+
+            /// <summary>
+            /// The key of config parameter "autoSaveTimeMinutes".
+            /// </summary>
+            public const string AutoSaveTimeMinutesKey = "autoSaveTimeMinutes";
+
+            /// <summary>
+            /// The key of config parameter "isAutoSaveAssetsEnabled".
+            /// </summary>
+            public const string IsAutoSaveAssetsEnabledKey = "isAutoSaveAssetsEnabled";
+
+            /// <summary>
+            /// The key of config parameter "isAutoSaveEnabled".
+            /// </summary>
+            public const string IsAutoSaveEnabledKey = "isAutoSaveEnabled";
+
+            /// <summary>
+            /// The key of config parameter "isAutoSaveScenesEnabled".
+            /// </summary>
+            public const string IsAutoSaveScenesEnabledKey = "isAutoSaveScenesEnabled";
+
+            #endregion Fields
+        }
+
+        #endregion Classes
     }
 }

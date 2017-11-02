@@ -32,25 +32,7 @@ namespace UniSharper.Threading.Events
     /// </summary>
     public class Event
     {
-        /// <summary>
-        /// The type of event.
-        /// </summary>
-        /// <value>The type of event.</value>
-        public string EventType
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets or sets the context object.
-        /// </summary>
-        /// <value>The context object.</value>
-        public object Context
-        {
-            get;
-            set;
-        }
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Event"/> class.
@@ -68,5 +50,31 @@ namespace UniSharper.Threading.Events
             EventType = eventType;
             Context = context;
         }
+
+        #endregion Constructors
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the context object.
+        /// </summary>
+        /// <value>The context object.</value>
+        public object Context
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The type of event.
+        /// </summary>
+        /// <value>The type of event.</value>
+        public string EventType
+        {
+            get;
+            private set;
+        }
+
+        #endregion Properties
     }
 }

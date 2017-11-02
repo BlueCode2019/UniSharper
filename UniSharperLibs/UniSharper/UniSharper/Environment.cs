@@ -33,11 +33,17 @@ namespace UniSharper
     /// </summary>
     public static class Environment
     {
+        #region Fields
+
         /// <summary>
         /// Gets a <see cref="Version"/> object that describes the major, minor, build, and revision
         /// numbers of the library runtime.
         /// </summary>
         public static readonly Version Version = typeof(Environment).Assembly.GetName().Version;
+
+        #endregion Fields
+
+        #region Properties
 
         /// <summary>
         /// Gets the path to the StreamingAssets folder
@@ -69,5 +75,7 @@ namespace UniSharper
                 return path;
             }
         }
+
+        #endregion Properties
     }
 }

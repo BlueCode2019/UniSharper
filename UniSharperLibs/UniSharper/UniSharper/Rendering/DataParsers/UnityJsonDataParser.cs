@@ -30,107 +30,7 @@ namespace UniSharper.Rendering.DataParsers
 {
     internal class UnityJsonDataParser : TilingSheetDataParser
     {
-        private class QuatSize
-        {
-            public float x;
-            public float y;
-            public float w;
-            public float h;
-
-            public QuatSize(float x, float y, float w, float h)
-            {
-                this.x = x;
-                this.y = y;
-                this.w = w;
-                this.h = h;
-            }
-
-            public override string ToString()
-            {
-                return string.Format("x={0}, y={1}, w={2}, h={3}", x, y, w, h);
-            }
-        }
-
-        private class DualSize
-        {
-            public float w;
-            public float h;
-
-            public DualSize(float w, float h)
-            {
-                this.w = w;
-                this.h = h;
-            }
-
-            public override string ToString()
-            {
-                return string.Format("w={0}, h={1}", w, h);
-            }
-        }
-
-        private class Frame
-        {
-            public string name;
-            public QuatSize frame;
-            public bool rotated;
-            public bool trimmed;
-            public QuatSize spriteSourceSize;
-            public DualSize sourceSize;
-
-            public Frame(string name, QuatSize frame, bool rotated, bool trimmed, QuatSize spriteSourceSize, DualSize sourceSize)
-            {
-                this.name = name;
-                this.frame = frame;
-                this.rotated = rotated;
-                this.trimmed = trimmed;
-                this.spriteSourceSize = spriteSourceSize;
-                this.sourceSize = sourceSize;
-            }
-
-            public override string ToString()
-            {
-                return string.Format("name={0}, frame={1}, rotated={2}, trimmed={3}, spriteSourceSize={4}, sourceSize={5}", name, frame, rotated, trimmed, spriteSourceSize, sourceSize);
-            }
-        }
-
-        private class Meta
-        {
-            public string app;
-            public string version;
-            public string image;
-            public string format;
-            public DualSize size;
-            public string scale;
-            public string smartupdate;
-
-            public Meta(string app, string version, string image, string format, DualSize size, string scale, string smartupdate)
-            {
-                this.app = app;
-                this.version = version;
-                this.image = image;
-                this.format = format;
-                this.size = size;
-                this.scale = scale;
-                this.smartupdate = smartupdate;
-            }
-
-            public override string ToString()
-            {
-                return string.Format("image={0}, size={1},", image, size);
-            }
-        }
-
-        private class UnityJsonData
-        {
-            public Dictionary<string, Frame> frames;
-            public Meta meta;
-
-            public UnityJsonData(Dictionary<string, Frame> frames, Meta meta)
-            {
-                this.frames = frames;
-                this.meta = meta;
-            }
-        }
+        #region Methods
 
         public override Dictionary<string, Rect> ParseData(string name, string data)
         {
@@ -158,5 +58,169 @@ namespace UniSharper.Rendering.DataParsers
 
             return DataDict[name];
         }
+
+        #endregion Methods
+
+        #region Classes
+
+        private class DualSize
+        {
+            #region Fields
+
+            public float h;
+            public float w;
+
+            #endregion Fields
+
+            #region Constructors
+
+            public DualSize(float w, float h)
+            {
+                this.w = w;
+                this.h = h;
+            }
+
+            #endregion Constructors
+
+            #region Methods
+
+            public override string ToString()
+            {
+                return string.Format("w={0}, h={1}", w, h);
+            }
+
+            #endregion Methods
+        }
+
+        private class Frame
+        {
+            #region Fields
+
+            public QuatSize frame;
+            public string name;
+            public bool rotated;
+            public DualSize sourceSize;
+            public QuatSize spriteSourceSize;
+            public bool trimmed;
+
+            #endregion Fields
+
+            #region Constructors
+
+            public Frame(string name, QuatSize frame, bool rotated, bool trimmed, QuatSize spriteSourceSize, DualSize sourceSize)
+            {
+                this.name = name;
+                this.frame = frame;
+                this.rotated = rotated;
+                this.trimmed = trimmed;
+                this.spriteSourceSize = spriteSourceSize;
+                this.sourceSize = sourceSize;
+            }
+
+            #endregion Constructors
+
+            #region Methods
+
+            public override string ToString()
+            {
+                return string.Format("name={0}, frame={1}, rotated={2}, trimmed={3}, spriteSourceSize={4}, sourceSize={5}", name, frame, rotated, trimmed, spriteSourceSize, sourceSize);
+            }
+
+            #endregion Methods
+        }
+
+        private class Meta
+        {
+            #region Fields
+
+            public string app;
+            public string format;
+            public string image;
+            public string scale;
+            public DualSize size;
+            public string smartupdate;
+            public string version;
+
+            #endregion Fields
+
+            #region Constructors
+
+            public Meta(string app, string version, string image, string format, DualSize size, string scale, string smartupdate)
+            {
+                this.app = app;
+                this.version = version;
+                this.image = image;
+                this.format = format;
+                this.size = size;
+                this.scale = scale;
+                this.smartupdate = smartupdate;
+            }
+
+            #endregion Constructors
+
+            #region Methods
+
+            public override string ToString()
+            {
+                return string.Format("image={0}, size={1},", image, size);
+            }
+
+            #endregion Methods
+        }
+
+        private class QuatSize
+        {
+            #region Fields
+
+            public float h;
+            public float w;
+            public float x;
+            public float y;
+
+            #endregion Fields
+
+            #region Constructors
+
+            public QuatSize(float x, float y, float w, float h)
+            {
+                this.x = x;
+                this.y = y;
+                this.w = w;
+                this.h = h;
+            }
+
+            #endregion Constructors
+
+            #region Methods
+
+            public override string ToString()
+            {
+                return string.Format("x={0}, y={1}, w={2}, h={3}", x, y, w, h);
+            }
+
+            #endregion Methods
+        }
+
+        private class UnityJsonData
+        {
+            #region Fields
+
+            public Dictionary<string, Frame> frames;
+            public Meta meta;
+
+            #endregion Fields
+
+            #region Constructors
+
+            public UnityJsonData(Dictionary<string, Frame> frames, Meta meta)
+            {
+                this.frames = frames;
+                this.meta = meta;
+            }
+
+            #endregion Constructors
+        }
+
+        #endregion Classes
     }
 }

@@ -26,14 +26,15 @@ namespace UniSharperEditor
 {
     internal sealed class MenuItemPriorities
     {
-        public const int MenuItemDivNumber = 11;
-
-        public const int RenderingMenuItemsPriority = 0;
-
-        public const int PreferencesMenuItemPriority = RenderingMenuItemsPriority + MenuItemDivNumber;
+        #region Fields
 
         public const int BuildSettingsMenuItemsPriority = PreferencesMenuItemPriority + MenuItemDivNumber;
-
         public const int HelpMenuItemsPriority = BuildSettingsMenuItemsPriority + MenuItemDivNumber;
+        public const int MenuItemDivNumber = 11;
+
+        public const int PreferencesMenuItemPriority = RenderingMenuItemsPriority + MenuItemDivNumber;
+        public const int RenderingMenuItemsPriority = 0;
+
+        #endregion Fields
     }
 }

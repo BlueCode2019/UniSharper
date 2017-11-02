@@ -31,10 +31,16 @@ namespace UniSharperEditor
     /// </summary>
     internal static class AssetUtil
     {
+        #region Fields
+
         /// <summary>
         /// The extension of Scene asset.
         /// </summary>
         private const string sceneAssetExtension = ".unity";
+
+        #endregion Fields
+
+        #region Methods
 
         /// <summary>
         /// Determines whether the asset by the path is a scene asset.
@@ -56,5 +62,7 @@ namespace UniSharperEditor
 
             return false;
         }
+
+        #endregion Methods
     }
 }

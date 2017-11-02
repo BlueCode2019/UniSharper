@@ -39,6 +39,8 @@ namespace UniSharperEditor.Timers
     [InitializeOnEditorStartup(int.MaxValue)]
     internal sealed class EditorTimerManager : Singleton<EditorTimerManager>
     {
+        #region Fields
+
         /// <summary>
         /// The last time.
         /// </summary>
@@ -48,6 +50,10 @@ namespace UniSharperEditor.Timers
         /// The timer list.
         /// </summary>
         private ITimerList timerList;
+
+        #endregion Fields
+
+        #region Constructors
 
         /// <summary>
         /// Initializes static members of the <see cref="EditorTimerManager"/> class.
@@ -64,15 +70,9 @@ namespace UniSharperEditor.Timers
         {
         }
 
-        /// <summary>
-        /// Initializes this instance.
-        /// </summary>
-        public void Initialize()
-        {
-            lastTime = EditorApplication.timeSinceStartup;
-            timerList = new TimerGroup();
-            EditorApplication.update += OnEditorUpdate;
-        }
+        #endregion Constructors
+
+        #region Properties
 
         /// <summary>
         /// Gets the number of <see cref="ITimer"/> elements contained in the <see cref="EditorTimerManager"/>.
@@ -91,7 +91,9 @@ namespace UniSharperEditor.Timers
             }
         }
 
-        #region Public Methods
+        #endregion Properties
+
+        #region Methods
 
         /// <summary>
         /// Adds an <see cref="QuickUnity.Timers.ITimer"/> item to the <see cref="QuickUnity.Timers.ITimerCollection"/>.
@@ -140,6 +142,16 @@ namespace UniSharperEditor.Timers
         }
 
         /// <summary>
+        /// Initializes this instance.
+        /// </summary>
+        public void Initialize()
+        {
+            lastTime = EditorApplication.timeSinceStartup;
+            timerList = new TimerGroup();
+            EditorApplication.update += OnEditorUpdate;
+        }
+
+        /// <summary>
         /// Removes the first occurrence of a specific object from the <see cref="QuickUnity.Timers.ITimerCollection"/>.
         /// </summary>
         /// <param name="item">The object to remove from the <see cref="QuickUnity.Timers.ITimerCollection"/>.</param>
@@ -174,10 +186,6 @@ namespace UniSharperEditor.Timers
             }
         }
 
-        #endregion Public Methods
-
-        #region Private Methods
-
         /// <summary>
         /// Called when [editor update].
         /// </summary>
@@ -207,6 +215,6 @@ namespace UniSharperEditor.Timers
             }
         }
 
-        #endregion Private Methods
+        #endregion Methods
     }
 }

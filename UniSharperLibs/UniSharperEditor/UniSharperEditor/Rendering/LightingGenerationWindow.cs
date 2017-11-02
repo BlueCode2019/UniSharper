@@ -36,9 +36,14 @@ namespace UniSharperEditor.Rendering
     /// <seealso cref="EditorWindow"/>
     internal class LightingGenerationWindow : EditorWindow
     {
-        private Vector2 scrollPosition;
+        #region Fields
 
         private List<SceneAsset> scenes = new List<SceneAsset>();
+        private Vector2 scrollPosition;
+
+        #endregion Fields
+
+        #region Methods
 
         [MenuItem("Tools/UniSharper/Rendering/Generate Lighting for Scenes", false, MenuItemPriorities.RenderingMenuItemsPriority + 1)]
         public static void ShowWindow()
@@ -46,29 +51,6 @@ namespace UniSharperEditor.Rendering
             //Show existing window instance. If one doesn't exist, make one.
             LightingGenerationWindow window = GetWindow<LightingGenerationWindow>(true, "Lighting Generation", true);
             window.position = new Rect(200, 200, 500, 500);
-        }
-
-        private void OnGUI()
-        {
-            scrollPosition = GUILayout.BeginScrollView(scrollPosition);
-            GUILayout.Label("Scenes to generate lighting:", EditorStyles.boldLabel);
-            for (int i = 0; i < scenes.Count; ++i)
-            {
-                scenes[i] = (SceneAsset)EditorGUILayout.ObjectField(scenes[i], typeof(SceneAsset), false);
-            }
-            if (GUILayout.Button("Add"))
-            {
-                scenes.Add(null);
-            }
-
-            GUILayout.Space(8);
-
-            if (GUILayout.Button("Generate Lighting for Scenes"))
-            {
-                GenerateLighting();
-            }
-
-            GUILayout.EndScrollView();
         }
 
         private void GenerateLighting()
@@ -96,5 +78,30 @@ namespace UniSharperEditor.Rendering
 
             EditorUtility.ClearProgressBar();
         }
+
+        private void OnGUI()
+        {
+            scrollPosition = GUILayout.BeginScrollView(scrollPosition);
+            GUILayout.Label("Scenes to generate lighting:", EditorStyles.boldLabel);
+            for (int i = 0; i < scenes.Count; ++i)
+            {
+                scenes[i] = (SceneAsset)EditorGUILayout.ObjectField(scenes[i], typeof(SceneAsset), false);
+            }
+            if (GUILayout.Button("Add"))
+            {
+                scenes.Add(null);
+            }
+
+            GUILayout.Space(8);
+
+            if (GUILayout.Button("Generate Lighting for Scenes"))
+            {
+                GenerateLighting();
+            }
+
+            GUILayout.EndScrollView();
+        }
+
+        #endregion Methods
     }
 }

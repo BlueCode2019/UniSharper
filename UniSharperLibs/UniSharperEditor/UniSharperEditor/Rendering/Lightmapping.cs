@@ -35,6 +35,8 @@ namespace UniSharperEditor.Rendering
     [InitializeOnEditorStartup]
     internal static class Lightmapping
     {
+        #region Constructors
+
         /// <summary>
         /// Initializes static members of the <see cref="Lightmapping"/> class.
         /// </summary>
@@ -43,33 +45,9 @@ namespace UniSharperEditor.Rendering
             UnityEditor.Lightmapping.completed += OnLightmappingCompleted;
         }
 
-        /// <summary>
-        /// Validates the prefab lightmaps baking.
-        /// </summary>
-        /// <returns>
-        /// <c>true</c> if got <see cref="PrefabLightmapData"/> component in open scenes,
-        /// <c>false</c> otherwise.
-        /// </returns>
-        [MenuItem("Tools/UniSharper/Rendering/Bake Prefab Lightmaps", true)]
-        private static bool ValidatePrefabLightmapsBaking()
-        {
-            PrefabLightmapData[] prefabs = Object.FindObjectsOfType<PrefabLightmapData>();
+        #endregion Constructors
 
-            if (prefabs.Length > 0)
-            {
-                foreach (PrefabLightmapData item in prefabs)
-                {
-                    GameObject root = PrefabUtility.GetPrefabParent(item.gameObject) as GameObject;
-
-                    if (root != null)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
+        #region Methods
 
         /// <summary>
         /// Bakes the prefab lightmaps.
@@ -127,35 +105,6 @@ namespace UniSharperEditor.Rendering
         }
 
         /// <summary>
-        /// Make sure the <see cref="GameObject"/> of renderer is lightmap static.
-        /// </summary>
-        /// <param name="prefabs">The <see cref="Array"/> of <see cref="PrefabLightmapData"/>.</param>
-        private static void MakeSureRendererGameObjectIsLightmapStatic(PrefabLightmapData[] prefabs)
-        {
-            if (prefabs.Length > 0)
-            {
-                foreach (PrefabLightmapData lightmap in prefabs)
-                {
-                    MeshRenderer[] renderers = lightmap.gameObject.GetComponentsInChildren<MeshRenderer>();
-
-                    foreach (MeshRenderer renderer in renderers)
-                    {
-                        GameObject gameObject = renderer.gameObject;
-                        PrefabLightmapExcludedRenderer excludedRenderer = gameObject.GetComponent<PrefabLightmapExcludedRenderer>();
-
-                        if (excludedRenderer == null)
-                        {
-                            if (!GameObjectUtility.AreStaticEditorFlagsSet(gameObject, StaticEditorFlags.LightmapStatic))
-                            {
-                                GameObjectUtility.SetStaticEditorFlags(gameObject, StaticEditorFlags.LightmapStatic);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// Generates the lightmap information.
         /// </summary>
         /// <param name="gameObject">The <see cref="GameObject"/>.</param>
@@ -203,6 +152,35 @@ namespace UniSharperEditor.Rendering
         }
 
         /// <summary>
+        /// Make sure the <see cref="GameObject"/> of renderer is lightmap static.
+        /// </summary>
+        /// <param name="prefabs">The <see cref="Array"/> of <see cref="PrefabLightmapData"/>.</param>
+        private static void MakeSureRendererGameObjectIsLightmapStatic(PrefabLightmapData[] prefabs)
+        {
+            if (prefabs.Length > 0)
+            {
+                foreach (PrefabLightmapData lightmap in prefabs)
+                {
+                    MeshRenderer[] renderers = lightmap.gameObject.GetComponentsInChildren<MeshRenderer>();
+
+                    foreach (MeshRenderer renderer in renderers)
+                    {
+                        GameObject gameObject = renderer.gameObject;
+                        PrefabLightmapExcludedRenderer excludedRenderer = gameObject.GetComponent<PrefabLightmapExcludedRenderer>();
+
+                        if (excludedRenderer == null)
+                        {
+                            if (!GameObjectUtility.AreStaticEditorFlagsSet(gameObject, StaticEditorFlags.LightmapStatic))
+                            {
+                                GameObjectUtility.SetStaticEditorFlags(gameObject, StaticEditorFlags.LightmapStatic);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Called when lightmap generating completed.
         /// </summary>
         private static void OnLightmappingCompleted()
@@ -210,5 +188,35 @@ namespace UniSharperEditor.Rendering
             PrefabLightmapData[] prefabs = Object.FindObjectsOfType<PrefabLightmapData>();
             BakePrefabLightmaps(prefabs);
         }
+
+        /// <summary>
+        /// Validates the prefab lightmaps baking.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if got <see cref="PrefabLightmapData"/> component in open scenes,
+        /// <c>false</c> otherwise.
+        /// </returns>
+        [MenuItem("Tools/UniSharper/Rendering/Bake Prefab Lightmaps", true)]
+        private static bool ValidatePrefabLightmapsBaking()
+        {
+            PrefabLightmapData[] prefabs = Object.FindObjectsOfType<PrefabLightmapData>();
+
+            if (prefabs.Length > 0)
+            {
+                foreach (PrefabLightmapData item in prefabs)
+                {
+                    GameObject root = PrefabUtility.GetPrefabParent(item.gameObject) as GameObject;
+
+                    if (root != null)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        #endregion Methods
     }
 }

@@ -33,23 +33,20 @@ namespace UniSharper.Rendering
     [Serializable]
     public class LightmapRendererInfo
     {
-        [SerializeField]
-        private Renderer renderer;
-
-        public Renderer Renderer
-        {
-            get
-            {
-                return renderer;
-            }
-            set
-            {
-                renderer = value;
-            }
-        }
+        #region Fields
 
         [SerializeField]
         private int lightmapIndex;
+
+        [SerializeField]
+        private Vector4 lightmapScaleOffset;
+
+        [SerializeField]
+        private Renderer renderer;
+
+        #endregion Fields
+
+        #region Properties
 
         public int LightmapIndex
         {
@@ -63,9 +60,6 @@ namespace UniSharper.Rendering
             }
         }
 
-        [SerializeField]
-        private Vector4 lightmapScaleOffset;
-
         public Vector4 LightmapScaleOffset
         {
             get
@@ -77,6 +71,20 @@ namespace UniSharper.Rendering
                 lightmapScaleOffset = value;
             }
         }
+
+        public Renderer Renderer
+        {
+            get
+            {
+                return renderer;
+            }
+            set
+            {
+                renderer = value;
+            }
+        }
+
+        #endregion Properties
     }
 
     /// <summary>
@@ -86,8 +94,7 @@ namespace UniSharper.Rendering
     [DisallowMultipleComponent, ExecuteInEditMode]
     public class PrefabLightmapData : MonoBehaviour
     {
-        [SerializeField]
-        private LightmapRendererInfo[] rendererInfos;
+        #region Fields
 
         [SerializeField]
         private Texture2D[] lightmapColors;
@@ -96,17 +103,14 @@ namespace UniSharper.Rendering
         private Texture2D[] lightmapDirs;
 
         [SerializeField]
+        private LightmapRendererInfo[] rendererInfos;
+
+        [SerializeField]
         private Texture2D[] shadowMasks;
 
-        #region Properties
+        #endregion Fields
 
-        public LightmapRendererInfo[] RendererInfos
-        {
-            set
-            {
-                rendererInfos = value;
-            }
-        }
+        #region Properties
 
         public Texture2D[] LightmapColors
         {
@@ -124,6 +128,14 @@ namespace UniSharper.Rendering
             }
         }
 
+        public LightmapRendererInfo[] RendererInfos
+        {
+            set
+            {
+                rendererInfos = value;
+            }
+        }
+
         public Texture2D[] ShadowMasks
         {
             set
@@ -134,7 +146,7 @@ namespace UniSharper.Rendering
 
         #endregion Properties
 
-        #region Statis Methods
+        #region Methods
 
         /// <summary>
         /// Applies the static lightmap.
@@ -197,10 +209,6 @@ namespace UniSharper.Rendering
             }
         }
 
-        #endregion Statis Methods
-
-        #region Messages
-
         /// <summary>
         /// Called when the script instance is being loaded.
         /// </summary>
@@ -209,6 +217,6 @@ namespace UniSharper.Rendering
             ApplyStaticLightmap(this);
         }
 
-        #endregion Messages
+        #endregion Methods
     }
 }

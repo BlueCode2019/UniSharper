@@ -29,12 +29,18 @@ namespace UniSharper.Rendering.DataParsers
 {
     internal abstract class TilingSheetDataParser : ITilingSheetDataParser
     {
+        #region Fields
+
         private static readonly Dictionary<TilingSheetDataFormat, ITilingSheetDataParser> parsers = new Dictionary<TilingSheetDataFormat, ITilingSheetDataParser>()
         {
             { TilingSheetDataFormat.UnityJson, new UnityJsonDataParser() }
         };
 
         private static Dictionary<string, Dictionary<string, Rect>> dataDict = new Dictionary<string, Dictionary<string, Rect>>();
+
+        #endregion Fields
+
+        #region Properties
 
         protected static Dictionary<string, Dictionary<string, Rect>> DataDict
         {
@@ -43,6 +49,10 @@ namespace UniSharper.Rendering.DataParsers
                 return dataDict;
             }
         }
+
+        #endregion Properties
+
+        #region Methods
 
         public static ITilingSheetDataParser CreateParser(TilingSheetDataFormat dataFormat)
         {
@@ -55,5 +65,7 @@ namespace UniSharper.Rendering.DataParsers
         }
 
         public abstract Dictionary<string, Rect> ParseData(string name, string data);
+
+        #endregion Methods
     }
 }

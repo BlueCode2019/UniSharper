@@ -33,6 +33,8 @@ namespace UniSharperEditor
     [AttributeUsage(AttributeTargets.Class)]
     internal class InitializeOnEditorStartupAttribute : Attribute
     {
+        #region Constructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="InitializeOnEditorStartupAttribute"/> class.
         /// </summary>
@@ -43,6 +45,10 @@ namespace UniSharperEditor
             ExecutionOrder = executionOrder;
         }
 
+        #endregion Constructors
+
+        #region Properties
+
         /// <summary>
         /// Gets the execution order.
         /// </summary>
@@ -52,5 +58,7 @@ namespace UniSharperEditor
             get;
             private set;
         }
+
+        #endregion Properties
     }
 }

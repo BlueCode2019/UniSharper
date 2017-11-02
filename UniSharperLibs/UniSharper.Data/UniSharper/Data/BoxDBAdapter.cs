@@ -30,6 +30,15 @@ using UnityEngine;
 namespace UniSharper.Data
 {
     /// <summary>
+    /// The multi-condition operator of iBoxDB database.
+    /// </summary>
+    public enum BoxDBMultiConditionOperator
+    {
+        And,
+        Or
+    }
+
+    /// <summary>
     /// The operator enumeration of iBoxDB database.
     /// </summary>
     public enum BoxDBQueryOperator
@@ -43,32 +52,33 @@ namespace UniSharper.Data
     }
 
     /// <summary>
-    /// The multi-condition operator of iBoxDB database.
-    /// </summary>
-    public enum BoxDBMultiConditionOperator
-    {
-        And,
-        Or
-    }
-
-    /// <summary>
     /// The query condition for iBoxDB database.
     /// </summary>
     public struct BoxDBQueryCondition
     {
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BoxDBQueryCondition"/> struct.
+        /// </summary>
+        /// <param name="propertyName">The name of property.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="queryOperator">The query operator.</param>
+        public BoxDBQueryCondition(string propertyName, object value, BoxDBQueryOperator queryOperator = BoxDBQueryOperator.Equal)
+        {
+            PropertyName = propertyName;
+            Value = value;
+            QueryOperator = queryOperator;
+        }
+
+        #endregion Constructors
+
+        #region Properties
+
         /// <summary>
         /// The name of property.
         /// </summary>
         public string PropertyName
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The value.
-        /// </summary>
-        public object Value
         {
             get;
             set;
@@ -84,17 +94,15 @@ namespace UniSharper.Data
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BoxDBQueryCondition"/> struct.
+        /// The value.
         /// </summary>
-        /// <param name="propertyName">The name of property.</param>
-        /// <param name="value">The value.</param>
-        /// <param name="queryOperator">The query operator.</param>
-        public BoxDBQueryCondition(string propertyName, object value, BoxDBQueryOperator queryOperator = BoxDBQueryOperator.Equal)
+        public object Value
         {
-            PropertyName = propertyName;
-            Value = value;
-            QueryOperator = queryOperator;
+            get;
+            set;
         }
+
+        #endregion Properties
     }
 
     /// <summary>
@@ -103,18 +111,9 @@ namespace UniSharper.Data
     /// <seealso cref="System.IDisposable"/>
     public class BoxDBAdapter : IDisposable
     {
-        private const BoxDBMultiConditionOperator defaultMultiConditionOperator = BoxDBMultiConditionOperator.And;
+        #region Fields
 
-        private static readonly Dictionary<BoxDBQueryOperator, string> queryOperators =
-            new Dictionary<BoxDBQueryOperator, string>()
-        {
-            { BoxDBQueryOperator.Equal, "==" },
-            { BoxDBQueryOperator.NotEqual, "!=" },
-            { BoxDBQueryOperator.GreaterThan, ">" },
-            { BoxDBQueryOperator.LessThan, "<" },
-            { BoxDBQueryOperator.GreaterThanOrEqual, ">=" },
-            { BoxDBQueryOperator.LessThanOrEqual, "<=" }
-        };
+        private const BoxDBMultiConditionOperator defaultMultiConditionOperator = BoxDBMultiConditionOperator.And;
 
         private static readonly Dictionary<BoxDBMultiConditionOperator, string> multiConditionOperators =
             new Dictionary<BoxDBMultiConditionOperator, string>()
@@ -123,10 +122,22 @@ namespace UniSharper.Data
                 { BoxDBMultiConditionOperator.Or, " |" }
         };
 
-        private DB dbServer;
-        private AutoBox database;
+        private static readonly Dictionary<BoxDBQueryOperator, string> queryOperators =
+            new Dictionary<BoxDBQueryOperator, string>()
+{
+            { BoxDBQueryOperator.Equal, "==" },
+            { BoxDBQueryOperator.NotEqual, "!=" },
+            { BoxDBQueryOperator.GreaterThan, ">" },
+            { BoxDBQueryOperator.LessThan, "<" },
+            { BoxDBQueryOperator.GreaterThanOrEqual, ">=" },
+            { BoxDBQueryOperator.LessThanOrEqual, "<=" }
+};
 
+        private AutoBox database;
+        private DB dbServer;
         private bool disposed = false;
+
+        #endregion Fields
 
         #region Constructors
 
@@ -158,6 +169,8 @@ namespace UniSharper.Data
 
         #endregion Constructors
 
+        #region Destructors
+
         /// <summary>
         /// Finalizes an instance of the <see cref="BoxDBAdapter"/> class.
         /// </summary>
@@ -166,16 +179,9 @@ namespace UniSharper.Data
             Dispose(false);
         }
 
-        #region Properties
+        #endregion Destructors
 
-        /// <summary>
-        /// Gets the database server.
-        /// </summary>
-        /// <value>The database server.</value>
-        public DB DbServer
-        {
-            get { return dbServer; }
-        }
+        #region Properties
 
         /// <summary>
         /// Gets the database.
@@ -186,9 +192,91 @@ namespace UniSharper.Data
             get { return database; }
         }
 
+        /// <summary>
+        /// Gets the database server.
+        /// </summary>
+        /// <value>The database server.</value>
+        public DB DbServer
+        {
+            get { return dbServer; }
+        }
+
         #endregion Properties
 
-        #region Public Methods
+        #region Methods
+
+        /// <summary>
+        /// Closes the connection to the database.
+        /// </summary>
+        public void Close()
+        {
+            if (dbServer != null)
+            {
+                try
+                {
+                    if (!dbServer.IsClosed())
+                    {
+                        dbServer.Close();
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogException(exception);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Deletes data by the given primary key value.
+        /// </summary>
+        /// <param name="tableName">Name of the table.</param>
+        /// <param name="primaryKeyValues">The primary key values.</param>
+        /// <returns><c>true</c> if delete data success, <c>false</c> otherwise.</returns>
+        public bool Delete(string tableName, params object[] primaryKeyValues)
+        {
+            CheckDisposed();
+
+            try
+            {
+                if (database != null && primaryKeyValues != null)
+                {
+                    using (IBox box = database.Cube())
+                    {
+                        for (int i = 0, length = primaryKeyValues.Length; i < length; ++i)
+                        {
+                            object primaryKeyValue = primaryKeyValues[i];
+                            box.Bind(tableName, primaryKeyValue).Delete();
+                        }
+
+                        CommitResult result = box.Commit();
+
+                        if (result.Equals(CommitResult.OK))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            Debug.LogError(result.GetErrorMsg(box));
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Releases the unmanaged resources and disposes of the managed resources used by the <see cref="BoxDBAdapter"/>.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
         /// <summary>
         /// Ensures the table.
@@ -217,21 +305,47 @@ namespace UniSharper.Data
         }
 
         /// <summary>
-        /// Opens the database connection.
+        /// Inserts data.
         /// </summary>
-        public void Open()
+        /// <typeparam name="T">The type definition of data.</typeparam>
+        /// <param name="tableName">Name of the table.</param>
+        /// <param name="values">The list of data.</param>
+        /// <returns><c>true</c> if insert data success, <c>false</c> otherwise.</returns>
+        public bool Insert<T>(string tableName, params T[] values) where T : class
         {
-            if (dbServer != null)
+            CheckDisposed();
+
+            try
             {
-                try
+                if (database != null && values != null)
                 {
-                    database = dbServer.Open();
-                }
-                catch (Exception exception)
-                {
-                    Debug.LogException(exception);
+                    using (IBox box = database.Cube())
+                    {
+                        for (int i = 0, length = values.Length; i < length; ++i)
+                        {
+                            T data = values[i];
+                            box.Bind(tableName).Insert(data);
+                        }
+
+                        CommitResult result = box.Commit();
+
+                        if (result.Equals(CommitResult.OK))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            Debug.LogError(result.GetErrorMsg(box));
+                        }
+                    }
                 }
             }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -251,56 +365,21 @@ namespace UniSharper.Data
         }
 
         /// <summary>
-        /// Get the item count of the table.
+        /// Opens the database connection.
         /// </summary>
-        /// <param name="tableName">Name of the table.</param>
-        /// <returns>The item count of the table.</returns>
-        public long SelectCount(string tableName)
+        public void Open()
         {
-            try
+            if (dbServer != null)
             {
-                if (database != null)
+                try
                 {
-                    return database.SelectCount(string.Format("from {0}", tableName));
+                    database = dbServer.Open();
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogException(exception);
                 }
             }
-            catch (Exception exception)
-            {
-                Debug.LogException(exception);
-            }
-
-            return 0;
-        }
-
-        /// <summary>
-        /// Get the item count by multi-condition.
-        /// </summary>
-        /// <param name="tableName">Name of the table.</param>
-        /// <param name="conditions">The conditions.</param>
-        /// <param name="multiConditionOperators">The multi condition operators.</param>
-        /// <returns>The item count.</returns>
-        public long SelectCount(string tableName, List<BoxDBQueryCondition> conditions,
-            List<BoxDBMultiConditionOperator> multiConditionOperators = null)
-        {
-            try
-            {
-                if (database != null)
-                {
-                    object[] values;
-                    string sql = GenerateMultiConditionQuerySQL(out values, tableName, conditions, multiConditionOperators);
-
-                    if (!string.IsNullOrEmpty(sql))
-                    {
-                        return database.SelectCount(sql, values);
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                Debug.LogException(exception);
-            }
-
-            return 0;
         }
 
         /// <summary>
@@ -397,38 +476,47 @@ namespace UniSharper.Data
         }
 
         /// <summary>
-        /// Inserts data.
+        /// Get the item count of the table.
         /// </summary>
-        /// <typeparam name="T">The type definition of data.</typeparam>
         /// <param name="tableName">Name of the table.</param>
-        /// <param name="values">The list of data.</param>
-        /// <returns><c>true</c> if insert data success, <c>false</c> otherwise.</returns>
-        public bool Insert<T>(string tableName, params T[] values) where T : class
+        /// <returns>The item count of the table.</returns>
+        public long SelectCount(string tableName)
         {
-            CheckDisposed();
-
             try
             {
-                if (database != null && values != null)
+                if (database != null)
                 {
-                    using (IBox box = database.Cube())
+                    return database.SelectCount(string.Format("from {0}", tableName));
+                }
+            }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Get the item count by multi-condition.
+        /// </summary>
+        /// <param name="tableName">Name of the table.</param>
+        /// <param name="conditions">The conditions.</param>
+        /// <param name="multiConditionOperators">The multi condition operators.</param>
+        /// <returns>The item count.</returns>
+        public long SelectCount(string tableName, List<BoxDBQueryCondition> conditions,
+            List<BoxDBMultiConditionOperator> multiConditionOperators = null)
+        {
+            try
+            {
+                if (database != null)
+                {
+                    object[] values;
+                    string sql = GenerateMultiConditionQuerySQL(out values, tableName, conditions, multiConditionOperators);
+
+                    if (!string.IsNullOrEmpty(sql))
                     {
-                        for (int i = 0, length = values.Length; i < length; ++i)
-                        {
-                            T data = values[i];
-                            box.Bind(tableName).Insert(data);
-                        }
-
-                        CommitResult result = box.Commit();
-
-                        if (result.Equals(CommitResult.OK))
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            Debug.LogError(result.GetErrorMsg(box));
-                        }
+                        return database.SelectCount(sql, values);
                     }
                 }
             }
@@ -437,7 +525,7 @@ namespace UniSharper.Data
                 Debug.LogException(exception);
             }
 
-            return false;
+            return 0;
         }
 
         /// <summary>
@@ -485,79 +573,25 @@ namespace UniSharper.Data
         }
 
         /// <summary>
-        /// Deletes data by the given primary key value.
+        /// Releases the unmanaged resources used by the <see cref="BoxDBAdapter"/> and optionally
+        /// disposes of the managed resources.
         /// </summary>
-        /// <param name="tableName">Name of the table.</param>
-        /// <param name="primaryKeyValues">The primary key values.</param>
-        /// <returns><c>true</c> if delete data success, <c>false</c> otherwise.</returns>
-        public bool Delete(string tableName, params object[] primaryKeyValues)
+        /// <param name="disposing">
+        /// <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
+        /// unmanaged resources.
+        /// </param>
+        protected virtual void Dispose(bool disposing)
         {
-            CheckDisposed();
-
-            try
+            if (disposing && !disposed)
             {
-                if (database != null && primaryKeyValues != null)
+                Close();
+
+                if (dbServer != null)
                 {
-                    using (IBox box = database.Cube())
-                    {
-                        for (int i = 0, length = primaryKeyValues.Length; i < length; ++i)
-                        {
-                            object primaryKeyValue = primaryKeyValues[i];
-                            box.Bind(tableName, primaryKeyValue).Delete();
-                        }
-
-                        CommitResult result = box.Commit();
-
-                        if (result.Equals(CommitResult.OK))
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            Debug.LogError(result.GetErrorMsg(box));
-                        }
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                Debug.LogException(exception);
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Closes the connection to the database.
-        /// </summary>
-        public void Close()
-        {
-            if (dbServer != null)
-            {
-                try
-                {
-                    if (!dbServer.IsClosed())
-                    {
-                        dbServer.Close();
-                    }
-                }
-                catch (Exception exception)
-                {
-                    Debug.LogException(exception);
+                    dbServer.Dispose();
                 }
             }
         }
-
-        /// <summary>
-        /// Releases the unmanaged resources and disposes of the managed resources used by the <see cref="BoxDBAdapter"/>.
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion Public Methods
 
         /// <summary>
         /// Generates the multi-condition query SQL statement.
@@ -607,27 +641,6 @@ namespace UniSharper.Data
         }
 
         /// <summary>
-        /// Releases the unmanaged resources used by the <see cref="BoxDBAdapter"/> and optionally
-        /// disposes of the managed resources.
-        /// </summary>
-        /// <param name="disposing">
-        /// <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
-        /// unmanaged resources.
-        /// </param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing && !disposed)
-            {
-                Close();
-
-                if (dbServer != null)
-                {
-                    dbServer.Dispose();
-                }
-            }
-        }
-
-        /// <summary>
         /// Throws an <see cref="ObjectDisposedException"/> if the <see cref="BoxDBAdapter"/> is in
         /// the disposed state.
         /// </summary>
@@ -641,5 +654,7 @@ namespace UniSharper.Data
                 throw new ObjectDisposedException(GetType().FullName);
             }
         }
+
+        #endregion Methods
     }
 }

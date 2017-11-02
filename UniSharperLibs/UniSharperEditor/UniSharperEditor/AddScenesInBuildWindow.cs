@@ -34,15 +34,35 @@ namespace UniSharperEditor
     /// <seealso cref="EditorWindow"/>
     internal class AddScenesInBuildWindow : EditorWindow
     {
-        private Vector2 scrollPosition;
+        #region Fields
 
         private List<SceneAsset> sceneAssets = new List<SceneAsset>();
+        private Vector2 scrollPosition;
+
+        #endregion Fields
+
+        #region Methods
 
         [MenuItem("Tools/UniSharper/Build Settings.../Add Scenes In Build", false, MenuItemPriorities.BuildSettingsMenuItemsPriority)]
         public static void ShowWindow()
         {
             //Show existing window instance. If one doesn't exist, make one.
             GetWindow(typeof(AddScenesInBuildWindow), true, "Add Scenes In Build");
+        }
+
+        public void SetEditorBuildSettingsScenes()
+        {
+            // Find valid Scene paths and make a list of EditorBuildSettingsScene
+            List<EditorBuildSettingsScene> editorBuildSettingsScenes = new List<EditorBuildSettingsScene>();
+            foreach (var sceneAsset in sceneAssets)
+            {
+                string scenePath = AssetDatabase.GetAssetPath(sceneAsset);
+                if (!string.IsNullOrEmpty(scenePath))
+                    editorBuildSettingsScenes.Add(new EditorBuildSettingsScene(scenePath, true));
+            }
+
+            // Set the Build Settings window Scene list
+            EditorBuildSettings.scenes = editorBuildSettingsScenes.ToArray();
         }
 
         private void OnGUI()
@@ -68,19 +88,6 @@ namespace UniSharperEditor
             GUILayout.EndScrollView();
         }
 
-        public void SetEditorBuildSettingsScenes()
-        {
-            // Find valid Scene paths and make a list of EditorBuildSettingsScene
-            List<EditorBuildSettingsScene> editorBuildSettingsScenes = new List<EditorBuildSettingsScene>();
-            foreach (var sceneAsset in sceneAssets)
-            {
-                string scenePath = AssetDatabase.GetAssetPath(sceneAsset);
-                if (!string.IsNullOrEmpty(scenePath))
-                    editorBuildSettingsScenes.Add(new EditorBuildSettingsScene(scenePath, true));
-            }
-
-            // Set the Build Settings window Scene list
-            EditorBuildSettings.scenes = editorBuildSettingsScenes.ToArray();
-        }
+        #endregion Methods
     }
 }

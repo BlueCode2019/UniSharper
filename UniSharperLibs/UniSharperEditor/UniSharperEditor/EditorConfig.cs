@@ -35,7 +35,13 @@ namespace UniSharperEditor
     /// </summary>
     internal static class EditorConfig
     {
+        #region Fields
+
         private static readonly string configFilePath = Path.Combine(new FileInfo(EditorApplication.applicationPath).DirectoryName, "EditorApp.config");
+
+        #endregion Fields
+
+        #region Properties
 
         private static string ConfigFilePath
         {
@@ -51,6 +57,10 @@ namespace UniSharperEditor
                 return configFilePath;
             }
         }
+
+        #endregion Properties
+
+        #region Methods
 
         public static T GetConfigValue<T>(string section, string key, T defaultValue = default(T))
         {
@@ -124,5 +134,7 @@ namespace UniSharperEditor
 
             return success;
         }
+
+        #endregion Methods
     }
 }

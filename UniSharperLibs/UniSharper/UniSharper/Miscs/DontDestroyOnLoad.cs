@@ -32,7 +32,13 @@ namespace UniSharper.Miscs
     /// <seealso cref="MonoBehaviour"/>
     public sealed class DontDestroyOnLoad : MonoBehaviour
     {
+        #region Fields
+
         private bool initialized;
+
+        #endregion Fields
+
+        #region Methods
 
         /// <summary>
         /// Called when the script instance is being loaded.
@@ -45,5 +51,7 @@ namespace UniSharper.Miscs
                 initialized = true;
             }
         }
+
+        #endregion Methods
     }
 }

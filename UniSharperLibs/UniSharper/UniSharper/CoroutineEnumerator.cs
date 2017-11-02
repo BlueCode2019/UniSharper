@@ -33,9 +33,14 @@ namespace UniSharper
     /// <seealso cref="IEnumerator"/>
     public class CoroutineEnumerator : IEnumerator
     {
-        private object current;
+        #region Fields
 
         private Queue<IEnumerator> coroutineQueue;
+        private object current;
+
+        #endregion Fields
+
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CoroutineEnumerator"/> class with some coroutines.
@@ -45,6 +50,10 @@ namespace UniSharper
         {
             coroutineQueue = new Queue<IEnumerator>(coroutines);
         }
+
+        #endregion Constructors
+
+        #region Properties
 
         /// <summary>
         /// Gets the element in the collection at the current position of the enumerator.
@@ -57,6 +66,10 @@ namespace UniSharper
                 return current;
             }
         }
+
+        #endregion Properties
+
+        #region Methods
 
         /// <summary>
         /// Enqueues the specified coroutine.
@@ -92,5 +105,7 @@ namespace UniSharper
         {
             coroutineQueue.Clear();
         }
+
+        #endregion Methods
     }
 }

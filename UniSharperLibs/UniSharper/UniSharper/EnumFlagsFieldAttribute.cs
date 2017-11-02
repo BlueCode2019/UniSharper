@@ -34,6 +34,8 @@ namespace UniSharper
     [AttributeUsage(AttributeTargets.Field, Inherited = true, AllowMultiple = false)]
     public class EnumFlagsFieldAttribute : PropertyAttribute
     {
+        #region Constructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EnumFlagsFieldAttribute"/> class.
         /// </summary>
@@ -51,6 +53,10 @@ namespace UniSharper
             Label = label;
         }
 
+        #endregion Constructors
+
+        #region Properties
+
         /// <summary>
         /// Gets the caption/label for the attribute.
         /// </summary>
@@ -60,5 +66,7 @@ namespace UniSharper
             get;
             private set;
         }
+
+        #endregion Properties
     }
 }

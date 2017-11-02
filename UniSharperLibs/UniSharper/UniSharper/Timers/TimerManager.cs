@@ -35,10 +35,16 @@ namespace UniSharper.Timers
     /// <seealso cref="ITimerCollection"/>
     public sealed class TimerManager : SingletonMonoBehaviour<TimerManager>, ITimerCollection
     {
+        #region Fields
+
         /// <summary>
         /// The timer list.
         /// </summary>
         private ITimerList timerList;
+
+        #endregion Fields
+
+        #region Properties
 
         /// <summary>
         /// Gets the number of <see cref="ITimer"/> elements contained in the <see cref="TimerManager"/>.
@@ -57,94 +63,9 @@ namespace UniSharper.Timers
             }
         }
 
-        #region Messages
+        #endregion Properties
 
-        /// <summary>
-        /// Called when script receive message Awake.
-        /// </summary>
-        protected override void Awake()
-        {
-            base.Awake();
-
-            timerList = new TimerGroup();
-        }
-
-        /// <summary>
-        /// This function is called when the behaviour becomes enabled and active.
-        /// </summary>
-        private void OnEnable()
-        {
-            SetAllEnabled(true);
-        }
-
-        /// <summary>
-        /// This function is called when the behaviour becomes disabled () or inactive.
-        /// </summary>
-        private void OnDisable()
-        {
-            SetAllEnabled(false);
-        }
-
-        /// <summary>
-        /// This function is called when the application pauses.
-        /// </summary>
-        /// <param name="pauseStatus"><c>true</c> if the application is paused, else <c>false</c>.</param>
-        private void OnApplicationPause(bool pauseStatus)
-        {
-            if (pauseStatus)
-            {
-                // Pause all timers.
-                PauseAll();
-            }
-            else
-            {
-                // Resume all timers.
-                ResumeAll();
-            }
-        }
-
-        /// <summary>
-        /// Update is called every frame.
-        /// </summary>
-        private void Update()
-        {
-            if (timerList != null)
-            {
-                timerList.ForEach((timer) =>
-                {
-                    float deltaTime = Time.deltaTime;
-
-                    try
-                    {
-                        if (timer.IgnoreTimeScale)
-                        {
-                            deltaTime = Time.unscaledDeltaTime;
-                        }
-
-                        timer.Tick(deltaTime);
-                    }
-                    catch (Exception exception)
-                    {
-                        Debug.LogException(exception, this);
-                    }
-                });
-            }
-        }
-
-        /// <summary>
-        /// This function is called when the MonoBehaviour will be destroyed.
-        /// </summary>
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-
-            timerList.RemoveAllEventHandlers();
-            timerList = null;
-        }
-
-        #endregion Messages
-
-        #region Public Methods
+        #region Methods
 
         /// <summary>
         /// Adds an <see cref="ITimer"/> item to the <see cref="ITimerCollection"/>.
@@ -189,6 +110,17 @@ namespace UniSharper.Timers
         }
 
         /// <summary>
+        /// Pauses all timers in the <see cref="TimerManager"/>.
+        /// </summary>
+        public void PauseAll()
+        {
+            if (timerList != null)
+            {
+                timerList.PauseAll();
+            }
+        }
+
+        /// <summary>
         /// Removes the first occurrence of a specific object from the <see cref="ITimerCollection"/>.
         /// </summary>
         /// <param name="item">The object to remove from the <see cref="ITimerCollection"/>.</param>
@@ -207,7 +139,27 @@ namespace UniSharper.Timers
             return false;
         }
 
-        #region Interface ITimerCollection
+        /// <summary>
+        /// Resets all timers in the <see cref="TimerManager"/>.
+        /// </summary>
+        public void ResetAll()
+        {
+            if (timerList != null)
+            {
+                timerList.ResetAll();
+            }
+        }
+
+        /// <summary>
+        /// Resumes all timers in <see cref="TimerManager"/>.
+        /// </summary>
+        public void ResumeAll()
+        {
+            if (timerList != null)
+            {
+                timerList.ResumeAll();
+            }
+        }
 
         /// <summary>
         /// Sets all timers in the <see cref="ITimerCollection"/> to be enabled or not.
@@ -236,28 +188,6 @@ namespace UniSharper.Timers
         }
 
         /// <summary>
-        /// Pauses all timers in the <see cref="TimerManager"/>.
-        /// </summary>
-        public void PauseAll()
-        {
-            if (timerList != null)
-            {
-                timerList.PauseAll();
-            }
-        }
-
-        /// <summary>
-        /// Resumes all timers in <see cref="TimerManager"/>.
-        /// </summary>
-        public void ResumeAll()
-        {
-            if (timerList != null)
-            {
-                timerList.ResumeAll();
-            }
-        }
-
-        /// <summary>
         /// Stops all timers in the <see cref="TimerManager"/>.
         /// </summary>
         public void StopAll()
@@ -269,18 +199,88 @@ namespace UniSharper.Timers
         }
 
         /// <summary>
-        /// Resets all timers in the <see cref="TimerManager"/>.
+        /// Called when script receive message Awake.
         /// </summary>
-        public void ResetAll()
+        protected override void Awake()
         {
-            if (timerList != null)
+            base.Awake();
+
+            timerList = new TimerGroup();
+        }
+
+        /// <summary>
+        /// This function is called when the MonoBehaviour will be destroyed.
+        /// </summary>
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            timerList.RemoveAllEventHandlers();
+            timerList = null;
+        }
+
+        /// <summary>
+        /// This function is called when the application pauses.
+        /// </summary>
+        /// <param name="pauseStatus"><c>true</c> if the application is paused, else <c>false</c>.</param>
+        private void OnApplicationPause(bool pauseStatus)
+        {
+            if (pauseStatus)
             {
-                timerList.ResetAll();
+                // Pause all timers.
+                PauseAll();
+            }
+            else
+            {
+                // Resume all timers.
+                ResumeAll();
             }
         }
 
-        #endregion Interface ITimerCollection
+        /// <summary>
+        /// This function is called when the behaviour becomes disabled () or inactive.
+        /// </summary>
+        private void OnDisable()
+        {
+            SetAllEnabled(false);
+        }
 
-        #endregion Public Methods
+        /// <summary>
+        /// This function is called when the behaviour becomes enabled and active.
+        /// </summary>
+        private void OnEnable()
+        {
+            SetAllEnabled(true);
+        }
+
+        /// <summary>
+        /// Update is called every frame.
+        /// </summary>
+        private void Update()
+        {
+            if (timerList != null)
+            {
+                timerList.ForEach((timer) =>
+                {
+                    float deltaTime = Time.deltaTime;
+
+                    try
+                    {
+                        if (timer.IgnoreTimeScale)
+                        {
+                            deltaTime = Time.unscaledDeltaTime;
+                        }
+
+                        timer.Tick(deltaTime);
+                    }
+                    catch (Exception exception)
+                    {
+                        Debug.LogException(exception, this);
+                    }
+                });
+            }
+        }
+
+        #endregion Methods
     }
 }

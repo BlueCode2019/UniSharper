@@ -35,7 +35,11 @@ namespace UniSharper.Threading
     /// <seealso cref="SingletonMonoBehaviour{Synchronizer}"/>
     public class Synchronizer : SingletonMonoBehaviour<Synchronizer>, ICollection<ISyncObject>
     {
+        #region Fields
+
         private LinkedList<ISyncObject> synchronizedObjects;
+
+        #endregion Fields
 
         #region Properties
 
@@ -70,7 +74,7 @@ namespace UniSharper.Threading
 
         #endregion Properties
 
-        #region Public Methods
+        #region Methods
 
         /// <summary>
         /// Adds an object of <see cref="ISyncObject"/> to the <see cref="Synchronizer"/>.
@@ -81,6 +85,17 @@ namespace UniSharper.Threading
             if (synchronizedObjects != null)
             {
                 synchronizedObjects.AddLast(item);
+            }
+        }
+
+        /// <summary>
+        /// Removes all items from the <see cref="Synchronizer"/>.
+        /// </summary>
+        public void Clear()
+        {
+            if (synchronizedObjects != null)
+            {
+                synchronizedObjects.Clear();
             }
         }
 
@@ -123,6 +138,20 @@ namespace UniSharper.Threading
         }
 
         /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        public IEnumerator<ISyncObject> GetEnumerator()
+        {
+            if (synchronizedObjects != null)
+            {
+                return synchronizedObjects.GetEnumerator();
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Removes the first occurrence of a specific object of <see cref="ISyncObject"/> from the
         /// <see cref="Synchronizer"/>.
         /// </summary>
@@ -143,31 +172,6 @@ namespace UniSharper.Threading
         }
 
         /// <summary>
-        /// Removes all items from the <see cref="Synchronizer"/>.
-        /// </summary>
-        public void Clear()
-        {
-            if (synchronizedObjects != null)
-            {
-                synchronizedObjects.Clear();
-            }
-        }
-
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection.
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
-        public IEnumerator<ISyncObject> GetEnumerator()
-        {
-            if (synchronizedObjects != null)
-            {
-                return synchronizedObjects.GetEnumerator();
-            }
-
-            return null;
-        }
-
-        /// <summary>
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
@@ -175,10 +179,6 @@ namespace UniSharper.Threading
         {
             return GetEnumerator();
         }
-
-        #endregion Public Methods
-
-        #region Messages
 
         /// <summary>
         /// Called when script receive message Awake.
@@ -188,6 +188,16 @@ namespace UniSharper.Threading
             base.Awake();
 
             synchronizedObjects = new LinkedList<ISyncObject>();
+        }
+
+        /// <summary>
+        /// Called when script receive message Destroy.
+        /// </summary>
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            synchronizedObjects = null;
         }
 
         /// <summary>
@@ -201,16 +211,6 @@ namespace UniSharper.Threading
             }
         }
 
-        /// <summary>
-        /// Called when script receive message Destroy.
-        /// </summary>
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-
-            synchronizedObjects = null;
-        }
-
-        #endregion Messages
+        #endregion Methods
     }
 }

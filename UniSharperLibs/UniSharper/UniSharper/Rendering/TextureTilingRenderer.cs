@@ -42,20 +42,31 @@ namespace UniSharper.Rendering
     /// <seealso cref="MonoBehaviour"/>
     public class TextureTilingRenderer : MonoBehaviour
     {
-        [SerializeField]
-        private TilingSheetDataFormat dataFormat = TilingSheetDataFormat.UnityJson;
+        #region Fields
 
         [SerializeField]
         private TextAsset dataFileAsset = null;
+
+        [SerializeField]
+        private TilingSheetDataFormat dataFormat = TilingSheetDataFormat.UnityJson;
+
+        private Mesh mesh;
+
+        private Vector2[] meshOriginalUV;
 
         [SerializeField]
         private string textureTilingName;
 
         private Dictionary<string, Rect> tilingData;
 
-        private Vector2[] meshOriginalUV;
+        #endregion Fields
 
-        private Mesh mesh;
+        #region Properties
+
+        public string TextureTilingName
+        {
+            get { return textureTilingName; }
+        }
 
         private Mesh Mesh
         {
@@ -75,32 +86,9 @@ namespace UniSharper.Rendering
             }
         }
 
-        public string TextureTilingName
-        {
-            get { return textureTilingName; }
-        }
+        #endregion Properties
 
-        #region Messages
-
-        /// <summary>
-        /// Called when the script instance is being loaded.
-        /// </summary>
-        private void Awake()
-        {
-            if (dataFileAsset)
-            {
-                LoadData(dataFileAsset.name, dataFileAsset.text);
-            }
-        }
-
-        private void Start()
-        {
-            UpdateMeshUV();
-        }
-
-        #endregion Messages
-
-        #region Public Methods
+        #region Methods
 
         public void LoadData(string name, string data)
         {
@@ -147,6 +135,22 @@ namespace UniSharper.Rendering
             }
         }
 
-        #endregion Public Methods
+        /// <summary>
+        /// Called when the script instance is being loaded.
+        /// </summary>
+        private void Awake()
+        {
+            if (dataFileAsset)
+            {
+                LoadData(dataFileAsset.name, dataFileAsset.text);
+            }
+        }
+
+        private void Start()
+        {
+            UpdateMeshUV();
+        }
+
+        #endregion Methods
     }
 }
