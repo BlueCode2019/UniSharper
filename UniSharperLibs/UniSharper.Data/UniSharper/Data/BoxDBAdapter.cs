@@ -549,7 +549,7 @@ namespace UniSharper.Data
         }
 
         /// <summary>
-        /// Releases unmanaged and - optionally - managed resources.
+        /// Releases the unmanaged resources and disposes of the managed resources used by the <see cref="BoxDBAdapter"/>.
         /// </summary>
         public void Dispose()
         {
