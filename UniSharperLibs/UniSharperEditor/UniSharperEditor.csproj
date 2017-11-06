@@ -62,7 +62,7 @@
     <Compile Include="UniSharperEditor\ReadonlyFieldDrawer.cs" />
     <Compile Include="UniSharperEditor\Timers\EditorTimer.cs" />
     <Compile Include="UniSharperEditor\Timers\EditorTimerManager.cs" />
-    <Compile Include="UniSharperEditor\AssetUtil.cs" />
+    <Compile Include="UniSharperEditor\AssetUtility.cs" />
     <Compile Include="UniSharperEditor\PrefabUtil.cs" />
   </ItemGroup>
   <ItemGroup>

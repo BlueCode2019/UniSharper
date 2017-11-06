@@ -22,47 +22,41 @@
  *	SOFTWARE.
  */
 
-using System.IO;
+using System;
 
-namespace UniSharperEditor
+namespace UniSharper.Net.Http
 {
     /// <summary>
-    /// This class provides some useful asset utilities.
+    /// Representation of an HTTP cookie.
     /// </summary>
-    internal static class AssetUtil
+    public class HttpCookie
     {
-        #region Fields
+        public string Comment { get; set; }
 
-        /// <summary>
-        /// The extension of Scene asset.
-        /// </summary>
-        private const string sceneAssetExtension = ".unity";
+        public Uri CommentUri { get; set; }
 
-        #endregion Fields
+        public bool Discard { get; set; }
 
-        #region Methods
+        public string Domain { get; set; }
 
-        /// <summary>
-        /// Determines whether the asset by the path is a scene asset.
-        /// </summary>
-        /// <param name="path">The path of the asset.</param>
-        /// <returns><c>true</c> if it is a scene asset; otherwise, <c>false</c>.</returns>
-        /// <exception cref="ArgumentNullException"><c>path</c> is <c>null</c>.</exception>
-        public static bool IsSceneAsset(string path)
-        {
-            if (!string.IsNullOrEmpty(path))
-            {
-                string ext = Path.GetExtension(path);
+        public bool Expired { get; set; }
 
-                if (ext.Equals(sceneAssetExtension))
-                {
-                    return true;
-                }
-            }
+        public DateTime Expires { get; set; }
 
-            return false;
-        }
+        public bool HttpOnly { get; set; }
 
-        #endregion Methods
+        public string Name { get; set; }
+
+        public string Path { get; set; }
+
+        public string Port { get; set; }
+
+        public bool Secure { get; set; }
+
+        public DateTime TimeStamp { get; set; }
+
+        public string Value { get; set; }
+
+        public int Version { get; set; }
     }
 }

@@ -38,7 +38,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UniSharper\Net\Http\HttpCookie.cs" />
     <Compile Include="UniSharper\Net\Http\HttpMethod.cs" />
+    <Compile Include="UniSharper\Net\Http\HttpRequest.cs" />
+    <Compile Include="UniSharper\Net\Http\HttpResponse.cs" />
+    <Compile Include="UniSharper\Net\Http\HttpResponseStatus.cs" />
+    <Compile Include="UniSharper\Net\Http\IHttpClient.cs" />
+    <Compile Include="UniSharper\Net\Http\IHttpRequest.cs" />
+    <Compile Include="UniSharper\Net\Http\IHttpResponse.cs" />
+    <Compile Include="UniSharper\Net\Http\MonoHttpClient.cs" />
+    <Compile Include="UniSharper\Net\Http\MonoHttpRequest.cs" />
+    <Compile Include="UniSharper\Net\Http\MonoHttpResponse.cs" />
+    <Compile Include="UniSharper\Net\Http\HttpRequestAsyncHandle.cs" />
+    <Compile Include="UniSharper\Net\Http\Parameter.cs" />
+    <Compile Include="UniSharper\Net\Http\ParameterType.cs" />
+    <Compile Include="UniSharper\Net\Http\UnityHttpClient.cs" />
+    <Compile Include="UniSharper\Net\Http\UnityHttpRequest.cs" />
+    <Compile Include="UniSharper\Net\Http\UnityHttpResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UniSharper\UniSharper.csproj">

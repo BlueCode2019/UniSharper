@@ -32,7 +32,7 @@ namespace UniSharper.Net.Http
     /// <seealso cref="IEquatable{HttpMethod}"/>
     public class HttpMethod : IEquatable<HttpMethod>
     {
-        #region Private Fields
+        #region Fields
 
         private static readonly HttpMethod connectMethod = new HttpMethod("CONNECT");
 
@@ -52,9 +52,9 @@ namespace UniSharper.Net.Http
 
         private string method;
 
-        #endregion Private Fields
+        #endregion Fields
 
-        #region Public Constructors
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpMethod"/> class with a specific HTTP method.
@@ -71,9 +71,9 @@ namespace UniSharper.Net.Http
             this.method = method;
         }
 
-        #endregion Public Constructors
+        #endregion Constructors
 
-        #region Public Properties
+        #region Properties
 
         /// <summary>
         /// Represents an HTTP CONNECT protocol method.
@@ -183,9 +183,9 @@ namespace UniSharper.Net.Http
             }
         }
 
-        #endregion Public Properties
+        #endregion Properties
 
-        #region Public Methods
+        #region Methods
 
         /// <summary>
         /// Indicates whether two <see cref="HttpMethod"/> objects are not equal.
@@ -264,6 +264,6 @@ namespace UniSharper.Net.Http
             return method.ToString();
         }
 
-        #endregion Public Methods
+        #endregion Methods
     }
 }
