@@ -22,41 +22,46 @@
  *	SOFTWARE.
  */
 
-using System;
-
-namespace UniSharper.Net.Http
+namespace UniSharper.Net.Http.VO
 {
     /// <summary>
-    /// Representation of an HTTP cookie.
+    /// Parameter container for requests
     /// </summary>
-    public class HttpCookie
+    public class Parameter
     {
-        public string Comment { get; set; }
+        #region Properties
 
-        public Uri CommentUri { get; set; }
-
-        public bool Discard { get; set; }
-
-        public string Domain { get; set; }
-
-        public bool Expired { get; set; }
-
-        public DateTime Expires { get; set; }
-
-        public bool HttpOnly { get; set; }
-
+        /// <summary>
+        /// Gets or sets the name of the parameter.
+        /// </summary>
+        /// <value>The name of the parameter.</value>
         public string Name { get; set; }
 
-        public string Path { get; set; }
+        /// <summary>
+        /// Gets or sets the type of the parameter.
+        /// </summary>
+        /// <value>A value of the <see cref="ParameterType"/>.</value>
+        public ParameterType Type { get; set; }
 
-        public string Port { get; set; }
-
-        public bool Secure { get; set; }
-
-        public DateTime TimeStamp { get; set; }
-
+        /// <summary>
+        /// Gets or sets the value of the parameter.
+        /// </summary>
+        /// <value>The value of the parameter.</value>
         public string Value { get; set; }
 
-        public int Version { get; set; }
+        #endregion Properties
+
+        #region Methods
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents this instance.</returns>
+        public override string ToString()
+        {
+            return string.Format("{0}={1}, Type={2}", Name, Value, Type);
+        }
+
+        #endregion Methods
     }
 }

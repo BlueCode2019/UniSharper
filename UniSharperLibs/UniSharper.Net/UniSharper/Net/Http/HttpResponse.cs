@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using UniSharper.Net.Http.VO;
 
 namespace UniSharper.Net.Http
 {

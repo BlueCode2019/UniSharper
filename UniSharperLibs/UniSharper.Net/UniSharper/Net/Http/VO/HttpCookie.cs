@@ -22,38 +22,59 @@
  *	SOFTWARE.
  */
 
-namespace UniSharper.Net.Http
+using System;
+
+namespace UniSharper.Net.Http.VO
 {
     /// <summary>
-    /// Parameter container for requests
+    /// Representation of an HTTP cookie.
     /// </summary>
-    public class Parameter
+    public class HttpCookie
     {
-        /// <summary>
-        /// Gets or sets the name of the parameter.
-        /// </summary>
-        /// <value>The name of the parameter.</value>
+        #region Properties
+
+        public string Comment { get; set; }
+
+        public Uri CommentUri { get; set; }
+
+        public bool Discard { get; set; }
+
+        public string Domain { get; set; }
+
+        public bool Expired { get; set; }
+
+        public DateTime Expires { get; set; }
+
+        public bool HttpOnly { get; set; }
+
         public string Name { get; set; }
 
-        /// <summary>
-        /// Gets or sets the value of the parameter.
-        /// </summary>
-        /// <value>The value of the parameter.</value>
+        public string Path { get; set; }
+
+        public string Port { get; set; }
+
+        public bool Secure { get; set; }
+
+        public DateTime TimeStamp { get; set; }
+
         public string Value { get; set; }
 
-        /// <summary>
-        /// Gets or sets the type of the parameter.
-        /// </summary>
-        /// <value>A value of the <see cref="ParameterType"/>.</value>
-        public ParameterType Type { get; set; }
+        public int Version { get; set; }
+
+        #endregion Properties
+
+        #region Methods
 
         /// <summary>
-        /// Return a human-readable representation of this parameter.
+        /// Returns a <see cref="string"/> that represents this instance.
         /// </summary>
-        /// <returns>A human-readable representation of this parameter.</returns>
+        /// <returns>A <see cref="string"/> that represents this instance.</returns>
         public override string ToString()
         {
-            return string.Format("{0}={1}", Name, Value);
+            return string.Format("Comment={0}, CommentUri={1}, Discard={2}, Domain={3}, Expired={4}, Expires={5}, HttpOnly={6}, Name={7}, Path={8}, Port={9}, Secure={10}, TimeStamp={11}, Value={12}, Version={13}",
+                Comment, CommentUri, Discard, Domain, Expired, Expires, HttpOnly, Name, Path, Port, Secure, TimeStamp, Value, Version);
         }
+
+        #endregion Methods
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace UniSharper.Net.Http
 {
-    public class UnityHttpClient
+    public class MonoHttpProtocol : HttpProtocol
     {
     }
 }
