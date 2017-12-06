@@ -56,19 +56,17 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>SET TargetPath="$(SolutionDir)..\Assets\$(SolutionName)\$(ProjectName)\Plugins\"
+    <PostBuildEvent>SET TargetPath="$(SolutionDir)..\Assets\$(SolutionName)\Plugins\"
 
 xcopy "$(TargetPath)" "%25TargetPath%25" /y
-del "%25TargetPath%25JsonFx.dll" /f/q</PostBuildEvent>
+
+IF $(ConfigurationName)==Release del "%25TargetPath%25*.pdb" /f/q
+IF $(ConfigurationName)==Release del "%25TargetPath%25*.mdb" /f/q</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>SET ParentPath="$(SolutionDir)..\Assets\$(SolutionName)\$(ProjectName)\"
-SET TargetPath="%25ParentPath%25Plugins\"
+    <PreBuildEvent>SET TargetPath="$(SolutionDir)..\Assets\$(SolutionName)\Plugins\"
 
-IF not exist "%25ParentPath%25" md "%25ParentPath%25"
-IF not exist "%25TargetPath%25" md "%25TargetPath%25"
-
-del "%25TargetPath%25*.*" /f/q</PreBuildEvent>
+IF not exist "%25TargetPath%25" md "%25TargetPath%25"</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

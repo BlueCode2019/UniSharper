@@ -73,16 +73,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>SET TargetPath="$(SolutionDir)..\Assets\$(SolutionName)\UniSharper\Editor\"
+    <PostBuildEvent>SET TargetPath="$(SolutionDir)..\Assets\$(SolutionName)\Editor\"
 
 xcopy "$(TargetPath)" "%25TargetPath%25" /y</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>SET TargetPath="$(SolutionDir)..\Assets\$(SolutionName)\UniSharper\Editor\"
+    <PreBuildEvent>SET TargetPath="$(SolutionDir)..\Assets\$(SolutionName)\Editor\"
 
-IF not exist "%25TargetPath%25" md "%25TargetPath%25"
-
-del "%25TargetPath%25*.*" /f/q</PreBuildEvent>
+IF not exist "%25TargetPath%25" md "%25TargetPath%25"</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
