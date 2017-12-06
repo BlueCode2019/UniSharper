@@ -23,7 +23,6 @@
  */
 
 using System;
-using UniSharper.Threading;
 
 namespace UniSharper.Threading.Events
 {

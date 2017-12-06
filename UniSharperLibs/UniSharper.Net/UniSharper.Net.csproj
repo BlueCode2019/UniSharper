@@ -37,6 +37,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\ReSharp.CSharpExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>libs\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="UnityEngine">
@@ -45,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UniSharper\Net\Http\IMonoRestClient.cs" />
+    <Compile Include="UniSharper\Net\Http\MonoRestClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UniSharper.Extensions\UniSharper.Extensions.csproj">
@@ -56,15 +61,14 @@
       <Name>UniSharper</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UniSharper\Net\Http\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>SET ParentPath="$(SolutionDir)..\Assets\$(SolutionName)\Plugins\"
 SET TargetPath="%25ParentPath%25Modules\"
 
 xcopy "$(TargetPath)" "%25TargetPath%25" /y
+xcopy "$(TargetDir)RestSharp.dll" "%25ParentPath%25" /y
 
 IF $(ConfigurationName)==Release del "%25TargetPath%25*.pdb" /f/q
 IF $(ConfigurationName)==Release del "%25TargetPath%25*.mdb" /f/q</PostBuildEvent>
