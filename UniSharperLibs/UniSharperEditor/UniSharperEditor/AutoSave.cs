@@ -23,6 +23,7 @@
  */
 
 using ReSharp.Patterns;
+using System;
 using UniSharper.Timers;
 using UniSharperEditor.Timers;
 using UnityEditor;
@@ -268,8 +269,8 @@ namespace UniSharperEditor
                 if (autosaveTimer == null)
                 {
                     autosaveTimer = new EditorTimer(1, AutoSaveTimeMinutes * 60);
-                    autosaveTimer.TimerTicking += OnAutosaveTimerTicking;
-                    autosaveTimer.TimerCompleted += OnAutosaveTimerCompleted;
+                    autosaveTimer.Ticking += OnAutosaveTimerTicking;
+                    autosaveTimer.Completed += OnAutosaveTimerCompleted;
                 }
             }
         }
@@ -298,10 +299,8 @@ namespace UniSharperEditor
         /// Called when timer completed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">
-        /// The <see cref="TimerEventArgs"/> instance containing the timer event data.
-        /// </param>
-        private void OnAutosaveTimerCompleted(object sender, TimerEventArgs e)
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the timer event data.</param>
+        private void OnAutosaveTimerCompleted(object sender, EventArgs e)
         {
             if (isAutoSaveEnabled && !EditorApplication.isPlaying)
             {
@@ -328,9 +327,9 @@ namespace UniSharperEditor
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">
-        /// The <see cref="TimerEventArgs"/> instance containing the timer event data.
+        /// The <see cref="TimerTickingEventArgs"/> instance containing the timer event data.
         /// </param>
-        private void OnAutosaveTimerTicking(object sender, TimerEventArgs e)
+        private void OnAutosaveTimerTicking(object sender, TimerTickingEventArgs e)
         {
             if (isDirty)
             {

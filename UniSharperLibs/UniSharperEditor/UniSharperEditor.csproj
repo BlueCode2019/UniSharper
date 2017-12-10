@@ -60,10 +60,10 @@
     <Compile Include="UniSharperEditor\Rendering\Lightmapping.cs" />
     <Compile Include="UniSharperEditor\InitializeOnEditorStartupAttribute.cs" />
     <Compile Include="UniSharperEditor\ReadonlyFieldDrawer.cs" />
-    <Compile Include="UniSharperEditor\Timers\EditorTimer.cs" />
-    <Compile Include="UniSharperEditor\Timers\EditorTimerManager.cs" />
     <Compile Include="UniSharperEditor\AssetUtility.cs" />
     <Compile Include="UniSharperEditor\PrefabUtil.cs" />
+    <Compile Include="UniSharperEditor\Timers\EditorTimer.cs" />
+    <Compile Include="UniSharperEditor\Timers\EditorTimerManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UniSharper\UniSharper.csproj">

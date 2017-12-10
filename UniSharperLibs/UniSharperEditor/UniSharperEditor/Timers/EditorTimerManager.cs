@@ -31,8 +31,8 @@ using UnityEngine;
 namespace UniSharperEditor.Timers
 {
     /// <summary>
-    /// The EditorTimerManager is a convenience class for managing editor timer systems. This class
-    /// cannot be inherited.
+    /// The <see cref="EditorTimerManager"/> is a convenience class for managing editor timers. This
+    /// class cannot be inherited.
     /// </summary>
     /// <seealso cref="SingletonBase{EditorTimerManager}"/>
     /// <seealso cref="ITimerCollection"/>
@@ -41,14 +41,8 @@ namespace UniSharperEditor.Timers
     {
         #region Fields
 
-        /// <summary>
-        /// The last time.
-        /// </summary>
         private double lastTime = 0.0d;
 
-        /// <summary>
-        /// The timer list.
-        /// </summary>
         private ITimerList timerList;
 
         #endregion Fields
@@ -75,9 +69,9 @@ namespace UniSharperEditor.Timers
         #region Properties
 
         /// <summary>
-        /// Gets the number of <see cref="ITimer"/> elements contained in the <see cref="EditorTimerManager"/>.
+        /// Gets the number of <see cref="ITimer"/> contained in this <see cref="EditorTimerManager"/>.
         /// </summary>
-        /// <value>The number of <see cref="ITimer"/> elements contained in the <see cref="EditorTimerManager"/>.</value>
+        /// <value>The number of <see cref="ITimer"/> contained in this <see cref="EditorTimerManager"/>.</value>
         public int Count
         {
             get
@@ -96,49 +90,33 @@ namespace UniSharperEditor.Timers
         #region Methods
 
         /// <summary>
-        /// Adds an <see cref="QuickUnity.Timers.ITimer"/> item to the <see cref="QuickUnity.Timers.ITimerCollection"/>.
+        /// Adds an <see cref="ITimer"/> item to this <see cref="EditorTimerManager"/>.
         /// </summary>
-        /// <param name="item">
-        /// The <see cref="QuickUnity.Timers.ITimer"/> object to add to the <see cref="QuickUnity.Timers.ITimerCollection"/>.
-        /// </param>
-        public void Add(ITimer item)
+        /// <param name="timer">The <see cref="ITimer"/> to add.</param>
+        public void Add(ITimer timer)
         {
-            if (timerList != null)
-            {
-                timerList.Add(item);
-            }
+            timerList.Add(timer);
         }
 
         /// <summary>
-        /// Removes all <see cref="QuickUnity.Timers.ITimer"/> items from the <see cref="QuickUnity.Timers.ITimerCollection"/>.
+        /// Removes all <see cref="ITimer"/> contained in this <see cref="EditorTimerManager"/>.
         /// </summary>
         public void Clear()
         {
-            if (timerList != null)
-            {
-                timerList.Clear();
-            }
+            timerList.Clear();
         }
 
         /// <summary>
-        /// Determines whether the <see cref="QuickUnity.Timers.ITimerCollection"/>. contains a
-        /// specific <see cref="QuickUnity.Timers.ITimer"/> object.
+        /// Determines whether the specified <see cref="ITimer"/> contained in this <see cref="EditorTimerManager"/>.
         /// </summary>
-        /// <param name="item">
-        /// The <see cref="QuickUnity.Timers.ITimer"/> object to locate in the <see cref="QuickUnity.Timers.ITimerCollection"/>.
-        /// </param>
+        /// <param name="timer">The <see cref="ITimer"/> to locate.</param>
         /// <returns>
-        /// <c>true</c> if <see cref="QuickUnity.Timers.ITimer"/> item is found in the <see
-        /// cref="QuickUnity.Timers.ITimerCollection"/>; otherwise, <c>false</c>.
+        /// <c>true</c> if <see cref="ITimer"/> is found in this <see cref="EditorTimerManager"/>;
+        /// otherwise, <c>false</c>.
         /// </returns>
-        public bool Contains(ITimer item)
+        public bool Contains(ITimer timer)
         {
-            if (timerList != null)
-            {
-                return timerList.Contains(item);
-            }
-
-            return false;
+            return timerList.Contains(timer);
         }
 
         /// <summary>
@@ -152,42 +130,21 @@ namespace UniSharperEditor.Timers
         }
 
         /// <summary>
-        /// Removes the first occurrence of a specific object from the <see cref="QuickUnity.Timers.ITimerCollection"/>.
+        /// Removes the first occurrence of a specific <see cref="ITimer"/> from this <see cref="EditorTimerManager"/>.
         /// </summary>
-        /// <param name="item">The object to remove from the <see cref="QuickUnity.Timers.ITimerCollection"/>.</param>
+        /// <param name="timer">The <see cref="ITimer"/> to be removed.</param>
         /// <returns>
-        /// <c>true</c> if item was successfully removed from the <see
-        /// cref="QuickUnity.Timers.ITimerCollection"/>; otherwise, <c>false</c>. This method also
-        /// returns <c>false</c> if item is not found in the original <see cref="QuickUnity.Timers.ITimerCollection"/>.
+        /// <c>true</c> if <see cref="ITimer"/> was successfully removed from this <see
+        /// cref="EditorTimerManager"/>; otherwise, <c>false</c>. This method also returns
+        /// <c>false</c> if the specified <see cref="ITimer"/> is not found.
         /// </returns>
-        public bool Remove(ITimer item)
+        public bool Remove(ITimer timer)
         {
-            if (timerList != null)
-            {
-                return timerList.Remove(item);
-            }
-
-            return false;
+            return timerList.Remove(timer);
         }
 
         /// <summary>
-        /// Sets all timers in the <see cref="QuickUnity.Timers.ITimerCollection"/> to be enabled or not.
-        /// </summary>
-        /// <param name="value">
-        /// Set to <c>true</c> to enable all timers in the <see
-        /// cref="QuickUnity.Timers.ITimerCollection"/> control to trigger their timer event;
-        /// otherwise, set to <c>false</c>.
-        /// </param>
-        public void SetAllEnabled(bool value = true)
-        {
-            if (timerList != null)
-            {
-                timerList.SetAllEnabled(value);
-            }
-        }
-
-        /// <summary>
-        /// Called when [editor update].
+        /// Called when Unity editor update.
         /// </summary>
         private void OnEditorUpdate()
         {
@@ -200,11 +157,6 @@ namespace UniSharperEditor.Timers
                 {
                     try
                     {
-                        if (!timer.IgnoreTimeScale)
-                        {
-                            deltaTime = deltaTime * Time.timeScale;
-                        }
-
                         timer.Tick(deltaTime);
                     }
                     catch (Exception exception)

@@ -27,42 +27,26 @@ using UniSharper.Timers;
 namespace UniSharperEditor.Timers
 {
     /// <summary>
-    /// Class EditorTimer.
+    /// Base implementation of interface <see cref="ITimer"/> for Editor.
     /// </summary>
-    /// <seealso cref="QuickUnity.Timers.Timer"/>
+    /// <seealso cref="Timer"/>
     internal class EditorTimer : Timer
     {
-        #region Constructors
+        private bool disposed;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EditorTimer"/> class.
         /// </summary>
-        /// <param name="delay">The delay of the <see cref="ITimer"/>.</param>
-        /// <param name="repeatCount">The repeat count of the <see cref="ITimer"/>.</param>
-        /// <param name="ignoreTimeScale">
-        /// if set to <c>true</c> the <see cref="ITimer"/> will ignore time scale of Unity.
+        /// <param name="interval">
+        /// The time, in seconds, between <see cref="E:UniSharper.Timers.Timer.Ticking"/> events.
         /// </param>
-        /// <param name="stopOnDisable">
-        /// if set to <c>true</c> the <see cref="ITimer"/> won't stop when the <see cref="ITimer"/>
-        /// is disabled.
+        /// <param name="repeatCount">The repeat count.</param>
+        /// <param name="autoStart">
+        /// if set to <c>true</c> invoke the method <see cref="M:UniSharper.Timers.Timer.Start"/> automatically.
         /// </param>
-        /// <param name="autoStart">if set to <c>true</c> the <see cref="ITimer"/> will start automatically.</param>
-        public EditorTimer(float delay, uint repeatCount = 0, bool ignoreTimeScale = true, bool stopOnDisable = true, bool autoStart = true)
-            : base(delay, repeatCount, ignoreTimeScale, stopOnDisable, autoStart)
+        public EditorTimer(float interval, uint repeatCount = 0, bool autoStart = true)
+            : base(interval, repeatCount, true, autoStart)
         {
-        }
-
-        #endregion Constructors
-
-        #region Methods
-
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting
-        /// unmanaged resources.
-        /// </summary>
-        public override void Dispose()
-        {
-            EditorTimerManager.Instance.Remove(this);
         }
 
         /// <summary>
@@ -73,6 +57,22 @@ namespace UniSharperEditor.Timers
             EditorTimerManager.Instance.Add(this);
         }
 
-        #endregion Methods
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing">
+        /// <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
+        /// unmanaged resources.
+        /// </param>
+        protected override void Dispose(bool disposing)
+        {
+            if (!disposed && disposing)
+            {
+                EditorTimerManager.Instance.Remove(this);
+            }
+
+            disposed = true;
+            TimerState = TimerState.Stop;
+        }
     }
 }

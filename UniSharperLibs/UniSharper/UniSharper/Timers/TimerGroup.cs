@@ -23,23 +23,18 @@
  */
 
 using System;
-using System.Collections.ObjectModel;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace UniSharper.Timers
 {
     /// <summary>
-    /// Class used internally to store a group of <see cref="ITimer"/> objects.
+    /// Class used internally to store a group of <see cref="ITimer"/>.
     /// </summary>
     /// <seealso cref="ITimerList"/>
     public class TimerGroup : ITimerList
     {
         #region Fields
 
-        /// <summary>
-        /// The timer collection.
-        /// </summary>
         private LinkedList<ITimer> timers;
 
         #endregion Fields
@@ -65,63 +60,17 @@ namespace UniSharper.Timers
 
         #endregion Constructors
 
-        #region Events
-
-        /// <summary>
-        /// Indicates that all <see cref="ITimer"/> in the <see cref="TimerGroup"/> paused.
-        /// </summary>
-        public event TimersPausedEventHandler TimersPaused;
-
-        /// <summary>
-        /// Indicates that all <see cref="ITimer"/> in the <see cref="TimerGroup"/> reseted.
-        /// </summary>
-        public event TimersResetedEventHandler TimersReseted;
-
-        /// <summary>
-        /// Indicates that all <see cref="ITimer"/> in the <see cref="TimerGroup"/> resumed.
-        /// </summary>
-        public event TimersResumedEventHandler TimersResumed;
-
-        /// <summary>
-        /// Indicates that all <see cref="ITimer"/> in the <see cref="TimerGroup"/> started.
-        /// </summary>
-        public event TimersStartedEventHandler TimersStarted;
-
-        /// <summary>
-        /// Indicates that all <see cref="ITimer"/> in the <see cref="TimerGroup"/> stopped.
-        /// </summary>
-        public event TimersStoppedEventHandler TimersStopped;
-
-        #endregion Events
-
         #region Properties
 
         /// <summary>
-        /// Gets the number of <see cref="ITimer"/> elements contained in the <see cref="TimerGroup"/>.
+        /// Gets the number of <see cref="ITimer"/> contained in this <see cref="TimerGroup"/>.
         /// </summary>
-        /// <value>The number of <see cref="ITimer"/> elements contained in the <see cref="TimerGroup"/>.</value>
+        /// <value>The number of <see cref="ITimer"/> contained in this <see cref="TimerGroup"/>.</value>
         public int Count
         {
             get
             {
-                if (timers != null)
-                {
-                    return timers.Count;
-                }
-
-                return 0;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the <see cref="TimerGroup"/> is read-only.
-        /// </summary>
-        /// <value><c>true</c> if the <see cref="TimerGroup"/> is read-only; otherwise, <c>false</c>.</value>
-        bool ICollection<ITimer>.IsReadOnly
-        {
-            get
-            {
-                return false;
+                return timers.Count;
             }
         }
 
@@ -130,58 +79,64 @@ namespace UniSharper.Timers
         #region Methods
 
         /// <summary>
-        /// Adds an <see cref="ITimer"/> item to the <see cref="TimerGroup"/>.
+        /// Adds an <see cref="ITimer"/> item to this <see cref="TimerGroup"/>.
         /// </summary>
-        /// <param name="item">The <see cref="ITimer"/> object to add to the <see cref="TimerGroup"/>.</param>
-        public void Add(ITimer item)
+        /// <param name="timer">The <see cref="ITimer"/> to add.</param>
+        /// <exception cref="ArgumentNullException"><c>timer</c> is <c>null</c>.</exception>
+        public void Add(ITimer timer)
         {
-            if (timers != null && item != null)
+            if (timer == null)
             {
-                timers.AddUnique(item);
+                throw new ArgumentNullException(nameof(timer));
             }
+
+            timers.AddUnique(timer);
         }
 
         /// <summary>
-        /// Removes all <see cref="ITimer"/> items from the <see cref="TimerGroup"/>.
+        /// Removes all <see cref="ITimer"/> contained in this <see cref="TimerGroup"/>.
         /// </summary>
         public void Clear()
         {
-            if (timers != null)
-            {
-                timers.Clear();
-            }
+            timers.Clear();
         }
 
         /// <summary>
-        /// Determines whether the <see cref="TimerGroup"/>. contains a specific <see cref="ITimer"/> object.
+        /// Determines whether the specified <see cref="ITimer"/> contained in this <see cref="TimerGroup"/>.
         /// </summary>
-        /// <param name="item">The <see cref="ITimer"/> object to locate in the <see cref="TimerGroup"/>.</param>
+        /// <param name="timer">The <see cref="ITimer"/> to locate.</param>
         /// <returns>
-        /// <c>true</c> if <see cref="ITimer"/> item is found in the <see cref="TimerGroup"/>;
-        /// otherwise, <c>false</c>.
+        /// <c>true</c> if <see cref="ITimer"/> is found in this <see cref="TimerGroup"/>; otherwise, <c>false</c>.
         /// </returns>
-        public bool Contains(ITimer item)
+        /// <exception cref="ArgumentNullException"><c>timer</c> is <c>null</c>.</exception>
+        public bool Contains(ITimer timer)
         {
-            if (timers != null && item != null)
+            if (timer == null)
             {
-                return timers.Contains(item);
+                throw new ArgumentNullException(nameof(timer));
             }
 
-            return false;
+            return timers.Contains(timer);
         }
 
         /// <summary>
-        /// Performs the specified action on each <see cref="ITimer"/> element of the <see cref="TimerGroup"/>.
+        /// Performs the specified action on each <see cref="ITimer"/> of the <see cref="TimerGroup"/>.
         /// </summary>
         /// <param name="action">
-        /// The <see cref="Action{ITimer}"/> delegate to perform on each <see cref="ITimer"/> element
-        /// of the <see cref="TimerGroup"/>.
+        /// The <see cref="Action{ITimer}"/> delegate to perform on each <see cref="ITimer"/> of the
+        /// <see cref="TimerGroup"/>.
         /// </param>
+        /// <exception cref="ArgumentNullException"><c>action</c> is <c>null</c>.</exception>
         public void ForEach(Action<ITimer> action)
         {
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
             foreach (ITimer timer in timers)
             {
-                if (action != null && timer != null)
+                if (timer != null)
                 {
                     action.Invoke(timer);
                 }
@@ -189,7 +144,7 @@ namespace UniSharper.Timers
         }
 
         /// <summary>
-        /// Pauses all timers in the <see cref="TimerGroup"/>.
+        /// Pauses all timers contained in the <see cref="TimerGroup"/>.
         /// </summary>
         public void PauseAll()
         {
@@ -197,8 +152,6 @@ namespace UniSharper.Timers
             {
                 timer.Pause();
             });
-
-            DispatchTimersPausedEvent();
         }
 
         /// <summary>
@@ -210,18 +163,19 @@ namespace UniSharper.Timers
         /// otherwise, <c>false</c>. This method also returns <c>false</c> if item is not found in
         /// the original <see cref="TimerGroup"/>.
         /// </returns>
-        public bool Remove(ITimer item)
+        /// <exception cref="ArgumentNullException"><c>timer</c> is <c>null</c>.</exception>
+        public bool Remove(ITimer timer)
         {
-            if (timers != null && item != null)
+            if (timer == null)
             {
-                return timers.Remove(item);
+                throw new ArgumentNullException(nameof(timer));
             }
 
-            return false;
+            return timers.Remove(timer);
         }
 
         /// <summary>
-        /// Resets all timers in the <see cref="TimerGroup"/>.
+        /// Resets all timers contained in the <see cref="TimerGroup"/>.
         /// </summary>
         public void ResetAll()
         {
@@ -229,12 +183,10 @@ namespace UniSharper.Timers
             {
                 timer.Reset();
             });
-
-            DispatchTimersResetedEvent();
         }
 
         /// <summary>
-        /// Resumes all timers in <see cref="TimerGroup"/>.
+        /// Resumes all timers contained in <see cref="TimerGroup"/>.
         /// </summary>
         public void ResumeAll()
         {
@@ -242,27 +194,10 @@ namespace UniSharper.Timers
             {
                 timer.Resume();
             });
-
-            DispatchTimersResumedEvent();
         }
 
         /// <summary>
-        /// Sets all timers in the <see cref="TimerGroup"/> to be enabled or not.
-        /// </summary>
-        /// <param name="value">
-        /// Set to <c>true</c> to enable all timers in the <see cref="TimerGroup"/> control to
-        /// trigger their timer event; otherwise, set to <c>false</c>.
-        /// </param>
-        public void SetAllEnabled(bool value = true)
-        {
-            ForEach((timer) =>
-            {
-                timer.Enabled = value;
-            });
-        }
-
-        /// <summary>
-        /// Starts all timers in the <see cref="TimerGroup"/>.
+        /// Starts all timers contained in the <see cref="TimerGroup"/>.
         /// </summary>
         public void StartAll()
         {
@@ -270,12 +205,10 @@ namespace UniSharper.Timers
             {
                 timer.Start();
             });
-
-            DispatchTimersStartedEvent();
         }
 
         /// <summary>
-        /// Stops all timers in the <see cref="TimerGroup"/>.
+        /// Stops all timers contained in the <see cref="TimerGroup"/>.
         /// </summary>
         public void StopAll()
         {
@@ -283,108 +216,6 @@ namespace UniSharper.Timers
             {
                 timer.Stop();
             });
-
-            DispatchTimersStoppedEvent();
-        }
-
-        /// <summary>
-        /// Copies the elements of the <see cref="TimerGroup"/> to an <see cref="Array"/>, starting
-        /// at a particular <see cref="Array"/> index.
-        /// </summary>
-        /// <param name="array">
-        /// The one-dimensional <see cref="Array"/> that is the destination of the elements copied
-        /// from <see cref="TimerGroup"/>. The <see cref="Array"/> must have zero-based indexing.
-        /// </param>
-        /// <param name="arrayIndex">The zero-based index in <c>array</c> at which copying begins.</param>
-        void ICollection<ITimer>.CopyTo(ITimer[] array, int arrayIndex)
-        {
-            if (timers != null)
-            {
-                timers.CopyTo(array, arrayIndex);
-            }
-        }
-
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection.
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
-        IEnumerator<ITimer> IEnumerable<ITimer>.GetEnumerator()
-        {
-            if (timers != null)
-            {
-                return timers.GetEnumerator();
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection.
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            if (timers != null)
-            {
-                return timers.GetEnumerator();
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Dispatches the event of all <see cref="ITimer"/> in this <see cref="TimerGroup"/> paused.
-        /// </summary>
-        private void DispatchTimersPausedEvent()
-        {
-            if (TimersPaused != null)
-            {
-                TimersPaused.Invoke(this, new TimerListEventArgs(this));
-            }
-        }
-
-        /// <summary>
-        /// Dispatches the event of all <see cref="ITimer"/> in this <see cref="TimerGroup"/> reseted.
-        /// </summary>
-        private void DispatchTimersResetedEvent()
-        {
-            if (TimersReseted != null)
-            {
-                TimersReseted.Invoke(this, new TimerListEventArgs(this));
-            }
-        }
-
-        /// <summary>
-        /// Dispatches the event of all <see cref="ITimer"/> in this <see cref="TimerGroup"/> resumed.
-        /// </summary>
-        private void DispatchTimersResumedEvent()
-        {
-            if (TimersResumed != null)
-            {
-                TimersResumed.Invoke(this, new TimerListEventArgs(this));
-            }
-        }
-
-        /// <summary>
-        /// Dispatches the event of all <see cref="ITimer"/> in this <see cref="TimerGroup"/> started.
-        /// </summary>
-        private void DispatchTimersStartedEvent()
-        {
-            if (TimersStarted != null)
-            {
-                TimersStarted.Invoke(this, new TimerListEventArgs(this));
-            }
-        }
-
-        /// <summary>
-        /// Dispatches the event of all <see cref="ITimer"/> in this <see cref="TimerGroup"/> stopped.
-        /// </summary>
-        private void DispatchTimersStoppedEvent()
-        {
-            if (TimersStopped != null)
-            {
-                TimersStopped.Invoke(this, new TimerListEventArgs(this));
-            }
         }
 
         #endregion Methods

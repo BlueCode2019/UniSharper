@@ -65,16 +65,15 @@
     <Compile Include="UniSharper\ReadonlyFieldAttribute.cs" />
     <Compile Include="UniSharper\Threading\ISyncObject.cs" />
     <Compile Include="UniSharper\Threading\Synchronizer.cs" />
+    <Compile Include="UniSharper\Environment.cs" />
+    <Compile Include="UniSharper\Timers\Enums.cs" />
+    <Compile Include="UniSharper\Timers\EventHandlers.cs" />
     <Compile Include="UniSharper\Timers\ITimer.cs" />
-    <Compile Include="UniSharper\Timers\ITimerCollection.cs" />
     <Compile Include="UniSharper\Timers\ITimerList.cs" />
     <Compile Include="UniSharper\Timers\Timer.cs" />
-    <Compile Include="UniSharper\Timers\TimerEventArgs.cs" />
     <Compile Include="UniSharper\Timers\TimerGroup.cs" />
-    <Compile Include="UniSharper\Timers\TimerListEventArgs.cs" />
     <Compile Include="UniSharper\Timers\TimerManager.cs" />
-    <Compile Include="UniSharper\Timers\TimerState.cs" />
-    <Compile Include="UniSharper\Environment.cs" />
+    <Compile Include="UniSharper\Timers\TimerTickingEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

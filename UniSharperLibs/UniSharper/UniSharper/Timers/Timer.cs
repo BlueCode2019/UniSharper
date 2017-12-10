@@ -22,97 +22,47 @@
  *	SOFTWARE.
  */
 
+using System;
+
 namespace UniSharper.Timers
 {
     /// <summary>
     /// Base implementation of interface <see cref="ITimer"/>.
     /// </summary>
     /// <seealso cref="ITimer"/>
-    public class Timer : ITimer
+    /// <seealso cref="IDisposable"/>
+    public class Timer : ITimer, IDisposable
     {
         #region Fields
 
-        /// <summary>
-        /// Indicates that the <see cref="Timer"/> completed.
-        /// </summary>
-        public TimerCompletedEventHandler TimerCompleted;
+        private bool disposed;
 
-        /// <summary>
-        /// Indicates that the <see cref="Timer"/> paused.
-        /// </summary>
-        public TimerPausedEventHandler TimerPaused;
-
-        /// <summary>
-        /// Indicates that the <see cref="Timer"/> reseted.
-        /// </summary>
-        public TimerResetedEventHandler TimerReseted;
-
-        /// <summary>
-        /// Indicates that the <see cref="Timer"/> resumed.
-        /// </summary>
-        public TimerResumedEventHandler TimerResumed;
-
-        /// <summary>
-        /// Indicates that the <see cref="Timer"/> started.
-        /// </summary>
-        public TimerStartedEventHandler TimerStarted;
-
-        /// <summary>
-        /// Indicates that the <see cref="Timer"/> stopped.
-        /// </summary>
-        public TimerStoppedEventHandler TimerStopped;
-
-        /// <summary>
-        /// Indicates that the <see cref="Timer"/> is ticking.
-        /// </summary>
-        public TimerTickingEventHandler TimerTicking;
-
-        /// <summary>
-        /// The minimum delay time.
-        /// </summary>
-        private const float minDelayTime = 0.02f;
-
-        private uint currentCount = 0;
-        private float delay;
-        private bool ignoreTimeScale = true;
-        private uint repeatCount;
-        private bool stopOnDisable = true;
         private float time;
-        private TimerState timerState;
 
         #endregion Fields
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Timer"/> class.
+        /// Initializes a new instance of the <see cref="Timer"/> class, and sets the Interval
+        /// property to the specified number of seconds, the RepeatCount property, the
+        /// IgnoreTimeScale property and a <see cref="bool"/> value to determine to invoke the method
+        /// <see cref="Start"/> automatically.
         /// </summary>
-        /// <param name="delay">The delay of the <see cref="ITimer"/>.</param>
-        /// <param name="repeatCount">The repeat count of the <see cref="ITimer"/>.</param>
-        /// <param name="ignoreTimeScale">
-        /// if set to <c>true</c> the <see cref="ITimer"/> will ignore time scale of Unity.
+        /// <param name="interval">The time, in seconds, between <see cref="Ticking"/> events.</param>
+        /// <param name="repeatCount">The repeat count.</param>
+        /// <param name="ignoreTimeScale">A value indicating whether to ignore time scale of Unity.</param>
+        /// <param name="autoStart">
+        /// if set to <c>true</c> invoke the method <see cref="Start"/> automatically.
         /// </param>
-        /// <param name="stopOnDisable">
-        /// if set to <c>true</c> the <see cref="ITimer"/> won't stop when the <see cref="ITimer"/>
-        /// is disabled.
-        /// </param>
-        /// <param name="autoStart">if set to <c>true</c> the <see cref="ITimer"/> will start automatically.</param>
-        public Timer(float delay, uint repeatCount = 0, bool ignoreTimeScale = true, bool stopOnDisable = true, bool autoStart = true)
+        public Timer(float interval, uint repeatCount = 0, bool ignoreTimeScale = false, bool autoStart = true)
         {
-            timerState = TimerState.Stop;
+            TimerState = TimerState.Stop;
+            time = 0f;
 
-            if (delay > minDelayTime)
-            {
-                this.delay = delay;
-            }
-            else
-            {
-                this.delay = minDelayTime;
-            }
-
-            this.repeatCount = repeatCount;
-            this.ignoreTimeScale = ignoreTimeScale;
-            this.stopOnDisable = stopOnDisable;
+            Interval = interval;
+            RepeatCount = repeatCount;
+            IgnoreTimeScale = ignoreTimeScale;
 
             Initialize();
 
@@ -124,99 +74,95 @@ namespace UniSharper.Timers
 
         #endregion Constructors
 
+        #region Events
+
+        /// <summary>
+        /// Occurs when the timer completed, ticking count equals to the <see cref="RepeatCount"/>.
+        /// </summary>
+        public event TimerCompletedEventHandler Completed;
+
+        /// <summary>
+        /// Occurs when call the method <see cref="Pause"/>.
+        /// </summary>
+        public event TimerPausedEventHandler Paused;
+
+        /// <summary>
+        /// Occurs when call the method <see cref="Reset"/>.
+        /// </summary>
+        public event TimerResetedEventHandler Reseted;
+
+        /// <summary>
+        /// Occurs when call the method <see cref="Resume"/>.
+        /// </summary>
+        public event TimerResumedEventHandler Resumed;
+
+        /// <summary>
+        /// Occurs when call the method <see cref="Start"/>.
+        /// </summary>
+        public event TimerStartedEventHandler Started;
+
+        /// <summary>
+        /// Occurs when call the method <see cref="Stop"/>.
+        /// </summary>
+        public event TimerStoppedEventHandler Stopped;
+
+        /// <summary>
+        /// Occurs when the specified timer interval has elapsed.
+        /// </summary>
+        public event TimerTickingEventHandler Ticking;
+
+        #endregion Events
+
         #region Properties
 
         /// <summary>
-        /// Gets the current count of <see cref="ITimer"/>.
+        /// Gets the current ticking count of <see cref="Timer"/>.
         /// </summary>
-        /// <value>The current count of <see cref="ITimer"/>.</value>
+        /// <value>The current ticking count of <see cref="Timer"/>.</value>
         public uint CurrentCount
         {
-            get { return currentCount; }
+            get;
+            protected set;
         }
 
         /// <summary>
-        /// Gets the delay time of <see cref="ITimer"/>.
-        /// </summary>
-        /// <value>The delay timer of <see cref="ITimer"/>.</value>
-        public float Delay
-        {
-            get { return delay; }
-            set { delay = value; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this <see cref="ITimer"/> is enabled.
-        /// </summary>
-        /// <value><c>true</c> if enabled Tick function will be invoked; otherwise, <c>false</c>.</value>
-        public bool Enabled
-        {
-            set
-            {
-                if (!value)
-                {
-                    // Disable timer object.
-                    if (StopOnDisable)
-                    {
-                        Reset();
-                    }
-                    else
-                    {
-                        Pause();
-                    }
-                }
-                else
-                {
-                    // Enable timer object.
-                    if (!StopOnDisable && timerState == TimerState.Pause)
-                    {
-                        Resume();
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the <see cref="ITimer"/> ignore time scale of Unity.
+        /// Gets or sets a value indicating whether the <see cref="Timer"/> ignore time scale of Unity.
         /// </summary>
         /// <value><c>true</c> if ignore time scale of Unity; otherwise, <c>false</c>.</value>
         public bool IgnoreTimeScale
         {
-            get { return ignoreTimeScale; }
-            set { ignoreTimeScale = value; }
+            get;
+            set;
         }
 
         /// <summary>
-        /// Gets the repeat count of <see cref="ITimer"/>.
+        /// Gets or sets the time, in seconds, between <see cref="Ticking"/> events.
         /// </summary>
-        /// <value>The repeat count of <see cref="ITimer"/>.</value>
+        /// <value>The time, in seconds, between <see cref="Ticking"/> events.</value>
+        public float Interval
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the repeat count of <see cref="Timer"/>.
+        /// </summary>
+        /// <value>The repeat count of <see cref="Timer"/>.</value>
         public uint RepeatCount
         {
-            get { return repeatCount; }
-            set { repeatCount = value; }
+            get;
+            set;
         }
 
         /// <summary>
-        /// Gets a value indicating whether the <see cref="ITimer"/> stop when the <see
-        /// cref="ITimer"/> is disabled.
+        /// Gets the state of the <see cref="Timer"/>.
         /// </summary>
-        /// <value>
-        /// <c>true</c> if the <see cref="ITimer"/> stop whtn the <see cref="ITimer"/> is disabled;
-        /// otherwise, <c>false</c>.
-        /// </value>
-        public bool StopOnDisable
-        {
-            get { return stopOnDisable; }
-            set { stopOnDisable = value; }
-        }
-
-        /// <summary>
-        /// Gets the state of the <see cref="ITimer"/>.
-        /// </summary>
-        /// <value>The state of the <see cref="ITimer"/>.</value>
+        /// <value>The state of the <see cref="Timer"/>.</value>
         public TimerState TimerState
         {
-            get { return timerState; }
+            get;
+            protected set;
         }
 
         #endregion Properties
@@ -227,99 +173,178 @@ namespace UniSharper.Timers
         /// Performs application-defined tasks associated with freeing, releasing, or resetting
         /// unmanaged resources.
         /// </summary>
-        public virtual void Dispose()
+        public void Dispose()
         {
-            TimerManager.Instance.Remove(this);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
-        /// This <see cref="ITimer"/> pause timing.
+        /// Pauses timing.
         /// </summary>
+        /// <exception cref="ObjectDisposedException"><c>UniSharper.Timers.Timer</c> is disposed.</exception>
         public void Pause()
         {
-            if (timerState != TimerState.Pause)
+            if (disposed)
             {
-                timerState = TimerState.Pause;
-                DispatchTimerPausedEvent();
+                throw new ObjectDisposedException(GetType().FullName);
+            }
+
+            if (TimerState != TimerState.Pause)
+            {
+                TimerState = TimerState.Pause;
+
+                if (Paused != null)
+                {
+                    Paused.Invoke(this, EventArgs.Empty);
+                }
             }
         }
 
         /// <summary>
-        /// This <see cref="ITimer"/> resets timing. Set CurrentCount to 0.
+        /// Resets the state of <see cref="ITimer"/>.
         /// </summary>
+        /// <exception cref="ObjectDisposedException"><c>UniSharper.Timers.Timer</c> is disposed.</exception>
         public void Reset()
         {
+            if (disposed)
+            {
+                throw new ObjectDisposedException(GetType().FullName);
+            }
+
             Stop();
 
-            currentCount = 0;
+            CurrentCount = 0;
             time = 0f;
 
-            DispatchTimerResetedEvent();
+            if (Reseted != null)
+            {
+                Reseted.Invoke(this, EventArgs.Empty);
+            }
         }
 
         /// <summary>
-        /// This <see cref="ITimer"/> resume timing.
+        /// Resumes timing.
         /// </summary>
+        /// <exception cref="ObjectDisposedException"><c>UniSharper.Timers.Timer</c> is disposed.</exception>
         public void Resume()
         {
-            if (timerState == TimerState.Pause)
+            if (disposed)
             {
-                timerState = TimerState.Running;
-                DispatchTimerResumedEvent();
+                throw new ObjectDisposedException(GetType().FullName);
+            }
+
+            if (TimerState == TimerState.Pause)
+            {
+                TimerState = TimerState.Running;
+
+                if (Resumed != null)
+                {
+                    Resumed.Invoke(this, EventArgs.Empty);
+                }
             }
         }
 
         /// <summary>
-        /// This <see cref="ITimer"/> start timing.
+        /// Starts timing.
         /// </summary>
+        /// <exception cref="ObjectDisposedException"><c>UniSharper.Timers.Timer</c> is disposed.</exception>
         public void Start()
         {
-            if (timerState != TimerState.Running)
+            if (disposed)
             {
-                timerState = TimerState.Running;
-                DispatchTimerStartedEvent();
+                throw new ObjectDisposedException(GetType().FullName);
+            }
+
+            if (TimerState != TimerState.Running)
+            {
+                TimerState = TimerState.Running;
+
+                if (Started != null)
+                {
+                    Started.Invoke(this, EventArgs.Empty);
+                }
             }
         }
 
         /// <summary>
-        /// This <see cref="ITimer"/> stop timing.
+        /// Stops timing.
         /// </summary>
+        /// <exception cref="ObjectDisposedException"><c>UniSharper.Timers.Timer</c> is disposed.</exception>
         public void Stop()
         {
-            if (timerState != TimerState.Stop)
+            if (disposed)
             {
-                timerState = TimerState.Stop;
-                DispatchTimerStoppedEvent();
+                throw new ObjectDisposedException(GetType().FullName);
+            }
+
+            if (TimerState != TimerState.Stop)
+            {
+                TimerState = TimerState.Stop;
+
+                if (Stopped != null)
+                {
+                    Stopped.Invoke(this, EventArgs.Empty);
+                }
             }
         }
 
         /// <summary>
-        /// This <see cref="ITimer"/> tick.
+        /// Updates the time of timing by delta time.
         /// </summary>
         /// <param name="deltaTime">The delta time.</param>
         public void Tick(float deltaTime)
         {
-            if (timerState == TimerState.Running)
+            if (TimerState != TimerState.Running)
             {
-                time += deltaTime;
+                return;
+            }
 
-                if (time >= delay)
+            time += deltaTime;
+
+            if (time >= Interval)
+            {
+                CurrentCount++;
+
+                // Raise Ticking event
+                if (Ticking != null)
                 {
-                    // Dispatch timer event.
-                    currentCount++;
-                    DispatchTimerTickingEvent();
+                    Ticking.Invoke(this, new TimerTickingEventArgs(CurrentCount));
+                }
 
-                    // Dispatch timer complete event.
-                    if (repeatCount != 0 && currentCount >= repeatCount)
+                if (RepeatCount != 0 && CurrentCount >= RepeatCount)
+                {
+                    Reset();
+
+                    if (Completed != null)
                     {
-                        DispatchTimerCompletedEvent();
-                        Reset();
+                        Completed.Invoke(this, EventArgs.Empty);
                     }
+                }
 
-                    // Reset delay time.
-                    time -= delay;
+                time = time - Interval;
+            }
+        }
+
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing">
+        /// <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
+        /// unmanaged resources.
+        /// </param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing && !disposed)
+            {
+                if (TimerManager.Instance)
+                {
+                    TimerManager.Instance.Remove(this);
                 }
             }
+
+            disposed = true;
+            TimerState = TimerState.Stop;
         }
 
         /// <summary>
@@ -327,83 +352,9 @@ namespace UniSharper.Timers
         /// </summary>
         protected virtual void Initialize()
         {
-            TimerManager.Instance.Add(this);
-        }
-
-        /// <summary>
-        /// Dispatches the event of this <see cref="Timer"/> completed.
-        /// </summary>
-        private void DispatchTimerCompletedEvent()
-        {
-            if (TimerCompleted != null)
+            if (TimerManager.Instance)
             {
-                TimerCompleted.Invoke(this, new TimerEventArgs(this));
-            }
-        }
-
-        /// <summary>
-        /// Dispatches the event of this <see cref="Timer"/> paused.
-        /// </summary>
-        private void DispatchTimerPausedEvent()
-        {
-            if (TimerPaused != null)
-            {
-                TimerPaused.Invoke(this, new TimerEventArgs(this));
-            }
-        }
-
-        /// <summary>
-        /// Dispatches the event of this <see cref="Timer"/> reseted.
-        /// </summary>
-        private void DispatchTimerResetedEvent()
-        {
-            if (TimerReseted != null)
-            {
-                TimerReseted.Invoke(this, new TimerEventArgs(this));
-            }
-        }
-
-        /// <summary>
-        /// Dispatches the event of this <see cref="Timer"/> resumed.
-        /// </summary>
-        private void DispatchTimerResumedEvent()
-        {
-            if (TimerResumed != null)
-            {
-                TimerResumed.Invoke(this, new TimerEventArgs(this));
-            }
-        }
-
-        /// <summary>
-        /// Dispatches the event of this <see cref="Timer"/> started.
-        /// </summary>
-        private void DispatchTimerStartedEvent()
-        {
-            if (TimerStarted != null)
-            {
-                TimerStarted.Invoke(this, new TimerEventArgs(this));
-            }
-        }
-
-        /// <summary>
-        /// Dispatches the event of this <see cref="Timer"/> stopped.
-        /// </summary>
-        private void DispatchTimerStoppedEvent()
-        {
-            if (TimerStopped != null)
-            {
-                TimerStopped.Invoke(this, new TimerEventArgs(this));
-            }
-        }
-
-        /// <summary>
-        /// Dispatches the event of this <see cref="Timer"/> ticking.
-        /// </summary>
-        private void DispatchTimerTickingEvent()
-        {
-            if (TimerTicking != null)
-            {
-                TimerTicking.Invoke(this, new TimerEventArgs(this));
+                TimerManager.Instance.Add(this);
             }
         }
 

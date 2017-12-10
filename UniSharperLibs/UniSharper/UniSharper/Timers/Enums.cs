@@ -25,10 +25,11 @@
 namespace UniSharper.Timers
 {
     /// <summary>
-    /// The state enum of <see cref="ITimer"/>.
+    /// The state enums of <see cref="ITimer"/>.
     /// </summary>
     public enum TimerState
     {
+        None,
         Running,
         Pause,
         Stop

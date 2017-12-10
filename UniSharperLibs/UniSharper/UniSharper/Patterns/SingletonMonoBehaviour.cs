@@ -81,9 +81,9 @@ namespace UniSharper.Patterns
                     else
                     {
                         // Make new one.
-                        GameObject go = new GameObject();
-                        go.name = typeof(T).Name;
-                        Instance = go.AddComponent<T>();
+                        GameObject targetGameObject = new GameObject();
+                        targetGameObject.name = typeof(T).Name;
+                        Instance = targetGameObject.AddComponent<T>();
                     }
                 }
 
@@ -111,11 +111,6 @@ namespace UniSharper.Patterns
         /// </summary>
         protected virtual void Awake()
         {
-            // If singleton instance got null, find the instance already have.
-            if (instance == null)
-            {
-                Instance = FindObjectOfType<T>();
-            }
         }
 
         /// <summary>

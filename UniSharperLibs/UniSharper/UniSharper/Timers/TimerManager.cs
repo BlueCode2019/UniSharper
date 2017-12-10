@@ -29,17 +29,15 @@ using UnityEngine;
 namespace UniSharper.Timers
 {
     /// <summary>
-    /// The TimerManager is a convenience class for managing timer systems. This class cannot be inherited.
+    /// The <see cref="TimerManager"/> is a convenience class for managing all <see cref="ITimer"/> s
+    /// at runtime. This class cannot be inherited.
     /// </summary>
     /// <seealso cref="SingletonMonoBehaviour{TimerManager}"/>
-    /// <seealso cref="ITimerCollection"/>
-    public sealed class TimerManager : SingletonMonoBehaviour<TimerManager>, ITimerCollection
+    /// <seealso cref="ITimerList"/>
+    public sealed class TimerManager : SingletonMonoBehaviour<TimerManager>
     {
         #region Fields
 
-        /// <summary>
-        /// The timer list.
-        /// </summary>
         private ITimerList timerList;
 
         #endregion Fields
@@ -63,6 +61,23 @@ namespace UniSharper.Timers
             }
         }
 
+        /// <summary>
+        /// Gets the timer list.
+        /// </summary>
+        /// <value>The timer list.</value>
+        private ITimerList TimerList
+        {
+            get
+            {
+                if (timerList == null)
+                {
+                    timerList = new TimerGroup();
+                }
+
+                return timerList;
+            }
+        }
+
         #endregion Properties
 
         #region Methods
@@ -71,12 +86,9 @@ namespace UniSharper.Timers
         /// Adds an <see cref="ITimer"/> item to the <see cref="ITimerCollection"/>.
         /// </summary>
         /// <param name="item">The <see cref="ITimer"/> object to add to the <see cref="ITimerCollection"/>.</param>
-        public void Add(ITimer item)
+        public void Add(ITimer timer)
         {
-            if (timerList != null)
-            {
-                timerList.Add(item);
-            }
+            TimerList.Add(timer);
         }
 
         /// <summary>
@@ -84,10 +96,7 @@ namespace UniSharper.Timers
         /// </summary>
         public void Clear()
         {
-            if (timerList != null)
-            {
-                timerList.Clear();
-            }
+            TimerList.Clear();
         }
 
         /// <summary>
@@ -99,14 +108,9 @@ namespace UniSharper.Timers
         /// <c>true</c> if <see cref="ITimer"/> item is found in the <see cref="ITimerCollection"/>;
         /// otherwise, <c>false</c>.
         /// </returns>
-        public bool Contains(ITimer item)
+        public bool Contains(ITimer timer)
         {
-            if (timerList != null)
-            {
-                return timerList.Contains(item);
-            }
-
-            return false;
+            return TimerList.Contains(timer);
         }
 
         /// <summary>
@@ -114,10 +118,7 @@ namespace UniSharper.Timers
         /// </summary>
         public void PauseAll()
         {
-            if (timerList != null)
-            {
-                timerList.PauseAll();
-            }
+            TimerList.PauseAll();
         }
 
         /// <summary>
@@ -129,14 +130,9 @@ namespace UniSharper.Timers
         /// otherwise, <c>false</c>. This method also returns <c>false</c> if item is not found in
         /// the original <see cref="ITimerCollection"/>.
         /// </returns>
-        public bool Remove(ITimer item)
+        public bool Remove(ITimer timer)
         {
-            if (timerList != null)
-            {
-                return timerList.Remove(item);
-            }
-
-            return false;
+            return TimerList.Remove(timer);
         }
 
         /// <summary>
@@ -144,10 +140,7 @@ namespace UniSharper.Timers
         /// </summary>
         public void ResetAll()
         {
-            if (timerList != null)
-            {
-                timerList.ResetAll();
-            }
+            TimerList.ResetAll();
         }
 
         /// <summary>
@@ -155,25 +148,7 @@ namespace UniSharper.Timers
         /// </summary>
         public void ResumeAll()
         {
-            if (timerList != null)
-            {
-                timerList.ResumeAll();
-            }
-        }
-
-        /// <summary>
-        /// Sets all timers in the <see cref="ITimerCollection"/> to be enabled or not.
-        /// </summary>
-        /// <param name="value">
-        /// Set to <c>true</c> to enable all timers in the <see cref="ITimerCollection"/> control to
-        /// trigger their timer event; otherwise, set to <c>false</c>.
-        /// </param>
-        public void SetAllEnabled(bool value = true)
-        {
-            if (timerList != null)
-            {
-                timerList.SetAllEnabled(value);
-            }
+            TimerList.ResumeAll();
         }
 
         /// <summary>
@@ -181,10 +156,7 @@ namespace UniSharper.Timers
         /// </summary>
         public void StartAll()
         {
-            if (timerList != null)
-            {
-                timerList.StartAll();
-            }
+            TimerList.StartAll();
         }
 
         /// <summary>
@@ -192,20 +164,7 @@ namespace UniSharper.Timers
         /// </summary>
         public void StopAll()
         {
-            if (timerList != null)
-            {
-                timerList.StopAll();
-            }
-        }
-
-        /// <summary>
-        /// Called when script receive message Awake.
-        /// </summary>
-        protected override void Awake()
-        {
-            base.Awake();
-
-            timerList = new TimerGroup();
+            TimerList.StopAll();
         }
 
         /// <summary>
@@ -215,7 +174,6 @@ namespace UniSharper.Timers
         {
             base.OnDestroy();
 
-            timerList.RemoveAllEventHandlers();
             timerList = null;
         }
 
@@ -238,22 +196,6 @@ namespace UniSharper.Timers
         }
 
         /// <summary>
-        /// This function is called when the behaviour becomes disabled () or inactive.
-        /// </summary>
-        private void OnDisable()
-        {
-            SetAllEnabled(false);
-        }
-
-        /// <summary>
-        /// This function is called when the behaviour becomes enabled and active.
-        /// </summary>
-        private void OnEnable()
-        {
-            SetAllEnabled(true);
-        }
-
-        /// <summary>
         /// Update is called every frame.
         /// </summary>
         private void Update()
@@ -262,15 +204,10 @@ namespace UniSharper.Timers
             {
                 timerList.ForEach((timer) =>
                 {
-                    float deltaTime = Time.deltaTime;
+                    float deltaTime = timer.IgnoreTimeScale ? Time.unscaledDeltaTime : Time.deltaTime;
 
                     try
                     {
-                        if (timer.IgnoreTimeScale)
-                        {
-                            deltaTime = Time.unscaledDeltaTime;
-                        }
-
                         timer.Tick(deltaTime);
                     }
                     catch (Exception exception)

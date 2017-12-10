@@ -22,45 +22,39 @@
  *	SOFTWARE.
  */
 
+using System;
+
 namespace UniSharper.Timers
 {
     /// <summary>
-    /// Defines methods to manipulate timer collection.
+    /// Provides data for the <see cref="ITimer.Ticking"/> event.
     /// </summary>
-    public interface ITimerCollection
+    /// <seealso cref="System.EventArgs"/>
+    public class TimerTickingEventArgs : EventArgs
     {
-        /// <summary>
-        /// Sets all timers in the <see cref="ITimerCollection"/> to be enabled or not.
-        /// </summary>
-        /// <param name="value">
-        /// Set to <c>true</c> to enable all timers in the <see cref="ITimerCollection"/> control to
-        /// trigger their timer event; otherwise, set to <c>false</c>.
-        /// </param>
-        void SetAllEnabled(bool value = true);
+        #region Constructors
 
         /// <summary>
-        /// Starts all timers in the <see cref="ITimerCollection"/>.
+        /// Initializes a new instance of the <see cref="TimerTickingEventArgs"/> class with the
+        /// ticking count of the <see cref="ITimer"/>.
         /// </summary>
-        void StartAll();
+        /// <param name="currentCount">The current ticking count of the <see cref="ITimer"/>.</param>
+        public TimerTickingEventArgs(uint currentCount)
+            : base()
+        {
+            CurrentCount = currentCount;
+        }
+
+        #endregion Constructors
 
         /// <summary>
-        /// Pauses all timers in the <see cref="ITimerCollection"/>.
+        /// Gets or sets the current ticking count of the <see cref="ITimer"/>.
         /// </summary>
-        void PauseAll();
-
-        /// <summary>
-        /// Resumes all timers in <see cref="ITimerCollection"/>.
-        /// </summary>
-        void ResumeAll();
-
-        /// <summary>
-        /// Stops all timers in the <see cref="ITimerCollection"/>.
-        /// </summary>
-        void StopAll();
-
-        /// <summary>
-        /// Resets all timers in the <see cref="ITimerCollection"/>.
-        /// </summary>
-        void ResetAll();
+        /// <value>The current ticking count of the <see cref="ITimer"/>.</value>
+        public uint CurrentCount
+        {
+            get;
+            set;
+        }
     }
 }
