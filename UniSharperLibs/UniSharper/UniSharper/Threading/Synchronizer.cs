@@ -33,11 +33,11 @@ namespace UniSharper.Threading
     /// synchronize data between child threads and main threads.
     /// </summary>
     /// <seealso cref="SingletonMonoBehaviour{Synchronizer}"/>
-    public class Synchronizer : SingletonMonoBehaviour<Synchronizer>, ICollection<ISyncObject>
+    public class Synchronizer : SingletonMonoBehaviour<Synchronizer>, ICollection<ISynchronizedObject>
     {
         #region Fields
 
-        private LinkedList<ISyncObject> synchronizedObjects;
+        private LinkedList<ISynchronizedObject> synchronizedObjects;
 
         #endregion Fields
 
@@ -64,7 +64,7 @@ namespace UniSharper.Threading
         /// Gets a value indicating whether the <see cref="Synchronizer"/> is read-only.
         /// </summary>
         /// <value><c>true</c> if the <see cref="Synchronizer"/> is read-only; otherwise, <c>false</c>.</value>
-        bool ICollection<ISyncObject>.IsReadOnly
+        bool ICollection<ISynchronizedObject>.IsReadOnly
         {
             get
             {
@@ -77,10 +77,12 @@ namespace UniSharper.Threading
         #region Methods
 
         /// <summary>
-        /// Adds an object of <see cref="ISyncObject"/> to the <see cref="Synchronizer"/>.
+        /// Adds an object of <see cref="ISynchronizedObject"/> to the <see cref="Synchronizer"/>.
         /// </summary>
-        /// <param name="item">The object of <see cref="ISyncObject"/> to add to the <see cref="Synchronizer"/>.</param>
-        public void Add(ISyncObject item)
+        /// <param name="item">
+        /// The object of <see cref="ISynchronizedObject"/> to add to the <see cref="Synchronizer"/>.
+        /// </param>
+        public void Add(ISynchronizedObject item)
         {
             if (synchronizedObjects != null)
             {
@@ -100,13 +102,13 @@ namespace UniSharper.Threading
         }
 
         /// <summary>
-        /// Determines whether the <see cref="Synchronizer"/> contains a specific object of <see cref="ISyncObject"/>.
+        /// Determines whether the <see cref="Synchronizer"/> contains a specific object of <see cref="ISynchronizedObject"/>.
         /// </summary>
         /// <param name="item">The object to locate in the <see cref="Synchronizer"/>.</param>
         /// <returns>
         /// <c>true</c> if <c>item</c> is found in the <see cref="Synchronizer"/>; otherwise, <c>false</c>.
         /// </returns>
-        public bool Contains(ISyncObject item)
+        public bool Contains(ISynchronizedObject item)
         {
             if (synchronizedObjects != null)
             {
@@ -117,7 +119,7 @@ namespace UniSharper.Threading
         }
 
         /// <summary>
-        /// Copies the objects of <see cref="ISyncObject"/> to sychronize in the <see
+        /// Copies the objects of <see cref="ISynchronizedObject"/> to sychronize in the <see
         /// cref="Synchronizer"/> to an <see cref="System.Array"/>, starting at a particular <see
         /// cref="System.Array"/> index.
         /// </summary>
@@ -129,7 +131,7 @@ namespace UniSharper.Threading
         /// <param name="arrayIndex">
         /// The zero-based index in <paramref name="array"/> at which copying begins.
         /// </param>
-        public void CopyTo(ISyncObject[] array, int arrayIndex)
+        public void CopyTo(ISynchronizedObject[] array, int arrayIndex)
         {
             if (synchronizedObjects != null)
             {
@@ -141,7 +143,7 @@ namespace UniSharper.Threading
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
-        public IEnumerator<ISyncObject> GetEnumerator()
+        public IEnumerator<ISynchronizedObject> GetEnumerator()
         {
             if (synchronizedObjects != null)
             {
@@ -152,8 +154,8 @@ namespace UniSharper.Threading
         }
 
         /// <summary>
-        /// Removes the first occurrence of a specific object of <see cref="ISyncObject"/> from the
-        /// <see cref="Synchronizer"/>.
+        /// Removes the first occurrence of a specific object of <see cref="ISynchronizedObject"/>
+        /// from the <see cref="Synchronizer"/>.
         /// </summary>
         /// <param name="item">The object to remove from the <see cref="Synchronizer"/>.</param>
         /// <returns>
@@ -161,7 +163,7 @@ namespace UniSharper.Threading
         /// cref="Synchronizer"/>; otherwise, <c>false</c>. This method also returns <c>false</c> if
         /// <paramref name="item"/> is not found in the original <see cref="Synchronizer"/>.
         /// </returns>
-        public bool Remove(ISyncObject item)
+        public bool Remove(ISynchronizedObject item)
         {
             if (synchronizedObjects != null)
             {
@@ -187,7 +189,7 @@ namespace UniSharper.Threading
         {
             base.Awake();
 
-            synchronizedObjects = new LinkedList<ISyncObject>();
+            synchronizedObjects = new LinkedList<ISynchronizedObject>();
         }
 
         /// <summary>
@@ -205,7 +207,7 @@ namespace UniSharper.Threading
         /// </summary>
         private void Update()
         {
-            foreach (ISyncObject item in synchronizedObjects)
+            foreach (ISynchronizedObject item in synchronizedObjects)
             {
                 item.Synchronize();
             }

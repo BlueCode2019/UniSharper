@@ -37,6 +37,8 @@ namespace UniSharper.Timers
 
         private LinkedList<ITimer> timers;
 
+        private bool isRemovingItem;
+
         #endregion Fields
 
         #region Constructors
@@ -46,6 +48,7 @@ namespace UniSharper.Timers
         /// </summary>
         public TimerGroup()
         {
+            isRemovingItem = false;
             timers = new LinkedList<ITimer>();
         }
 
@@ -134,6 +137,11 @@ namespace UniSharper.Timers
                 throw new ArgumentNullException(nameof(action));
             }
 
+            if (isRemovingItem)
+            {
+                return;
+            }
+
             foreach (ITimer timer in timers)
             {
                 if (timer != null)
@@ -171,7 +179,11 @@ namespace UniSharper.Timers
                 throw new ArgumentNullException(nameof(timer));
             }
 
-            return timers.Remove(timer);
+            bool success = false;
+            isRemovingItem = true;
+            success = timers.Remove(timer);
+            isRemovingItem = false;
+            return success;
         }
 
         /// <summary>
