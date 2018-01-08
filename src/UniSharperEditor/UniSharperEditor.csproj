@@ -73,12 +73,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>SET TargetPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Core"
+    <PostBuildEvent>SET TargetPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Editor\Core"
 
 xcopy "$(TargetPath)" "%25TargetPath%25" /y</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>SET LibPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Core"
+    <PreBuildEvent>SET LibPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Editor\Core"
 
 IF not exist "%25LibPath%25" md "%25LibPath%25"</PreBuildEvent>
   </PropertyGroup>

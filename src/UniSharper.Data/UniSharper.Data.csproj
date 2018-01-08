@@ -53,12 +53,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>SET LibPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Modules\$(ProjectName)"
+    <PreBuildEvent>SET LibPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Plugins\Modules\$(ProjectName)"
 
 IF not exist "%25LibPath%25" md "%25LibPath%25"</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>SET TargetPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Modules\$(ProjectName)"
+    <PostBuildEvent>SET TargetPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Plugins\Modules\$(ProjectName)"
 
 xcopy "$(TargetPath)" "%25TargetPath%25" /y
 xcopy "$(TargetDir)iBoxDB.NET2.dll" "%25TargetPath%25" /y

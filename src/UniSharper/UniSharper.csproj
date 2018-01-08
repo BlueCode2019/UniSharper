@@ -84,7 +84,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>SET TargetPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Core"
+    <PostBuildEvent>SET TargetPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Plugins\Core"
 
 xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s/e/y
 del "%25TargetPath%25\*.xml" /f/q
@@ -94,7 +94,7 @@ IF $(ConfigurationName)==Release del "%25TargetPath%25*.pdb" /f/q
 IF $(ConfigurationName)==Release del "%25TargetPath%25*.mdb" /f/q</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>SET LibPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Core"
+    <PreBuildEvent>SET LibPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Plugins\Core"
 
 IF not exist "%25LibPath%25" md "%25LibPath%25"</PreBuildEvent>
   </PropertyGroup>
