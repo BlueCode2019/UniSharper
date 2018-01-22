@@ -23,8 +23,9 @@
  */
 
 using System.Collections.Generic;
-using UniSharper.Rendering.DataParsers;
 using UnityEngine;
+using System;
+using UniSharper.Rendering.DataParsers;
 
 namespace UniSharper.Rendering
 {
@@ -48,7 +49,7 @@ namespace UniSharper.Rendering
         private TextAsset dataFileAsset = null;
 
         [SerializeField]
-        private TilingSheetDataFormat dataFormat = TilingSheetDataFormat.UnityJson;
+        private TilingSheetDataFormat dataFormat;
 
         private Mesh mesh;
 
@@ -59,13 +60,23 @@ namespace UniSharper.Rendering
 
         private Dictionary<string, Rect> tilingData;
 
+        [SerializeField]
+        private bool AutoUpdateMeshUV = false;
+
         #endregion Fields
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the name of the texture tiling.
+        /// </summary>
+        /// <value>The name of the texture tiling.</value>
         public string TextureTilingName
         {
-            get { return textureTilingName; }
+            get
+            {
+                return textureTilingName;
+            }
         }
 
         private Mesh Mesh
@@ -96,31 +107,28 @@ namespace UniSharper.Rendering
             tilingData = parser.ParseData(name, data);
         }
 
-        public void UpdateMeshUV(string textureTilingName = null)
+        public void UpdateMeshUV(string textureTilingName)
+        {
+            this.textureTilingName = textureTilingName;
+            UpdateMeshUV();
+        }
+
+        public void UpdateMeshUV()
         {
             if (Mesh)
             {
-                if (meshOriginalUV == null)
+                if (Mesh.uv != null)
                 {
-                    meshOriginalUV = Mesh.uv;
+                    meshOriginalUV = new Vector2[Mesh.uv.Length];
+                    Array.Copy(Mesh.uv, meshOriginalUV, Mesh.uv.Length);
                 }
 
-                if (!string.IsNullOrEmpty(textureTilingName))
+                if (tilingData != null && !string.IsNullOrEmpty(textureTilingName))
                 {
-                    if (this.textureTilingName == textureTilingName)
-                    {
-                        return;
-                    }
-
-                    this.textureTilingName = textureTilingName;
-                }
-
-                if (tilingData != null && !string.IsNullOrEmpty(this.textureTilingName))
-                {
-                    if (tilingData.ContainsKey(this.textureTilingName))
+                    if (tilingData.ContainsKey(textureTilingName))
                     {
                         // Change UV
-                        Rect rect = tilingData[this.textureTilingName];
+                        Rect rect = tilingData[textureTilingName];
                         Vector2[] uvs = new Vector2[Mesh.uv.Length];
 
                         for (int i = 0, length = uvs.Length; i < length; i++)
@@ -146,9 +154,25 @@ namespace UniSharper.Rendering
             }
         }
 
+        /// <summary>
+        /// Executes .
+        /// </summary>
+        [ContextMenu("Execute")]
+        private void Execute()
+        {
+            if (dataFileAsset && !string.IsNullOrEmpty(textureTilingName))
+            {
+                LoadData(dataFileAsset.name, dataFileAsset.text);
+                UpdateMeshUV();
+            }
+        }
+
         private void Start()
         {
-            UpdateMeshUV();
+            if (AutoUpdateMeshUV)
+            {
+                UpdateMeshUV();
+            }
         }
 
         #endregion Methods
