@@ -1,7 +1,7 @@
 ﻿/*
  *	The MIT License (MIT)
  *
- *	Copyright (c) 2017 Jerry Lee
+ *	Copyright (c) 2018 Jerry Lee
  *
  *	Permission is hereby granted, free of charge, to any person obtaining a copy
  *	of this software and associated documentation files (the "Software"), to deal
@@ -64,7 +64,7 @@ namespace UniSharperEditor
             GUILayout.Label(string.Format("Version {0}.{1}.{2}", Environment.Version.Major, Environment.Version.Minor, Environment.Version.Build));
             GUILayout.EndHorizontal();
             GUILayout.Space(30f);
-            GUILayout.Label("Copyright (c) 2017 Jerry Lee");
+            GUILayout.Label("Copyright (c) 2018 Jerry Lee");
             GUILayout.Label("cosmos53076@163.com");
             GUILayout.EndVertical();
             GUILayout.Space(10f);

@@ -1,7 +1,7 @@
 ﻿/*
  *	The MIT License (MIT)
  *
- *	Copyright (c) 2017 Jerry Lee
+ *	Copyright (c) 2018 Jerry Lee
  *
  *	Permission is hereby granted, free of charge, to any person obtaining a copy
  *	of this software and associated documentation files (the "Software"), to deal
@@ -34,6 +34,7 @@ namespace UniSharper.Rendering
     /// </summary>
     public enum TilingSheetDataFormat
     {
+        None,
         UnityJson
     }
 
@@ -49,7 +50,7 @@ namespace UniSharper.Rendering
         private TextAsset dataFileAsset = null;
 
         [SerializeField]
-        private TilingSheetDataFormat dataFormat;
+        private TilingSheetDataFormat dataFormat = TilingSheetDataFormat.None;
 
         private Mesh mesh;
 
@@ -103,8 +104,11 @@ namespace UniSharper.Rendering
 
         public void LoadData(string name, string data)
         {
-            ITilingSheetDataParser parser = TilingSheetDataParser.CreateParser(dataFormat);
-            tilingData = parser.ParseData(name, data);
+            if (dataFormat != TilingSheetDataFormat.None)
+            {
+                ITilingSheetDataParser parser = TilingSheetDataParser.CreateParser(dataFormat);
+                tilingData = parser.ParseData(name, data);
+            }
         }
 
         public void UpdateMeshUV(string textureTilingName)
@@ -115,31 +119,31 @@ namespace UniSharper.Rendering
 
         public void UpdateMeshUV()
         {
-            if (Mesh)
+            if (tilingData == null || !Mesh || Mesh.uv == null)
             {
-                if (Mesh.uv != null)
+                return;
+            }
+
+            // Copy mesh original UV
+            if (meshOriginalUV == null || meshOriginalUV.Length == 0)
+            {
+                meshOriginalUV = new Vector2[Mesh.uv.Length];
+                Array.Copy(Mesh.uv, meshOriginalUV, Mesh.uv.Length);
+            }
+
+            // Change UV of mesh
+            if (tilingData.ContainsKey(textureTilingName))
+            {
+                Rect rect = tilingData[textureTilingName];
+                Vector2[] uvs = new Vector2[Mesh.uv.Length];
+
+                for (int i = 0, length = uvs.Length; i < length; i++)
                 {
-                    meshOriginalUV = new Vector2[Mesh.uv.Length];
-                    Array.Copy(Mesh.uv, meshOriginalUV, Mesh.uv.Length);
+                    uvs[i].x = rect.x + meshOriginalUV[i].x * rect.width;
+                    uvs[i].y = rect.y + meshOriginalUV[i].y * rect.height;
                 }
 
-                if (tilingData != null && !string.IsNullOrEmpty(textureTilingName))
-                {
-                    if (tilingData.ContainsKey(textureTilingName))
-                    {
-                        // Change UV
-                        Rect rect = tilingData[textureTilingName];
-                        Vector2[] uvs = new Vector2[Mesh.uv.Length];
-
-                        for (int i = 0, length = uvs.Length; i < length; i++)
-                        {
-                            uvs[i].x = rect.x + meshOriginalUV[i].x * rect.width;
-                            uvs[i].y = rect.y + meshOriginalUV[i].y * rect.height;
-                        }
-
-                        Mesh.uv = uvs;
-                    }
-                }
+                Mesh.uv = uvs;
             }
         }
 

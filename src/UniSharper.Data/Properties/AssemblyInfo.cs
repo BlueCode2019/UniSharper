@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("UniSharper.Data")]
-[assembly: AssemblyCopyright("Copyright (c) 2017 Jerry Lee")]
+[assembly: AssemblyCopyright("Copyright (c) 2018 Jerry Lee")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

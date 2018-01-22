@@ -1,7 +1,7 @@
 ﻿/*
  *	The MIT License (MIT)
  *
- *	Copyright (c) 2017 Jerry Lee
+ *	Copyright (c) 2018 Jerry Lee
  *
  *	Permission is hereby granted, free of charge, to any person obtaining a copy
  *	of this software and associated documentation files (the "Software"), to deal
