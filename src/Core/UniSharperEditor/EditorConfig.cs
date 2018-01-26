@@ -22,7 +22,6 @@
  *	SOFTWARE.
  */
 
-using ReSharp.IO;
 using System;
 using System.IO;
 using System.Reflection;
@@ -64,47 +63,48 @@ namespace UniSharperEditor
 
         public static T GetConfigValue<T>(string section, string key, T defaultValue = default(T))
         {
-            IniFile file = new IniFile(ConfigFilePath);
-            IniSectionInfo sectionInfo = file.GetSection(section);
-            T value = defaultValue;
+            return default(T);
+            //IniFile file = new IniFile(ConfigFilePath);
+            //IniSectionInfo sectionInfo = file.GetSection(section);
+            //T value = defaultValue;
 
-            if (sectionInfo != null && sectionInfo.ContainsKey(key))
-            {
-                string strValue = sectionInfo[key];
-                bool success = TryParse(strValue, out value);
+            //if (sectionInfo != null && sectionInfo.ContainsKey(key))
+            //{
+            //    string strValue = sectionInfo[key];
+            //    bool success = TryParse(strValue, out value);
 
-                if (!success)
-                {
-                    value = (T)(object)strValue;
-                }
-            }
+            //    if (!success)
+            //    {
+            //        value = (T)(object)strValue;
+            //    }
+            //}
 
-            return value;
+            //return value;
         }
 
         public static void SetConfigValue<T>(string section, string key, T value)
         {
-            IniFile file = new IniFile(ConfigFilePath);
-            IniSectionInfo sectionInfo = file.GetSection(section);
+            //IniFile file = new IniFile(ConfigFilePath);
+            //IniSectionInfo sectionInfo = file.GetSection(section);
 
-            if (sectionInfo == null)
-            {
-                sectionInfo = new IniSectionInfo(section);
-                file.AddSection(section, sectionInfo);
-            }
+            //if (sectionInfo == null)
+            //{
+            //    sectionInfo = new IniSectionInfo(section);
+            //    file.AddSection(section, sectionInfo);
+            //}
 
-            string strValue = value.ToString();
+            //string strValue = value.ToString();
 
-            if (sectionInfo.ContainsKey(key))
-            {
-                sectionInfo[key] = strValue;
-            }
-            else
-            {
-                sectionInfo.Add(key, strValue);
-            }
+            //if (sectionInfo.ContainsKey(key))
+            //{
+            //    sectionInfo[key] = strValue;
+            //}
+            //else
+            //{
+            //    sectionInfo.Add(key, strValue);
+            //}
 
-            File.WriteAllText(ConfigFilePath, file.ToString());
+            //File.WriteAllText(ConfigFilePath, file.ToString());
         }
 
         /// <summary>
