@@ -14,21 +14,24 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>false</DebugSymbols>
-    <DebugType>none</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\UniSharperEditor.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\UniSharperEditor.XML</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ReSharp">
@@ -75,7 +78,11 @@
   <PropertyGroup>
     <PostBuildEvent>SET TargetPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Editor\Core"
 
-xcopy "$(TargetPath)" "%25TargetPath%25" /y</PostBuildEvent>
+xcopy "$(TargetPath)" "%25TargetPath%25" /y
+xcopy "$(ProjectName).pdb" "%25TargetPath%25" /y
+xcopy "$(ProjectName).xml" "%25TargetPath%25" /y
+
+del "%25TargetPath%25\*.tmp" /f/q</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>SET LibPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Editor\Core"

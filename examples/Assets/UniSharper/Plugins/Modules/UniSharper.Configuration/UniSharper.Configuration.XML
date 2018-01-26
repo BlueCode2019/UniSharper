@@ -1,0 +1,485 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UniSharper.Configuration</name>
+    </assembly>
+    <members>
+        <member name="T:UniSharper.Configuration.ConfigurationBuilder">
+            <summary>
+            Used to build key/value based configuration settings for use in an application.
+            </summary>
+            <seealso cref="T:UniSharper.Configuration.IConfigurationBuilder"/>
+        </member>
+        <member name="P:UniSharper.Configuration.ConfigurationBuilder.Properties">
+            <summary>
+            Gets a key/value collection that can be used to share data between the <see
+            cref="T:UniSharper.Configuration.IConfigurationBuilder"/> and the registered <see cref="T:UniSharper.Configuration.IConfigurationSource"/> s.
+            </summary>
+            <value>The properties.</value>
+        </member>
+        <member name="P:UniSharper.Configuration.ConfigurationBuilder.Sources">
+            <summary>
+            Gets the sources used to obtain configuration values
+            </summary>
+            <value>The sources.</value>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationBuilder.Add(UniSharper.Configuration.IConfigurationSource)">
+            <summary>
+            Adds a new configuration source.
+            </summary>
+            <param name="source">The configuration source to add.</param>
+            <returns>The same <see cref="T:UniSharper.Configuration.IConfigurationBuilder"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><c>source</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationBuilder.Build">
+            <summary>
+            Builds an <see cref="T:UniSharper.Configuration.IConfiguration"/> with keys and values from the set of sources
+            registered in <see cref="P:UniSharper.Configuration.ConfigurationBuilder.Sources"/>.
+            </summary>
+            <returns>
+            An <see cref="T:UniSharper.Configuration.IConfigurationRoot"/> with keys and values from the registered sources.
+            </returns>
+        </member>
+        <member name="T:UniSharper.Configuration.ConfigurationExtensions">
+            <summary>
+            Extension methods for configuration classes.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationExtensions.Add``1(UniSharper.Configuration.IConfigurationBuilder,System.Action{``0})">
+            <summary>
+            Adds a new configuration source.
+            </summary>
+            <param name="builder">The <see cref="T:UniSharper.Configuration.IConfigurationBuilder"/> to add to.</param>
+            <param name="configureSource">Configures the source secrets.</param>
+            <returns>The <see cref="T:UniSharper.Configuration.IConfigurationBuilder"/>.</returns>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationExtensions.GetConnectionString(UniSharper.Configuration.IConfiguration,System.String)">
+            <summary>
+            Shorthand for GetSection("ConnectionStrings")[name].
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <param name="name">The connection string key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationExtensions.AsEnumerable(UniSharper.Configuration.IConfiguration)">
+            <summary>
+            Get the enumeration of key value pairs within the <see cref="T:UniSharper.Configuration.IConfiguration"/>
+            </summary>
+            <param name="configuration">The <see cref="T:UniSharper.Configuration.IConfiguration"/> to enumerate.</param>
+            <returns>An enumeration of key value pairs.</returns>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationExtensions.AsEnumerable(UniSharper.Configuration.IConfiguration,System.Boolean)">
+            <summary>
+            Get the enumeration of key value pairs within the <see cref="T:UniSharper.Configuration.IConfiguration"/>
+            </summary>
+            <param name="configuration">The <see cref="T:UniSharper.Configuration.IConfiguration"/> to enumerate.</param>
+            <param name="makePathsRelative">
+            If true, the child keys returned will have the current configuration's Path trimmed from
+            the front.
+            </param>
+            <returns>An enumeration of key value pairs.</returns>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationExtensions.Exists(UniSharper.Configuration.IConfigurationSection)">
+            <summary>
+            Determines whether the section has a <see cref="P:UniSharper.Configuration.IConfigurationSection.Value"/> or has children
+            </summary>
+        </member>
+        <member name="T:UniSharper.Configuration.ConfigurationKeyComparer">
+            <summary>
+            IComparer implementation used to order configuration keys.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Configuration.ConfigurationKeyComparer.Instance">
+            <summary>
+            The default instance.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationKeyComparer.Compare(System.String,System.String)">
+            <summary>
+            Compares two strings.
+            </summary>
+            <param name="x">First string.</param>
+            <param name="y">Second string.</param>
+            <returns></returns>
+        </member>
+        <member name="T:UniSharper.Configuration.ConfigurationPath">
+            <summary>
+            Utility methods and constants for manipulating Configuration paths.
+            </summary>
+        </member>
+        <member name="F:UniSharper.Configuration.ConfigurationPath.KeyDelimiter">
+            <summary>
+            The delimiter ":" used to separate individual keys in a path.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationPath.Combine(System.String[])">
+            <summary>
+            Combines path segments into one path.
+            </summary>
+            <param name="pathSegments">The path segments to combine.</param>
+            <returns>The combined path.</returns>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationPath.GetSectionKey(System.String)">
+            <summary>
+            Extracts the last path segment from the path.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>The last path segment of the path.</returns>
+        </member>
+        <member name="T:UniSharper.Configuration.ConfigurationProvider">
+            <summary>
+            Base helper class for implementing an <see cref="T:UniSharper.Configuration.IConfigurationProvider"/>
+            </summary>
+            <seealso cref="T:UniSharper.Configuration.IConfigurationProvider"/>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationProvider.#ctor">
+            <summary>
+            Initializes a new <see cref="T:UniSharper.Configuration.IConfigurationProvider"/>
+            </summary>
+        </member>
+        <member name="P:UniSharper.Configuration.ConfigurationProvider.Data">
+            <summary>
+            The configuration key value pairs for this provider.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationProvider.GetChildKeys(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Returns the list of keys that this provider has.
+            </summary>
+            <param name="earlierKeys">The earlier keys that other providers contain.</param>
+            <param name="parentPath">The path for the parent IConfiguration.</param>
+            <returns>The list of keys for this provider.</returns>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationProvider.Load">
+            <summary>
+            Loads configuration values from the source represented by this <see cref="T:UniSharper.Configuration.IConfigurationProvider"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationProvider.Set(System.String,System.String)">
+            <summary>
+            Sets a configuration value for the specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationProvider.TryGet(System.String,System.String@)">
+            <summary>
+            Tries to get a configuration value for the specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="value">The value.</param>
+            <returns><c>True</c> if a value for the specified key was found, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="T:UniSharper.Configuration.ConfigurationRoot">
+            <summary>
+            The root node for a configuration.
+            </summary>
+            <seealso cref="T:UniSharper.Configuration.IConfigurationRoot"/>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationRoot.#ctor(System.Collections.Generic.IList{UniSharper.Configuration.IConfigurationProvider})">
+            <summary>
+            Initializes a new instance of the <see cref="T:UniSharper.Configuration.ConfigurationRoot"/> class with a list of providers.
+            </summary>
+            <param name="providers">The <see cref="T:UniSharper.Configuration.IConfigurationProvider"/> s for this configuration.</param>
+        </member>
+        <member name="P:UniSharper.Configuration.ConfigurationRoot.Providers">
+            <summary>
+            The <see cref="T:UniSharper.Configuration.IConfigurationProvider"/> s for this configuration.
+            </summary>
+            <value>The providers.</value>
+        </member>
+        <member name="P:UniSharper.Configuration.ConfigurationRoot.Item(System.String)">
+            <summary>
+            Gets or sets the <see cref="T:System.String"/> with the specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>System.String.</returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationRoot.GetSection(System.String)">
+            <summary>
+            Gets a configuration sub-section with the specified key.
+            </summary>
+            <param name="key">The key of the configuration section.</param>
+            <returns>The <see cref="T:UniSharper.Configuration.IConfigurationSection"/>.</returns>
+            <remarks>
+            This method will never return <c>null</c>. If no matching sub-section is found with the
+            specified key, an empty <see cref="T:UniSharper.Configuration.IConfigurationSection"/> will be returned.
+            </remarks>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationRoot.GetChildren">
+            <summary>
+            Gets the immediate children sub-sections.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:UniSharper.Configuration.ConfigurationSection">
+            <summary>
+            Represents a section of application configuration values.
+            </summary>
+            <seealso cref="T:UniSharper.Configuration.IConfigurationSection"/>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationSection.#ctor(UniSharper.Configuration.ConfigurationRoot,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UniSharper.Configuration.ConfigurationSection"/> class.
+            </summary>
+            <param name="root">The configuration root.</param>
+            <param name="path">The path to this section.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>root</c> is <c>null</c>.</para>
+            <para>-or-</para>
+            <para><c>path</c> is <c>null</c>.</para>
+            </exception>
+        </member>
+        <member name="P:UniSharper.Configuration.ConfigurationSection.Key">
+            <summary>
+            Gets the key this section occupies in its parent.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Configuration.ConfigurationSection.Path">
+            <summary>
+            Gets the full path to this section from the <see cref="T:UniSharper.Configuration.IConfigurationRoot"/>.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Configuration.ConfigurationSection.Value">
+            <summary>
+            Gets or sets the section value.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Configuration.ConfigurationSection.Item(System.String)">
+            <summary>
+            Gets or sets the value corresponding to a configuration key.
+            </summary>
+            <param name="key">The configuration key.</param>
+            <returns>The configuration value.</returns>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationSection.GetChildren">
+            <summary>
+            Gets the immediate descendant configuration sub-sections.
+            </summary>
+            <returns>The configuration sub-sections.</returns>
+        </member>
+        <member name="M:UniSharper.Configuration.ConfigurationSection.GetSection(System.String)">
+            <summary>
+            Gets a configuration sub-section with the specified key.
+            </summary>
+            <param name="key">The key of the configuration section.</param>
+            <returns>The <see cref="T:UniSharper.Configuration.IConfigurationSection"/>.</returns>
+            <remarks>
+            This method will never return <c>null</c>. If no matching sub-section is found with the
+            specified key, an empty <see cref="T:UniSharper.Configuration.IConfigurationSection"/> will be returned.
+            </remarks>
+        </member>
+        <member name="T:UniSharper.Configuration.ExceptionMessages">
+            <summary>
+            Exception messages collection. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="F:UniSharper.Configuration.ExceptionMessages.NoSourcesErrorMessage">
+            <summary>
+            The message of no sources error.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Configuration.IConfiguration">
+            <summary>
+            Represents a set of key/value application configuration properties.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Configuration.IConfiguration.Item(System.String)">
+            <summary>
+            Gets or sets a configuration value.
+            </summary>
+            <param name="key">The configuration key.</param>
+            <returns>The configuration value.</returns>
+        </member>
+        <member name="M:UniSharper.Configuration.IConfiguration.GetSection(System.String)">
+            <summary>
+            Gets a configuration sub-section with the specified key.
+            </summary>
+            <param name="key">The key of the configuration section.</param>
+            <returns>The <see cref="T:UniSharper.Configuration.IConfigurationSection"/>.</returns>
+            <remarks>
+            This method will never return <c>null</c>. If no matching sub-section is found with the
+            specified key, an empty <see cref="T:UniSharper.Configuration.IConfigurationSection"/> will be returned.
+            </remarks>
+        </member>
+        <member name="M:UniSharper.Configuration.IConfiguration.GetChildren">
+            <summary>
+            Gets the immediate descendant configuration sub-sections.
+            </summary>
+            <returns>The configuration sub-sections.</returns>
+        </member>
+        <member name="T:UniSharper.Configuration.IConfigurationBuilder">
+            <summary>
+            Represents a type used to build application configuration.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Configuration.IConfigurationBuilder.Properties">
+            <summary>
+            Gets a key/value collection that can be used to share data between the <see
+            cref="T:UniSharper.Configuration.IConfigurationBuilder"/> and the registered <see cref="T:UniSharper.Configuration.IConfigurationSource"/> s.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Configuration.IConfigurationBuilder.Sources">
+            <summary>
+            Gets the sources used to obtain configuration values
+            </summary>
+        </member>
+        <member name="M:UniSharper.Configuration.IConfigurationBuilder.Add(UniSharper.Configuration.IConfigurationSource)">
+            <summary>
+            Adds a new configuration source.
+            </summary>
+            <param name="source">The configuration source to add.</param>
+            <returns>The same <see cref="T:UniSharper.Configuration.IConfigurationBuilder"/>.</returns>
+        </member>
+        <member name="M:UniSharper.Configuration.IConfigurationBuilder.Build">
+            <summary>
+            Builds an <see cref="T:UniSharper.Configuration.IConfiguration"/> with keys and values from the set of sources
+            registered in <see cref="P:UniSharper.Configuration.IConfigurationBuilder.Sources"/>.
+            </summary>
+            <returns>
+            An <see cref="T:UniSharper.Configuration.IConfigurationRoot"/> with keys and values from the registered sources.
+            </returns>
+        </member>
+        <member name="T:UniSharper.Configuration.IConfigurationProvider">
+            <summary>
+            Provides configuration key/values for an application.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Configuration.IConfigurationProvider.TryGet(System.String,System.String@)">
+            <summary>
+            Tries to get a configuration value for the specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="value">The value.</param>
+            <returns><c>True</c> if a value for the specified key was found, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:UniSharper.Configuration.IConfigurationProvider.Set(System.String,System.String)">
+            <summary>
+            Sets a configuration value for the specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:UniSharper.Configuration.IConfigurationProvider.Load">
+            <summary>
+            Loads configuration values from the source represented by this <see cref="T:UniSharper.Configuration.IConfigurationProvider"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Configuration.IConfigurationProvider.GetChildKeys(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Returns the immediate descendant configuration keys for a given parent path based on this
+            <see cref="T:UniSharper.Configuration.IConfigurationProvider"/>'s data and the set of keys returned by all the
+            preceding <see cref="T:UniSharper.Configuration.IConfigurationProvider"/> s.
+            </summary>
+            <param name="earlierKeys">
+            The child keys returned by the preceding providers for the same parent path.
+            </param>
+            <param name="parentPath">The parent path.</param>
+            <returns>The child keys.</returns>
+        </member>
+        <member name="P:UniSharper.Configuration.IConfigurationRoot.Providers">
+            <summary>
+            The <see cref="T:UniSharper.Configuration.IConfigurationProvider"/> s for this configuration.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Configuration.IConfigurationSection">
+            <summary>
+            Represents a section of application configuration values.
+            </summary>
+            <seealso cref="T:UniSharper.Configuration.IConfiguration"/>
+        </member>
+        <member name="P:UniSharper.Configuration.IConfigurationSection.Key">
+            <summary>
+            Gets the key this section occupies in its parent.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Configuration.IConfigurationSection.Path">
+            <summary>
+            Gets the full path to this section within the <see cref="T:UniSharper.Configuration.IConfiguration"/>.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Configuration.IConfigurationSection.Value">
+            <summary>
+            Gets or sets the section value.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Configuration.IConfigurationSource">
+            <summary>
+            Represents a source of configuration key/values for an application.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Configuration.IConfigurationSource.Build(UniSharper.Configuration.IConfigurationBuilder)">
+            <summary>
+            Builds the <see cref="T:UniSharper.Configuration.IConfigurationProvider"/> for this source.
+            </summary>
+            <param name="builder">The <see cref="T:UniSharper.Configuration.IConfigurationBuilder"/>.</param>
+            <returns>An <see cref="T:UniSharper.Configuration.IConfigurationProvider"/></returns>
+        </member>
+        <member name="T:UniSharper.Configuration.Memory.MemoryConfigurationBuilderExtensions">
+            <summary>
+            IConfigurationBuilder extension methods for the MemoryConfigurationProvider.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Configuration.Memory.MemoryConfigurationBuilderExtensions.AddInMemoryCollection(UniSharper.Configuration.IConfigurationBuilder)">
+            <summary>
+            Adds the memory configuration provider to <paramref name="configurationBuilder"/>.
+            </summary>
+            <param name="configurationBuilder">The <see cref="T:UniSharper.Configuration.IConfigurationBuilder"/> to add to.</param>
+            <returns>The <see cref="T:UniSharper.Configuration.IConfigurationBuilder"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><c>configurationBuilder</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:UniSharper.Configuration.Memory.MemoryConfigurationBuilderExtensions.AddInMemoryCollection(UniSharper.Configuration.IConfigurationBuilder,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+            <summary>
+            Adds the memory configuration provider to <paramref name="configurationBuilder"/>.
+            </summary>
+            <param name="configurationBuilder">The <see cref="T:UniSharper.Configuration.IConfigurationBuilder"/> to add to.</param>
+            <param name="initialData">The data to add to memory configuration provider.</param>
+            <returns>The <see cref="T:UniSharper.Configuration.IConfigurationBuilder"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><c>configurationBuilder</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:UniSharper.Configuration.Memory.MemoryConfigurationProvider.#ctor(UniSharper.Configuration.Memory.MemoryConfigurationSource)">
+            <summary>
+            Initialize a new instance from the source.
+            </summary>
+            <param name="source">The source settings.</param>
+        </member>
+        <member name="M:UniSharper.Configuration.Memory.MemoryConfigurationProvider.Add(System.String,System.String)">
+            <summary>
+            Add a new key and value pair.
+            </summary>
+            <param name="key">The configuration key.</param>
+            <param name="value">The configuration value.</param>
+        </member>
+        <member name="M:UniSharper.Configuration.Memory.MemoryConfigurationProvider.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:UniSharper.Configuration.Memory.MemoryConfigurationProvider.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="T:UniSharper.Configuration.Memory.MemoryConfigurationSource">
+            <summary>
+            Class MemoryConfigurationSource.
+            </summary>
+            <seealso cref="T:UniSharper.Configuration.IConfigurationSource"/>
+        </member>
+        <member name="P:UniSharper.Configuration.Memory.MemoryConfigurationSource.InitialData">
+            <summary>
+            The initial key value configuration pairs.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Configuration.Memory.MemoryConfigurationSource.Build(UniSharper.Configuration.IConfigurationBuilder)">
+            <summary>
+            Builds the <see cref="T:UniSharper.Configuration.Memory.MemoryConfigurationProvider"/> for this source.
+            </summary>
+            <param name="builder">The <see cref="T:UniSharper.Configuration.IConfigurationBuilder"/>.</param>
+            <returns>A <see cref="T:UniSharper.Configuration.Memory.MemoryConfigurationProvider"/></returns>
+        </member>
+    </members>
+</doc>

@@ -21,14 +21,17 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\UniSharper.Data.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\UniSharper.Data.XML</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="iBoxDB.NET2, Version=2.17.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -62,10 +65,11 @@ IF not exist "%25LibPath%25" md "%25LibPath%25"</PreBuildEvent>
     <PostBuildEvent>SET TargetPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Plugins\Modules\$(ProjectName)"
 
 xcopy "$(TargetPath)" "%25TargetPath%25" /y
-xcopy "$(TargetDir)iBoxDB.NET2.dll" "%25TargetPath%25" /y
+xcopy "$(ProjectName).pdb" "%25TargetPath%25" /y
+xcopy "$(ProjectName).xml" "%25TargetPath%25" /y
 
-IF $(ConfigurationName)==Release del "%25TargetPath%25*.pdb" /f/q
-IF $(ConfigurationName)==Release del "%25TargetPath%25*.mdb" /f/q</PostBuildEvent>
+xcopy "$(TargetDir)iBoxDB.NET2.dll" "%25TargetPath%25" /y
+del "%25TargetPath%25\*.tmp" /f/q</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

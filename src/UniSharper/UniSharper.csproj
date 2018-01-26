@@ -21,14 +21,17 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\UniSharper.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DocumentationFile>bin\Release\UniSharper.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
@@ -87,11 +90,9 @@
     <PostBuildEvent>SET TargetPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Plugins\Core"
 
 xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s/e/y
-del "%25TargetPath%25\*.xml" /f/q
 del "%25TargetPath%25\UnityEngine.dll" /f/q
-
-IF $(ConfigurationName)==Release del "%25TargetPath%25*.pdb" /f/q
-IF $(ConfigurationName)==Release del "%25TargetPath%25*.mdb" /f/q</PostBuildEvent>
+del "%25TargetPath%25\UnityEngine.xml" /f/q
+del "%25TargetPath%25\*.tmp" /f/q</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>SET LibPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Plugins\Core"

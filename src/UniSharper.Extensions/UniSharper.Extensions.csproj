@@ -11,6 +11,7 @@
     <AssemblyName>UniSharper.Extensions</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,14 +21,17 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\UniSharper.Extensions.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\UniSharper.Extensions.XML</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -49,20 +53,17 @@
     <Compile Include="UnityEngine\Vector3Extensions.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\UniSharper\UniSharper.csproj">
-      <Project>{098f0e93-3177-4923-88cd-596c96f6e907}</Project>
-      <Name>UniSharper</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>SET TargetPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Plugins\Core"
 
 xcopy "$(TargetPath)" "%25TargetPath%25" /y
+xcopy "$(ProjectName).pdb" "%25TargetPath%25" /y
+xcopy "$(ProjectName).xml" "%25TargetPath%25" /y
 
-IF $(ConfigurationName)==Release del "%25TargetPath%25*.pdb" /f/q
-IF $(ConfigurationName)==Release del "%25TargetPath%25*.mdb" /f/q</PostBuildEvent>
+del "%25TargetPath%25\UnityEngine.dll" /f/q
+del "%25TargetPath%25\UnityEngine.xml" /f/q
+del "%25TargetPath%25\*.tmp" /f/q</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>SET LibPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Plugins\Core"

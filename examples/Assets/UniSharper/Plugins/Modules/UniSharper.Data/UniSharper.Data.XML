@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UniSharper.Data</name>
+    </assembly>
+    <members>
+        <member name="T:UniSharper.Data.BoxDBMultiConditionOperator">
+            <summary>
+            The multi-condition operator of iBoxDB database.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Data.BoxDBQueryOperator">
+            <summary>
+            The operator enumeration of iBoxDB database.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Data.BoxDBQueryCondition">
+            <summary>
+            The query condition for iBoxDB database.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBQueryCondition.#ctor(System.String,System.Object,UniSharper.Data.BoxDBQueryOperator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UniSharper.Data.BoxDBQueryCondition"/> struct.
+            </summary>
+            <param name="propertyName">The name of property.</param>
+            <param name="value">The value.</param>
+            <param name="queryOperator">The query operator.</param>
+        </member>
+        <member name="P:UniSharper.Data.BoxDBQueryCondition.PropertyName">
+            <summary>
+            The name of property.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Data.BoxDBQueryCondition.QueryOperator">
+            <summary>
+            The query operator.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Data.BoxDBQueryCondition.Value">
+            <summary>
+            The value.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Data.BoxDBAdapter">
+            <summary>
+            The database adapter for iBoxDB.
+            </summary>
+            <seealso cref="T:System.IDisposable"/>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.#ctor(System.String,System.Byte[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:UniSharper.Data.BoxDBAdapter"/> class.
+            </summary>
+            <param name="dbPath">The database path.</param>
+            <param name="bin">The binary data of database file.</param>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.#ctor(System.String,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UniSharper.Data.BoxDBAdapter"/> class.
+            </summary>
+            <param name="dbPath">The database path.</param>
+            <param name="dbDestAddr">The database destnation address.</param>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.Finalize">
+            <summary>
+            Finalizes an instance of the <see cref="T:UniSharper.Data.BoxDBAdapter"/> class.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Data.BoxDBAdapter.Database">
+            <summary>
+            Gets the database.
+            </summary>
+            <value>The database.</value>
+        </member>
+        <member name="P:UniSharper.Data.BoxDBAdapter.DbServer">
+            <summary>
+            Gets the database server.
+            </summary>
+            <value>The database server.</value>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.Close">
+            <summary>
+            Closes the connection to the database.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.Delete(System.String,System.Object[])">
+            <summary>
+            Deletes data by the given primary key value.
+            </summary>
+            <param name="tableName">Name of the table.</param>
+            <param name="primaryKeyValues">The primary key values.</param>
+            <returns><c>true</c> if delete data success, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.Dispose">
+            <summary>
+            Releases the unmanaged resources and disposes of the managed resources used by the <see cref="T:UniSharper.Data.BoxDBAdapter"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.EnsureTable``1(System.String,System.String[])">
+            <summary>
+            Ensures the table.
+            </summary>
+            <typeparam name="T">The type definition of data in table.</typeparam>
+            <param name="tableName">Name of the table.</param>
+            <param name="names">The names.</param>
+            <returns>The config of database.</returns>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.Insert``1(System.String,``0[])">
+            <summary>
+            Inserts data.
+            </summary>
+            <typeparam name="T">The type definition of data.</typeparam>
+            <param name="tableName">Name of the table.</param>
+            <param name="values">The list of data.</param>
+            <returns><c>true</c> if insert data success, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.MakeNewId(System.Byte,System.Int64)">
+            <summary>
+            Makes the new identifier.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="step">The step.</param>
+            <returns>The new identifier.</returns>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.Open">
+            <summary>
+            Opens the database connection.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.Select``1(System.String,System.Object)">
+            <summary>
+            Retrieve data by primary key value.
+            </summary>
+            <typeparam name="T">The type of data return.</typeparam>
+            <param name="tableName">Name of the table.</param>
+            <param name="primaryKeyValue">The primary key value.</param>
+            <returns>The data return.</returns>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.Select``1(System.String,System.Collections.Generic.List{UniSharper.Data.BoxDBQueryCondition},System.Collections.Generic.List{UniSharper.Data.BoxDBMultiConditionOperator})">
+            <summary>
+            Retrieve the data items by some conditions.
+            </summary>
+            <typeparam name="T">The tyoe of data return.</typeparam>
+            <param name="tableName">Name of the table.</param>
+            <param name="conditions">The query conditions.</param>
+            <param name="multiConditionOperators">The multi-condition operators.</param>
+            <returns>The data items.</returns>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.SelectAll``1(System.String)">
+            <summary>
+            Retrieve all data items of the table.
+            </summary>
+            <typeparam name="T">The tyoe of data return.</typeparam>
+            <param name="tableName">Name of the table.</param>
+            <returns>All data items of the table.</returns>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.SelectCount(System.String)">
+            <summary>
+            Get the item count of the table.
+            </summary>
+            <param name="tableName">Name of the table.</param>
+            <returns>The item count of the table.</returns>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.SelectCount(System.String,System.Collections.Generic.List{UniSharper.Data.BoxDBQueryCondition},System.Collections.Generic.List{UniSharper.Data.BoxDBMultiConditionOperator})">
+            <summary>
+            Get the item count by multi-condition.
+            </summary>
+            <param name="tableName">Name of the table.</param>
+            <param name="conditions">The conditions.</param>
+            <param name="multiConditionOperators">The multi condition operators.</param>
+            <returns>The item count.</returns>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.Update``1(System.String,``0[])">
+            <summary>
+            Updates data.
+            </summary>
+            <typeparam name="T">The type definition of data.</typeparam>
+            <param name="tableName">Name of the table.</param>
+            <param name="values">The list of data.</param>
+            <returns><c>true</c> if update the list of data success, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:UniSharper.Data.BoxDBAdapter"/> and optionally
+            disposes of the managed resources.
+            </summary>
+            <param name="disposing">
+            <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
+            unmanaged resources.
+            </param>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.GenerateMultiConditionQuerySQL(System.Object[]@,System.String,System.Collections.Generic.List{UniSharper.Data.BoxDBQueryCondition},System.Collections.Generic.List{UniSharper.Data.BoxDBMultiConditionOperator})">
+            <summary>
+            Generates the multi-condition query SQL statement.
+            </summary>
+            <param name="values">The values need to query.</param>
+            <param name="tableName">Name of the table.</param>
+            <param name="conditions">The conditions.</param>
+            <param name="multiConditionOperators">The multi condition operators.</param>
+            <returns>The SQL statement.</returns>
+        </member>
+        <member name="M:UniSharper.Data.BoxDBAdapter.CheckDisposed">
+            <summary>
+            Throws an <see cref="T:System.ObjectDisposedException"/> if the <see cref="T:UniSharper.Data.BoxDBAdapter"/> is in
+            the disposed state.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">
+            Cannot access a disposed object. Object name: 'UniSharper.Data.BoxDBAdapter'.
+            </exception>
+        </member>
+    </members>
+</doc>

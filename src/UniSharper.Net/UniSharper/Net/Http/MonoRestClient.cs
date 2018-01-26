@@ -176,6 +176,8 @@ namespace UniSharper.Net.Http
 
                 if (context.IsRequestCompleted)
                 {
+                    context.IsRequestCompleted = false;
+
                     if (context.Callback != null)
                     {
                         context.Callback.Invoke(context.Response, context.AsyncHandle);
@@ -190,7 +192,6 @@ namespace UniSharper.Net.Http
             }
 
             RemoveCompletedContexts(removedContexts);
-            removedContexts = null;
         }
 
         /// <summary>
@@ -268,14 +269,14 @@ namespace UniSharper.Net.Http
         /// <param name="list">The context list.</param>
         private void RemoveCompletedContexts(IList<MonoRestRequestAsyncContext> list)
         {
-            if (contexts == null)
+            if (contexts == null || list.Count == 0)
             {
                 return;
             }
 
             foreach (MonoRestRequestAsyncContext item in list)
             {
-                contexts.Remove(item);
+                bool result = contexts.Remove(item);
             }
         }
 
@@ -381,7 +382,7 @@ namespace UniSharper.Net.Http
             public bool IsRequestCompleted
             {
                 get;
-                private set;
+                internal set;
             }
 
             /// <summary>

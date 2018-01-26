@@ -15,20 +15,23 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\UniSharper.Net.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DocumentationFile>bin\Release\UniSharper.Net.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ReSharp">
@@ -59,10 +62,14 @@
     <PostBuildEvent>SET TargetPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Plugins\Modules\$(ProjectName)"
 
 xcopy "$(TargetPath)" "%25TargetPath%25" /y
-xcopy "$(TargetDir)RestSharp.dll" "%25TargetPath%25" /y
+xcopy "$(ProjectName).pdb" "%25TargetPath%25" /y
+xcopy "$(ProjectName).xml" "%25TargetPath%25" /y
 
-IF $(ConfigurationName)==Release del "%25TargetPath%25*.pdb" /f/q
-IF $(ConfigurationName)==Release del "%25TargetPath%25*.mdb" /f/q</PostBuildEvent>
+xcopy "$(TargetDir)RestSharp.dll" "%25TargetPath%25" /y
+xcopy "$(TargetDir)RestSharp.pdb" "%25TargetPath%25" /y
+xcopy "$(TargetDir)RestSharp.xml" "%25TargetPath%25" /y
+
+del "%25TargetPath%25\*.tmp" /f/q</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>SET LibPath="$(SolutionDir)\examples\Assets\$(SolutionName)\Plugins\Modules\$(ProjectName)"
