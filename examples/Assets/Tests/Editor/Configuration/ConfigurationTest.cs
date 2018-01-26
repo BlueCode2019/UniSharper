@@ -333,13 +333,6 @@ namespace UniSharper.Configuration.Tests
             var memConfigSrc2 = new MemoryConfigurationSource { InitialData = dict };
             var memConfigSrc3 = new MemoryConfigurationSource { InitialData = dict };
 
-            var srcSet = new HashSet<IConfigurationSource>()
-            {
-                memConfigSrc1,
-                memConfigSrc2,
-                memConfigSrc3
-            };
-
             var configurationBuilder = new ConfigurationBuilder();
 
             // Act
@@ -347,7 +340,7 @@ namespace UniSharper.Configuration.Tests
             configurationBuilder.Add(memConfigSrc2);
             configurationBuilder.Add(memConfigSrc3);
 
-            var config = configurationBuilder.Build();
+            configurationBuilder.Build();
 
             // Assert
             Assert.AreEqual(new[] { memConfigSrc1, memConfigSrc2, memConfigSrc3 }, configurationBuilder.Sources);
