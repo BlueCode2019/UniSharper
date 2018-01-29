@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{098F0E93-3177-4923-88CD-596C96F6E907}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UniSharper</RootNamespace>
+    <AssemblyName>UniSharper</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\UniSharper.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DocumentationFile>bin\Release\UniSharper.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="JsonFx, Version=2.0.1209.2802, Culture=neutral, PublicKeyToken=315052dd637f8a52, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\JsonFx.2.0.1209.2802\lib\net35\JsonFx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ReSharp, Version=1.0.6600.22031, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\ReSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="ReSharp.Extensions, Version=1.0.6600.22031, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\ReSharp.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\libs\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CoroutineEnumerator.cs" />
+    <Compile Include="EnumFlagsFieldAttribute.cs" />
+    <Compile Include="NameValueObject.cs" />
+    <Compile Include="Threading\Events\Event.cs" />
+    <Compile Include="Threading\Events\IThreadEventDispatcher.cs" />
+    <Compile Include="Threading\Events\ThreadEventDispatcher.cs" />
+    <Compile Include="Miscs\DontDestroyOnLoad.cs" />
+    <Compile Include="Patterns\SingletonMonoBehaviour.cs" />
+    <Compile Include="Rendering\DataParsers\ITilingSheetDataParser.cs" />
+    <Compile Include="Rendering\DataParsers\UnityJsonDataParser.cs" />
+    <Compile Include="Rendering\PrefabLightmapData.cs" />
+    <Compile Include="Rendering\PrefabLightmapExcludedRenderer.cs" />
+    <Compile Include="Rendering\TextureTilingRenderer.cs" />
+    <Compile Include="Rendering\DataParsers\TilingSheetDataParser.cs" />
+    <Compile Include="ReadOnlyFieldAttribute.cs" />
+    <Compile Include="Threading\ISynchronizedObject.cs" />
+    <Compile Include="Threading\Synchronizer.cs" />
+    <Compile Include="Environment.cs" />
+    <Compile Include="Timers\Enums.cs" />
+    <Compile Include="Timers\EventHandlers.cs" />
+    <Compile Include="Timers\ITimer.cs" />
+    <Compile Include="Timers\ITimerList.cs" />
+    <Compile Include="Timers\Timer.cs" />
+    <Compile Include="Timers\TimerGroup.cs" />
+    <Compile Include="Timers\TimerManager.cs" />
+    <Compile Include="Timers\TimerTickingEventArgs.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>SET TargetPath="$(SolutionDir)tests\$(SolutionName).Tests\Assets\$(SolutionName)\Plugins\Core"
+if not exist %25TargetPath%25 md %25TargetPath%25
+del "%25TargetPath%25\*.*" /f/q
+
+:: Tests for UniSharper
+xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s /e /i /y
+
+SET TargetPath="$(SolutionDir)samples\$(SolutionName).Samples\Assets\$(SolutionName)\Plugins\Core"
+if not exist %25TargetPath%25 md %25TargetPath%25
+del "%25TargetPath%25\*.*" /f/q
+
+:: Samples for UniSharper
+xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s /e /i /y
+</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>del "$(TargetDir)\*.*" /f/q</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
