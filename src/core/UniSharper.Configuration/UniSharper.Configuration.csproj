@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{42F26DB6-67F9-4228-A129-4B9849A391EE}</ProjectGuid>
+    <ProjectGuid>{EB04D5D5-4CED-46D1-9BD4-CF71DC0C5E45}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UniSharper.Configuration.FileExtensions</RootNamespace>
-    <AssemblyName>UniSharper.Configuration.FileExtensions</AssemblyName>
+    <RootNamespace>UniSharper.Configuration</RootNamespace>
+    <AssemblyName>UniSharper.Configuration</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\UniSharper.Configuration.FileExtensions.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\UniSharper.Configuration.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,7 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\UniSharper.Configuration.FileExtensions.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\UniSharper.Configuration.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -40,31 +40,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileConfigurationExtensions.cs" />
-    <Compile Include="FileConfigurationProvider.cs" />
-    <Compile Include="FileConfigurationSource.cs" />
-    <Compile Include="FileLoadExceptionContext.cs" />
+    <Compile Include="ConfigurationBuilder.cs" />
+    <Compile Include="ConfigurationExtensions.cs" />
+    <Compile Include="ConfigurationKeyComparer.cs" />
+    <Compile Include="ConfigurationPath.cs" />
+    <Compile Include="ConfigurationProvider.cs" />
+    <Compile Include="ConfigurationRoot.cs" />
+    <Compile Include="ConfigurationSection.cs" />
+    <Compile Include="ExceptionMessages.cs" />
+    <Compile Include="FileExtensions\FileConfigurationExtensions.cs" />
+    <Compile Include="FileExtensions\FileConfigurationProvider.cs" />
+    <Compile Include="FileExtensions\FileConfigurationSource.cs" />
+    <Compile Include="FileExtensions\FileLoadExceptionContext.cs" />
+    <Compile Include="IConfiguration.cs" />
+    <Compile Include="IConfigurationBuilder.cs" />
+    <Compile Include="IConfigurationProvider.cs" />
+    <Compile Include="IConfigurationRoot.cs" />
+    <Compile Include="IConfigurationSection.cs" />
+    <Compile Include="IConfigurationSource.cs" />
+    <Compile Include="MemoryConfigurationBuilderExtensions.cs" />
+    <Compile Include="MemoryConfigurationProvider.cs" />
+    <Compile Include="MemoryConfigurationSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UniSharper.Configuration\UniSharper.Configuration.csproj">
-      <Project>{eb04d5d5-4ced-46d1-9bd4-cf71dc0c5e45}</Project>
-      <Name>UniSharper.Configuration</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>del "$(TargetDir)\*.*" /f/q</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>SET TargetPath="$(SolutionDir)tests\UniSharper.Configuration.Tests\Assets\UniSharper.Configuration\Plugins"
+    <PostBuildEvent>SET TargetPath="$(SolutionDir)tests\$(SolutionName).Tests\Assets\$(SolutionName)\Plugins"
 if not exist %25TargetPath%25 md %25TargetPath%25
 
 :: UniSharper.Tests
 xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s /e /i /y
 
+SET TargetPath="$(SolutionDir)samples\$(SolutionName).Samples\Assets\$(SolutionName)\Plugins"
+if not exist %25TargetPath%25 md %25TargetPath%25
+
+:: UniSharper.Samples
+xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s /e /i /y
+
 :: Release
-SET ReleasePath="$(SolutionDir)bin\UniSharper.Configuration\Plugins"
+SET ReleasePath="$(SolutionDir)bin\$(SolutionName)\Plugins"
 IF $(ConfigurationName) == Release (
   IF NOT exist %25ReleasePath%25 md %25ReleasePath%25
   xcopy "$(TargetDir)*.*" "%25ReleasePath%25" /s /e /i /y
