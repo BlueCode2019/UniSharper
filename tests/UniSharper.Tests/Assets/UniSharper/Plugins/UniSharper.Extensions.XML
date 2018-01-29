@@ -1,0 +1,382 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UniSharper.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:System.StringExtensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="M:System.StringExtensions.ToVector2(System.String)">
+            <summary>
+            Returns <see cref="T:UnityEngine.Vector2"/> for this formatted string (format like this: (1.0, 1.0)).
+            </summary>
+            <param name="source">The <see cref="T:System.String"/> to convert to <see cref="T:UnityEngine.Vector2"/>.</param>
+            <returns>The <see cref="T:UnityEngine.Vector2"/> converted from the formatted <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="M:System.StringExtensions.ToVector3(System.String)">
+            <summary>
+            Returns <see cref="T:UnityEngine.Vector3"/> for this formatted string (format like this: (1.0, 1.0, 1.0)).
+            </summary>
+            <param name="source">The <see cref="T:System.String"/> to convert to <see cref="T:UnityEngine.Vector3"/>.</param>
+            <returns>The <see cref="T:UnityEngine.Vector3"/> converted from the formatted <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="M:System.StringExtensions.ToQuaternion(System.String)">
+            <summary>
+            Returns <see cref="T:UnityEngine.Quaternion"/> for this formatted string (format like this: (1.0, 1.0,
+            1.0, 1.0)).
+            </summary>
+            <param name="source">The <see cref="T:System.String"/> to convert to <see cref="T:UnityEngine.Quaternion"/>.</param>
+            <returns>The <see cref="T:UnityEngine.Quaternion"/> converted from the formatted <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="M:System.StringExtensions.GetValuesArray(System.String)">
+            <summary>
+            Gets the values array of <see cref="T:System.String"/>.
+            </summary>
+            <param name="strValue">The value of <see cref="T:System.String"/>.</param>
+            <returns>The array of values.</returns>
+        </member>
+        <member name="T:UnityEngine.ComponentExtensions">
+            <summary>
+            Extension methods collection of <see cref="T:UnityEngine.Component"/>.
+            </summary>
+        </member>
+        <member name="M:UnityEngine.ComponentExtensions.CopyComponentValues(UnityEngine.Component,UnityEngine.GameObject)">
+            <summary>
+            Copies values from the <see cref="T:UnityEngine.Component"/> to another <see cref="T:UnityEngine.Component"/> of the
+            <see cref="T:UnityEngine.GameObject"/>.
+            </summary>
+            <param name="component">The <see cref="T:UnityEngine.Component"/>.</param>
+            <param name="targetGameObject">The target <see cref="T:UnityEngine.GameObject"/>.</param>
+        </member>
+        <member name="T:UnityEngine.GameObjectExtensions">
+            <summary>
+            Extension methods collection of <see cref="T:UnityEngine.GameObject"/>.
+            </summary>
+        </member>
+        <member name="M:UnityEngine.GameObjectExtensions.GetOrAddComponent``1(UnityEngine.GameObject)">
+            <summary>
+            Gets or adds the <see cref="T:UnityEngine.Component"/>.
+            </summary>
+            <typeparam name="T">The type of the <see cref="T:UnityEngine.Component"/>.</typeparam>
+            <param name="gameObject">The <see cref="T:UnityEngine.GameObject"/> need to get or add component.</param>
+            <returns>The <see cref="T:UnityEngine.Component"/> get or added.</returns>
+        </member>
+        <member name="M:UnityEngine.GameObjectExtensions.GetOrAddComponent(UnityEngine.GameObject,System.Type)">
+            <summary>
+            Gets or adds the <see cref="T:UnityEngine.Component"/>.
+            </summary>
+            <param name="gameObject">The <see cref="T:UnityEngine.GameObject"/> to get or add component.</param>
+            <param name="type">The <see cref="T:System.Type"/> of the <see cref="T:UnityEngine.GameObject"/>.</param>
+            <returns>The <see cref="T:UnityEngine.Component"/> get or added.</returns>
+        </member>
+        <member name="M:UnityEngine.GameObjectExtensions.RemoveComponent``1(UnityEngine.GameObject,System.Single)">
+            <summary>
+            Removes the <see cref="T:UnityEngine.Component"/>.
+            </summary>
+            <typeparam name="T">The type of the <see cref="T:UnityEngine.Component"/>.</typeparam>
+            <param name="gameObject">The <see cref="T:UnityEngine.GameObject"/> to remove component.</param>
+            <param name="delay">The optional amount of time to delay before removing the component.</param>
+            <returns>
+            <c>true</c> if remove <see cref="T:UnityEngine.Component"/> successfully, <c>false</c> otherwise.
+            </returns>
+        </member>
+        <member name="M:UnityEngine.GameObjectExtensions.RemoveComponentImmediate``1(UnityEngine.GameObject)">
+            <summary>
+            Removes the <see cref="T:UnityEngine.Component"/> immediately.
+            </summary>
+            <typeparam name="T">The type of the <see cref="T:UnityEngine.Component"/>.</typeparam>
+            <param name="gameObject">The <see cref="T:UnityEngine.GameObject"/> to remove component.</param>
+            <returns>
+            <c>true</c> if remove <see cref="T:UnityEngine.Component"/> successfully, <c>false</c> otherwise.
+            </returns>
+        </member>
+        <member name="M:UnityEngine.GameObjectExtensions.GetAllComponents(UnityEngine.GameObject)">
+            <summary>
+            Returns all components of the <see cref="T:UnityEngine.GameObject"/>.
+            </summary>
+            <param name="gameObject">The specific <see cref="T:UnityEngine.GameObject"/>.</param>
+            <returns>The array of all components.</returns>
+        </member>
+        <member name="M:UnityEngine.GameObjectExtensions.CopyAllComponentsValues(UnityEngine.GameObject,UnityEngine.GameObject,System.Boolean)">
+            <summary>
+            Copies all components values of the specific <see cref="T:UnityEngine.GameObject"/> to the other <see cref="T:UnityEngine.GameObject"/>.
+            </summary>
+            <param name="gameObject">The original <see cref="T:UnityEngine.GameObject"/>.</param>
+            <param name="targetGameObject">The target <see cref="T:UnityEngine.GameObject"/>.</param>
+            <param name="excludeTransform">
+            if set to <c>true</c> exclude the component of <see cref="T:UnityEngine.Transform"/>.
+            </param>
+        </member>
+        <member name="M:UnityEngine.GameObjectExtensions.FindInChildren(UnityEngine.GameObject,System.String,System.Boolean)">
+            <summary>
+            Finds the <see cref="T:UnityEngine.GameObject"/> in children.
+            </summary>
+            <param name="gameObject">The <see cref="T:UnityEngine.GameObject"/>.</param>
+            <param name="targetName">The name of the target object.</param>
+            <param name="includeInactive">if set to <c>true</c> include inactive <see cref="T:UnityEngine.GameObject"/>.</param>
+            <returns>The <see cref="T:UnityEngine.GameObject"/> you want to find.</returns>
+        </member>
+        <member name="M:UnityEngine.GameObjectExtensions.SetChildrenLayer(UnityEngine.GameObject,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Sets the children layer.
+            </summary>
+            <param name="gameObject">The <see cref="T:UnityEngine.GameObject"/>.</param>
+            <param name="layer">The layer.</param>
+            <param name="includeParent">if set to <c>true</c> include parent.</param>
+            <param name="includeInactive">if set to <c>true</c> include inactive <see cref="T:UnityEngine.GameObject"/>.</param>
+        </member>
+        <member name="M:UnityEngine.GameObjectExtensions.SetChildrenLayer(UnityEngine.GameObject,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Sets the children layer.
+            </summary>
+            <param name="gameObject">The <see cref="T:UnityEngine.GameObject"/>.</param>
+            <param name="layerName">The name of the layer.</param>
+            <param name="includeParent">if set to <c>true</c> include parent.</param>
+            <param name="includeInactive">if set to <c>true</c> include inactive <see cref="T:UnityEngine.GameObject"/>.</param>
+        </member>
+        <member name="M:UnityEngine.GameObjectExtensions.IsInLayerMask(UnityEngine.GameObject,UnityEngine.LayerMask)">
+            <summary>
+            Determines whether the layer of <see cref="T:UnityEngine.GameObject"/> is in the specific <see cref="T:UnityEngine.LayerMask"/>.
+            </summary>
+            <param name="gameObject">The specific <see cref="T:UnityEngine.GameObject"/>.</param>
+            <param name="layerMask">The value of <see cref="T:UnityEngine.LayerMask"/>.</param>
+            <returns>
+            <c>true</c> if the layer of <see cref="T:UnityEngine.GameObject"/> is in the <see cref="T:UnityEngine.LayerMask"/>;
+            otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:UnityEngine.MathfUtility">
+            <summary>
+            This class provides some useful <see cref="T:UnityEngine.Mathf"/> utilities.
+            </summary>
+        </member>
+        <member name="M:UnityEngine.MathfUtility.ClampAngle(System.Single,System.Single,System.Single)">
+            <summary>
+            Clamps the angle between -180 and 180.
+            </summary>
+            <param name="angle">The angle.</param>
+            <param name="min">The minimum angle.</param>
+            <param name="max">The maximum angle.</param>
+            <returns>The angle between -180 and 180.</returns>
+        </member>
+        <member name="M:UnityEngine.MathfUtility.GetAngle(UnityEngine.Vector3,UnityEngine.Vector3)">
+            <summary>
+            Gets the angle between <see cref="T:UnityEngine.Vector3"/> a and b.
+            </summary>
+            <param name="a">The <see cref="T:UnityEngine.Vector3"/> a.</param>
+            <param name="b">The <see cref="T:UnityEngine.Vector3"/> b.</param>
+            <returns>The angle between <see cref="T:UnityEngine.Vector3"/> a and b.</returns>
+        </member>
+        <member name="M:UnityEngine.MathfUtility.NormalizeAngle(System.Single)">
+            <summary>
+            Normalizes the angle.
+            </summary>
+            <param name="angle">The angle.</param>
+            <returns>The normalized angle value.</returns>
+        </member>
+        <member name="T:UnityEngine.QuaternionExtensions">
+            <summary>
+            Extension methods collection of <see cref="T:UnityEngine.Quaternion"/>.
+            </summary>
+        </member>
+        <member name="M:UnityEngine.QuaternionExtensions.ToAccurateString(UnityEngine.Quaternion)">
+            <summary>
+            Converts the <see cref="T:UnityEngine.Quaternion"/> to the accurate <see cref="T:System.String"/>.
+            </summary>
+            <param name="source">The <see cref="T:UnityEngine.Quaternion"/>.</param>
+            <returns>The accurate <see cref="T:System.String"/> of the <see cref="T:UnityEngine.Quaternion"/>.</returns>
+        </member>
+        <member name="T:UnityEngine.TransformExtensions">
+            <summary>
+            Extension methods collection of <see cref="T:UnityEngine.Transform"/>.
+            </summary>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.RemoveComponent``1(UnityEngine.Transform,System.Single)">
+            <summary>
+            Removes the <see cref="T:UnityEngine.Component"/>.
+            </summary>
+            <typeparam name="T">The type of the <see cref="T:UnityEngine.Component"/>.</typeparam>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/> to remove component.</param>
+            <param name="delay">The optional amount of time to delay before removing the component.</param>
+            <returns>
+            <c>true</c> if remove <see cref="T:UnityEngine.Component"/> successfully, <c>false</c> otherwise.
+            </returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.RemoveComponentImmediate``1(UnityEngine.Transform)">
+            <summary>
+            Removes the <see cref="T:UnityEngine.Component"/> immediately.
+            </summary>
+            <typeparam name="T">The type of the <see cref="T:UnityEngine.Component"/>.</typeparam>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/> to remove component.</param>
+            <returns>
+            <c>true</c> if remove <see cref="T:UnityEngine.Component"/> successfully, <c>false</c> otherwise.
+            </returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.GetAllComponents(UnityEngine.Transform)">
+            <summary>
+            Returns all components of the <see cref="T:UnityEngine.Transform"/>.
+            </summary>
+            <param name="gameObject">The specific <see cref="T:UnityEngine.Transform"/>.</param>
+            <returns>The array of all components.</returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.FindInChildren(UnityEngine.Transform,System.String,System.Boolean)">
+            <summary>
+            Finds the <see cref="T:UnityEngine.Transform"/> in children.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <param name="targetName">The name of the target object.</param>
+            <param name="includeInactive">if set to <c>true</c> include inactive <see cref="T:UnityEngine.Transform"/>.</param>
+            <returns>The <see cref="T:UnityEngine.Transform"/> you want to find.</returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.SetChildrenLayer(UnityEngine.Transform,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Sets the children layer.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <param name="layer">The layer.</param>
+            <param name="includeParent">if set to <c>true</c> include parent.</param>
+            <param name="includeInactive">if set to <c>true</c> include inactive <see cref="T:UnityEngine.Transform"/>.</param>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.SetChildrenLayer(UnityEngine.Transform,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Sets the children layer.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <param name="layerName">The name of the layer.</param>
+            <param name="includeParent">if set to <c>true</c> include parent.</param>
+            <param name="includeInactive">if set to <c>true</c> include inactive <see cref="T:UnityEngine.Transform"/>.</param>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.GetBackwardDirection(UnityEngine.Transform)">
+            <summary>
+            The reverse direction of blue axis of the <see cref="T:UnityEngine.Transform"/> in world space.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <returns>The backward direction.</returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.GetLeftDirection(UnityEngine.Transform)">
+            <summary>
+            The reverse direction of red axis of the <see cref="T:UnityEngine.Transform"/> in world space.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <returns>The left direction.</returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.GetDownDirection(UnityEngine.Transform)">
+            <summary>
+            The reverse direction of green axis of the <see cref="T:UnityEngine.Transform"/> in world space.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <returns>The down direction.</returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.GetPositionX(UnityEngine.Transform)">
+            <summary>
+            Gets the value of axis <c>x</c> in the world coordinate.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <returns>The value of axis <c>x</c> in the world coordinate.</returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.SetPositionX(UnityEngine.Transform,System.Single)">
+            <summary>
+            Sets the value of axis <c>x</c> in the world coordinate.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <param name="value">The value of axis <c>x</c> in the world coordinate.</param>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.GetLocalPositionX(UnityEngine.Transform)">
+            <summary>
+            Gets the value of axis <c>x</c> in the local coordinate.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <returns>The value of axis <c>x</c> in the local coordinate.</returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.SetLocalPositionX(UnityEngine.Transform,System.Single)">
+            <summary>
+            Sets the value of axis <c>x</c> in the local coordinate.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <param name="value">The value of axis <c>x</c> in the local coordinate.</param>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.GetPositionY(UnityEngine.Transform)">
+            <summary>
+            Gets the value of axis <c>y</c> in the world coordinate.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <returns>The value of axis <c>y</c> in the world coordinate.</returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.SetPositionY(UnityEngine.Transform,System.Single)">
+            <summary>
+            Sets the value of axis <c>y</c> in the world coordinate.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <returns>The value of axis <c>y</c> in the world coordinate.</returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.GetLocalPositionY(UnityEngine.Transform)">
+            <summary>
+            Gets the value of axis <c>y</c> in the local coordinate.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <returns>The value of axis <c>y</c> in the local coordinate.</returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.SetLocalPositionY(UnityEngine.Transform,System.Single)">
+            <summary>
+            Sets the value of axis <c>y</c> in the local coordinate.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <returns>The value of axis <c>y</c> in the local coordinate.</returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.GetPositionZ(UnityEngine.Transform)">
+            <summary>
+            Gets the value of axis <c>z</c> in the world coordinate.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <returns>The value of axis <c>z</c> in the world coordinate.</returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.SetPositionZ(UnityEngine.Transform,System.Single)">
+            <summary>
+            Sets the value of axis <c>z</c> in the world coordinate.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <returns>The value of axis <c>z</c> in the world coordinate.</returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.GetLocalPositionZ(UnityEngine.Transform)">
+            <summary>
+            Gets the value of axis <c>z</c> in the local coordinate.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <returns>The value of axis <c>z</c> in the local coordinate.</returns>
+        </member>
+        <member name="M:UnityEngine.TransformExtensions.SetLocalPositionZ(UnityEngine.Transform,System.Single)">
+            <summary>
+            Sets the value of axis <c>z</c> in the local coordinate.
+            </summary>
+            <param name="transform">The <see cref="T:UnityEngine.Transform"/>.</param>
+            <returns>The value of axis <c>z</c> in the local coordinate.</returns>
+        </member>
+        <member name="T:UnityEngine.Vector2Extensions">
+            <summary>
+            Extension methods collection of <see cref="T:UnityEngine.Vector2"/>.
+            </summary>
+        </member>
+        <member name="M:UnityEngine.Vector2Extensions.ToAccurateString(UnityEngine.Vector2)">
+            <summary>
+            Converts the <see cref="T:UnityEngine.Vector2"/> to the accurate <see cref="T:System.String"/>.
+            </summary>
+            <param name="source">The <see cref="T:UnityEngine.Vector2"/>.</param>
+            <returns>The accurate <see cref="T:System.String"/> of the <see cref="T:UnityEngine.Vector2"/>.</returns>
+        </member>
+        <member name="T:UnityEngine.Vector3Extensions">
+            <summary>
+            Extension methods collection of <see cref="T:UnityEngine.Vector3"/>.
+            </summary>
+        </member>
+        <member name="M:UnityEngine.Vector3Extensions.ToAccurateString(UnityEngine.Vector3)">
+            <summary>
+            Converts the <see cref="T:UnityEngine.Vector3"/> to the accurate <see cref="T:System.String"/>.
+            </summary>
+            <param name="source">The <see cref="T:UnityEngine.Vector3"/>.</param>
+            <returns>The accurate <see cref="T:System.String"/> of the <see cref="T:UnityEngine.Vector3"/>.</returns>
+        </member>
+    </members>
+</doc>
