@@ -1,0 +1,1123 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UniSharper</name>
+    </assembly>
+    <members>
+        <member name="T:UniSharper.CoroutineEnumerator">
+            <summary>
+            Support a simple chain execution for <see cref="T:System.Collections.IEnumerator"/>.
+            </summary>
+            <seealso cref="T:System.Collections.IEnumerator"/>
+        </member>
+        <member name="M:UniSharper.CoroutineEnumerator.#ctor(System.Collections.IEnumerator[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:UniSharper.CoroutineEnumerator"/> class with some coroutines.
+            </summary>
+            <param name="coroutines">The coroutines.</param>
+        </member>
+        <member name="P:UniSharper.CoroutineEnumerator.Current">
+            <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+            <value>The element in the collection at the current position of the enumerator.</value>
+        </member>
+        <member name="M:UniSharper.CoroutineEnumerator.Enqueue(System.Collections.IEnumerator)">
+            <summary>
+            Enqueues the specified coroutine.
+            </summary>
+            <param name="coroutine">The coroutine.</param>
+        </member>
+        <member name="M:UniSharper.CoroutineEnumerator.MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the collection.
+            </summary>
+            <returns>
+            <c>true</c> if the enumerator was successfully advanced to the next element; <c>false</c>
+            if the enumerator has passed the end of the collection.
+            </returns>
+        </member>
+        <member name="M:UniSharper.CoroutineEnumerator.Reset">
+            <summary>
+            Sets the enumerator to its initial position, which is before the first element in the collection.
+            </summary>
+        </member>
+        <member name="T:UniSharper.EnumFlagsFieldAttribute">
+            <summary>
+            Represents the enum property with Flags attribute declaration.
+            </summary>
+            <seealso cref="T:UnityEngine.PropertyAttribute"/>
+        </member>
+        <member name="M:UniSharper.EnumFlagsFieldAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UniSharper.EnumFlagsFieldAttribute"/> class.
+            </summary>
+        </member>
+        <member name="M:UniSharper.EnumFlagsFieldAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UniSharper.EnumFlagsFieldAttribute"/> class.
+            </summary>
+            <param name="label">The caption/label for the attribute.</param>
+        </member>
+        <member name="P:UniSharper.EnumFlagsFieldAttribute.Label">
+            <summary>
+            Gets the caption/label for the attribute.
+            </summary>
+            <value>The caption/label for the attribute.</value>
+        </member>
+        <member name="T:UniSharper.NameValueObject">
+            <summary>
+            Representation of an Name/Value object.
+            </summary>
+        </member>
+        <member name="P:UniSharper.NameValueObject.Name">
+            <summary>
+            Gets or sets the name of the parameter.
+            </summary>
+            <value>The name of the parameter.</value>
+        </member>
+        <member name="P:UniSharper.NameValueObject.Value">
+            <summary>
+            Gets or sets the value of the parameter.
+            </summary>
+            <value>The value of the parameter.</value>
+        </member>
+        <member name="M:UniSharper.NameValueObject.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents this instance.</returns>
+        </member>
+        <member name="T:UniSharper.Threading.Events.Event">
+            <summary>
+            The Event class is used as the base class for the creation of Event objects, which are passed
+            as parameters to event listeners when an event occurs.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Threading.Events.Event.#ctor(System.String,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UniSharper.Threading.Events.Event"/> class.
+            </summary>
+            <param name="eventType">The type of event.</param>
+            <param name="context">The context object.</param>
+            <exception cref="T:System.ArgumentNullException"><c>eventType</c> is <c>null</c> or <c>empty</c>.</exception>
+        </member>
+        <member name="P:UniSharper.Threading.Events.Event.Context">
+            <summary>
+            Gets or sets the context object.
+            </summary>
+            <value>The context object.</value>
+        </member>
+        <member name="P:UniSharper.Threading.Events.Event.EventType">
+            <summary>
+            The type of event.
+            </summary>
+            <value>The type of event.</value>
+        </member>
+        <member name="T:UniSharper.Threading.Events.IThreadEventDispatcher">
+            <summary>
+            The <see cref="T:UniSharper.Threading.Events.IThreadEventDispatcher"/> interface defines methods for adding or removing
+            event listeners, checks whether specific types of event listeners are registered, and
+            dispatches events for child thread.
+            </summary>
+            <seealso cref="T:UniSharper.Threading.ISynchronizedObject"/>
+        </member>
+        <member name="M:UniSharper.Threading.Events.IThreadEventDispatcher.AddEventListener(System.String,System.Action{UniSharper.Threading.Events.Event})">
+            <summary>
+            Registers an event listener to receive an event notification.
+            </summary>
+            <param name="eventType">The type of event.</param>
+            <param name="listener">The delegate to handle the event.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>eventType</c> is <c>null</c> or <c>empty</c>.</para>
+            - or -
+            <para><c>listener</c> is <c>null</c>.</para>
+            </exception>
+        </member>
+        <member name="M:UniSharper.Threading.Events.IThreadEventDispatcher.DispatchEvent(UniSharper.Threading.Events.Event)">
+            <summary>
+            Dispatches en <see cref="T:UniSharper.Threading.Events.Event"/>.
+            </summary>
+            <param name="e">The <see cref="T:UniSharper.Threading.Events.Event"/> object.</param>
+            <exception cref="T:System.ArgumentNullException"><c>e</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:UniSharper.Threading.Events.IThreadEventDispatcher.HasEventListeners(System.String)">
+            <summary>
+            Checks whether this <see cref="T:UniSharper.Threading.Events.IThreadEventDispatcher"/> has listeners registered for a
+            specific type of event.
+            </summary>
+            <param name="eventType">The type of event.</param>
+            <returns>
+            <c>true</c> if listeners of the specified type of event are registered; <c>false</c> otherwise.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><c>eventType</c> is <c>null</c> or <c>empty</c>.</exception>
+        </member>
+        <member name="M:UniSharper.Threading.Events.IThreadEventDispatcher.HasEventListener(System.String,System.Action{UniSharper.Threading.Events.Event})">
+            <summary>
+            Checks whether this <see cref="T:UniSharper.Threading.Events.IThreadEventDispatcher"/> has the delegate listener
+            registered for a specific type of event.
+            </summary>
+            <param name="eventType">The type of event.</param>
+            <param name="listener">The delegate to locate.</param>
+            <returns>
+            <c>true</c> if a listener of the specified type of event is registered; <c>false</c> otherwise.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>eventType</c> is <c>null</c> or <c>empty</c>.</para>
+            - or -
+            <para><c>listener</c> is <c>null</c>.</para>
+            </exception>
+        </member>
+        <member name="M:UniSharper.Threading.Events.IThreadEventDispatcher.RemoveEventListener(System.String,System.Action{UniSharper.Threading.Events.Event})">
+            <summary>
+            Removes a listener.
+            </summary>
+            <param name="eventType">The type of event.</param>
+            <param name="listener">The delegate to be removed.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>eventType</c> is <c>null</c> or <c>empty</c>.</para>
+            - or -
+            <para><c>listener</c> is <c>null</c>.</para>
+            </exception>
+        </member>
+        <member name="M:UniSharper.Threading.Events.IThreadEventDispatcher.RemoveEventListeners(System.String)">
+            <summary>
+            Removes the event listeners registered for the specific type of event.
+            </summary>
+            <param name="eventType">The type of event.</param>
+            <exception cref="T:System.ArgumentNullException"><c>eventType</c> is <c>null</c> or <c>empty</c>.</exception>
+        </member>
+        <member name="M:UniSharper.Threading.Events.IThreadEventDispatcher.RemoveAllEventListeners">
+            <summary>
+            Removes all event listeners of this <see cref="T:UniSharper.Threading.Events.IThreadEventDispatcher"/>.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Threading.Events.ThreadEventDispatcher">
+            <summary>
+            This class provides event dispatcher and listen between Unity main thread and sub-thread.
+            Since Unity do not allow
+            </summary>
+            <seealso cref="T:UniSharper.Threading.Events.IThreadEventDispatcher"/>
+        </member>
+        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UniSharper.Threading.Events.ThreadEventDispatcher"/> class.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.Finalize">
+            <summary>
+            Finalizes an instance of the <see cref="T:UniSharper.Threading.Events.ThreadEventDispatcher"/> class.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.AddEventListener(System.String,System.Action{UniSharper.Threading.Events.Event})">
+            <summary>
+            Registers an event listener to receive an event notification.
+            </summary>
+            <param name="eventType">The type of event.</param>
+            <param name="listener">The delegate to handle the event.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>eventType</c> is <c>null</c> or <c>empty</c>.</para>
+            - or -
+            <para><c>listener</c> is <c>null</c>.</para>
+            </exception>
+        </member>
+        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.DispatchEvent(UniSharper.Threading.Events.Event)">
+            <summary>
+            Dispatches en <see cref="T:UniSharper.Threading.Events.Event"/>.
+            </summary>
+            <param name="e">The <see cref="T:UniSharper.Threading.Events.Event"/> object.</param>
+            <exception cref="T:System.ArgumentNullException"><c>e</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.HasEventListener(System.String,System.Action{UniSharper.Threading.Events.Event})">
+            <summary>
+            Checks whether this <see cref="T:UniSharper.Threading.Events.ThreadEventDispatcher"/> has the delegate listener
+            registered for a specific type of event.
+            </summary>
+            <param name="eventType">The type of event.</param>
+            <param name="listener">The delegate to locate.</param>
+            <returns>
+            <c>true</c> if a listener of the specified type of event is registered; <c>false</c> otherwise.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>eventType</c> is <c>null</c> or <c>empty</c>.</para>
+            - or -
+            <para><c>listener</c> is <c>null</c>.</para>
+            </exception>
+        </member>
+        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.HasEventListeners(System.String)">
+            <summary>
+            Checks whether this <see cref="T:UniSharper.Threading.Events.ThreadEventDispatcher"/> has listeners registered for a
+            specific type of event.
+            </summary>
+            <param name="eventType">The type of event.</param>
+            <returns>
+            <c>true</c> if listeners of the specified type of event are registered; <c>false</c> otherwise.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><c>eventType</c> is <c>null</c> or <c>empty</c>.</exception>
+        </member>
+        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.RemoveAllEventListeners">
+            <summary>
+            Removes all event listeners of this <see cref="T:UniSharper.Threading.Events.ThreadEventDispatcher"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.RemoveEventListener(System.String,System.Action{UniSharper.Threading.Events.Event})">
+            <summary>
+            Removes a listener.
+            </summary>
+            <param name="eventType">The type of event.</param>
+            <param name="listener">The delegate to be removed.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>eventType</c> is <c>null</c> or <c>empty</c>.</para>
+            - or -
+            <para><c>listener</c> is <c>null</c>.</para>
+            </exception>
+        </member>
+        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.RemoveEventListeners(System.String)">
+            <summary>
+            Removes the event listeners registered for the specific type of event.
+            </summary>
+            <param name="eventType">The type of event.</param>
+            <exception cref="T:System.ArgumentNullException"><c>eventType</c> is <c>null</c> or <c>empty</c>.</exception>
+        </member>
+        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.Synchronize">
+            <summary>
+            Synchronizes data between threads.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.AddPendingEventListeners">
+            <summary>
+            Adds pending event listeners.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.AddPendingEvents">
+            <summary>
+            Adds pending events.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.HasEventListeners">
+            <summary>
+            Checks whether this <see cref="T:UniSharper.Threading.Events.IThreadEventDispatcher"/> has listeners registered.
+            </summary>
+            <returns><c>true</c> if listeners are registered; <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.RemovePendingEventListeners">
+            <summary>
+            Removes pending event listeners.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Threading.ISynchronizedObject">
+            <summary>
+            The <see cref="T:UniSharper.Threading.ISynchronizedObject"/> interface defines the object that need to synchronize
+            data between child threads and main thread.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Threading.ISynchronizedObject.Synchronize">
+            <summary>
+            Synchronizes data between threads.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Threading.Synchronizer">
+            <summary>
+            A <see cref="T:UniSharper.Threading.Synchronizer"/> representing a <see cref="T:UnityEngine.MonoBehaviour"/> to
+            synchronize data between child threads and main threads.
+            </summary>
+            <seealso cref="T:UniSharper.Patterns.SingletonMonoBehaviour`1"/>
+        </member>
+        <member name="P:UniSharper.Threading.Synchronizer.Count">
+            <summary>
+            Gets the number of objects contained in the <see cref="T:UniSharper.Threading.Synchronizer"/>.
+            </summary>
+            <value>The number of objects contained in the <see cref="T:UniSharper.Threading.Synchronizer"/>.</value>
+        </member>
+        <member name="P:UniSharper.Threading.Synchronizer.System#Collections#Generic#ICollection{UniSharper#Threading#ISynchronizedObject}#IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:UniSharper.Threading.Synchronizer"/> is read-only.
+            </summary>
+            <value><c>true</c> if the <see cref="T:UniSharper.Threading.Synchronizer"/> is read-only; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:UniSharper.Threading.Synchronizer.Add(UniSharper.Threading.ISynchronizedObject)">
+            <summary>
+            Adds an object of <see cref="T:UniSharper.Threading.ISynchronizedObject"/> to the <see cref="T:UniSharper.Threading.Synchronizer"/>.
+            </summary>
+            <param name="item">
+            The object of <see cref="T:UniSharper.Threading.ISynchronizedObject"/> to add to the <see cref="T:UniSharper.Threading.Synchronizer"/>.
+            </param>
+        </member>
+        <member name="M:UniSharper.Threading.Synchronizer.Clear">
+            <summary>
+            Removes all items from the <see cref="T:UniSharper.Threading.Synchronizer"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Threading.Synchronizer.Contains(UniSharper.Threading.ISynchronizedObject)">
+            <summary>
+            Determines whether the <see cref="T:UniSharper.Threading.Synchronizer"/> contains a specific object of <see cref="T:UniSharper.Threading.ISynchronizedObject"/>.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:UniSharper.Threading.Synchronizer"/>.</param>
+            <returns>
+            <c>true</c> if <c>item</c> is found in the <see cref="T:UniSharper.Threading.Synchronizer"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:UniSharper.Threading.Synchronizer.CopyTo(UniSharper.Threading.ISynchronizedObject[],System.Int32)">
+            <summary>
+            Copies the objects of <see cref="T:UniSharper.Threading.ISynchronizedObject"/> to sychronize in the <see
+            cref="T:UniSharper.Threading.Synchronizer"/> to an <see cref="T:System.Array"/>, starting at a particular <see
+            cref="T:System.Array"/> index.
+            </summary>
+            <param name="array">
+            The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements
+            copied from <see cref="T:UniSharper.Threading.Synchronizer"/>. The <see cref="T:System.Array"/> must have
+            zero-based indexing.
+            </param>
+            <param name="arrayIndex">
+            The zero-based index in <paramref name="array"/> at which copying begins.
+            </param>
+        </member>
+        <member name="M:UniSharper.Threading.Synchronizer.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:UniSharper.Threading.Synchronizer.Remove(UniSharper.Threading.ISynchronizedObject)">
+            <summary>
+            Removes the first occurrence of a specific object of <see cref="T:UniSharper.Threading.ISynchronizedObject"/>
+            from the <see cref="T:UniSharper.Threading.Synchronizer"/>.
+            </summary>
+            <param name="item">The object to remove from the <see cref="T:UniSharper.Threading.Synchronizer"/>.</param>
+            <returns>
+            <c>true</c> if <paramref name="item"/> was successfully removed from the <see
+            cref="T:UniSharper.Threading.Synchronizer"/>; otherwise, <c>false</c>. This method also returns <c>false</c> if
+            <paramref name="item"/> is not found in the original <see cref="T:UniSharper.Threading.Synchronizer"/>.
+            </returns>
+        </member>
+        <member name="M:UniSharper.Threading.Synchronizer.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:UniSharper.Threading.Synchronizer.Awake">
+            <summary>
+            Called when script receive message Awake.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Threading.Synchronizer.OnDestroy">
+            <summary>
+            Called when script receive message Destroy.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Threading.Synchronizer.Update">
+            <summary>
+            Update is called every frame.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Miscs.DontDestroyOnLoad">
+            <summary>
+            Makes the <see cref="T:UnityEngine.GameObject"/> not be destroyed automatically when loading a new scene.
+            </summary>
+            <seealso cref="T:UnityEngine.MonoBehaviour"/>
+        </member>
+        <member name="M:UniSharper.Miscs.DontDestroyOnLoad.Awake">
+            <summary>
+            Called when the script instance is being loaded.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Patterns.SingletonMonoBehaviour`1">
+            <summary>
+            Abstract class for implementing singleton pattern for which is inherited from <see cref="T:UnityEngine.MonoBehaviour"/>.
+            </summary>
+            <typeparam name="T">The type of the class.</typeparam>
+            <seealso cref="T:UnityEngine.MonoBehaviour"/>
+        </member>
+        <member name="P:UniSharper.Patterns.SingletonMonoBehaviour`1.Instance">
+            <summary>
+            Gets or sets the singleton instance.
+            </summary>
+            <value>The singleton instance.</value>
+        </member>
+        <member name="M:UniSharper.Patterns.SingletonMonoBehaviour`1.Awake">
+            <summary>
+            Called when script receive message Awake.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Patterns.SingletonMonoBehaviour`1.OnDestroy">
+            <summary>
+            Called when script receive message Destroy.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Rendering.DataParsers.ITilingSheetDataParser">
+            <summary>
+            The <see cref="T:UniSharper.Rendering.DataParsers.ITilingSheetDataParser"/> interface defines methods for parsing the tiling
+            sheet data.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Rendering.LightmapRendererInfo">
+            <summary>
+            The <see cref="T:UniSharper.Rendering.LightmapRendererInfo"/> store data information about lightmap.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Rendering.PrefabLightmapData">
+            <summary>
+            The class <see cref="T:UniSharper.Rendering.PrefabLightmapData"/> provides lightmap data of prefab storing and reverting.
+            </summary>
+            <seealso cref="T:UnityEngine.MonoBehaviour"/>
+        </member>
+        <member name="M:UniSharper.Rendering.PrefabLightmapData.ApplyStaticLightmap(UniSharper.Rendering.PrefabLightmapData)">
+            <summary>
+            Applies the static lightmap.
+            </summary>
+            <param name="instance">The instance of <see cref="T:UniSharper.Rendering.PrefabLightmapData"/>.</param>
+            <exception cref="T:System.ArgumentNullException"><c>instance</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:UniSharper.Rendering.PrefabLightmapData.ApplyStaticLightmap(UniSharper.Rendering.LightmapRendererInfo[],System.Int32)">
+            <summary>
+            Applies the static lightmap for this prefab.
+            </summary>
+            <param name="infos">
+            The <see cref="T:System.Array"/> of <see cref="T:UniSharper.Rendering.LightmapRendererInfo"/> stored lightmap renderer informations.
+            </param>
+            <param name="lightmapOffsetIndex">Index of the lightmap offset.</param>
+        </member>
+        <member name="M:UniSharper.Rendering.PrefabLightmapData.Awake">
+            <summary>
+            Called when the script instance is being loaded.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Rendering.PrefabLightmapExcludedRenderer">
+            <summary>
+            The <see cref="!:ExcludedMeshRenderer"/> to define the excluded GameObject that no need to
+            store lightmap data.
+            </summary>
+            <seealso cref="T:UnityEngine.MonoBehaviour"/>
+        </member>
+        <member name="T:UniSharper.Rendering.TilingSheetDataFormat">
+            <summary>
+            Specifies the data format for tiling sheet.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Rendering.TextureTilingRenderer">
+            <summary>
+            The class <see cref="T:UniSharper.Rendering.TextureTilingRenderer"/> provides rendering method for texture tiling.
+            </summary>
+            <seealso cref="T:UnityEngine.MonoBehaviour"/>
+        </member>
+        <member name="P:UniSharper.Rendering.TextureTilingRenderer.TextureTilingName">
+            <summary>
+            Gets or sets the name of the texture tiling.
+            </summary>
+            <value>The name of the texture tiling.</value>
+        </member>
+        <member name="M:UniSharper.Rendering.TextureTilingRenderer.Awake">
+            <summary>
+            Called when the script instance is being loaded.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Rendering.TextureTilingRenderer.Execute">
+            <summary>
+            Executes .
+            </summary>
+        </member>
+        <member name="T:UniSharper.ReadOnlyFieldAttribute">
+            <summary>
+            Represents the readonly field that you can not change the value of field in the Inspector window.
+            </summary>
+            <seealso cref="T:UnityEngine.PropertyAttribute"/>
+        </member>
+        <member name="T:UniSharper.Environment">
+            <summary>
+            Provides information about, and means to manipulate, the current environment. This class
+            cannot be inherited.
+            </summary>
+        </member>
+        <member name="F:UniSharper.Environment.Version">
+            <summary>
+            Gets a <see cref="F:UniSharper.Environment.Version"/> object that describes the major, minor, build, and revision
+            numbers of the library runtime.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Environment.StreamingAssetsPath">
+            <summary>
+            Gets the path to the StreamingAssets folder
+            </summary>
+            <value>The path to the StreamingAssets folder.</value>
+        </member>
+        <member name="T:UniSharper.Timers.TimerState">
+            <summary>
+            The state enums of <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Timers.TimerStartedEventHandler">
+            <summary>
+            Represents the method that will handle the <see cref="E:UniSharper.Timers.ITimer.Started"/> event.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing no event data.</param>
+        </member>
+        <member name="T:UniSharper.Timers.TimerPausedEventHandler">
+            <summary>
+            Represents the method that will handle the <see cref="E:UniSharper.Timers.ITimer.Paused"/> event.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing no event data.</param>
+        </member>
+        <member name="T:UniSharper.Timers.TimerResumedEventHandler">
+            <summary>
+            Represents the method that will handle the <see cref="E:UniSharper.Timers.ITimer.Resumed"/> event.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing no event data.</param>
+        </member>
+        <member name="T:UniSharper.Timers.TimerStoppedEventHandler">
+            <summary>
+            Represents the method that will handle the <see cref="E:UniSharper.Timers.ITimer.Stopped"/> event.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing no event data.</param>
+        </member>
+        <member name="T:UniSharper.Timers.TimerResetedEventHandler">
+            <summary>
+            Represents the method that will handle the <see cref="E:UniSharper.Timers.ITimer.Reseted"/> event.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing no event data.</param>
+        </member>
+        <member name="T:UniSharper.Timers.TimerTickingEventHandler">
+            <summary>
+            Represents the method that will handle the <see cref="E:UniSharper.Timers.ITimer.Ticking"/> event.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing no event data.</param>
+        </member>
+        <member name="T:UniSharper.Timers.TimerCompletedEventHandler">
+            <summary>
+            Represents the method that will handle the <see cref="E:UniSharper.Timers.ITimer.Completed"/> event.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing no event data.</param>
+        </member>
+        <member name="T:UniSharper.Timers.ITimer">
+            <summary>
+            Defines methods to manipulate timer object.
+            </summary>
+        </member>
+        <member name="E:UniSharper.Timers.ITimer.Completed">
+            <summary>
+            Occurs when the timer completed, ticking count equals to the <see cref="P:UniSharper.Timers.ITimer.RepeatCount"/>.
+            </summary>
+        </member>
+        <member name="E:UniSharper.Timers.ITimer.Paused">
+            <summary>
+            Occurs when call the method <see cref="M:UniSharper.Timers.ITimer.Pause"/> of this <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+        </member>
+        <member name="E:UniSharper.Timers.ITimer.Reseted">
+            <summary>
+            Occurs when call the method <see cref="M:UniSharper.Timers.ITimer.Reset"/> of this <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+        </member>
+        <member name="E:UniSharper.Timers.ITimer.Resumed">
+            <summary>
+            Occurs when call the method <see cref="M:UniSharper.Timers.ITimer.Resume"/> of this <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+        </member>
+        <member name="E:UniSharper.Timers.ITimer.Started">
+            <summary>
+            Occurs when call the method <see cref="M:UniSharper.Timers.ITimer.Start"/> of this <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+        </member>
+        <member name="E:UniSharper.Timers.ITimer.Stopped">
+            <summary>
+            Occurs when call the method <see cref="M:UniSharper.Timers.ITimer.Stop"/> of this <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+        </member>
+        <member name="E:UniSharper.Timers.ITimer.Ticking">
+            <summary>
+            Occurs when the specified timer interval has elapsed.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Timers.ITimer.CurrentCount">
+            <summary>
+            Gets the current ticking count of <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+            <value>The current ticking count of <see cref="T:UniSharper.Timers.ITimer"/>.</value>
+        </member>
+        <member name="P:UniSharper.Timers.ITimer.IgnoreTimeScale">
+            <summary>
+            Gets or sets a value indicating whether the <see cref="T:UniSharper.Timers.ITimer"/> ignore time scale of Unity.
+            </summary>
+            <value><c>true</c> if ignore time scale of Unity; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:UniSharper.Timers.ITimer.Interval">
+            <summary>
+            Gets or sets the time, in seconds, between <see cref="E:UniSharper.Timers.ITimer.Ticking"/> events.
+            </summary>
+            <value>The time, in seconds, between <see cref="E:UniSharper.Timers.ITimer.Ticking"/> events.</value>
+        </member>
+        <member name="P:UniSharper.Timers.ITimer.RepeatCount">
+            <summary>
+            Gets or sets the repeat count of <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+            <value>The repeat count of <see cref="T:UniSharper.Timers.ITimer"/>.</value>
+        </member>
+        <member name="P:UniSharper.Timers.ITimer.TimerState">
+            <summary>
+            Gets the state of the <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+            <value>The state of the <see cref="T:UniSharper.Timers.ITimer"/>.</value>
+        </member>
+        <member name="M:UniSharper.Timers.ITimer.Pause">
+            <summary>
+            Pauses timing.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.ITimer.Reset">
+            <summary>
+            Resets the state of <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.ITimer.Resume">
+            <summary>
+            Resumes timing.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.ITimer.Start">
+            <summary>
+            Starts timing.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.ITimer.Stop">
+            <summary>
+            Stops timing.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.ITimer.Tick(System.Single)">
+            <summary>
+            Updates the time of timing by delta time.
+            </summary>
+            <param name="deltaTime">The delta time.</param>
+        </member>
+        <member name="T:UniSharper.Timers.ITimerList">
+            <summary>
+            Represents a collection of timers.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Timers.ITimerList.Count">
+            <summary>
+            Gets the number of <see cref="T:UniSharper.Timers.ITimer"/> contained in this <see cref="T:UniSharper.Timers.ITimerList"/>.
+            </summary>
+            <value>The number of <see cref="T:UniSharper.Timers.ITimer"/> contained in this <see cref="T:UniSharper.Timers.ITimerList"/>.</value>
+        </member>
+        <member name="M:UniSharper.Timers.ITimerList.Add(UniSharper.Timers.ITimer)">
+            <summary>
+            Adds an <see cref="T:UniSharper.Timers.ITimer"/> item to this <see cref="T:UniSharper.Timers.ITimerList"/>.
+            </summary>
+            <param name="timer">The <see cref="T:UniSharper.Timers.ITimer"/> to add.</param>
+        </member>
+        <member name="M:UniSharper.Timers.ITimerList.Clear">
+            <summary>
+            Removes all <see cref="T:UniSharper.Timers.ITimer"/> contained in this <see cref="T:UniSharper.Timers.ITimerList"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.ITimerList.Contains(UniSharper.Timers.ITimer)">
+            <summary>
+            Determines whether the specified <see cref="T:UniSharper.Timers.ITimer"/> contained in this <see cref="T:UniSharper.Timers.ITimerList"/>.
+            </summary>
+            <param name="timer">The <see cref="T:UniSharper.Timers.ITimer"/> to locate.</param>
+            <returns>
+            <c>true</c> if <see cref="T:UniSharper.Timers.ITimer"/> is found in this <see cref="T:UniSharper.Timers.ITimerList"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:UniSharper.Timers.ITimerList.ForEach(System.Action{UniSharper.Timers.ITimer})">
+            <summary>
+            Performs the specified action on each <see cref="T:UniSharper.Timers.ITimer"/> of the <see cref="T:UniSharper.Timers.ITimerList"/>.
+            </summary>
+            <param name="action">
+            The <see cref="T:System.Action`1"/> delegate to perform on each <see cref="T:UniSharper.Timers.ITimer"/> of the
+            <see cref="T:UniSharper.Timers.ITimerList"/>.
+            </param>
+        </member>
+        <member name="M:UniSharper.Timers.ITimerList.PauseAll">
+            <summary>
+            Pauses all timers contained in this <see cref="T:UniSharper.Timers.ITimerList"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.ITimerList.Remove(UniSharper.Timers.ITimer)">
+            <summary>
+            Removes the first occurrence of a specific <see cref="T:UniSharper.Timers.ITimer"/> from this <see cref="T:UniSharper.Timers.ITimerList"/>.
+            </summary>
+            <param name="timer">The <see cref="T:UniSharper.Timers.ITimer"/> to be removed.</param>
+            <returns>
+            <c>true</c> if <see cref="T:UniSharper.Timers.ITimer"/> was successfully removed from this <see
+            cref="T:UniSharper.Timers.ITimerList"/>; otherwise, <c>false</c>. This method also returns <c>false</c> if
+            the specified <see cref="T:UniSharper.Timers.ITimer"/> is not found.
+            </returns>
+        </member>
+        <member name="M:UniSharper.Timers.ITimerList.ResetAll">
+            <summary>
+            Resets all timers contained in this <see cref="T:UniSharper.Timers.ITimerList"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.ITimerList.ResumeAll">
+            <summary>
+            Resumes all timers contained in this <see cref="T:UniSharper.Timers.ITimerList"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.ITimerList.StartAll">
+            <summary>
+            Starts all timers contained in this <see cref="T:UniSharper.Timers.ITimerList"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.ITimerList.StopAll">
+            <summary>
+            Stops all timers contained in this <see cref="T:UniSharper.Timers.ITimerList"/>.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Timers.Timer">
+            <summary>
+            Base implementation of interface <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+            <seealso cref="T:UniSharper.Timers.ITimer"/>
+            <seealso cref="T:System.IDisposable"/>
+        </member>
+        <member name="M:UniSharper.Timers.Timer.#ctor(System.Single,System.UInt32,System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UniSharper.Timers.Timer"/> class, and sets the Interval
+            property to the specified number of seconds, the RepeatCount property, the
+            IgnoreTimeScale property and a <see cref="T:System.Boolean"/> value to determine to invoke the method
+            <see cref="M:UniSharper.Timers.Timer.Start"/> automatically.
+            </summary>
+            <param name="interval">The time, in seconds, between <see cref="E:UniSharper.Timers.Timer.Ticking"/> events.</param>
+            <param name="repeatCount">The repeat count.</param>
+            <param name="ignoreTimeScale">A value indicating whether to ignore time scale of Unity.</param>
+            <param name="autoStart">
+            if set to <c>true</c> invoke the method <see cref="M:UniSharper.Timers.Timer.Start"/> automatically.
+            </param>
+        </member>
+        <member name="E:UniSharper.Timers.Timer.Completed">
+            <summary>
+            Occurs when the timer completed, ticking count equals to the <see cref="P:UniSharper.Timers.Timer.RepeatCount"/>.
+            </summary>
+        </member>
+        <member name="E:UniSharper.Timers.Timer.Paused">
+            <summary>
+            Occurs when call the method <see cref="M:UniSharper.Timers.Timer.Pause"/>.
+            </summary>
+        </member>
+        <member name="E:UniSharper.Timers.Timer.Reseted">
+            <summary>
+            Occurs when call the method <see cref="M:UniSharper.Timers.Timer.Reset"/>.
+            </summary>
+        </member>
+        <member name="E:UniSharper.Timers.Timer.Resumed">
+            <summary>
+            Occurs when call the method <see cref="M:UniSharper.Timers.Timer.Resume"/>.
+            </summary>
+        </member>
+        <member name="E:UniSharper.Timers.Timer.Started">
+            <summary>
+            Occurs when call the method <see cref="M:UniSharper.Timers.Timer.Start"/>.
+            </summary>
+        </member>
+        <member name="E:UniSharper.Timers.Timer.Stopped">
+            <summary>
+            Occurs when call the method <see cref="M:UniSharper.Timers.Timer.Stop"/>.
+            </summary>
+        </member>
+        <member name="E:UniSharper.Timers.Timer.Ticking">
+            <summary>
+            Occurs when the specified timer interval has elapsed.
+            </summary>
+        </member>
+        <member name="P:UniSharper.Timers.Timer.CurrentCount">
+            <summary>
+            Gets the current ticking count of <see cref="T:UniSharper.Timers.Timer"/>.
+            </summary>
+            <value>The current ticking count of <see cref="T:UniSharper.Timers.Timer"/>.</value>
+        </member>
+        <member name="P:UniSharper.Timers.Timer.IgnoreTimeScale">
+            <summary>
+            Gets or sets a value indicating whether the <see cref="T:UniSharper.Timers.Timer"/> ignore time scale of Unity.
+            </summary>
+            <value><c>true</c> if ignore time scale of Unity; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:UniSharper.Timers.Timer.Interval">
+            <summary>
+            Gets or sets the time, in seconds, between <see cref="E:UniSharper.Timers.Timer.Ticking"/> events.
+            </summary>
+            <value>The time, in seconds, between <see cref="E:UniSharper.Timers.Timer.Ticking"/> events.</value>
+        </member>
+        <member name="P:UniSharper.Timers.Timer.RepeatCount">
+            <summary>
+            Gets or sets the repeat count of <see cref="T:UniSharper.Timers.Timer"/>.
+            </summary>
+            <value>The repeat count of <see cref="T:UniSharper.Timers.Timer"/>.</value>
+        </member>
+        <member name="P:UniSharper.Timers.Timer.TimerState">
+            <summary>
+            Gets the state of the <see cref="T:UniSharper.Timers.Timer"/>.
+            </summary>
+            <value>The state of the <see cref="T:UniSharper.Timers.Timer"/>.</value>
+        </member>
+        <member name="M:UniSharper.Timers.Timer.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting
+            unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.Timer.Pause">
+            <summary>
+            Pauses timing.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException"><c>UniSharper.Timers.Timer</c> is disposed.</exception>
+        </member>
+        <member name="M:UniSharper.Timers.Timer.Reset">
+            <summary>
+            Resets the state of <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException"><c>UniSharper.Timers.Timer</c> is disposed.</exception>
+        </member>
+        <member name="M:UniSharper.Timers.Timer.Resume">
+            <summary>
+            Resumes timing.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException"><c>UniSharper.Timers.Timer</c> is disposed.</exception>
+        </member>
+        <member name="M:UniSharper.Timers.Timer.Start">
+            <summary>
+            Starts timing.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException"><c>UniSharper.Timers.Timer</c> is disposed.</exception>
+        </member>
+        <member name="M:UniSharper.Timers.Timer.Stop">
+            <summary>
+            Stops timing.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException"><c>UniSharper.Timers.Timer</c> is disposed.</exception>
+        </member>
+        <member name="M:UniSharper.Timers.Timer.Tick(System.Single)">
+            <summary>
+            Updates the time of timing by delta time.
+            </summary>
+            <param name="deltaTime">The delta time.</param>
+        </member>
+        <member name="M:UniSharper.Timers.Timer.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing">
+            <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
+            unmanaged resources.
+            </param>
+        </member>
+        <member name="M:UniSharper.Timers.Timer.Initialize">
+            <summary>
+            Initializes this instance.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Timers.TimerGroup">
+            <summary>
+            Class used internally to store a group of <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+            <seealso cref="T:UniSharper.Timers.ITimerList"/>
+        </member>
+        <member name="M:UniSharper.Timers.TimerGroup.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UniSharper.Timers.TimerGroup"/> class.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.TimerGroup.#ctor(UniSharper.Timers.ITimer[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:UniSharper.Timers.TimerGroup"/> class.
+            </summary>
+            <param name="timers">The timers array.</param>
+        </member>
+        <member name="P:UniSharper.Timers.TimerGroup.Count">
+            <summary>
+            Gets the number of <see cref="T:UniSharper.Timers.ITimer"/> contained in this <see cref="T:UniSharper.Timers.TimerGroup"/>.
+            </summary>
+            <value>The number of <see cref="T:UniSharper.Timers.ITimer"/> contained in this <see cref="T:UniSharper.Timers.TimerGroup"/>.</value>
+        </member>
+        <member name="M:UniSharper.Timers.TimerGroup.Add(UniSharper.Timers.ITimer)">
+            <summary>
+            Adds an <see cref="T:UniSharper.Timers.ITimer"/> item to this <see cref="T:UniSharper.Timers.TimerGroup"/>.
+            </summary>
+            <param name="timer">The <see cref="T:UniSharper.Timers.ITimer"/> to add.</param>
+            <exception cref="T:System.ArgumentNullException"><c>timer</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:UniSharper.Timers.TimerGroup.Clear">
+            <summary>
+            Removes all <see cref="T:UniSharper.Timers.ITimer"/> contained in this <see cref="T:UniSharper.Timers.TimerGroup"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.TimerGroup.Contains(UniSharper.Timers.ITimer)">
+            <summary>
+            Determines whether the specified <see cref="T:UniSharper.Timers.ITimer"/> contained in this <see cref="T:UniSharper.Timers.TimerGroup"/>.
+            </summary>
+            <param name="timer">The <see cref="T:UniSharper.Timers.ITimer"/> to locate.</param>
+            <returns>
+            <c>true</c> if <see cref="T:UniSharper.Timers.ITimer"/> is found in this <see cref="T:UniSharper.Timers.TimerGroup"/>; otherwise, <c>false</c>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><c>timer</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:UniSharper.Timers.TimerGroup.ForEach(System.Action{UniSharper.Timers.ITimer})">
+            <summary>
+            Performs the specified action on each <see cref="T:UniSharper.Timers.ITimer"/> of the <see cref="T:UniSharper.Timers.TimerGroup"/>.
+            </summary>
+            <param name="action">
+            The <see cref="T:System.Action`1"/> delegate to perform on each <see cref="T:UniSharper.Timers.ITimer"/> of the
+            <see cref="T:UniSharper.Timers.TimerGroup"/>.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><c>action</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:UniSharper.Timers.TimerGroup.PauseAll">
+            <summary>
+            Pauses all timers contained in the <see cref="T:UniSharper.Timers.TimerGroup"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.TimerGroup.Remove(UniSharper.Timers.ITimer)">
+            <summary>
+            Removes the first occurrence of a specific object from the <see cref="T:UniSharper.Timers.TimerGroup"/>.
+            </summary>
+            <param name="item">The object to remove from the <see cref="T:UniSharper.Timers.TimerGroup"/>.</param>
+            <returns>
+            <c>true</c> if item was successfully removed from the <see cref="T:UniSharper.Timers.TimerGroup"/>;
+            otherwise, <c>false</c>. This method also returns <c>false</c> if item is not found in
+            the original <see cref="T:UniSharper.Timers.TimerGroup"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><c>timer</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:UniSharper.Timers.TimerGroup.ResetAll">
+            <summary>
+            Resets all timers contained in the <see cref="T:UniSharper.Timers.TimerGroup"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.TimerGroup.ResumeAll">
+            <summary>
+            Resumes all timers contained in <see cref="T:UniSharper.Timers.TimerGroup"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.TimerGroup.StartAll">
+            <summary>
+            Starts all timers contained in the <see cref="T:UniSharper.Timers.TimerGroup"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.TimerGroup.StopAll">
+            <summary>
+            Stops all timers contained in the <see cref="T:UniSharper.Timers.TimerGroup"/>.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Timers.TimerManager">
+            <summary>
+            The <see cref="T:UniSharper.Timers.TimerManager"/> is a convenience class for managing all <see cref="T:UniSharper.Timers.ITimer"/> s
+            at runtime. This class cannot be inherited.
+            </summary>
+            <seealso cref="T:UniSharper.Patterns.SingletonMonoBehaviour`1"/>
+            <seealso cref="T:UniSharper.Timers.ITimerList"/>
+        </member>
+        <member name="P:UniSharper.Timers.TimerManager.Count">
+            <summary>
+            Gets the number of <see cref="T:UniSharper.Timers.ITimer"/> elements contained in the <see cref="T:UniSharper.Timers.TimerManager"/>.
+            </summary>
+            <value>The number of <see cref="T:UniSharper.Timers.ITimer"/> elements contained in the <see cref="T:UniSharper.Timers.TimerManager"/>.</value>
+        </member>
+        <member name="P:UniSharper.Timers.TimerManager.TimerList">
+            <summary>
+            Gets the timer list.
+            </summary>
+            <value>The timer list.</value>
+        </member>
+        <member name="M:UniSharper.Timers.TimerManager.Add(UniSharper.Timers.ITimer)">
+            <summary>
+            Adds an <see cref="T:UniSharper.Timers.ITimer"/> item to the <see cref="!:ITimerCollection"/>.
+            </summary>
+            <param name="item">The <see cref="T:UniSharper.Timers.ITimer"/> object to add to the <see cref="!:ITimerCollection"/>.</param>
+        </member>
+        <member name="M:UniSharper.Timers.TimerManager.Clear">
+            <summary>
+            Removes all <see cref="T:UniSharper.Timers.ITimer"/> items from the <see cref="!:ITimerCollection"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.TimerManager.Contains(UniSharper.Timers.ITimer)">
+            <summary>
+            Determines whether the <see cref="!:ITimerCollection"/>. contains a specific <see
+            cref="T:UniSharper.Timers.ITimer"/> object.
+            </summary>
+            <param name="item">The <see cref="T:UniSharper.Timers.ITimer"/> object to locate in the <see cref="!:ITimerCollection"/>.</param>
+            <returns>
+            <c>true</c> if <see cref="T:UniSharper.Timers.ITimer"/> item is found in the <see cref="!:ITimerCollection"/>;
+            otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:UniSharper.Timers.TimerManager.PauseAll">
+            <summary>
+            Pauses all timers in the <see cref="T:UniSharper.Timers.TimerManager"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.TimerManager.Remove(UniSharper.Timers.ITimer)">
+            <summary>
+            Removes the first occurrence of a specific object from the <see cref="!:ITimerCollection"/>.
+            </summary>
+            <param name="item">The object to remove from the <see cref="!:ITimerCollection"/>.</param>
+            <returns>
+            <c>true</c> if item was successfully removed from the <see cref="!:ITimerCollection"/>;
+            otherwise, <c>false</c>. This method also returns <c>false</c> if item is not found in
+            the original <see cref="!:ITimerCollection"/>.
+            </returns>
+        </member>
+        <member name="M:UniSharper.Timers.TimerManager.ResetAll">
+            <summary>
+            Resets all timers in the <see cref="T:UniSharper.Timers.TimerManager"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.TimerManager.ResumeAll">
+            <summary>
+            Resumes all timers in <see cref="T:UniSharper.Timers.TimerManager"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.TimerManager.StartAll">
+            <summary>
+            Starts all timers in the <see cref="T:UniSharper.Timers.TimerManager"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.TimerManager.StopAll">
+            <summary>
+            Stops all timers in the <see cref="T:UniSharper.Timers.TimerManager"/>.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.TimerManager.OnDestroy">
+            <summary>
+            This function is called when the MonoBehaviour will be destroyed.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.TimerManager.OnApplicationPause(System.Boolean)">
+            <summary>
+            This function is called when the application pauses.
+            </summary>
+            <param name="pauseStatus"><c>true</c> if the application is paused, else <c>false</c>.</param>
+        </member>
+        <member name="M:UniSharper.Timers.TimerManager.Update">
+            <summary>
+            Update is called every frame.
+            </summary>
+        </member>
+        <member name="T:UniSharper.Timers.TimerTickingEventArgs">
+            <summary>
+            Provides data for the <see cref="E:UniSharper.Timers.ITimer.Ticking"/> event.
+            </summary>
+            <seealso cref="T:System.EventArgs"/>
+        </member>
+        <member name="M:UniSharper.Timers.TimerTickingEventArgs.#ctor(System.UInt32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UniSharper.Timers.TimerTickingEventArgs"/> class with the
+            ticking count of the <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+            <param name="currentCount">The current ticking count of the <see cref="T:UniSharper.Timers.ITimer"/>.</param>
+        </member>
+        <member name="P:UniSharper.Timers.TimerTickingEventArgs.CurrentCount">
+            <summary>
+            Gets or sets the current ticking count of the <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+            <value>The current ticking count of the <see cref="T:UniSharper.Timers.ITimer"/>.</value>
+        </member>
+    </members>
+</doc>
