@@ -978,12 +978,13 @@
             <summary>
             Removes the first occurrence of a specific object from the <see cref="T:UniSharper.Timers.TimerGroup"/>.
             </summary>
-            <param name="item">The object to remove from the <see cref="T:UniSharper.Timers.TimerGroup"/>.</param>
+            <param name="timer">The <see cref="T:UniSharper.Timers.ITimer"/> to be removed.</param>
             <returns>
             <c>true</c> if item was successfully removed from the <see cref="T:UniSharper.Timers.TimerGroup"/>;
             otherwise, <c>false</c>. This method also returns <c>false</c> if item is not found in
             the original <see cref="T:UniSharper.Timers.TimerGroup"/>.
             </returns>
+            <exception cref="T:System.ArgumentNullException">timer</exception>
             <exception cref="T:System.ArgumentNullException"><c>timer</c> is <c>null</c>.</exception>
         </member>
         <member name="M:UniSharper.Timers.TimerGroup.ResetAll">

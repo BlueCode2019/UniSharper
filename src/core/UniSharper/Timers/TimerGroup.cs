@@ -35,9 +35,11 @@ namespace UniSharper.Timers
     {
         #region Fields
 
-        private LinkedList<ITimer> timers;
+        private List<ITimer> addList;
 
-        private bool isRemovingItem;
+        private List<ITimer> removeList;
+
+        private LinkedList<ITimer> timers;
 
         #endregion Fields
 
@@ -48,8 +50,13 @@ namespace UniSharper.Timers
         /// </summary>
         public TimerGroup()
         {
-            isRemovingItem = false;
-            timers = new LinkedList<ITimer>();
+            addList = new List<ITimer>();
+            removeList = new List<ITimer>();
+
+            if (timers == null)
+            {
+                timers = new LinkedList<ITimer>();
+            }
         }
 
         /// <summary>
@@ -57,6 +64,7 @@ namespace UniSharper.Timers
         /// </summary>
         /// <param name="timers">The timers array.</param>
         public TimerGroup(params ITimer[] timers)
+            : this()
         {
             this.timers = new LinkedList<ITimer>(timers);
         }
@@ -93,7 +101,7 @@ namespace UniSharper.Timers
                 throw new ArgumentNullException(nameof(timer));
             }
 
-            timers.AddUnique(timer);
+            addList.Add(timer);
         }
 
         /// <summary>
@@ -137,9 +145,14 @@ namespace UniSharper.Timers
                 throw new ArgumentNullException(nameof(action));
             }
 
-            if (isRemovingItem)
+            foreach (ITimer timer in addList)
             {
-                return;
+                timers.AddUnique(timer);
+            }
+
+            foreach (ITimer timer in removeList)
+            {
+                timers.Remove(timer);
             }
 
             foreach (ITimer timer in timers)
@@ -165,12 +178,13 @@ namespace UniSharper.Timers
         /// <summary>
         /// Removes the first occurrence of a specific object from the <see cref="TimerGroup"/>.
         /// </summary>
-        /// <param name="item">The object to remove from the <see cref="TimerGroup"/>.</param>
+        /// <param name="timer">The <see cref="ITimer"/> to be removed.</param>
         /// <returns>
         /// <c>true</c> if item was successfully removed from the <see cref="TimerGroup"/>;
         /// otherwise, <c>false</c>. This method also returns <c>false</c> if item is not found in
         /// the original <see cref="TimerGroup"/>.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException">timer</exception>
         /// <exception cref="ArgumentNullException"><c>timer</c> is <c>null</c>.</exception>
         public bool Remove(ITimer timer)
         {
@@ -179,11 +193,8 @@ namespace UniSharper.Timers
                 throw new ArgumentNullException(nameof(timer));
             }
 
-            bool success = false;
-            isRemovingItem = true;
-            success = timers.Remove(timer);
-            isRemovingItem = false;
-            return success;
+            removeList.Add(timer);
+            return true;
         }
 
         /// <summary>
