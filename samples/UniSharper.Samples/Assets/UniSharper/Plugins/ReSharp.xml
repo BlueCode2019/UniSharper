@@ -463,7 +463,7 @@
             </summary>
             <seealso cref="T:System.Exception"/>
         </member>
-        <member name="F:ReSharp.Security.MemoryDataModifiedException.errorMessage">
+        <member name="F:ReSharp.Security.MemoryDataModifiedException.ErrorMessage">
             <summary>
             The error message.
             </summary>

@@ -39,6 +39,10 @@ namespace UniSharper.Threading
 
         private LinkedList<ISynchronizedObject> synchronizedObjects;
 
+        private Queue<ISynchronizedObject> addedObjects;
+
+        private Queue<ISynchronizedObject> removedObjects;
+
         #endregion Fields
 
         #region Properties
@@ -84,9 +88,9 @@ namespace UniSharper.Threading
         /// </param>
         public void Add(ISynchronizedObject item)
         {
-            if (synchronizedObjects != null)
+            if (addedObjects != null)
             {
-                synchronizedObjects.AddLast(item);
+                addedObjects.Enqueue(item);
             }
         }
 
@@ -97,7 +101,7 @@ namespace UniSharper.Threading
         {
             if (synchronizedObjects != null)
             {
-                synchronizedObjects.Clear();
+                removedObjects = new Queue<ISynchronizedObject>(synchronizedObjects);
             }
         }
 
@@ -165,11 +169,7 @@ namespace UniSharper.Threading
         /// </returns>
         public bool Remove(ISynchronizedObject item)
         {
-            if (synchronizedObjects != null)
-            {
-                return synchronizedObjects.Remove(item);
-            }
-
+            removedObjects.Enqueue(item);
             return false;
         }
 
@@ -190,6 +190,8 @@ namespace UniSharper.Threading
             base.Awake();
 
             synchronizedObjects = new LinkedList<ISynchronizedObject>();
+            addedObjects = new Queue<ISynchronizedObject>();
+            removedObjects = new Queue<ISynchronizedObject>();
         }
 
         /// <summary>
@@ -207,9 +209,27 @@ namespace UniSharper.Threading
         /// </summary>
         private void Update()
         {
-            foreach (ISynchronizedObject item in synchronizedObjects)
+            lock ((synchronizedObjects as ICollection).SyncRoot)
             {
-                item.Synchronize();
+                while (addedObjects.Count > 0)
+                {
+                    ISynchronizedObject obj = addedObjects.Dequeue();
+                    synchronizedObjects.AddLast(obj);
+                }
+
+                while (removedObjects.Count > 0)
+                {
+                    ISynchronizedObject obj = removedObjects.Dequeue();
+                    synchronizedObjects.Remove(obj);
+                }
+
+                if (synchronizedObjects != null)
+                {
+                    foreach (ISynchronizedObject item in synchronizedObjects)
+                    {
+                        item.Synchronize();
+                    }
+                }
             }
         }
 

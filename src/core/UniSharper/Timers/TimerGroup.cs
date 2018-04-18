@@ -35,10 +35,8 @@ namespace UniSharper.Timers
     {
         #region Fields
 
-        private List<ITimer> addList;
-
-        private List<ITimer> removeList;
-
+        private Queue<ITimer> addedTimers;
+        private Queue<ITimer> removedTimers;
         private LinkedList<ITimer> timers;
 
         #endregion Fields
@@ -50,13 +48,13 @@ namespace UniSharper.Timers
         /// </summary>
         public TimerGroup()
         {
-            addList = new List<ITimer>();
-            removeList = new List<ITimer>();
-
             if (timers == null)
             {
                 timers = new LinkedList<ITimer>();
             }
+
+            addedTimers = new Queue<ITimer>();
+            removedTimers = new Queue<ITimer>();
         }
 
         /// <summary>
@@ -101,7 +99,7 @@ namespace UniSharper.Timers
                 throw new ArgumentNullException(nameof(timer));
             }
 
-            addList.Add(timer);
+            addedTimers.Enqueue(timer);
         }
 
         /// <summary>
@@ -109,7 +107,7 @@ namespace UniSharper.Timers
         /// </summary>
         public void Clear()
         {
-            timers.Clear();
+            removedTimers = new Queue<ITimer>(timers);
         }
 
         /// <summary>
@@ -145,13 +143,15 @@ namespace UniSharper.Timers
                 throw new ArgumentNullException(nameof(action));
             }
 
-            foreach (ITimer timer in addList)
+            while (addedTimers.Count > 0)
             {
-                timers.AddUnique(timer);
+                ITimer timer = addedTimers.Dequeue();
+                timers.AddLast(timer);
             }
 
-            foreach (ITimer timer in removeList)
+            while (removedTimers.Count > 0)
             {
+                ITimer timer = removedTimers.Dequeue();
                 timers.Remove(timer);
             }
 
@@ -193,7 +193,7 @@ namespace UniSharper.Timers
                 throw new ArgumentNullException(nameof(timer));
             }
 
-            removeList.Add(timer);
+            removedTimers.Enqueue(timer);
             return true;
         }
 

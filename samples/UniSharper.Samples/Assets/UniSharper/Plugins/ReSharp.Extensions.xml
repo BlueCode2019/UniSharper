@@ -4,6 +4,18 @@
         <name>ReSharp.Extensions</name>
     </assembly>
     <members>
+        <member name="T:System.ArrayExtensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.Array"/>.
+            </summary>
+        </member>
+        <member name="M:System.ArrayExtensions.Reverse(System.Byte[])">
+            <summary>
+            Reverses the specified source.
+            </summary>
+            <param name="source">The source.</param>
+            <returns>System.Byte[].</returns>
+        </member>
         <member name="T:System.EnumUtility">
             <summary>
             Provides utilities to deal with <see cref="T:System.Enum"/>.
@@ -17,6 +29,42 @@
             <param name="enumValueStr">The <see cref="T:System.String"/> of the value of <see cref="T:System.Enum"/>.</param>
             <param name="ignoreCase"><c>true</c> to ignore case; <c>false</c> to regard case.</param>
             <returns>The <see cref="T:System.Enum"/> value.</returns>
+        </member>
+        <member name="T:System.Int16Extensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.Int16"/>.
+            </summary>
+        </member>
+        <member name="M:System.Int16Extensions.Reverse(System.Int16)">
+            <summary>
+            Reverse and advances the position of the source by two bytes.
+            </summary>
+            <param name="source">The <see cref="T:System.Int16"/> to reverse.</param>
+            <returns>A 2-byte signed short integer in reverse.</returns>
+        </member>
+        <member name="T:System.Int32Extensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.Int32"/>.
+            </summary>
+        </member>
+        <member name="M:System.Int32Extensions.Reverse(System.Int32)">
+            <summary>
+            Reverse and advances the position of the source by four bytes.
+            </summary>
+            <param name="source">The <see cref="T:System.Int32"/> to reverse.</param>
+            <returns>A 4-byte signed integer in reverse.</returns>
+        </member>
+        <member name="T:System.Int64Extensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.Int64"/>.
+            </summary>
+        </member>
+        <member name="M:System.Int64Extensions.Reverse(System.Int64)">
+            <summary>
+            Reverse and advances the position of the source by eight bytes.
+            </summary>
+            <param name="source">The <see cref="T:System.Int64"/> to reverse.</param>
+            <returns>A 8-byte signed long integer in reverse.</returns>
         </member>
         <member name="T:System.IO.BinaryReaderExtensions">
             <summary>
@@ -43,8 +91,8 @@
             Reads a 2-byte signed integer in reverse from the current stream and advances the current
             position of the stream by two bytes.
             </summary>
-            <param name="reader">The <see cref="T:System.IO.BinaryReader"/> to read signed integer.</param>
-            <returns>A 2-byte signed integer in reverse read from the current stream.</returns>
+            <param name="reader">The <see cref="T:System.IO.BinaryReader"/> to read signed short integer.</param>
+            <returns>A 2-byte signed short integer in reverse read from the current stream.</returns>
         </member>
         <member name="M:System.IO.BinaryReaderExtensions.ReadInt32Reverse(System.IO.BinaryReader)">
             <summary>
@@ -59,16 +107,16 @@
             Reads an 8-byte signed integer in reverse from the current stream and advances the
             current position of the stream by eight bytes.
             </summary>
-            <param name="reader">The <see cref="T:System.IO.BinaryReader"/> to read signed integer.</param>
-            <returns>A 8-byte signed integer in reverse read from the current stream.</returns>
+            <param name="reader">The <see cref="T:System.IO.BinaryReader"/> to read signed long integer.</param>
+            <returns>A 8-byte signed long integer in reverse read from the current stream.</returns>
         </member>
         <member name="M:System.IO.BinaryReaderExtensions.ReadUInt16Reverse(System.IO.BinaryReader)">
             <summary>
             Reads a 2-byte unsigned integer in reverse from the current stream and advances the
             position of the stream by two bytes.
             </summary>
-            <param name="reader">The <see cref="T:System.IO.BinaryReader"/> to read unsigned integer.</param>
-            <returns>A 2-byte unsigned integer in reverse read from this stream.</returns>
+            <param name="reader">The <see cref="T:System.IO.BinaryReader"/> to read unsigned short integer.</param>
+            <returns>A 2-byte unsigned short integer in reverse read from this stream.</returns>
         </member>
         <member name="M:System.IO.BinaryReaderExtensions.ReadUInt32Reverse(System.IO.BinaryReader)">
             <summary>
@@ -83,8 +131,8 @@
             Reads an 8-byte unsigned integer in reverse from the current stream and advances the
             position of the stream by eight bytes.
             </summary>
-            <param name="reader">The <see cref="T:System.IO.BinaryReader"/> to read unsigned integer.</param>
-            <returns>A 8-byte unsigned integer in reverse read from this stream.</returns>
+            <param name="reader">The <see cref="T:System.IO.BinaryReader"/> to read unsigned long integer.</param>
+            <returns>A 8-byte unsigned long integer in reverse read from this stream.</returns>
         </member>
         <member name="T:System.IO.StreamExtensions">
             <summary>
@@ -863,6 +911,42 @@
             <param name="dateTime">The specific <see cref="T:System.DateTime"/>.</param>
             <returns>The Unix timestamp of the specific <see cref="T:System.DateTime"/>.</returns>
             <exception cref="T:System.ArgumentNullException"><c>dateTime</c> is <c>null</c>.</exception>
+        </member>
+        <member name="T:System.UInt16Extensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.UInt16"/>.
+            </summary>
+        </member>
+        <member name="M:System.UInt16Extensions.Reverse(System.UInt16)">
+            <summary>
+            Reverse and advances the position of the source by two bytes.
+            </summary>
+            <param name="source">The <see cref="T:System.UInt16"/> to reverse.</param>
+            <returns>A 2-byte unsigned short integer in reverse.</returns>
+        </member>
+        <member name="T:System.UInt32Extensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.UInt32"/>.
+            </summary>
+        </member>
+        <member name="M:System.UInt32Extensions.Reverse(System.UInt32)">
+            <summary>
+            Reverse and advances the position of the source by four bytes.
+            </summary>
+            <param name="source">The <see cref="T:System.UInt32"/> to reverse.</param>
+            <returns>A 4-byte unsigned integer in reverse.</returns>
+        </member>
+        <member name="T:System.UInt64Extensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.UInt64"/>.
+            </summary>
+        </member>
+        <member name="M:System.UInt64Extensions.Reverse(System.UInt64)">
+            <summary>
+            Reverse and advances the position of the source by eight bytes.
+            </summary>
+            <param name="source">The <see cref="T:System.UInt64"/> to reverse.</param>
+            <returns>A 8-byte unsigned long integer in reverse.</returns>
         </member>
     </members>
 </doc>
