@@ -30,8 +30,7 @@ namespace UniSharper.Timers
     /// Base implementation of interface <see cref="ITimer"/>.
     /// </summary>
     /// <seealso cref="ITimer"/>
-    /// <seealso cref="IDisposable"/>
-    public class Timer : ITimer, IDisposable
+    public class Timer : ITimer
     {
         #region Fields
 

@@ -599,6 +599,7 @@
             <summary>
             Defines methods to manipulate timer object.
             </summary>
+            <seealso cref="T:System.IDisposable"/>
         </member>
         <member name="E:UniSharper.Timers.ITimer.Completed">
             <summary>
@@ -777,7 +778,6 @@
             Base implementation of interface <see cref="T:UniSharper.Timers.ITimer"/>.
             </summary>
             <seealso cref="T:UniSharper.Timers.ITimer"/>
-            <seealso cref="T:System.IDisposable"/>
         </member>
         <member name="M:UniSharper.Timers.Timer.#ctor(System.Single,System.UInt32,System.Boolean,System.Boolean)">
             <summary>

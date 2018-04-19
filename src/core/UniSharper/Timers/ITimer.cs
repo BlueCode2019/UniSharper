@@ -22,12 +22,15 @@
  *	SOFTWARE.
  */
 
+using System;
+
 namespace UniSharper.Timers
 {
     /// <summary>
     /// Defines methods to manipulate timer object.
     /// </summary>
-    public interface ITimer
+    /// <seealso cref="System.IDisposable"/>
+    public interface ITimer : IDisposable
     {
         #region Events
 
