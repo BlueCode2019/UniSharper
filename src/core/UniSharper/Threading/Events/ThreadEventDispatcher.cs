@@ -347,8 +347,7 @@ namespace UniSharper.Threading.Events
         /// </summary>
         private void AddPendingEventListeners()
         {
-            listeners = listeners.Union(pendingListeners)
-                .ToDictionary(pair => pair.Key, pair => pair.Value);
+            listeners = listeners.MergeLeft(pendingListeners);
 
             pendingListeners.Clear();
         }
