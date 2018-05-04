@@ -189,7 +189,7 @@ namespace UniSharper.Timers
                 throw new ObjectDisposedException(GetType().FullName);
             }
 
-            if (TimerState != TimerState.Pause)
+            if (TimerState == TimerState.Running)
             {
                 TimerState = TimerState.Pause;
 
