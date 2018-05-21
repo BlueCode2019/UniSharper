@@ -22,7 +22,7 @@
  *	SOFTWARE.
  */
 
-using JsonFx.Json;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,9 +37,7 @@ namespace UniSharper.Rendering.DataParsers
             if (!DataDict.ContainsKey(name))
             {
                 DataDict.Add(name, new Dictionary<string, Rect>());
-
-                JsonReader reader = new JsonReader();
-                UnityJsonData jsonData = reader.Read<UnityJsonData>(data);
+                UnityJsonData jsonData = JsonConvert.DeserializeObject<UnityJsonData>(data);
 
                 DualSize texSize = jsonData.meta.size;
 
