@@ -186,7 +186,7 @@ namespace UniSharper.Timers
             if (pauseStatus)
             {
                 // Pause all timers.
-                PauseAll();
+                TimerList.PauseAll(true);
             }
             else
             {

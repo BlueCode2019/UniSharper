@@ -167,11 +167,14 @@ namespace UniSharper.Timers
         /// <summary>
         /// Pauses all timers contained in the <see cref="TimerGroup"/>.
         /// </summary>
-        public void PauseAll()
+        /// <param name="causedByApplicationPaused">
+        /// if set to <c>true</c> invoke this method caused by application paused; otherwise, set <c>false</c>.
+        /// </param>
+        public void PauseAll(bool causedByApplicationPaused = false)
         {
             ForEach((timer) =>
             {
-                timer.Pause();
+                timer.Pause(causedByApplicationPaused);
             });
         }
 

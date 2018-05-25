@@ -74,6 +74,12 @@ namespace UniSharper.Timers
         #region Properties
 
         /// <summary>
+        /// Gets or sets a value indicating whether accept application pause.
+        /// </summary>
+        /// <value><c>true</c> if accept application pause; otherwise, <c>false</c>.</value>
+        bool CanAcceptApplicationPause { get; set; }
+
+        /// <summary>
         /// Gets the current ticking count of <see cref="ITimer"/>.
         /// </summary>
         /// <value>The current ticking count of <see cref="ITimer"/>.</value>
@@ -110,7 +116,10 @@ namespace UniSharper.Timers
         /// <summary>
         /// Pauses timing.
         /// </summary>
-        void Pause();
+        /// <param name="causedByApplicationPaused">
+        /// if set to <c>true</c> invoke this method caused by application paused; otherwise, set <c>false</c>.
+        /// </param>
+        void Pause(bool causedByApplicationPaused = false);
 
         /// <summary>
         /// Resets the state of <see cref="ITimer"/>.

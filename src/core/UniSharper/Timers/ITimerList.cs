@@ -75,7 +75,10 @@ namespace UniSharper.Timers
         /// <summary>
         /// Pauses all timers contained in this <see cref="ITimerList"/>.
         /// </summary>
-        void PauseAll();
+        /// <param name="causedByApplicationPaused">
+        /// if set to <c>true</c> invoke this method caused by application paused; otherwise, set <c>false</c>.
+        /// </param>
+        void PauseAll(bool causedByApplicationPaused = false);
 
         /// <summary>
         /// Removes the first occurrence of a specific <see cref="ITimer"/> from this <see cref="ITimerList"/>.

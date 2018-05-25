@@ -51,10 +51,10 @@ namespace UniSharper.Timers
         /// <param name="interval">The time, in seconds, between <see cref="Ticking"/> events.</param>
         /// <param name="repeatCount">The repeat count.</param>
         /// <param name="ignoreTimeScale">A value indicating whether to ignore time scale of Unity.</param>
-        /// <param name="autoStart">
-        /// if set to <c>true</c> invoke the method <see cref="Start"/> automatically.
+        /// <param name="canAcceptApplicationPause">
+        /// if set to <c>true</c> can accept timer pause caused by application pause; otherwise, <c>false</c>.
         /// </param>
-        public Timer(float interval, uint repeatCount = 0, bool ignoreTimeScale = false, bool autoStart = true)
+        public Timer(float interval, uint repeatCount = 0, bool ignoreTimeScale = false, bool canAcceptApplicationPause = true)
         {
             TimerState = TimerState.Stop;
             time = 0f;
@@ -62,13 +62,9 @@ namespace UniSharper.Timers
             Interval = interval;
             RepeatCount = repeatCount;
             IgnoreTimeScale = ignoreTimeScale;
+            CanAcceptApplicationPause = canAcceptApplicationPause;
 
             Initialize();
-
-            if (autoStart)
-            {
-                Start();
-            }
         }
 
         #endregion Constructors
@@ -113,6 +109,16 @@ namespace UniSharper.Timers
         #endregion Events
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets a value indicating whether accept application pause.
+        /// </summary>
+        /// <value><c>true</c> if accept application pause; otherwise, <c>false</c>.</value>
+        public bool CanAcceptApplicationPause
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Gets the current ticking count of <see cref="Timer"/>.
@@ -181,12 +187,21 @@ namespace UniSharper.Timers
         /// <summary>
         /// Pauses timing.
         /// </summary>
+        /// <param name="causedByApplicationPaused">
+        /// if set to <c>true</c> invoke this method caused by application paused; otherwise, set <c>false</c>.
+        /// </param>
+        /// <exception cref="System.ObjectDisposedException"></exception>
         /// <exception cref="ObjectDisposedException"><c>UniSharper.Timers.Timer</c> is disposed.</exception>
-        public void Pause()
+        public void Pause(bool causedByApplicationPaused = false)
         {
             if (disposed)
             {
                 throw new ObjectDisposedException(GetType().FullName);
+            }
+
+            if (!CanAcceptApplicationPause && causedByApplicationPaused)
+            {
+                return;
             }
 
             if (TimerState == TimerState.Running)

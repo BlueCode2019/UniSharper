@@ -608,7 +608,7 @@
         </member>
         <member name="E:UniSharper.Timers.ITimer.Paused">
             <summary>
-            Occurs when call the method <see cref="M:UniSharper.Timers.ITimer.Pause"/> of this <see cref="T:UniSharper.Timers.ITimer"/>.
+            Occurs when call the method <see cref="M:UniSharper.Timers.ITimer.Pause(System.Boolean)"/> of this <see cref="T:UniSharper.Timers.ITimer"/>.
             </summary>
         </member>
         <member name="E:UniSharper.Timers.ITimer.Reseted">
@@ -635,6 +635,12 @@
             <summary>
             Occurs when the specified timer interval has elapsed.
             </summary>
+        </member>
+        <member name="P:UniSharper.Timers.ITimer.CanAcceptApplicationPause">
+            <summary>
+            Gets or sets a value indicating whether accept application pause.
+            </summary>
+            <value><c>true</c> if accept application pause; otherwise, <c>false</c>.</value>
         </member>
         <member name="P:UniSharper.Timers.ITimer.CurrentCount">
             <summary>
@@ -666,10 +672,13 @@
             </summary>
             <value>The state of the <see cref="T:UniSharper.Timers.ITimer"/>.</value>
         </member>
-        <member name="M:UniSharper.Timers.ITimer.Pause">
+        <member name="M:UniSharper.Timers.ITimer.Pause(System.Boolean)">
             <summary>
             Pauses timing.
             </summary>
+            <param name="causedByApplicationPaused">
+            if set to <c>true</c> invoke this method caused by application paused; otherwise, set <c>false</c>.
+            </param>
         </member>
         <member name="M:UniSharper.Timers.ITimer.Reset">
             <summary>
@@ -737,10 +746,13 @@
             <see cref="T:UniSharper.Timers.ITimerList"/>.
             </param>
         </member>
-        <member name="M:UniSharper.Timers.ITimerList.PauseAll">
+        <member name="M:UniSharper.Timers.ITimerList.PauseAll(System.Boolean)">
             <summary>
             Pauses all timers contained in this <see cref="T:UniSharper.Timers.ITimerList"/>.
             </summary>
+            <param name="causedByApplicationPaused">
+            if set to <c>true</c> invoke this method caused by application paused; otherwise, set <c>false</c>.
+            </param>
         </member>
         <member name="M:UniSharper.Timers.ITimerList.Remove(UniSharper.Timers.ITimer)">
             <summary>
@@ -789,8 +801,8 @@
             <param name="interval">The time, in seconds, between <see cref="E:UniSharper.Timers.Timer.Ticking"/> events.</param>
             <param name="repeatCount">The repeat count.</param>
             <param name="ignoreTimeScale">A value indicating whether to ignore time scale of Unity.</param>
-            <param name="autoStart">
-            if set to <c>true</c> invoke the method <see cref="M:UniSharper.Timers.Timer.Start"/> automatically.
+            <param name="canAcceptApplicationPause">
+            if set to <c>true</c> can accept timer pause caused by application pause; otherwise, <c>false</c>.
             </param>
         </member>
         <member name="E:UniSharper.Timers.Timer.Completed">
@@ -800,7 +812,7 @@
         </member>
         <member name="E:UniSharper.Timers.Timer.Paused">
             <summary>
-            Occurs when call the method <see cref="M:UniSharper.Timers.Timer.Pause"/>.
+            Occurs when call the method <see cref="M:UniSharper.Timers.Timer.Pause(System.Boolean)"/>.
             </summary>
         </member>
         <member name="E:UniSharper.Timers.Timer.Reseted">
@@ -827,6 +839,12 @@
             <summary>
             Occurs when the specified timer interval has elapsed.
             </summary>
+        </member>
+        <member name="P:UniSharper.Timers.Timer.CanAcceptApplicationPause">
+            <summary>
+            Gets or sets a value indicating whether accept application pause.
+            </summary>
+            <value><c>true</c> if accept application pause; otherwise, <c>false</c>.</value>
         </member>
         <member name="P:UniSharper.Timers.Timer.CurrentCount">
             <summary>
@@ -864,10 +882,14 @@
             unmanaged resources.
             </summary>
         </member>
-        <member name="M:UniSharper.Timers.Timer.Pause">
+        <member name="M:UniSharper.Timers.Timer.Pause(System.Boolean)">
             <summary>
             Pauses timing.
             </summary>
+            <param name="causedByApplicationPaused">
+            if set to <c>true</c> invoke this method caused by application paused; otherwise, set <c>false</c>.
+            </param>
+            <exception cref="T:System.ObjectDisposedException"></exception>
             <exception cref="T:System.ObjectDisposedException"><c>UniSharper.Timers.Timer</c> is disposed.</exception>
         </member>
         <member name="M:UniSharper.Timers.Timer.Reset">
@@ -969,10 +991,13 @@
             </param>
             <exception cref="T:System.ArgumentNullException"><c>action</c> is <c>null</c>.</exception>
         </member>
-        <member name="M:UniSharper.Timers.TimerGroup.PauseAll">
+        <member name="M:UniSharper.Timers.TimerGroup.PauseAll(System.Boolean)">
             <summary>
             Pauses all timers contained in the <see cref="T:UniSharper.Timers.TimerGroup"/>.
             </summary>
+            <param name="causedByApplicationPaused">
+            if set to <c>true</c> invoke this method caused by application paused; otherwise, set <c>false</c>.
+            </param>
         </member>
         <member name="M:UniSharper.Timers.TimerGroup.Remove(UniSharper.Timers.ITimer)">
             <summary>
