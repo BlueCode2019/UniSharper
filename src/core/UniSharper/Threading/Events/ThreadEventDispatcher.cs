@@ -61,7 +61,7 @@ namespace UniSharper.Threading.Events
             eventQueue = new Queue<Event>();
             pendingEventQueue = new Queue<Event>();
 
-            if (Synchronizer.Instance)
+            if (Synchronizer.Instance != null)
             {
                 Synchronizer.Instance.Add(this);
             }
@@ -82,7 +82,7 @@ namespace UniSharper.Threading.Events
             eventQueue = null;
             pendingEventQueue = null;
 
-            if (Synchronizer.Instance)
+            if (Synchronizer.Instance != null)
             {
                 Synchronizer.Instance.Remove(this);
             }

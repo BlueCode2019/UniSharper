@@ -34,6 +34,10 @@
     <DocumentationFile>bin\Release\UniSharper.Net.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ReSharp">
+      <HintPath>..\..\..\..\libs\ReSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="RestSharp">
       <HintPath>libs\RestSharp.dll</HintPath>
     </Reference>

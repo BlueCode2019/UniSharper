@@ -321,7 +321,8 @@
             A <see cref="T:UniSharper.Threading.Synchronizer"/> representing a <see cref="T:UnityEngine.MonoBehaviour"/> to
             synchronize data between child threads and main threads.
             </summary>
-            <seealso cref="T:UniSharper.Patterns.SingletonMonoBehaviour`1"/>
+            <seealso cref="T:ReSharp.Patterns.Singleton`1"/>
+            <seealso cref="T:System.Collections.Generic.ICollection`1"/>
         </member>
         <member name="P:UniSharper.Threading.Synchronizer.Count">
             <summary>
@@ -395,21 +396,6 @@
             Returns an enumerator that iterates through the collection.
             </summary>
             <returns>An enumerator that can be used to iterate through the collection.</returns>
-        </member>
-        <member name="M:UniSharper.Threading.Synchronizer.Awake">
-            <summary>
-            Called when script receive message Awake.
-            </summary>
-        </member>
-        <member name="M:UniSharper.Threading.Synchronizer.OnDestroy">
-            <summary>
-            Called when script receive message Destroy.
-            </summary>
-        </member>
-        <member name="M:UniSharper.Threading.Synchronizer.Update">
-            <summary>
-            Update is called every frame.
-            </summary>
         </member>
         <member name="T:UniSharper.Miscs.DontDestroyOnLoad">
             <summary>

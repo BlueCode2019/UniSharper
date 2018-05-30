@@ -205,7 +205,7 @@ namespace UniSharper.Net.Http
         {
             if (disposing && !disposed)
             {
-                if (Synchronizer.Instance)
+                if (Synchronizer.Instance != null)
                 {
                     Synchronizer.Instance.Remove(this);
                 }
@@ -257,7 +257,7 @@ namespace UniSharper.Net.Http
         {
             contexts = new List<MonoRestRequestAsyncContext>();
 
-            if (Synchronizer.Instance)
+            if (Synchronizer.Instance != null)
             {
                 Synchronizer.Instance.Add(this);
             }

@@ -22,9 +22,10 @@
  *	SOFTWARE.
  */
 
+using ReSharp.Patterns;
 using System.Collections;
 using System.Collections.Generic;
-using UniSharper.Patterns;
+using UniRx;
 
 namespace UniSharper.Threading
 {
@@ -32,18 +33,30 @@ namespace UniSharper.Threading
     /// A <see cref="Synchronizer"/> representing a <see cref="UnityEngine.MonoBehaviour"/> to
     /// synchronize data between child threads and main threads.
     /// </summary>
-    /// <seealso cref="SingletonMonoBehaviour{Synchronizer}"/>
-    public class Synchronizer : SingletonMonoBehaviour<Synchronizer>, ICollection<ISynchronizedObject>
+    /// <seealso cref="Singleton{Synchronizer}"/>
+    /// <seealso cref="ICollection{ISynchronizedObject}"/>
+    public class Synchronizer : Singleton<Synchronizer>, ICollection<ISynchronizedObject>
     {
         #region Fields
 
-        private LinkedList<ISynchronizedObject> synchronizedObjects;
-
         private Queue<ISynchronizedObject> addedObjects;
-
         private Queue<ISynchronizedObject> removedObjects;
+        private List<ISynchronizedObject> synchronizedObjects;
 
         #endregion Fields
+
+        #region Constructors
+
+        private Synchronizer()
+        {
+            synchronizedObjects = new List<ISynchronizedObject>();
+            addedObjects = new Queue<ISynchronizedObject>();
+            removedObjects = new Queue<ISynchronizedObject>();
+
+            Observable.EveryUpdate().Subscribe(Update);
+        }
+
+        #endregion Constructors
 
         #region Properties
 
@@ -182,39 +195,14 @@ namespace UniSharper.Threading
             return GetEnumerator();
         }
 
-        /// <summary>
-        /// Called when script receive message Awake.
-        /// </summary>
-        protected override void Awake()
-        {
-            base.Awake();
-
-            synchronizedObjects = new LinkedList<ISynchronizedObject>();
-            addedObjects = new Queue<ISynchronizedObject>();
-            removedObjects = new Queue<ISynchronizedObject>();
-        }
-
-        /// <summary>
-        /// Called when script receive message Destroy.
-        /// </summary>
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-
-            synchronizedObjects = null;
-        }
-
-        /// <summary>
-        /// Update is called every frame.
-        /// </summary>
-        private void Update()
+        private void Update(long frameCount)
         {
             lock ((synchronizedObjects as ICollection).SyncRoot)
             {
                 while (addedObjects.Count > 0)
                 {
                     ISynchronizedObject obj = addedObjects.Dequeue();
-                    synchronizedObjects.AddLast(obj);
+                    synchronizedObjects.Add(obj);
                 }
 
                 while (removedObjects.Count > 0)
