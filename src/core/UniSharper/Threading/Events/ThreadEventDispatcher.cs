@@ -39,9 +39,9 @@ namespace UniSharper.Threading.Events
 
         private readonly object syncRoot = new object();
         private Queue<Event> eventQueue;
+        private bool isPending = false;
         private Dictionary<string, List<Action<Event>>> listeners = null;
         private Queue<Event> pendingEventQueue;
-        private bool pendingFlag = false;
         private Dictionary<string, List<Action<Event>>> pendingListeners = null;
         private Dictionary<string, List<Action<Event>>> pendingRemovedListeners = null;
 
@@ -116,17 +116,13 @@ namespace UniSharper.Threading.Events
 
             lock (syncRoot)
             {
-                if (pendingFlag)
+                if (isPending)
                 {
-                    // Add to pending listeners
-                    pendingListeners.AddUnique(eventType, new List<Action<Event>>());
-                    pendingListeners[eventType].AddUnique(listener);
+                    AddPendingEventListener(eventType, listener);
                 }
                 else
                 {
-                    // Add to listeners.
-                    listeners.AddUnique(eventType, new List<Action<Event>>());
-                    listeners[eventType].AddUnique(listener);
+                    AddNormalEventListener(eventType, listener);
                 }
             }
         }
@@ -150,7 +146,7 @@ namespace UniSharper.Threading.Events
                     return;
                 }
 
-                if (pendingFlag)
+                if (isPending)
                 {
                     pendingEventQueue.Enqueue(e);
                 }
@@ -223,7 +219,7 @@ namespace UniSharper.Threading.Events
 
             lock (syncRoot)
             {
-                if (pendingFlag)
+                if (isPending)
                 {
                     pendingListeners = new Dictionary<string, List<Action<Event>>>(listeners);
                 }
@@ -258,7 +254,7 @@ namespace UniSharper.Threading.Events
 
             lock (syncRoot)
             {
-                if (pendingFlag)
+                if (isPending)
                 {
                     if (!pendingListeners.ContainsKey(eventType) || !pendingListeners[eventType].Contains(listener))
                     {
@@ -268,11 +264,7 @@ namespace UniSharper.Threading.Events
                 }
                 else
                 {
-                    if (listeners.ContainsKey(eventType))
-                    {
-                        List<Action<Event>> list = listeners[eventType];
-                        list.Remove(listener);
-                    }
+                    RemoveNormalEventListener(eventType, listener);
                 }
             }
         }
@@ -291,7 +283,7 @@ namespace UniSharper.Threading.Events
 
             lock (syncRoot)
             {
-                if (pendingFlag)
+                if (isPending)
                 {
                     if (listeners.ContainsKey(eventType))
                     {
@@ -317,11 +309,11 @@ namespace UniSharper.Threading.Events
         {
             lock (syncRoot)
             {
-                RemovePendingEventListeners();
-                AddPendingEventListeners();
+                HandlePendingRemovedEventListeners();
+                MergePendingEventListeners();
                 AddPendingEvents();
 
-                pendingFlag = true;
+                isPending = true;
 
                 while (eventQueue.Count > 0)
                 {
@@ -338,23 +330,28 @@ namespace UniSharper.Threading.Events
                     }
                 }
 
-                pendingFlag = false;
+                isPending = false;
             }
         }
 
-        /// <summary>
-        /// Adds pending event listeners.
-        /// </summary>
-        private void AddPendingEventListeners()
+        private void AddNormalEventListener(string eventType, Action<Event> listener)
         {
-            listeners = listeners.MergeLeft(pendingListeners);
-
-            pendingListeners.Clear();
+            if (listeners != null)
+            {
+                listeners.AddUnique(eventType, new List<Action<Event>>());
+                listeners[eventType].AddUnique(listener);
+            }
         }
 
-        /// <summary>
-        /// Adds pending events.
-        /// </summary>
+        private void AddPendingEventListener(string eventType, Action<Event> listener)
+        {
+            if (pendingListeners != null)
+            {
+                pendingListeners.AddUnique(eventType, new List<Action<Event>>());
+                pendingListeners[eventType].AddUnique(listener);
+            }
+        }
+
         private void AddPendingEvents()
         {
             while (pendingEventQueue.Count > 0)
@@ -364,22 +361,62 @@ namespace UniSharper.Threading.Events
             }
         }
 
-        /// <summary>
-        /// Checks whether this <see cref="IThreadEventDispatcher"/> has listeners registered.
-        /// </summary>
-        /// <returns><c>true</c> if listeners are registered; <c>false</c> otherwise.</returns>
+        private void HandlePendingRemovedEventListeners()
+        {
+            if (pendingRemovedListeners != null && pendingRemovedListeners.Count > 0)
+            {
+                foreach (KeyValuePair<string, List<Action<Event>>> kvp in pendingRemovedListeners)
+                {
+                    string eventType = kvp.Key;
+                    List<Action<Event>> listeners = kvp.Value;
+
+                    if (listeners != null && listeners.Count > 0)
+                    {
+                        foreach (Action<Event> listener in listeners)
+                        {
+                            RemoveNormalEventListener(eventType, listener);
+                        }
+                    }
+                }
+
+                pendingRemovedListeners.Clear();
+            }
+        }
+
         private bool HasEventListeners()
         {
             return listeners.Count > 0 || pendingListeners.Count > 0;
         }
 
-        /// <summary>
-        /// Removes pending event listeners.
-        /// </summary>
-        private void RemovePendingEventListeners()
+        private void MergePendingEventListeners()
         {
-            listeners = listeners.Except(pendingRemovedListeners)
-                .ToDictionary(pair => pair.Key, pair => pair.Value);
+            if (pendingListeners != null && pendingListeners.Count > 0)
+            {
+                foreach (KeyValuePair<string, List<Action<Event>>> kvp in pendingListeners)
+                {
+                    string eventType = kvp.Key;
+                    List<Action<Event>> listeners = kvp.Value;
+
+                    if (listeners != null && listeners.Count > 0)
+                    {
+                        foreach (Action<Event> listener in listeners)
+                        {
+                            AddNormalEventListener(eventType, listener);
+                        }
+                    }
+                }
+
+                pendingListeners.Clear();
+            }
+        }
+
+        private void RemoveNormalEventListener(string eventType, Action<Event> listener)
+        {
+            if (listeners.ContainsKey(eventType))
+            {
+                List<Action<Event>> list = listeners[eventType];
+                list.Remove(listener);
+            }
         }
 
         #endregion Methods

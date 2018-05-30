@@ -284,27 +284,6 @@
             Synchronizes data between threads.
             </summary>
         </member>
-        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.AddPendingEventListeners">
-            <summary>
-            Adds pending event listeners.
-            </summary>
-        </member>
-        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.AddPendingEvents">
-            <summary>
-            Adds pending events.
-            </summary>
-        </member>
-        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.HasEventListeners">
-            <summary>
-            Checks whether this <see cref="T:UniSharper.Threading.Events.IThreadEventDispatcher"/> has listeners registered.
-            </summary>
-            <returns><c>true</c> if listeners are registered; <c>false</c> otherwise.</returns>
-        </member>
-        <member name="M:UniSharper.Threading.Events.ThreadEventDispatcher.RemovePendingEventListeners">
-            <summary>
-            Removes pending event listeners.
-            </summary>
-        </member>
         <member name="T:UniSharper.Threading.ISynchronizedObject">
             <summary>
             The <see cref="T:UniSharper.Threading.ISynchronizedObject"/> interface defines the object that need to synchronize
