@@ -37,7 +37,7 @@ namespace UniSharper.Timers
 
         private Queue<ITimer> addedTimers;
         private Queue<ITimer> removedTimers;
-        private LinkedList<ITimer> timers;
+        private List<ITimer> timers;
 
         #endregion Fields
 
@@ -50,7 +50,7 @@ namespace UniSharper.Timers
         {
             if (timers == null)
             {
-                timers = new LinkedList<ITimer>();
+                timers = new List<ITimer>();
             }
 
             addedTimers = new Queue<ITimer>();
@@ -64,7 +64,7 @@ namespace UniSharper.Timers
         public TimerGroup(params ITimer[] timers)
             : this()
         {
-            this.timers = new LinkedList<ITimer>(timers);
+            this.timers = new List<ITimer>(timers);
         }
 
         #endregion Constructors
@@ -146,7 +146,7 @@ namespace UniSharper.Timers
             while (addedTimers.Count > 0)
             {
                 ITimer timer = addedTimers.Dequeue();
-                timers.AddLast(timer);
+                timers.Add(timer);
             }
 
             while (removedTimers.Count > 0)

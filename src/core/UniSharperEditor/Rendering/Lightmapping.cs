@@ -74,7 +74,7 @@ namespace UniSharperEditor.Rendering
         /// <summary>
         /// Bakes the prefab lightmaps.
         /// </summary>
-        /// <param name="prefabs">The <see cref="Array"/> of <see cref="PrefabLightmapData"/>.</param>
+        /// <param name="prefabs">The <see cref="System.Array"/> of <see cref="PrefabLightmapData"/>.</param>
         private static void BakePrefabLightmaps(PrefabLightmapData[] prefabs)
         {
             if (prefabs.Length > 0)
@@ -154,7 +154,7 @@ namespace UniSharperEditor.Rendering
         /// <summary>
         /// Make sure the <see cref="GameObject"/> of renderer is lightmap static.
         /// </summary>
-        /// <param name="prefabs">The <see cref="Array"/> of <see cref="PrefabLightmapData"/>.</param>
+        /// <param name="prefabs">The <see cref="System.Array"/> of <see cref="PrefabLightmapData"/>.</param>
         private static void MakeSureRendererGameObjectIsLightmapStatic(PrefabLightmapData[] prefabs)
         {
             if (prefabs.Length > 0)

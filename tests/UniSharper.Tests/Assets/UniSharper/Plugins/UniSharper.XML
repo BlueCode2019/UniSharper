@@ -456,11 +456,53 @@
             The <see cref="T:UniSharper.Rendering.LightmapRendererInfo"/> store data information about lightmap.
             </summary>
         </member>
+        <member name="P:UniSharper.Rendering.LightmapRendererInfo.LightmapIndex">
+            <summary>
+            Gets or sets the index of the lightmap.
+            </summary>
+            <value>The index of the lightmap.</value>
+        </member>
+        <member name="P:UniSharper.Rendering.LightmapRendererInfo.LightmapScaleOffset">
+            <summary>
+            Gets or sets the lightmap scale offset.
+            </summary>
+            <value>The lightmap scale offset.</value>
+        </member>
+        <member name="P:UniSharper.Rendering.LightmapRendererInfo.Renderer">
+            <summary>
+            Gets or sets the renderer.
+            </summary>
+            <value>The renderer.</value>
+        </member>
         <member name="T:UniSharper.Rendering.PrefabLightmapData">
             <summary>
             The class <see cref="T:UniSharper.Rendering.PrefabLightmapData"/> provides lightmap data of prefab storing and reverting.
             </summary>
             <seealso cref="T:UnityEngine.MonoBehaviour"/>
+        </member>
+        <member name="P:UniSharper.Rendering.PrefabLightmapData.LightmapColors">
+            <summary>
+            Sets an array of color of incoming light.
+            </summary>
+            <value>An array of color of incoming light.</value>
+        </member>
+        <member name="P:UniSharper.Rendering.PrefabLightmapData.LightmapDirs">
+            <summary>
+            Sets an array of dominant direction of incoming light.
+            </summary>
+            <value>An array of dominant direction of incoming light.</value>
+        </member>
+        <member name="P:UniSharper.Rendering.PrefabLightmapData.RendererInfos">
+            <summary>
+            Sets the renderer informations.
+            </summary>
+            <value>The renderer informations.</value>
+        </member>
+        <member name="P:UniSharper.Rendering.PrefabLightmapData.ShadowMasks">
+            <summary>
+            Sets an array of occlusion mask per light.
+            </summary>
+            <value>An array of occlusion mask per light.</value>
         </member>
         <member name="M:UniSharper.Rendering.PrefabLightmapData.ApplyStaticLightmap(UniSharper.Rendering.PrefabLightmapData)">
             <summary>
@@ -485,14 +527,24 @@
         </member>
         <member name="T:UniSharper.Rendering.PrefabLightmapExcludedRenderer">
             <summary>
-            The <see cref="!:ExcludedMeshRenderer"/> to define the excluded GameObject that no need to
-            store lightmap data.
+            The <see cref="T:UniSharper.Rendering.PrefabLightmapExcludedRenderer"/> to define the excluded GameObject that no
+            need to store lightmap data.
             </summary>
             <seealso cref="T:UnityEngine.MonoBehaviour"/>
         </member>
         <member name="T:UniSharper.Rendering.TilingSheetDataFormat">
             <summary>
-            Specifies the data format for tiling sheet.
+            Defines the data format of tiling sheet.
+            </summary>
+        </member>
+        <member name="F:UniSharper.Rendering.TilingSheetDataFormat.None">
+            <summary>
+            None.
+            </summary>
+        </member>
+        <member name="F:UniSharper.Rendering.TilingSheetDataFormat.UnityJson">
+            <summary>
+            The JSON format for Unity engine.
             </summary>
         </member>
         <member name="T:UniSharper.Rendering.TextureTilingRenderer">
@@ -506,6 +558,24 @@
             Gets or sets the name of the texture tiling.
             </summary>
             <value>The name of the texture tiling.</value>
+        </member>
+        <member name="M:UniSharper.Rendering.TextureTilingRenderer.LoadData(System.String,System.String)">
+            <summary>
+            Loads the data.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="data">The data.</param>
+        </member>
+        <member name="M:UniSharper.Rendering.TextureTilingRenderer.UpdateMeshUV(System.String)">
+            <summary>
+            Updates the mesh UV information with specified name of texture tiling.
+            </summary>
+            <param name="textureTilingName">Name of texture tiling.</param>
+        </member>
+        <member name="M:UniSharper.Rendering.TextureTilingRenderer.UpdateMeshUV">
+            <summary>
+            Updates the mesh UV information.
+            </summary>
         </member>
         <member name="M:UniSharper.Rendering.TextureTilingRenderer.Awake">
             <summary>
@@ -543,7 +613,27 @@
         </member>
         <member name="T:UniSharper.Timers.TimerState">
             <summary>
-            The state enums of <see cref="T:UniSharper.Timers.ITimer"/>.
+            Defines the states of <see cref="T:UniSharper.Timers.ITimer"/>.
+            </summary>
+        </member>
+        <member name="F:UniSharper.Timers.TimerState.None">
+            <summary>
+            None.
+            </summary>
+        </member>
+        <member name="F:UniSharper.Timers.TimerState.Running">
+            <summary>
+            Represents the timer is in running state.
+            </summary>
+        </member>
+        <member name="F:UniSharper.Timers.TimerState.Pause">
+            <summary>
+            Represents the timer is in pausing state.
+            </summary>
+        </member>
+        <member name="F:UniSharper.Timers.TimerState.Stop">
+            <summary>
+            Represents the timer is in stop state.
             </summary>
         </member>
         <member name="T:UniSharper.Timers.TimerStartedEventHandler">
@@ -1054,23 +1144,22 @@
         </member>
         <member name="M:UniSharper.Timers.TimerManager.Add(UniSharper.Timers.ITimer)">
             <summary>
-            Adds an <see cref="T:UniSharper.Timers.ITimer"/> item to the <see cref="!:ITimerCollection"/>.
+            Adds an <see cref="T:UniSharper.Timers.ITimer"/> item.
             </summary>
-            <param name="item">The <see cref="T:UniSharper.Timers.ITimer"/> object to add to the <see cref="!:ITimerCollection"/>.</param>
+            <param name="timer">The <see cref="T:UniSharper.Timers.ITimer"/> to be added.</param>
         </member>
         <member name="M:UniSharper.Timers.TimerManager.Clear">
             <summary>
-            Removes all <see cref="T:UniSharper.Timers.ITimer"/> items from the <see cref="!:ITimerCollection"/>.
+            Removes all <see cref="T:UniSharper.Timers.ITimer"/> items.
             </summary>
         </member>
         <member name="M:UniSharper.Timers.TimerManager.Contains(UniSharper.Timers.ITimer)">
             <summary>
-            Determines whether the <see cref="!:ITimerCollection"/>. contains a specific <see
-            cref="T:UniSharper.Timers.ITimer"/> object.
+            Determines whether the <see cref="T:UniSharper.Timers.TimerManager"/> contains a specific <see cref="T:UniSharper.Timers.ITimer"/>.
             </summary>
-            <param name="item">The <see cref="T:UniSharper.Timers.ITimer"/> object to locate in the <see cref="!:ITimerCollection"/>.</param>
+            <param name="timer">The <see cref="T:UniSharper.Timers.ITimer"/> to locate in the <see cref="T:UniSharper.Timers.TimerManager"/>.</param>
             <returns>
-            <c>true</c> if <see cref="T:UniSharper.Timers.ITimer"/> item is found in the <see cref="!:ITimerCollection"/>;
+            <c>true</c> if <see cref="T:UniSharper.Timers.ITimer"/> item is found in the <see cref="T:UniSharper.Timers.TimerManager"/>;
             otherwise, <c>false</c>.
             </returns>
         </member>
@@ -1081,13 +1170,12 @@
         </member>
         <member name="M:UniSharper.Timers.TimerManager.Remove(UniSharper.Timers.ITimer)">
             <summary>
-            Removes the first occurrence of a specific object from the <see cref="!:ITimerCollection"/>.
+            Removes the first occurrence of a specific object from the <see cref="T:UniSharper.Timers.TimerManager"/>.
             </summary>
-            <param name="item">The object to remove from the <see cref="!:ITimerCollection"/>.</param>
+            <param name="timer">The <see cref="T:UniSharper.Timers.ITimer"/> to be removed.</param>
             <returns>
-            <c>true</c> if item was successfully removed from the <see cref="!:ITimerCollection"/>;
-            otherwise, <c>false</c>. This method also returns <c>false</c> if item is not found in
-            the original <see cref="!:ITimerCollection"/>.
+            <c>true</c> if item was successfully removed; otherwise, <c>false</c>. This method also
+            returns <c>false</c> if item is not found in the <see cref="T:UniSharper.Timers.TimerManager"/>.
             </returns>
         </member>
         <member name="M:UniSharper.Timers.TimerManager.ResetAll">
@@ -1110,18 +1198,18 @@
             Stops all timers in the <see cref="T:UniSharper.Timers.TimerManager"/>.
             </summary>
         </member>
-        <member name="M:UniSharper.Timers.TimerManager.OnDestroy">
-            <summary>
-            This function is called when the MonoBehaviour will be destroyed.
-            </summary>
-        </member>
         <member name="M:UniSharper.Timers.TimerManager.OnApplicationPause(System.Boolean)">
             <summary>
             This function is called when the application pauses.
             </summary>
             <param name="pauseStatus"><c>true</c> if the application is paused, else <c>false</c>.</param>
         </member>
-        <member name="M:UniSharper.Timers.TimerManager.Update">
+        <member name="M:UniSharper.Timers.TimerManager.OnApplicationQuit(UniRx.Unit)">
+            <summary>
+            This function is called when the application quit.
+            </summary>
+        </member>
+        <member name="M:UniSharper.Timers.TimerManager.Update(System.Int64)">
             <summary>
             Update is called every frame.
             </summary>

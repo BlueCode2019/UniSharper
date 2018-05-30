@@ -34,8 +34,7 @@ namespace UniSharperEditor.Timers
     /// The <see cref="EditorTimerManager"/> is a convenience class for managing editor timers. This
     /// class cannot be inherited.
     /// </summary>
-    /// <seealso cref="SingletonBase{EditorTimerManager}"/>
-    /// <seealso cref="ITimerCollection"/>
+    /// <seealso cref="Singleton{EditorTimerManager}"/>
     [InitializeOnEditorStartup(int.MaxValue)]
     internal sealed class EditorTimerManager : Singleton<EditorTimerManager>
     {

@@ -48,6 +48,10 @@ namespace UniSharper.Rendering
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the index of the lightmap.
+        /// </summary>
+        /// <value>The index of the lightmap.</value>
         public int LightmapIndex
         {
             get
@@ -60,6 +64,10 @@ namespace UniSharper.Rendering
             }
         }
 
+        /// <summary>
+        /// Gets or sets the lightmap scale offset.
+        /// </summary>
+        /// <value>The lightmap scale offset.</value>
         public Vector4 LightmapScaleOffset
         {
             get
@@ -72,6 +80,10 @@ namespace UniSharper.Rendering
             }
         }
 
+        /// <summary>
+        /// Gets or sets the renderer.
+        /// </summary>
+        /// <value>The renderer.</value>
         public Renderer Renderer
         {
             get
@@ -112,6 +124,10 @@ namespace UniSharper.Rendering
 
         #region Properties
 
+        /// <summary>
+        /// Sets an array of color of incoming light.
+        /// </summary>
+        /// <value>An array of color of incoming light.</value>
         public Texture2D[] LightmapColors
         {
             set
@@ -120,6 +136,10 @@ namespace UniSharper.Rendering
             }
         }
 
+        /// <summary>
+        /// Sets an array of dominant direction of incoming light.
+        /// </summary>
+        /// <value>An array of dominant direction of incoming light.</value>
         public Texture2D[] LightmapDirs
         {
             set
@@ -128,6 +148,10 @@ namespace UniSharper.Rendering
             }
         }
 
+        /// <summary>
+        /// Sets the renderer informations.
+        /// </summary>
+        /// <value>The renderer informations.</value>
         public LightmapRendererInfo[] RendererInfos
         {
             set
@@ -136,6 +160,10 @@ namespace UniSharper.Rendering
             }
         }
 
+        /// <summary>
+        /// Sets an array of occlusion mask per light.
+        /// </summary>
+        /// <value>An array of occlusion mask per light.</value>
         public Texture2D[] ShadowMasks
         {
             set

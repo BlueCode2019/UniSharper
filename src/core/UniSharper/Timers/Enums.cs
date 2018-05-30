@@ -25,13 +25,28 @@
 namespace UniSharper.Timers
 {
     /// <summary>
-    /// The state enums of <see cref="ITimer"/>.
+    /// Defines the states of <see cref="ITimer"/>.
     /// </summary>
     public enum TimerState
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None,
+
+        /// <summary>
+        /// Represents the timer is in running state.
+        /// </summary>
         Running,
+
+        /// <summary>
+        /// Represents the timer is in pausing state.
+        /// </summary>
         Pause,
+
+        /// <summary>
+        /// Represents the timer is in stop state.
+        /// </summary>
         Stop
     }
 }

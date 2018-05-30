@@ -27,8 +27,8 @@ using UnityEngine;
 namespace UniSharper.Rendering
 {
     /// <summary>
-    /// The <see cref="ExcludedMeshRenderer"/> to define the excluded GameObject that no need to
-    /// store lightmap data.
+    /// The <see cref="PrefabLightmapExcludedRenderer"/> to define the excluded GameObject that no
+    /// need to store lightmap data.
     /// </summary>
     /// <seealso cref="MonoBehaviour"/>
     [RequireComponent(typeof(MeshRenderer))]

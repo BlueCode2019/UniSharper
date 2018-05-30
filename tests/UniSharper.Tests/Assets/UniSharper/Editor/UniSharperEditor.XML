@@ -302,7 +302,7 @@
             <summary>
             Bakes the prefab lightmaps.
             </summary>
-            <param name="prefabs">The <see cref="!:Array"/> of <see cref="T:UniSharper.Rendering.PrefabLightmapData"/>.</param>
+            <param name="prefabs">The <see cref="T:System.Array"/> of <see cref="T:UniSharper.Rendering.PrefabLightmapData"/>.</param>
         </member>
         <member name="M:UniSharperEditor.Rendering.Lightmapping.GenerateLightmapInfo(UnityEngine.GameObject,System.Collections.Generic.List{UniSharper.Rendering.LightmapRendererInfo},System.Collections.Generic.List{UnityEngine.Texture2D},System.Collections.Generic.List{UnityEngine.Texture2D},System.Collections.Generic.List{UnityEngine.Texture2D})">
             <summary>
@@ -320,7 +320,7 @@
             <summary>
             Make sure the <see cref="T:UnityEngine.GameObject"/> of renderer is lightmap static.
             </summary>
-            <param name="prefabs">The <see cref="!:Array"/> of <see cref="T:UniSharper.Rendering.PrefabLightmapData"/>.</param>
+            <param name="prefabs">The <see cref="T:System.Array"/> of <see cref="T:UniSharper.Rendering.PrefabLightmapData"/>.</param>
         </member>
         <member name="M:UniSharperEditor.Rendering.Lightmapping.OnLightmappingCompleted">
             <summary>
@@ -384,7 +384,7 @@
             </summary>
             <param name="path">The path of the asset.</param>
             <returns><c>true</c> if it is a scene asset; otherwise, <c>false</c>.</returns>
-            <exception cref="!:ArgumentNullException"><c>path</c> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException"><c>path</c> is <c>null</c>.</exception>
         </member>
         <member name="T:UniSharperEditor.PrefabUtil">
             <summary>
@@ -436,8 +436,7 @@
             The <see cref="T:UniSharperEditor.Timers.EditorTimerManager"/> is a convenience class for managing editor timers. This
             class cannot be inherited.
             </summary>
-            <seealso cref="!:SingletonBase&lt;EditorTimerManager&gt;"/>
-            <seealso cref="!:ITimerCollection"/>
+            <seealso cref="T:ReSharp.Patterns.Singleton`1"/>
         </member>
         <member name="M:UniSharperEditor.Timers.EditorTimerManager.#cctor">
             <summary>

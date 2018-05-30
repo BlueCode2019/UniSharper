@@ -30,11 +30,18 @@ using UniSharper.Rendering.DataParsers;
 namespace UniSharper.Rendering
 {
     /// <summary>
-    /// Specifies the data format for tiling sheet.
+    /// Defines the data format of tiling sheet.
     /// </summary>
     public enum TilingSheetDataFormat
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None,
+
+        /// <summary>
+        /// The JSON format for Unity engine.
+        /// </summary>
         UnityJson
     }
 
@@ -45,6 +52,9 @@ namespace UniSharper.Rendering
     public class TextureTilingRenderer : MonoBehaviour
     {
         #region Fields
+
+        [SerializeField]
+        private bool AutoUpdateMeshUV = false;
 
         [SerializeField]
         private TextAsset dataFileAsset = null;
@@ -60,9 +70,6 @@ namespace UniSharper.Rendering
         private string textureTilingName;
 
         private Dictionary<string, Rect> tilingData;
-
-        [SerializeField]
-        private bool AutoUpdateMeshUV = false;
 
         #endregion Fields
 
@@ -102,6 +109,11 @@ namespace UniSharper.Rendering
 
         #region Methods
 
+        /// <summary>
+        /// Loads the data.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="data">The data.</param>
         public void LoadData(string name, string data)
         {
             if (dataFormat != TilingSheetDataFormat.None)
@@ -111,12 +123,19 @@ namespace UniSharper.Rendering
             }
         }
 
+        /// <summary>
+        /// Updates the mesh UV information with specified name of texture tiling.
+        /// </summary>
+        /// <param name="textureTilingName">Name of texture tiling.</param>
         public void UpdateMeshUV(string textureTilingName)
         {
             this.textureTilingName = textureTilingName;
             UpdateMeshUV();
         }
 
+        /// <summary>
+        /// Updates the mesh UV information.
+        /// </summary>
         public void UpdateMeshUV()
         {
             if (tilingData == null || !Mesh || Mesh.uv == null)

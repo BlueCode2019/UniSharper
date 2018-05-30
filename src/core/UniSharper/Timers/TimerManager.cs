@@ -22,7 +22,9 @@
  *	SOFTWARE.
  */
 
+using ReSharp.Patterns;
 using System;
+using UniRx;
 using UniSharper.Patterns;
 using UnityEngine;
 
@@ -34,13 +36,31 @@ namespace UniSharper.Timers
     /// </summary>
     /// <seealso cref="SingletonMonoBehaviour{TimerManager}"/>
     /// <seealso cref="ITimerList"/>
-    public sealed class TimerManager : SingletonMonoBehaviour<TimerManager>
+    public sealed class TimerManager : Singleton<TimerManager>
     {
         #region Fields
 
         private ITimerList timerList;
 
         #endregion Fields
+
+        #region Constructors
+
+        private TimerManager()
+        {
+            Observable.EveryUpdate().Subscribe(Update);
+
+            try
+            {
+                MainThreadDispatcher.OnApplicationQuitAsObservable().Subscribe(OnApplicationQuit);
+                MainThreadDispatcher.OnApplicationPauseAsObservable().Subscribe(OnApplicationPause);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        #endregion Constructors
 
         #region Properties
 
@@ -83,16 +103,16 @@ namespace UniSharper.Timers
         #region Methods
 
         /// <summary>
-        /// Adds an <see cref="ITimer"/> item to the <see cref="ITimerCollection"/>.
+        /// Adds an <see cref="ITimer"/> item.
         /// </summary>
-        /// <param name="item">The <see cref="ITimer"/> object to add to the <see cref="ITimerCollection"/>.</param>
+        /// <param name="timer">The <see cref="ITimer"/> to be added.</param>
         public void Add(ITimer timer)
         {
             TimerList.Add(timer);
         }
 
         /// <summary>
-        /// Removes all <see cref="ITimer"/> items from the <see cref="ITimerCollection"/>.
+        /// Removes all <see cref="ITimer"/> items.
         /// </summary>
         public void Clear()
         {
@@ -100,12 +120,11 @@ namespace UniSharper.Timers
         }
 
         /// <summary>
-        /// Determines whether the <see cref="ITimerCollection"/>. contains a specific <see
-        /// cref="ITimer"/> object.
+        /// Determines whether the <see cref="TimerManager"/> contains a specific <see cref="ITimer"/>.
         /// </summary>
-        /// <param name="item">The <see cref="ITimer"/> object to locate in the <see cref="ITimerCollection"/>.</param>
+        /// <param name="timer">The <see cref="ITimer"/> to locate in the <see cref="TimerManager"/>.</param>
         /// <returns>
-        /// <c>true</c> if <see cref="ITimer"/> item is found in the <see cref="ITimerCollection"/>;
+        /// <c>true</c> if <see cref="ITimer"/> item is found in the <see cref="TimerManager"/>;
         /// otherwise, <c>false</c>.
         /// </returns>
         public bool Contains(ITimer timer)
@@ -122,13 +141,12 @@ namespace UniSharper.Timers
         }
 
         /// <summary>
-        /// Removes the first occurrence of a specific object from the <see cref="ITimerCollection"/>.
+        /// Removes the first occurrence of a specific object from the <see cref="TimerManager"/>.
         /// </summary>
-        /// <param name="item">The object to remove from the <see cref="ITimerCollection"/>.</param>
+        /// <param name="timer">The <see cref="ITimer"/> to be removed.</param>
         /// <returns>
-        /// <c>true</c> if item was successfully removed from the <see cref="ITimerCollection"/>;
-        /// otherwise, <c>false</c>. This method also returns <c>false</c> if item is not found in
-        /// the original <see cref="ITimerCollection"/>.
+        /// <c>true</c> if item was successfully removed; otherwise, <c>false</c>. This method also
+        /// returns <c>false</c> if item is not found in the <see cref="TimerManager"/>.
         /// </returns>
         public bool Remove(ITimer timer)
         {
@@ -168,16 +186,6 @@ namespace UniSharper.Timers
         }
 
         /// <summary>
-        /// This function is called when the MonoBehaviour will be destroyed.
-        /// </summary>
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-
-            timerList = null;
-        }
-
-        /// <summary>
         /// This function is called when the application pauses.
         /// </summary>
         /// <param name="pauseStatus"><c>true</c> if the application is paused, else <c>false</c>.</param>
@@ -196,9 +204,17 @@ namespace UniSharper.Timers
         }
 
         /// <summary>
+        /// This function is called when the application quit.
+        /// </summary>
+        private void OnApplicationQuit(Unit unit)
+        {
+            timerList = null;
+        }
+
+        /// <summary>
         /// Update is called every frame.
         /// </summary>
-        private void Update()
+        private void Update(long frameCount)
         {
             if (timerList != null)
             {
@@ -212,7 +228,7 @@ namespace UniSharper.Timers
                     }
                     catch (Exception exception)
                     {
-                        Debug.LogException(exception, this);
+                        Debug.LogException(exception);
                     }
                 });
             }

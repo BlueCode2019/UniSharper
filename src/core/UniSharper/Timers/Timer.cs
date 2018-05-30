@@ -351,7 +351,7 @@ namespace UniSharper.Timers
         {
             if (disposing && !disposed)
             {
-                if (TimerManager.Instance)
+                if (TimerManager.Instance != null)
                 {
                     TimerManager.Instance.Remove(this);
                 }
@@ -366,7 +366,7 @@ namespace UniSharper.Timers
         /// </summary>
         protected virtual void Initialize()
         {
-            if (TimerManager.Instance)
+            if (TimerManager.Instance != null)
             {
                 TimerManager.Instance.Add(this);
             }

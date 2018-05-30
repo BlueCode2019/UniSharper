@@ -59,7 +59,7 @@ namespace UniSharperEditor
             if (targetEnum != null)
             {
                 EditorGUI.BeginProperty(position, label, property);
-                Enum enumMask = EditorGUI.EnumMaskField(position, propertyDisplayName, targetEnum);
+                Enum enumMask = EditorGUI.EnumFlagsField(position, propertyDisplayName, targetEnum);
                 property.intValue = (int)Convert.ChangeType(enumMask, targetEnum.GetType());
                 EditorGUI.EndProperty();
             }
