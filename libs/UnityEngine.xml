@@ -5658,14 +5658,14 @@ Here is an example of handling the callback:</para>
     </member>
     <member name="M:UnityEngine.Application.LoadLevel(System.Int32)">
       <summary>
-        <para>Loads the level by its name or index.</para>
+        <para>Note: This is now obsolete. Use SceneManager.LoadScene instead.</para>
       </summary>
       <param name="index">The level to load.</param>
       <param name="name">The name of the level to load.</param>
     </member>
     <member name="M:UnityEngine.Application.LoadLevel(System.String)">
       <summary>
-        <para>Loads the level by its name or index.</para>
+        <para>Note: This is now obsolete. Use SceneManager.LoadScene instead.</para>
       </summary>
       <param name="index">The level to load.</param>
       <param name="name">The name of the level to load.</param>
@@ -9856,7 +9856,7 @@ If called outside of a rendering callback and stereo is enabled, it will return 
       <summary>
         <para>Makes this camera's settings match other camera.</para>
       </summary>
-      <param name="other"></param>
+      <param name="other">Copy camera settings to the other camera.</param>
     </member>
     <member name="M:UnityEngine.Camera.CopyStereoDeviceProjectionMatrixToNonJittered(UnityEngine.Camera/StereoscopicEye)">
       <summary>
@@ -9960,7 +9960,7 @@ The default value is Camera.MonoOrStereoscopicEye.Left, so Camera.MonoOrStereosc
       <param name="cubemap">The cube map to render to.</param>
       <param name="faceMask">A bitmask which determines which of the six faces are rendered to.</param>
       <returns>
-        <para>False is rendering fails, else true.</para>
+        <para>False if rendering fails, else true.</para>
       </returns>
     </member>
     <member name="M:UnityEngine.Camera.RenderToCubemap(UnityEngine.RenderTexture,System.Int32)">
@@ -9970,7 +9970,7 @@ The default value is Camera.MonoOrStereoscopicEye.Left, so Camera.MonoOrStereosc
       <param name="faceMask">A bitfield indicating which cubemap faces should be rendered into.</param>
       <param name="cubemap">The texture to render to.</param>
       <returns>
-        <para>False is rendering fails, else true.</para>
+        <para>False if rendering fails, else true.</para>
       </returns>
     </member>
     <member name="M:UnityEngine.Camera.RenderWithShader(UnityEngine.Shader,System.String)">
@@ -50388,6 +50388,11 @@ See Also: ReflectionProbeTimeSlicingMode.</para>
         <para>Reflections gathered from default reflection and reflections probes.</para>
       </summary>
     </member>
+    <member name="F:UnityEngine.Rendering.BuiltinRenderTextureType.RenderTexture">
+      <summary>
+        <para>The given RenderTexture.</para>
+      </summary>
+    </member>
     <member name="F:UnityEngine.Rendering.BuiltinRenderTextureType.ResolvedDepth">
       <summary>
         <para>Resolved depth buffer from deferred.</para>
@@ -51965,6 +51970,11 @@ Allows for CPU determination of whether the GPU has passed the point in its proc
     <member name="F:UnityEngine.Rendering.GraphicsDeviceType.PlayStationVita">
       <summary>
         <para>PlayStation Vita graphics API.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Rendering.GraphicsDeviceType.Switch">
+      <summary>
+        <para>Nintendo Switch graphics API.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Rendering.GraphicsDeviceType.Vulkan">
@@ -62347,7 +62357,7 @@ Rotation of the tree on X-Z plane (in radians).</para>
     </member>
     <member name="P:UnityEngine.TreePrototype.prefab">
       <summary>
-        <para>Retrieves the actual GameObect used by the tree.</para>
+        <para>Retrieves the actual GameObject used by the tree.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.U2D.SpriteAtlas">
@@ -62369,6 +62379,12 @@ Rotation of the tree on X-Z plane (in radians).</para>
       <summary>
         <para>Get the tag of this SpriteAtlas.</para>
       </summary>
+    </member>
+    <member name="M:UnityEngine.U2D.SpriteAtlas.CanBindTo(UnityEngine.Sprite)">
+      <summary>
+        <para>Return true if Sprite is packed into this SpriteAtlas.</para>
+      </summary>
+      <param name="sprite"></param>
     </member>
     <member name="M:UnityEngine.U2D.SpriteAtlas.GetSprite(System.String)">
       <summary>
@@ -62396,6 +62412,12 @@ Rotation of the tree on X-Z plane (in radians).</para>
       <summary>
         <para>Manages SpriteAtlas during runtime.</para>
       </summary>
+    </member>
+    <member name="?:UnityEngine.U2D.SpriteAtlasManager.atlasRegistered(System.Action`1&lt;UnityEngine.U2D.SpriteAtlas&gt;)">
+      <summary>
+        <para>Trigger when a SpriteAtlas is registered via invoking the callback in U2D.SpriteAtlasManager.atlasRequested.</para>
+      </summary>
+      <param name="value"></param>
     </member>
     <member name="?:UnityEngine.U2D.SpriteAtlasManager.atlasRequested(UnityEngine.U2D.SpriteAtlasManager/RequestAtlasCallback)">
       <summary>

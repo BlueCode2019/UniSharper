@@ -105,7 +105,6 @@ del "%25TargetPath%25\*.*" /f/q
 :: UniSharper.Samples
 xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s /e /i /y
 
-
 :: Release
 SET ReleasePath="$(SolutionDir)bin\$(SolutionName)\Plugins"
 IF $(ConfigurationName) == Release (

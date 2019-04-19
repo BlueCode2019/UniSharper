@@ -72,7 +72,7 @@ namespace UniSharper.Threading.Events
         public string EventType
         {
             get;
-            private set;
+            set;
         }
 
         #endregion Properties

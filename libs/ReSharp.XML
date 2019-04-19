@@ -68,11 +68,6 @@
             </summary>
             <returns><c>true</c> if the command is aborted or executed, <c>false</c> otherwise.</returns>
         </member>
-        <member name="M:ReSharp.Patterns.Command.AsyncMacroCommand.Dispose">
-            <summary>
-            Disposes objects.
-            </summary>
-        </member>
         <member name="M:ReSharp.Patterns.Command.AsyncMacroCommand.ExecuteNextSubCommand">
             <summary>
             Executes the next <see cref="T:ReSharp.Patterns.Command.IAsyncCommand"/>.
@@ -148,15 +143,6 @@
             cref="T:ReSharp.Patterns.Command.IUndoableCommand"/>, perform undo and redo operation.
             </summary>
         </member>
-        <member name="P:ReSharp.Patterns.Command.IUndoableMacroCommand.CanUndo">
-            <summary>
-            Gets a value indicating whether this <see cref="T:ReSharp.Patterns.Command.IUndoableMacroCommand"/> can perform undo operation.
-            </summary>
-            <value>
-            <c>true</c> if this <see cref="T:ReSharp.Patterns.Command.IUndoableMacroCommand"/> can perform undo operation;
-            otherwise, <c>false</c>.
-            </value>
-        </member>
         <member name="P:ReSharp.Patterns.Command.IUndoableMacroCommand.CanRedo">
             <summary>
             Gets a value indicating whether this <see cref="T:ReSharp.Patterns.Command.IUndoableMacroCommand"/> can perform redo operation.
@@ -166,20 +152,29 @@
             otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="P:ReSharp.Patterns.Command.IUndoableMacroCommand.CanUndo">
+            <summary>
+            Gets a value indicating whether this <see cref="T:ReSharp.Patterns.Command.IUndoableMacroCommand"/> can perform undo operation.
+            </summary>
+            <value>
+            <c>true</c> if this <see cref="T:ReSharp.Patterns.Command.IUndoableMacroCommand"/> can perform undo operation;
+            otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="M:ReSharp.Patterns.Command.IUndoableMacroCommand.Execute(ReSharp.Patterns.Command.IUndoableCommand)">
             <summary>
             Executes the specific <see cref="T:ReSharp.Patterns.Command.IUndoableCommand"/>.
             </summary>
             <param name="command">The sepecified <see cref="T:ReSharp.Patterns.Command.IUndoableCommand"/> to execute.</param>
         </member>
-        <member name="M:ReSharp.Patterns.Command.IUndoableMacroCommand.Undo">
-            <summary>
-            Performs undo operation.
-            </summary>
-        </member>
         <member name="M:ReSharp.Patterns.Command.IUndoableMacroCommand.Redo">
             <summary>
             Performs redo operation.
+            </summary>
+        </member>
+        <member name="M:ReSharp.Patterns.Command.IUndoableMacroCommand.Undo">
+            <summary>
+            Performs undo operation.
             </summary>
         </member>
         <member name="T:ReSharp.Patterns.Command.MacroCommand">
@@ -252,68 +247,149 @@
             Performs undo operation.
             </summary>
         </member>
-        <member name="T:ReSharp.Patterns.IPooledObject">
+        <member name="T:ReSharp.Patterns.IPool`1">
             <summary>
-            Interface IPooledObject defined the <see cref="T:System.Object"/> that need to be added into object pool.
+            Interface for managing a pool of objects.
             </summary>
-            <seealso cref="T:System.ICloneable"/>
-        </member>
-        <member name="M:ReSharp.Patterns.IPooledObject.OnSpawn">
-            <summary>
-            Called when <see cref="T:ReSharp.Patterns.ObjectPool`1"/> spawn the instance of <see cref="T:ReSharp.Patterns.IPooledObject"/>.
-            </summary>
-        </member>
-        <member name="M:ReSharp.Patterns.IPooledObject.OnDespawn">
-            <summary>
-            Called when <see cref="T:ReSharp.Patterns.ObjectPool`1"/> despawn the instance of <see cref="T:ReSharp.Patterns.IPooledObject"/>.
-            </summary>
-        </member>
-        <member name="T:ReSharp.Patterns.ObjectPool`1">
-            <summary>
-            Represents a object pool.
-            </summary>
-            <typeparam name="T">Specifies the object type of the pool.</typeparam>
+            <typeparam name="T">The type of objects in the pool.</typeparam>
             <seealso cref="T:System.IDisposable"/>
         </member>
-        <member name="M:ReSharp.Patterns.ObjectPool`1.#ctor(System.Func{`0})">
+        <member name="M:ReSharp.Patterns.IPool`1.Acquire">
             <summary>
-            Initializes a new instance of the <see cref="T:ReSharp.Patterns.ObjectPool`1"/> class with the method to
-            create object defined.
+            Return a object from the pool.
             </summary>
-            <param name="objectGenerateMethod">The method to create object defined.</param>
-            <exception cref="T:System.ArgumentNullException"><c>objectGenerateMethod</c> is <c>null</c>.</exception>
+            <returns>The object in the pool.</returns>
         </member>
-        <member name="M:ReSharp.Patterns.ObjectPool`1.Despawn(`0)">
+        <member name="M:ReSharp.Patterns.IPool`1.AcquireSome(System.Int32)">
             <summary>
-            Despawns the specified <see cref="T:ReSharp.Patterns.IPooledObject"/>.
+            Return objects from the pool
             </summary>
-            <param name="pooledObject">The instance of <see cref="T:ReSharp.Patterns.IPooledObject"/>.</param>
-            <exception cref="T:System.ArgumentNullException"><c>pooledObject</c> is <c>null</c>.</exception>
+            <param name="count">The count of objects need to return.</param>
+            <returns>An array of object contains objects in the pool.</returns>
         </member>
-        <member name="M:ReSharp.Patterns.ObjectPool`1.DespawnAll">
+        <member name="M:ReSharp.Patterns.IPool`1.Initialize(System.Int32)">
             <summary>
-            Despawns all <see cref="T:ReSharp.Patterns.IPooledObject"/> s.
+            Pre-generate objects of the pool defined.
             </summary>
+            <param name="count">The count of objects to generate.</param>
         </member>
-        <member name="M:ReSharp.Patterns.ObjectPool`1.Dispose">
+        <member name="M:ReSharp.Patterns.IPool`1.IsInPool(`0)">
             <summary>
-            Releases the managed and unmanaged resources used by the <see cref="T:ReSharp.Patterns.ObjectPool`1"/>.
+            Determines whether the object is in the pool.
             </summary>
+            <param name="instance">The object to query.</param>
+            <returns><c>true</c> if the object is in the pool; otherwise, <c>false</c>.</returns>
         </member>
-        <member name="M:ReSharp.Patterns.ObjectPool`1.IsSpawned(`0)">
+        <member name="M:ReSharp.Patterns.IPool`1.Release(`0)">
             <summary>
-            Determines whether the specified <see cref="T:ReSharp.Patterns.IPooledObject"/> is spawned.
+            Releases a object to the pool.
             </summary>
-            <param name="instance">The instance of <see cref="T:ReSharp.Patterns.IPooledObject"/>.</param>
-            <returns><c>true</c> if the specified instance is spawned; otherwise, <c>false</c>.</returns>
+            <param name="instance">The object to release.</param>
         </member>
-        <member name="M:ReSharp.Patterns.ObjectPool`1.Spawn">
+        <member name="M:ReSharp.Patterns.IPool`1.ReleaseAll">
             <summary>
-            Spawns the instance from pool.
+            Releases all objects to the pool.
             </summary>
-            <returns>The instance spawned from pool.</returns>
         </member>
-        <member name="M:ReSharp.Patterns.ObjectPool`1.Dispose(System.Boolean)">
+        <member name="M:ReSharp.Patterns.IPool`1.ReleaseSome(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Releases some objects to the pool.
+            </summary>
+            <param name="collection">The collection whose elements are acquired from this pool.</param>
+        </member>
+        <member name="T:ReSharp.Patterns.IPooledObject">
+            <summary>
+            Interface for the object that need to be hold in <see cref="T:ReSharp.Patterns.IPool`1"/>.
+            </summary>
+        </member>
+        <member name="M:ReSharp.Patterns.IPooledObject.OnAcquire">
+            <summary>
+            Called when the object is acquired from <see cref="T:ReSharp.Patterns.IPool`1"/>.
+            </summary>
+        </member>
+        <member name="M:ReSharp.Patterns.IPooledObject.OnReleased">
+            <summary>
+            Called when the object is released to <see cref="T:ReSharp.Patterns.IPool`1"/>.
+            </summary>
+        </member>
+        <member name="T:ReSharp.Patterns.Pool`1">
+            <summary>
+            Simple pool implementation of interface <see cref="T:ReSharp.Patterns.IPool`1"/>.
+            </summary>
+            <typeparam name="T">The type of objects in the pool.</typeparam>
+            <seealso cref="T:ReSharp.Patterns.IPool`1"/>
+        </member>
+        <member name="M:ReSharp.Patterns.Pool`1.#ctor(System.Func{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReSharp.Patterns.Pool`1"/> class with a delegate to generate
+            the defined object.
+            </summary>
+            <param name="objectGenerator">The delegate to genreate the defined object.</param>
+            <exception cref="T:System.ArgumentNullException"><c>objectGenerator</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:ReSharp.Patterns.Pool`1.Finalize">
+            <summary>
+            Finalizes an instance of the <see cref="T:ReSharp.Patterns.Pool`1"/> class.
+            </summary>
+        </member>
+        <member name="M:ReSharp.Patterns.Pool`1.Acquire">
+            <summary>
+            Return a object from the pool.
+            </summary>
+            <returns>The object in the pool.</returns>
+        </member>
+        <member name="M:ReSharp.Patterns.Pool`1.AcquireSome(System.Int32)">
+            <summary>
+            Return objects from the pool
+            </summary>
+            <param name="count">The count of objects need to return.</param>
+            <returns>An array of object contains objects in the pool.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"><c>count</c> is out of range.</exception>
+        </member>
+        <member name="M:ReSharp.Patterns.Pool`1.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting
+            unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:ReSharp.Patterns.Pool`1.Initialize(System.Int32)">
+            <summary>
+            Pre-generate objects of the pool defined.
+            </summary>
+            <param name="count">The count of objects to generate.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"><c>count</c> is out of range.</exception>
+        </member>
+        <member name="M:ReSharp.Patterns.Pool`1.IsInPool(`0)">
+            <summary>
+            Determines whether the object is in the pool.
+            </summary>
+            <param name="instance">The object to query.</param>
+            <returns><c>true</c> if the object is in the pool; otherwise, <c>false</c>.</returns>
+            <exception cref="T:System.ArgumentNullException"><c>instance</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:ReSharp.Patterns.Pool`1.Release(`0)">
+            <summary>
+            Releases a object to the pool.
+            </summary>
+            <param name="instance">The object to release.</param>
+            <exception cref="T:System.ArgumentNullException"><c>instance</c> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentException">
+            Please make sure the instance is acquired from pool!
+            </exception>
+        </member>
+        <member name="M:ReSharp.Patterns.Pool`1.ReleaseAll">
+            <summary>
+            Releases all objects to the pool.
+            </summary>
+        </member>
+        <member name="M:ReSharp.Patterns.Pool`1.ReleaseSome(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Releases some objects to the pool.
+            </summary>
+            <param name="collection">The collection whose elements are acquired from this pool.</param>
+            <exception cref="T:System.ArgumentNullException"><c>collection</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:ReSharp.Patterns.Pool`1.Dispose(System.Boolean)">
             <summary>
             Releases unmanaged and - optionally - managed resources.
             </summary>
@@ -321,21 +397,6 @@
             <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
             unmanaged resources.
             </param>
-        </member>
-        <member name="M:ReSharp.Patterns.ObjectPool`1.Add(`0)">
-            <summary>
-            Adds the specified instance <see cref="T:ReSharp.Patterns.IPooledObject"/> into pool.
-            </summary>
-            <param name="instance">The instance of <see cref="T:ReSharp.Patterns.IPooledObject"/>.</param>
-        </member>
-        <member name="M:ReSharp.Patterns.ObjectPool`1.CheckDisposed">
-            <summary>
-            Throws an <see cref="T:System.ObjectDisposedException"/> if the <see cref="T:ReSharp.Patterns.ObjectPool`1"/> is in
-            the disposed state.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">
-            Cannot access a disposed object. Object name: 'ReSharp.Patterns.ObjectPool{T}'.
-            </exception>
         </member>
         <member name="T:ReSharp.Patterns.Singleton`1">
             <summary>
@@ -531,11 +592,11 @@
             <summary>
             Subtracts a <see cref="T:ReSharp.Security.SecureDouble"/> structure from a <see cref="T:ReSharp.Security.SecureDouble"/> structure.
             </summary>
-            <param name="left">A <see cref="T:ReSharp.Security.SecureDouble"/> structure.</param>
-            <param name="right">A <see cref="T:ReSharp.Security.SecureDouble"/> structure.</param>
+            <param name="x">A <see cref="T:ReSharp.Security.SecureDouble"/> structure.</param>
+            <param name="y">A <see cref="T:ReSharp.Security.SecureDouble"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureDouble"/> structure whose <paramref name="Value"/> property contains
-            the results of the subtraction.
+            A <see cref="T:ReSharp.Security.SecureDouble"/> structure whose <see name="Value"/> property contains the
+            results of the subtraction.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureDouble.op_Decrement(ReSharp.Security.SecureDouble)">
@@ -544,8 +605,8 @@
             </summary>
             <param name="value">The value to decrement.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureDouble"/> structure whose <paramref name="Value"/> property contains
-            the value of <c>value</c> decremented by 1.
+            A <see cref="T:ReSharp.Security.SecureDouble"/> structure whose <see name="Value"/> property contains the
+            value of <c>value</c> decremented by 1.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureDouble.op_Inequality(ReSharp.Security.SecureDouble,ReSharp.Security.SecureDouble)">
@@ -568,8 +629,7 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureDouble"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureDouble"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureDouble"/> structure whose <paramref name="Value"/> property contains
-            the remainder.
+            A <see cref="T:ReSharp.Security.SecureDouble"/> structure whose <see name="Value"/> property contains the remainder.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureDouble.op_Multiply(ReSharp.Security.SecureDouble,ReSharp.Security.SecureDouble)">
@@ -579,8 +639,8 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureDouble"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureDouble"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureDouble"/> structure whose <paramref name="Value"/> property contains
-            the product of the two parameters.
+            A <see cref="T:ReSharp.Security.SecureDouble"/> structure whose <see name="Value"/> property contains the
+            product of the two parameters.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureDouble.op_Division(ReSharp.Security.SecureDouble,ReSharp.Security.SecureDouble)">
@@ -590,8 +650,8 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureDouble"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureDouble"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureDouble"/> structure whose <paramref name="Value"/> property contains
-            the result of the division.
+            A <see cref="T:ReSharp.Security.SecureDouble"/> structure whose <see name="Value"/> property contains the
+            result of the division.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureDouble.op_Addition(ReSharp.Security.SecureDouble,ReSharp.Security.SecureDouble)">
@@ -601,8 +661,8 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureDouble"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureDouble"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureDouble"/> structure whose <paramref name="Value"/> property contains
-            the sum of the specified <see cref="T:ReSharp.Security.SecureDouble"/> structures.
+            A <see cref="T:ReSharp.Security.SecureDouble"/> structure whose <see name="Value"/> property contains the
+            sum of the specified <see cref="T:ReSharp.Security.SecureDouble"/> structures.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureDouble.op_Increment(ReSharp.Security.SecureDouble)">
@@ -611,8 +671,8 @@
             </summary>
             <param name="value">The value to increment.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureDouble"/> structure whose <paramref name="Value"/> property contains
-            the value of <c>value</c> incremented by 1.
+            A <see cref="T:ReSharp.Security.SecureDouble"/> structure whose <see name="Value"/> property contains the
+            value of <c>value</c> incremented by 1.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureDouble.op_LessThan(ReSharp.Security.SecureDouble,ReSharp.Security.SecureDouble)">
@@ -713,7 +773,7 @@
         </member>
         <member name="M:ReSharp.Security.SecureInt32.#ctor(System.Int32)">
             <summary>
-            Initializes a new instance of the <see cref="!:SecureInt"/> struct with the <see
+            Initializes a new instance of the <see cref="T:ReSharp.Security.SecureInt32"/> struct with the <see
             cref="T:System.Int32"/> value to encrypt.
             </summary>
             <param name="value">The <see cref="T:System.Int32"/> value to encrypt.</param>
@@ -763,11 +823,11 @@
             <summary>
             Subtracts a <see cref="T:ReSharp.Security.SecureInt32"/> structure from a <see cref="T:ReSharp.Security.SecureInt32"/> structure.
             </summary>
-            <param name="left">A <see cref="T:ReSharp.Security.SecureInt32"/> structure.</param>
-            <param name="right">A <see cref="T:ReSharp.Security.SecureInt32"/> structure.</param>
+            <param name="x">A <see cref="T:ReSharp.Security.SecureInt32"/> structure.</param>
+            <param name="y">A <see cref="T:ReSharp.Security.SecureInt32"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureInt32"/> structure whose <paramref name="Value"/> property contains
-            the results of the subtraction.
+            A <see cref="T:ReSharp.Security.SecureInt32"/> structure whose <see name="Value"/> property contains the
+            results of the subtraction.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureInt32.op_Decrement(ReSharp.Security.SecureInt32)">
@@ -776,8 +836,8 @@
             </summary>
             <param name="value">The value to decrement.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureInt32"/> structure whose <paramref name="Value"/> property contains
-            the value of <c>value</c> decremented by 1.
+            A <see cref="T:ReSharp.Security.SecureInt32"/> structure whose <see name="Value"/> property contains the
+            value of <c>value</c> decremented by 1.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureInt32.op_Inequality(ReSharp.Security.SecureInt32,ReSharp.Security.SecureInt32)">
@@ -800,8 +860,7 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureInt32"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureInt32"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureInt32"/> structure whose <paramref name="Value"/> property contains
-            the remainder.
+            A <see cref="T:ReSharp.Security.SecureInt32"/> structure whose <see name="Value"/> property contains the remainder.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureInt32.op_Multiply(ReSharp.Security.SecureInt32,ReSharp.Security.SecureInt32)">
@@ -811,8 +870,8 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureInt32"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureInt32"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureInt32"/> structure whose <paramref name="Value"/> property contains
-            the product of the two parameters.
+            A <see cref="T:ReSharp.Security.SecureInt32"/> structure whose <see name="Value"/> property contains the
+            product of the two parameters.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureInt32.op_Division(ReSharp.Security.SecureInt32,ReSharp.Security.SecureInt32)">
@@ -822,8 +881,8 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureInt32"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureInt32"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureInt32"/> structure whose <paramref name="Value"/> property contains
-            the result of the division.
+            A <see cref="T:ReSharp.Security.SecureInt32"/> structure whose <see name="Value"/> property contains the
+            result of the division.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureInt32.op_Addition(ReSharp.Security.SecureInt32,ReSharp.Security.SecureInt32)">
@@ -833,8 +892,8 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureInt32"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureInt32"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureInt32"/> structure whose <paramref name="Value"/> property contains
-            the sum of the specified <see cref="T:ReSharp.Security.SecureInt32"/> structures.
+            A <see cref="T:ReSharp.Security.SecureInt32"/> structure whose <see name="Value"/> property contains the sum
+            of the specified <see cref="T:ReSharp.Security.SecureInt32"/> structures.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureInt32.op_Increment(ReSharp.Security.SecureInt32)">
@@ -843,8 +902,8 @@
             </summary>
             <param name="value">The value to increment.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureInt32"/> structure whose <paramref name="Value"/> property contains
-            the value of <c>value</c> incremented by 1.
+            A <see cref="T:ReSharp.Security.SecureInt32"/> structure whose <see name="Value"/> property contains the
+            value of <c>value</c> incremented by 1.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureInt32.op_LessThan(ReSharp.Security.SecureInt32,ReSharp.Security.SecureInt32)">
@@ -995,11 +1054,11 @@
             <summary>
             Subtracts a <see cref="T:ReSharp.Security.SecureInt64"/> structure from a <see cref="T:ReSharp.Security.SecureInt64"/> structure.
             </summary>
-            <param name="left">A <see cref="T:ReSharp.Security.SecureInt64"/> structure.</param>
-            <param name="right">A <see cref="T:ReSharp.Security.SecureInt64"/> structure.</param>
+            <param name="x">A <see cref="T:ReSharp.Security.SecureInt64"/> structure.</param>
+            <param name="y">A <see cref="T:ReSharp.Security.SecureInt64"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureInt64"/> structure whose <paramref name="Value"/> property contains
-            the results of the subtraction.
+            A <see cref="T:ReSharp.Security.SecureInt64"/> structure whose <see name="Value"/> property contains the
+            results of the subtraction.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureInt64.op_Decrement(ReSharp.Security.SecureInt64)">
@@ -1008,8 +1067,8 @@
             </summary>
             <param name="value">The value to decrement.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureInt64"/> structure whose <paramref name="Value"/> property contains
-            the value of <c>value</c> decremented by 1.
+            A <see cref="T:ReSharp.Security.SecureInt64"/> structure whose <see name="Value"/> property contains the
+            value of <c>value</c> decremented by 1.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureInt64.op_Inequality(ReSharp.Security.SecureInt64,ReSharp.Security.SecureInt64)">
@@ -1032,8 +1091,7 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureInt64"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureInt64"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureInt64"/> structure whose <paramref name="Value"/> property contains
-            the remainder.
+            A <see cref="T:ReSharp.Security.SecureInt64"/> structure whose <see name="Value"/> property contains the remainder.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureInt64.op_Multiply(ReSharp.Security.SecureInt64,ReSharp.Security.SecureInt64)">
@@ -1043,8 +1101,8 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureInt64"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureInt64"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureInt64"/> structure whose <paramref name="Value"/> property contains
-            the product of the two parameters.
+            A <see cref="T:ReSharp.Security.SecureInt64"/> structure whose <see name="Value"/> property contains the
+            product of the two parameters.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureInt64.op_Division(ReSharp.Security.SecureInt64,ReSharp.Security.SecureInt64)">
@@ -1054,8 +1112,8 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureInt64"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureInt64"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureInt64"/> structure whose <paramref name="Value"/> property contains
-            the result of the division.
+            A <see cref="T:ReSharp.Security.SecureInt64"/> structure whose <see name="Value"/> property contains the
+            result of the division.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureInt64.op_Addition(ReSharp.Security.SecureInt64,ReSharp.Security.SecureInt64)">
@@ -1065,8 +1123,8 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureInt64"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureInt64"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureInt64"/> structure whose <paramref name="Value"/> property contains
-            the sum of the specified <see cref="T:ReSharp.Security.SecureInt64"/> structures.
+            A <see cref="T:ReSharp.Security.SecureInt64"/> structure whose <see name="Value"/> property contains the sum
+            of the specified <see cref="T:ReSharp.Security.SecureInt64"/> structures.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureInt64.op_Increment(ReSharp.Security.SecureInt64)">
@@ -1075,8 +1133,8 @@
             </summary>
             <param name="value">The value to increment.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureInt64"/> structure whose <paramref name="Value"/> property contains
-            the value of <c>value</c> incremented by 1.
+            A <see cref="T:ReSharp.Security.SecureInt64"/> structure whose <see name="Value"/> property contains the
+            value of <c>value</c> incremented by 1.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureInt64.op_LessThan(ReSharp.Security.SecureInt64,ReSharp.Security.SecureInt64)">
@@ -1227,11 +1285,11 @@
             <summary>
             Subtracts a <see cref="T:ReSharp.Security.SecureSingle"/> structure from a <see cref="T:ReSharp.Security.SecureSingle"/> structure.
             </summary>
-            <param name="left">A <see cref="T:ReSharp.Security.SecureSingle"/> structure.</param>
-            <param name="right">A <see cref="T:ReSharp.Security.SecureSingle"/> structure.</param>
+            <param name="x">A <see cref="T:ReSharp.Security.SecureSingle"/> structure.</param>
+            <param name="y">A <see cref="T:ReSharp.Security.SecureSingle"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureSingle"/> structure whose <paramref name="Value"/> property contains
-            the results of the subtraction.
+            A <see cref="T:ReSharp.Security.SecureSingle"/> structure whose <see name="Value"/> property contains the
+            results of the subtraction.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureSingle.op_Decrement(ReSharp.Security.SecureSingle)">
@@ -1240,8 +1298,8 @@
             </summary>
             <param name="value">The value to decrement.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureSingle"/> structure whose <paramref name="Value"/> property contains
-            the value of <c>value</c> decremented by 1.
+            A <see cref="T:ReSharp.Security.SecureSingle"/> structure whose <see name="Value"/> property contains the
+            value of <c>value</c> decremented by 1.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureSingle.op_Inequality(ReSharp.Security.SecureSingle,ReSharp.Security.SecureSingle)">
@@ -1264,8 +1322,7 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureSingle"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureSingle"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureSingle"/> structure whose <paramref name="Value"/> property contains
-            the remainder.
+            A <see cref="T:ReSharp.Security.SecureSingle"/> structure whose <see name="Value"/> property contains the remainder.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureSingle.op_Multiply(ReSharp.Security.SecureSingle,ReSharp.Security.SecureSingle)">
@@ -1275,8 +1332,8 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureSingle"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureSingle"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureSingle"/> structure whose <paramref name="Value"/> property contains
-            the product of the two parameters.
+            A <see cref="T:ReSharp.Security.SecureSingle"/> structure whose <see name="Value"/> property contains the
+            product of the two parameters.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureSingle.op_Division(ReSharp.Security.SecureSingle,ReSharp.Security.SecureSingle)">
@@ -1286,8 +1343,8 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureSingle"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureSingle"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureSingle"/> structure whose <paramref name="Value"/> property contains
-            the result of the division.
+            A <see cref="T:ReSharp.Security.SecureSingle"/> structure whose <see name="Value"/> property contains the
+            result of the division.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureSingle.op_Addition(ReSharp.Security.SecureSingle,ReSharp.Security.SecureSingle)">
@@ -1297,8 +1354,8 @@
             <param name="x">A <see cref="T:ReSharp.Security.SecureSingle"/> structure.</param>
             <param name="y">A <see cref="T:ReSharp.Security.SecureSingle"/> structure.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureSingle"/> structure whose <paramref name="Value"/> property contains
-            the sum of the specified <see cref="T:ReSharp.Security.SecureSingle"/> structures.
+            A <see cref="T:ReSharp.Security.SecureSingle"/> structure whose <see name="Value"/> property contains the
+            sum of the specified <see cref="T:ReSharp.Security.SecureSingle"/> structures.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureSingle.op_Increment(ReSharp.Security.SecureSingle)">
@@ -1307,8 +1364,8 @@
             </summary>
             <param name="value">The value to increment.</param>
             <returns>
-            A <see cref="T:ReSharp.Security.SecureSingle"/> structure whose <paramref name="Value"/> property contains
-            the value of <c>value</c> incremented by 1.
+            A <see cref="T:ReSharp.Security.SecureSingle"/> structure whose <see name="Value"/> property contains the
+            value of <c>value</c> incremented by 1.
             </returns>
         </member>
         <member name="M:ReSharp.Security.SecureSingle.op_LessThan(ReSharp.Security.SecureSingle,ReSharp.Security.SecureSingle)">

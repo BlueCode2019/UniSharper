@@ -13971,15 +13971,15 @@ More information - https:msdn.microsoft.comen-uslibrary/dn584397(v=vs.110).aspx.
     </member>
     <member name="M:UnityEditor.EditorWindow.Show">
       <summary>
-        <para>Show the EditorWindow.</para>
+        <para>Show the EditorWindow window.</para>
       </summary>
-      <param name="immediateDisplay"></param>
+      <param name="immediateDisplay">Immediately display Show.</param>
     </member>
     <member name="M:UnityEditor.EditorWindow.Show(System.Boolean)">
       <summary>
-        <para>Show the EditorWindow.</para>
+        <para>Show the EditorWindow window.</para>
       </summary>
-      <param name="immediateDisplay"></param>
+      <param name="immediateDisplay">Immediately display Show.</param>
     </member>
     <member name="M:UnityEditor.EditorWindow.ShowAsDropDown(UnityEngine.Rect,UnityEngine.Vector2)">
       <summary>
@@ -29763,7 +29763,7 @@ It is required that the GameObject is at the root of its current scene.</para>
     </member>
     <member name="P:UnityEditor.VersionControl.Asset.isInCurrentProject">
       <summary>
-        <para>Returns true if the assets is in the current project.</para>
+        <para>Returns true if the asset file exists and is in the current project.</para>
       </summary>
     </member>
     <member name="P:UnityEditor.VersionControl.Asset.isMeta">

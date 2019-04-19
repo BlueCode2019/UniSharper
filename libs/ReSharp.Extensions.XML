@@ -55,6 +55,552 @@
             <param name="others">The other dictionaries.</param>
             <returns>The dictionary contains all values of source dictionary and others.</returns>
         </member>
+        <member name="T:System.Collections.Generic.SingleLinkedList`1">
+            <summary>
+            Represents a single linked list.
+            </summary>
+            <typeparam name="T">Specifies the element type of the linked list.</typeparam>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> class that is empty.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> class that contains
+            elements copied from the specified <see cref="T:System.Collections.IEnumerable"/> and has sufficient capacity
+            to accommodate the number of elements copied.
+            </summary>
+            <param name="collection">
+            The <see cref="T:System.Collections.IEnumerable"/> whose elements are copied to the new <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><c>collection</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> class that is
+            serializable with the specified <see cref="T:System.Runtime.Serialization.SerializationInfo"/> and <see cref="T:System.Runtime.Serialization.StreamingContext"/>.
+            </summary>
+            <param name="info">
+            A <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object containing the information required to serialize
+            the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+            <param name="context">
+            A <see cref="T:System.Runtime.Serialization.StreamingContext"/> object containing the source and destination of the
+            serialized stream associated with the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedList`1.Count">
+            <summary>
+            Gets the number of nodes actually contained in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <value>The number of nodes actually contained in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</value>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedList`1.First">
+            <summary>
+            Gets the first node of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <value>The first <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</value>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedList`1.System#Collections#Generic#ICollection{T}#IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            </summary>
+            <value>
+            <c>true</c> if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, <c>false</c>. In
+            the default implementation of <see cref="T:System.Collections.Generic.ICollection`1"/>, this property always returns <c>false</c>.
+            </value>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedList`1.System#Collections#ICollection#IsSynchronized">
+            <summary>
+            Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized
+            (thread safe).
+            </summary>
+            <value>
+            <c>true</c> if access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe);
+            otherwise, <c>false</c>. In the default implementation of <see
+            cref="T:System.Collections.Generic.SingleLinkedList`1"/>, this property always returns <c>false</c>.
+            </value>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedList`1.System#Collections#ICollection#SyncRoot">
+            <summary>
+            Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+            </summary>
+            <value>
+            An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>. In the
+            default implementation of <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>, this property always returns
+            the current instance.
+            </value>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.AddAfter(System.Collections.Generic.SingleLinkedListNode{`0},`0)">
+            <summary>
+            Adds a new node containing the specified value after the specified existing node in the
+            <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">
+            The <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> after which to insert a new <see
+            cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> containing <c>value</c>.
+            </param>
+            <param name="value">The value to add to the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+            <returns>The new <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> containing value.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>node</c> is <c>null</c>.</para>
+            <para><c>newNode</c> is <c>null</c>.</para>
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            <para><c>node</c> is not in the current <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            <para>-or-</para>
+            <para><c>newNode</c> belongs to another <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.AddAfter(System.Collections.Generic.SingleLinkedListNode{`0},System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Adds the specified new node after the specified existing node in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">
+            The <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> after which to insert newNode.
+            </param>
+            <param name="newNode">
+            The new <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> to add to the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>node</c> is <c>null</c>.</para>
+            <para><c>newNode</c> is <c>null</c>.</para>
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            <para><c>node</c> is not in the current <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            <para>-or-</para>
+            <para><c>newNode</c> belongs to another <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.AddFirst(`0)">
+            <summary>
+            Adds a new node containing the specified value at the start of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="value">The value to add at the start of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+            <returns>The new <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> containing <c>value</c>.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.AddFirst(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Adds the specified new node at the start of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">
+            The new <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> to add at the start of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>node</c> is <c>null</c>.</para>
+            <para><c>newNode</c> is <c>null</c>.</para>
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            <para><c>node</c> is not in the current <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            <para>-or-</para>
+            <para><c>newNode</c> belongs to another <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.AddLast(`0)">
+            <summary>
+            Adds a new node containing the specified value at the end of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="value">The value to add at the end of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+            <returns>The new <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> containing <c>value</c>.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.AddLast(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Adds the specified new node at the end of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">
+            The new <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> to add at the end of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>node</c> is <c>null</c>.</para>
+            <para><c>newNode</c> is <c>null</c>.</para>
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            <para><c>node</c> is not in the current <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            <para>-or-</para>
+            <para><c>newNode</c> belongs to another <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Clear">
+            <summary>
+            Removes all nodes from the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Contains(`0)">
+            <summary>
+            Determines whether a value is in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="value">
+            The value to locate in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>. The value can be
+            <c>null</c> for reference types.
+            </param>
+            <returns>
+            <c>true</c> if <c>value</c> is found in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            Copies the entire <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> to a compatible one-dimensional <see
+            cref="T:System.Array"/>, starting at the specified index of the target array.
+            </summary>
+            <param name="array">
+            The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied
+            from <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>. The <see cref="T:System.Array"/> must have zero-based indexing.
+            </param>
+            <param name="index">The zero-based index in <c>array</c> at which copying begins.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>array</c> is <c>null</c>.</para>
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <para><c>index</c> is less than zero.</para>
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            <para>
+            The number of elements in the source <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> is greater than
+            the available space from <c>index</c> to the end of the destination <c>array</c>.
+            </para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Find(`0)">
+            <summary>
+            Finds the first node that contains the specified value.
+            </summary>
+            <param name="value">The value to locate in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+            <returns>
+            The first <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> that contains the specified value, if
+            found; otherwise, <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the linked list as a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through the linked list as a collection.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Implements the <see cref="T:System.Runtime.Serialization.ISerializable"/> interface and returns the data needed to
+            serialize the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> instance.
+            </summary>
+            <param name="info">
+            A <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object that contains the information required to
+            serialize the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> instance.
+            </param>
+            <param name="context">
+            A <see cref="T:System.Runtime.Serialization.StreamingContext"/> object that contains the source and destination of the
+            serialized stream associated with the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> instance.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><c>info</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.OnDeserialization(System.Object)">
+            <summary>
+            Implements the <see cref="T:System.Runtime.Serialization.ISerializable"/> interface and raises the deserialization event
+            when the deserialization is complete.
+            </summary>
+            <param name="sender">The source of the deserialization event.</param>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object associated with the current <see
+            cref="T:System.Collections.Generic.SingleLinkedList`1"/> instance is invalid.
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Remove(`0)">
+            <summary>
+            Removes the first occurrence of the specified value from the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="value">The value to remove from the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+            <returns>
+            <c>true</c> if the element containing <c>value</c> is successfully removed; otherwise,
+            <c>false</c>. This method also returns <c>false</c> if value was not found in the
+            original <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Remove(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Removes the specified node from the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">
+            The <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> to remove from the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><c>node</c> is <c>null</c>.</exception>
+            <exception cref="T:System.InvalidOperationException">
+            <c>node</c> is not in the current <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.RemoveFirst">
+            <summary>
+            Removes the node at the start of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            The <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> is empty.
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.System#Collections#Generic#ICollection{T}#Add(`0)">
+            <summary>
+            Adds an item at the end of the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <param name="value">The value to add at the end of the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:System.Collections.ICollection"/> to an <see cref="T:System.Array"/>, starting
+            at a particular <see cref="T:System.Array"/> index.
+            </summary>
+            <param name="array">
+            The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied
+            from <see cref="T:System.Collections.ICollection"/>. The <see cref="T:System.Array"/> must have zero-based indexing.
+            </param>
+            <param name="index">The zero-based index in <c>array</c> at which copying begins.</param>
+            <exception cref="T:System.ArgumentNullException"><c>array</c> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><c>index</c> is less than zero.</exception>
+            <exception cref="T:System.ArgumentException">
+            <para><c>array</c> is multidimensional.</para>
+            <para>-or-</para>
+            <para><c>array</c> does not have zero-based indexing.</para>
+            <para>-or-</para>
+            <para>
+            The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the
+            available space from <c>index</c> to the end of the destination <c>array</c>.
+            </para>
+            <para>-or-</para>
+            <para>
+            The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type
+            of the destination <c>array</c>.
+            </para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.System#Collections#Generic#IEnumerable{T}#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.SingleLinkedList`1.Enumerator"/> for the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the linked list as a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through the linked list as a collection.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.ValidateNewNode(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Validates the new node.
+            </summary>
+            <param name="node">The node need to be validated.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>node</c> is <c>null</c>.</para>
+            <para><c>newNode</c> is <c>null</c>.</para>
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            <para><c>node</c> is not in the current <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            <para>-or-</para>
+            <para><c>newNode</c> belongs to another <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.ValidateNode(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Validates the node in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">The node need to be validated.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>node</c> is <c>null</c>.</para>
+            <para><c>newNode</c> is <c>null</c>.</para>
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            <para><c>node</c> is not in the current <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            <para>-or-</para>
+            <para><c>newNode</c> belongs to another <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.InternalInsertNodeAfter(System.Collections.Generic.SingleLinkedListNode{`0},System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Inserts the new node after the specified node in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">The specified node in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+            <param name="newNode">
+            The new node need to be inserted into the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> after the
+            specified node.
+            </param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.InternalInsertNodeFirst(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Inserts the new node to the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> at first place as head node.
+            </summary>
+            <param name="newNode">The new node need to be inserted into the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.InternalInsertNodeLast(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Inserts the new node to the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> at last place.
+            </summary>
+            <param name="newNode">The new node need to be inserted into the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.InternalInsertNodeToEmptyList(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Inserts the new node to the empty <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="newNode">The new node need to be inserted into the emty <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.InternalRemoveNode(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Removes the node from the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">The new node need to be removed.</param>
+        </member>
+        <member name="T:System.Collections.Generic.SingleLinkedList`1.Enumerator">
+            <summary>
+            Enumerates the elements of a <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Enumerator.#ctor(System.Collections.Generic.SingleLinkedList{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.SingleLinkedList`1.Enumerator"/> struct that contains the
+            <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="list">The <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> want to be enumerator.</param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Enumerator.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.SingleLinkedList`1.Enumerator"/> struct that is
+            serializable with the specified <see cref="T:System.Runtime.Serialization.SerializationInfo"/> and <see cref="T:System.Runtime.Serialization.StreamingContext"/>.
+            </summary>
+            <param name="info">
+            A <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object containing the information required to
+            serialize the <see cref="T:System.Collections.Generic.SingleLinkedList`1.Enumerator"/>.
+            </param>
+            <param name="context">
+            A <see cref="T:System.Runtime.Serialization.StreamingContext"/> object containing the source and destination of the
+            serialized stream associated with the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedList`1.Enumerator.Current">
+            <summary>
+            Gets the element at the current position of the enumerator.
+            </summary>
+            <value>
+            The element in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> at the current position of the enumerator.
+            </value>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedList`1.Enumerator.System#Collections#IEnumerator#Current">
+            <summary>
+            Gets the element at the current position of the enumerator.
+            </summary>
+            <value>The element in the collection at the current position of the enumerator.</value>
+            <exception cref="T:System.InvalidOperationException">
+            The enumerator is positioned before the first element of the collection or after the
+            last element.
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Enumerator.Dispose">
+            <summary>
+            Releases all resources used by the <see cref="T:System.Collections.Generic.SingleLinkedList`1.Enumerator"/>.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Enumerator.MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <returns>
+            <c>true</c> if the enumerator was successfully advanced to the next element;
+            <c>false</c> if the enumerator has passed the end of the collection.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">
+            The collection was modified after the enumerator was created.
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Enumerator.System#Runtime#Serialization#ISerializable#GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Implements the <see cref="T:System.Runtime.Serialization.ISerializable"/> interface and returns the data needed to
+            serialize the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> instance.
+            </summary>
+            <param name="info">
+            A <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object that contains the information required to
+            serialize the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> instance.
+            </param>
+            <param name="context">
+            A <see cref="T:System.Runtime.Serialization.StreamingContext"/> object that contains the source and destination of
+            the serialized stream associated with the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> instance.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><c>info</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Enumerator.System#Runtime#Serialization#IDeserializationCallback#OnDeserialization(System.Object)">
+            <summary>
+            Implements the <see cref="T:System.Runtime.Serialization.ISerializable"/> interface and raises the deserialization
+            event when the deserialization is complete.
+            </summary>
+            <param name="sender">The source of the deserialization event.</param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Enumerator.System#Collections#IEnumerator#Reset">
+            <summary>
+            Sets the enumerator to its initial position, which is before the first element in the collection.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            The collection was modified after the enumerator was created.
+            </exception>
+        </member>
+        <member name="T:System.Collections.Generic.SingleLinkedListNode`1">
+            <summary>
+            Represents a node in a <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <typeparam name="T">Specifies the element type of the single linked list.</typeparam>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedListNode`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> class, containing
+            the specified value.
+            </summary>
+            <param name="value">The value to contain in the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/>.</param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedListNode`1.#ctor(System.Collections.Generic.SingleLinkedList{`0},`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> class, containing
+            the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> that the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/>
+            belongs to and the specified value.
+            </summary>
+            <param name="list">
+            The <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> that the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/>
+            belongs to.
+            </param>
+            <param name="value">The value to contain in the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/>.</param>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedListNode`1.List">
+            <summary>
+            Gets the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> that the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/>
+            belongs to.
+            </summary>
+            <value>
+            A reference to the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> that the <see
+            cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> belongs to, or <c>null</c> if the <see
+            cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> is not linked.
+            </value>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedListNode`1.Next">
+            <summary>
+            Gets the next node in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <value>
+            A reference to the next node in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>, or <c>null</c> if
+            the current node is the last element of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </value>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedListNode`1.Value">
+            <summary>
+            Gets the value contained in the node.
+            </summary>
+            <value>The value contained in the node.</value>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedListNode`1.Invalidate">
+            <summary>
+            Invalidates this node.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.TreeNode`1.Invalidate">
+            <summary>
+            Invalidates this node.
+            </summary>
+        </member>
         <member name="T:System.Collections.Generic.GenericCollectionExtensions">
             <summary>
             Extension methods for generic collection classes.
@@ -126,7 +672,7 @@
             Converts the <see cref="T:System.String"/> to the sepecified <see cref="T:System.Enum"/> value.
             </summary>
             <typeparam name="TEnum">The type of the sepecified <see cref="T:System.Enum"/>.</typeparam>
-            <param name="enumValueStr">The <see cref="T:System.String"/> of the value of <see cref="T:System.Enum"/>.</param>
+            <param name="value">The <see cref="T:System.String"/> of the value of <see cref="T:System.Enum"/>.</param>
             <param name="ignoreCase"><c>true</c> to ignore case; <c>false</c> to regard case.</param>
             <returns>The <see cref="T:System.Enum"/> value.</returns>
         </member>
@@ -257,6 +803,21 @@
             </summary>
             <param name="source">The source object of FileInfo.</param>
             <param name="newFileName">The new file name.</param>
+        </member>
+        <member name="T:System.IO.PathUtility">
+            <summary>
+            Provides methods for processing directory strings in an ideally cross-platform manner.
+            </summary>
+        </member>
+        <member name="M:System.IO.PathUtility.Combine(System.String[])">
+            <summary>
+            Combines an array of strings into a path.
+            </summary>
+            <param name="paths">An array of parts of the path.</param>
+            <returns>The combined paths.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            One of the strings in the array is <c>null</c>.
+            </exception>
         </member>
         <member name="T:System.MathUtility">
             <summary>
@@ -885,6 +1446,37 @@
             The whitespace chars definitions.
             </summary>
         </member>
+        <member name="M:System.StringExtensions.HasValue(System.String)">
+            <summary>
+            Determines whether the specified <see cref="T:System.String"/> has value.
+            </summary>
+            <param name="source">The <see cref="T:System.String"/> to check.</param>
+            <returns>
+            <c>true</c> if the specified <see cref="T:System.String"/> has value; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:System.StringExtensions.KmpIndexOf(System.String,System.String)">
+            <summary>
+            Reports the zero-based index of the first occurrence of the specified string in this
+            instance by KMP algorithm.
+            </summary>
+            <param name="source">The source string.</param>
+            <param name="value">The string to seek.</param>
+            <returns>
+            The zero-based index position of <b>value</b> if that string is found, or -1 if it is
+            not. If <b>value</b> is <see cref="F:System.String.Empty"/>, the return value is 0.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><b>source</b> is <b>null</b>.</exception>
+        </member>
+        <member name="M:System.StringExtensions.Reverse(System.String)">
+            <summary>
+            Reverses the specified <see cref="T:System.String"/>.
+            </summary>
+            <param name="source">The specified <see cref="T:System.String"/>.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <b>source</b> is <b>null</b> or <see cref="F:System.String.Empty"/>.
+            </exception>
+        </member>
         <member name="M:System.StringExtensions.TrimAll(System.String)">
             <summary>
             Trims all whitespace characters.
@@ -899,15 +1491,6 @@
             <param name="source">The source string.</param>
             <param name="trimChars">The trim characters assigned.</param>
             <returns>The string with removing all characters assigned.</returns>
-        </member>
-        <member name="M:System.StringExtensions.HasValue(System.String)">
-            <summary>
-            Determines whether the specified <see cref="T:System.String"/> has value.
-            </summary>
-            <param name="source">The <see cref="T:System.String"/> to check.</param>
-            <returns>
-            <c>true</c> if the specified <see cref="T:System.String"/> has value; otherwise, <c>false</c>.
-            </returns>
         </member>
         <member name="T:System.TimeUtility">
             <summary>
