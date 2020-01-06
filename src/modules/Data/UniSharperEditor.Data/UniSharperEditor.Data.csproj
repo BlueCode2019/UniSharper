@@ -17,20 +17,20 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\bin\Debug\UniSharperEditor.Data\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\UniSharperEditor.Data.XML</DocumentationFile>
+    <DocumentationFile>..\..\..\..\bin\Debug\UniSharperEditor.Data\UniSharperEditor.Data.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\..\..\bin\Release\UniSharperEditor.Data\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\UniSharperEditor.Data.XML</DocumentationFile>
+    <DocumentationFile>..\..\..\..\bin\Release\UniSharperEditor.Data\UniSharperEditor.Data.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -52,22 +52,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>del "$(TargetDir)\*.*" /f/q</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>SET TargetPath="$(SolutionDir)tests\UniSharper.Data.Tests\Assets\UniSharper.Data\Editor"
-if not exist %25TargetPath%25 md %25TargetPath%25
-del "%25TargetPath%25\*.*" /f/q
-
-:: UniSharper.Tests
-xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s /e /i /y
-
-:: Release
-SET ReleasePath="$(SolutionDir)bin\UniSharper.Data\Editor"
-IF $(ConfigurationName) == Release (
-  IF NOT exist %25ReleasePath%25 md %25ReleasePath%25
-  xcopy "$(TargetDir)*.*" "%25ReleasePath%25" /s /e /i /y
-)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -17,21 +17,21 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\bin\Debug\UniSharper\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\UniSharper.XML</DocumentationFile>
+    <DocumentationFile>../../../bin/Debug/UniSharper/UniSharper.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\..\bin\Release\UniSharper\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
-    <DocumentationFile>bin\Release\UniSharper.XML</DocumentationFile>
+    <DocumentationFile>../../../bin/Release/UniSharper/UniSharper.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
@@ -43,14 +43,17 @@
     </Reference>
     <Reference Include="ReSharp">
       <HintPath>..\..\..\libs\ReSharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ReSharp.Extensions">
       <HintPath>..\..\..\libs\ReSharp.Extensions.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="UniRx">
       <HintPath>..\..\..\libs\UniRx.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\libs\UnityEngine.dll</HintPath>
@@ -91,30 +94,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>SET TargetPath="$(SolutionDir)tests\$(SolutionName).Tests\Assets\$(SolutionName)\Plugins"
-IF NOT exist %25TargetPath%25 md %25TargetPath%25
-del "%25TargetPath%25\*.*" /f/q
-
-:: UniSharper.Tests
-xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s /e /i /y
-
-SET TargetPath="$(SolutionDir)samples\$(SolutionName).Samples\Assets\$(SolutionName)\Plugins"
-if not exist %25TargetPath%25 md %25TargetPath%25
-del "%25TargetPath%25\*.*" /f/q
-
-:: UniSharper.Samples
-xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s /e /i /y
-
-:: Release
-SET ReleasePath="$(SolutionDir)bin\$(SolutionName)\Plugins"
-IF $(ConfigurationName) == Release (
-  IF NOT exist %25ReleasePath%25 md %25ReleasePath%25
-  del "%25ReleasePath%25\*.*" /f/q
-  xcopy "$(TargetDir)*.*" "%25ReleasePath%25" /s /e /i /y
-)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>del "$(TargetDir)\*.*" /f/q</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -17,21 +17,21 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\bin\Debug\UniSharper.Net\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\UniSharper.Net.XML</DocumentationFile>
+    <DocumentationFile>..\..\..\..\bin\Debug\UniSharper.Net\UniSharper.Net.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\..\..\bin\Release\UniSharper.Net\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
-    <DocumentationFile>bin\Release\UniSharper.Net.XML</DocumentationFile>
+    <DocumentationFile>..\..\..\..\bin\Release\UniSharper.Net\UniSharper.Net.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ReSharp">
@@ -62,28 +62,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>SET TargetPath="$(SolutionDir)tests\$(ProjectName).Tests\Assets\$(ProjectName)\Plugins"
-if not exist %25TargetPath%25 md %25TargetPath%25
-del "%25TargetPath%25\*.*" /f/q
-
-:: UniSharper.Tests
-xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s /e /i /y
-
-:: Release
-SET ReleasePath="$(SolutionDir)bin\$(ProjectName)\Plugins"
-IF $(ConfigurationName) == Release (
-  IF NOT exist %25ReleasePath%25 md %25ReleasePath%25
-  del "%25ReleasePath%25\*.*" /f/q
-  xcopy "$(TargetDir)RestSharp.dll" "%25ReleasePath%25" /s /e /i /y
-  xcopy "$(TargetDir)RestSharp.pdb" "%25ReleasePath%25" /s /e /i /y
-  xcopy "$(TargetDir)RestSharp.xml" "%25ReleasePath%25" /s /e /i /y
-  xcopy "$(TargetDir)$(ProjectName).dll" "%25ReleasePath%25" /s /e /i /y
-  xcopy "$(TargetDir)$(ProjectName).pdb" "%25ReleasePath%25" /s /e /i /y
-  xcopy "$(TargetDir)$(ProjectName).xml" "%25ReleasePath%25" /s /e /i /y
-)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>del "$(TargetDir)\*.*" /f/q</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -17,20 +17,20 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\bin\Debug\UniSharperEditor\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\UniSharperEditor.XML</DocumentationFile>
+    <DocumentationFile>..\..\..\bin\Debug\UniSharperEditor\UniSharperEditor.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\..\bin\Release\UniSharperEditor\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\UniSharperEditor.XML</DocumentationFile>
+    <DocumentationFile>..\..\..\bin\Release\UniSharperEditor\UniSharperEditor.XML</DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
@@ -81,30 +81,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>SET TargetPath="$(SolutionDir)tests\$(SolutionName).Tests\Assets\$(SolutionName)\Editor"
-if not exist %25TargetPath%25 md %25TargetPath%25
-del "%25TargetPath%25\*.*" /f/q
-
-:: UniSharper.Tests
-xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s /e /i /y
-
-SET TargetPath="$(SolutionDir)samples\$(SolutionName).Samples\Assets\$(SolutionName)\Editor"
-if not exist %25TargetPath%25 md %25TargetPath%25
-del "%25TargetPath%25\*.*" /f/q
-
-:: UniSharper.Samples
-xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s /e /i /y
-
-:: Release
-SET ReleasePath="$(SolutionDir)bin\$(SolutionName)\Editor"
-IF $(ConfigurationName) == Release (
-  IF NOT exist %25ReleasePath%25 md %25ReleasePath%25
-  del "%25ReleasePath%25\*.*" /f/q
-  xcopy "$(TargetDir)*.*" "%25ReleasePath%25" /s /e /i /y
-)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>del "$(TargetDir)\*.*" /f/q</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

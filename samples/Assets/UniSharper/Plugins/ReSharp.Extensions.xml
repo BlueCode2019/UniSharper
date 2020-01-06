@@ -1,0 +1,1551 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ReSharp.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:System.ArrayExtensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.Array"/>.
+            </summary>
+        </member>
+        <member name="M:System.ArrayExtensions.Reverse(System.Byte[])">
+            <summary>
+            Reverses the specified source.
+            </summary>
+            <param name="source">The source.</param>
+            <returns>System.Byte[].</returns>
+        </member>
+        <member name="T:System.Collections.Generic.IDictionaryExtensions">
+            <summary>
+            Extension methods for interface <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.IDictionaryExtensions.AddUnique``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1,System.Boolean)">
+            <summary>
+            Adds the value with unique key.
+            </summary>
+            <typeparam name="TKey">The type of the key.</typeparam>
+            <typeparam name="TValue">The type of the value.</typeparam>
+            <param name="source">The source Dictionary object.</param>
+            <param name="key">The key.</param>
+            <param name="value">The value.</param>
+            <param name="canReplace">
+            if set to <c>true</c>, the value will be replaced when find same key.
+            </param>
+        </member>
+        <member name="M:System.Collections.Generic.IDictionaryExtensions.GetKey``2(System.Collections.Generic.IDictionary{``0,``1},``1)">
+            <summary>
+            Gets the key by value.
+            </summary>
+            <typeparam name="TKey">The type of the key.</typeparam>
+            <typeparam name="TValue">The type of the value.</typeparam>
+            <param name="source">The source Dictionary object.</param>
+            <param name="value">The value.</param>
+            <returns>The value object.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.IDictionaryExtensions.MergeLeft``3(``0,System.Collections.Generic.IDictionary{``1,``2}[])">
+            <summary>
+            Merges dictionaries.
+            </summary>
+            <typeparam name="TResult">The type of the result.</typeparam>
+            <typeparam name="TKey">The type of the key.</typeparam>
+            <typeparam name="TValue">The type of the value.</typeparam>
+            <param name="source">The source dictionary.</param>
+            <param name="others">The other dictionaries.</param>
+            <returns>The dictionary contains all values of source dictionary and others.</returns>
+        </member>
+        <member name="T:System.Collections.Generic.SingleLinkedList`1">
+            <summary>
+            Represents a single linked list.
+            </summary>
+            <typeparam name="T">Specifies the element type of the linked list.</typeparam>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> class that is empty.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> class that contains
+            elements copied from the specified <see cref="T:System.Collections.IEnumerable"/> and has sufficient capacity
+            to accommodate the number of elements copied.
+            </summary>
+            <param name="collection">
+            The <see cref="T:System.Collections.IEnumerable"/> whose elements are copied to the new <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><c>collection</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> class that is
+            serializable with the specified <see cref="T:System.Runtime.Serialization.SerializationInfo"/> and <see cref="T:System.Runtime.Serialization.StreamingContext"/>.
+            </summary>
+            <param name="info">
+            A <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object containing the information required to serialize
+            the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+            <param name="context">
+            A <see cref="T:System.Runtime.Serialization.StreamingContext"/> object containing the source and destination of the
+            serialized stream associated with the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedList`1.Count">
+            <summary>
+            Gets the number of nodes actually contained in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <value>The number of nodes actually contained in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</value>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedList`1.First">
+            <summary>
+            Gets the first node of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <value>The first <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</value>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedList`1.System#Collections#Generic#ICollection{T}#IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            </summary>
+            <value>
+            <c>true</c> if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, <c>false</c>. In
+            the default implementation of <see cref="T:System.Collections.Generic.ICollection`1"/>, this property always returns <c>false</c>.
+            </value>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedList`1.System#Collections#ICollection#IsSynchronized">
+            <summary>
+            Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized
+            (thread safe).
+            </summary>
+            <value>
+            <c>true</c> if access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe);
+            otherwise, <c>false</c>. In the default implementation of <see
+            cref="T:System.Collections.Generic.SingleLinkedList`1"/>, this property always returns <c>false</c>.
+            </value>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedList`1.System#Collections#ICollection#SyncRoot">
+            <summary>
+            Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+            </summary>
+            <value>
+            An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>. In the
+            default implementation of <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>, this property always returns
+            the current instance.
+            </value>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.AddAfter(System.Collections.Generic.SingleLinkedListNode{`0},`0)">
+            <summary>
+            Adds a new node containing the specified value after the specified existing node in the
+            <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">
+            The <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> after which to insert a new <see
+            cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> containing <c>value</c>.
+            </param>
+            <param name="value">The value to add to the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+            <returns>The new <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> containing value.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>node</c> is <c>null</c>.</para>
+            <para><c>newNode</c> is <c>null</c>.</para>
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            <para><c>node</c> is not in the current <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            <para>-or-</para>
+            <para><c>newNode</c> belongs to another <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.AddAfter(System.Collections.Generic.SingleLinkedListNode{`0},System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Adds the specified new node after the specified existing node in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">
+            The <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> after which to insert newNode.
+            </param>
+            <param name="newNode">
+            The new <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> to add to the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>node</c> is <c>null</c>.</para>
+            <para><c>newNode</c> is <c>null</c>.</para>
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            <para><c>node</c> is not in the current <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            <para>-or-</para>
+            <para><c>newNode</c> belongs to another <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.AddFirst(`0)">
+            <summary>
+            Adds a new node containing the specified value at the start of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="value">The value to add at the start of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+            <returns>The new <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> containing <c>value</c>.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.AddFirst(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Adds the specified new node at the start of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">
+            The new <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> to add at the start of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>node</c> is <c>null</c>.</para>
+            <para><c>newNode</c> is <c>null</c>.</para>
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            <para><c>node</c> is not in the current <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            <para>-or-</para>
+            <para><c>newNode</c> belongs to another <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.AddLast(`0)">
+            <summary>
+            Adds a new node containing the specified value at the end of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="value">The value to add at the end of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+            <returns>The new <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> containing <c>value</c>.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.AddLast(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Adds the specified new node at the end of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">
+            The new <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> to add at the end of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>node</c> is <c>null</c>.</para>
+            <para><c>newNode</c> is <c>null</c>.</para>
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            <para><c>node</c> is not in the current <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            <para>-or-</para>
+            <para><c>newNode</c> belongs to another <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Clear">
+            <summary>
+            Removes all nodes from the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Contains(`0)">
+            <summary>
+            Determines whether a value is in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="value">
+            The value to locate in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>. The value can be
+            <c>null</c> for reference types.
+            </param>
+            <returns>
+            <c>true</c> if <c>value</c> is found in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            Copies the entire <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> to a compatible one-dimensional <see
+            cref="T:System.Array"/>, starting at the specified index of the target array.
+            </summary>
+            <param name="array">
+            The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied
+            from <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>. The <see cref="T:System.Array"/> must have zero-based indexing.
+            </param>
+            <param name="index">The zero-based index in <c>array</c> at which copying begins.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>array</c> is <c>null</c>.</para>
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <para><c>index</c> is less than zero.</para>
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            <para>
+            The number of elements in the source <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> is greater than
+            the available space from <c>index</c> to the end of the destination <c>array</c>.
+            </para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Find(`0)">
+            <summary>
+            Finds the first node that contains the specified value.
+            </summary>
+            <param name="value">The value to locate in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+            <returns>
+            The first <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> that contains the specified value, if
+            found; otherwise, <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the linked list as a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through the linked list as a collection.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Implements the <see cref="T:System.Runtime.Serialization.ISerializable"/> interface and returns the data needed to
+            serialize the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> instance.
+            </summary>
+            <param name="info">
+            A <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object that contains the information required to
+            serialize the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> instance.
+            </param>
+            <param name="context">
+            A <see cref="T:System.Runtime.Serialization.StreamingContext"/> object that contains the source and destination of the
+            serialized stream associated with the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> instance.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><c>info</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.OnDeserialization(System.Object)">
+            <summary>
+            Implements the <see cref="T:System.Runtime.Serialization.ISerializable"/> interface and raises the deserialization event
+            when the deserialization is complete.
+            </summary>
+            <param name="sender">The source of the deserialization event.</param>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object associated with the current <see
+            cref="T:System.Collections.Generic.SingleLinkedList`1"/> instance is invalid.
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Remove(`0)">
+            <summary>
+            Removes the first occurrence of the specified value from the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="value">The value to remove from the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+            <returns>
+            <c>true</c> if the element containing <c>value</c> is successfully removed; otherwise,
+            <c>false</c>. This method also returns <c>false</c> if value was not found in the
+            original <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Remove(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Removes the specified node from the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">
+            The <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> to remove from the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><c>node</c> is <c>null</c>.</exception>
+            <exception cref="T:System.InvalidOperationException">
+            <c>node</c> is not in the current <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.RemoveFirst">
+            <summary>
+            Removes the node at the start of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            The <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> is empty.
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.System#Collections#Generic#ICollection{T}#Add(`0)">
+            <summary>
+            Adds an item at the end of the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <param name="value">The value to add at the end of the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:System.Collections.ICollection"/> to an <see cref="T:System.Array"/>, starting
+            at a particular <see cref="T:System.Array"/> index.
+            </summary>
+            <param name="array">
+            The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied
+            from <see cref="T:System.Collections.ICollection"/>. The <see cref="T:System.Array"/> must have zero-based indexing.
+            </param>
+            <param name="index">The zero-based index in <c>array</c> at which copying begins.</param>
+            <exception cref="T:System.ArgumentNullException"><c>array</c> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><c>index</c> is less than zero.</exception>
+            <exception cref="T:System.ArgumentException">
+            <para><c>array</c> is multidimensional.</para>
+            <para>-or-</para>
+            <para><c>array</c> does not have zero-based indexing.</para>
+            <para>-or-</para>
+            <para>
+            The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the
+            available space from <c>index</c> to the end of the destination <c>array</c>.
+            </para>
+            <para>-or-</para>
+            <para>
+            The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type
+            of the destination <c>array</c>.
+            </para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.System#Collections#Generic#IEnumerable{T}#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.SingleLinkedList`1.Enumerator"/> for the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the linked list as a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through the linked list as a collection.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.ValidateNewNode(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Validates the new node.
+            </summary>
+            <param name="node">The node need to be validated.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>node</c> is <c>null</c>.</para>
+            <para><c>newNode</c> is <c>null</c>.</para>
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            <para><c>node</c> is not in the current <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            <para>-or-</para>
+            <para><c>newNode</c> belongs to another <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.ValidateNode(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Validates the node in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">The node need to be validated.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><c>node</c> is <c>null</c>.</para>
+            <para><c>newNode</c> is <c>null</c>.</para>
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            <para><c>node</c> is not in the current <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            <para>-or-</para>
+            <para><c>newNode</c> belongs to another <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</para>
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.InternalInsertNodeAfter(System.Collections.Generic.SingleLinkedListNode{`0},System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Inserts the new node after the specified node in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">The specified node in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+            <param name="newNode">
+            The new node need to be inserted into the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> after the
+            specified node.
+            </param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.InternalInsertNodeFirst(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Inserts the new node to the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> at first place as head node.
+            </summary>
+            <param name="newNode">The new node need to be inserted into the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.InternalInsertNodeLast(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Inserts the new node to the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> at last place.
+            </summary>
+            <param name="newNode">The new node need to be inserted into the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.InternalInsertNodeToEmptyList(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Inserts the new node to the empty <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="newNode">The new node need to be inserted into the emty <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.</param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.InternalRemoveNode(System.Collections.Generic.SingleLinkedListNode{`0})">
+            <summary>
+            Removes the node from the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="node">The new node need to be removed.</param>
+        </member>
+        <member name="T:System.Collections.Generic.SingleLinkedList`1.Enumerator">
+            <summary>
+            Enumerates the elements of a <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Enumerator.#ctor(System.Collections.Generic.SingleLinkedList{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.SingleLinkedList`1.Enumerator"/> struct that contains the
+            <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <param name="list">The <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> want to be enumerator.</param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Enumerator.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.SingleLinkedList`1.Enumerator"/> struct that is
+            serializable with the specified <see cref="T:System.Runtime.Serialization.SerializationInfo"/> and <see cref="T:System.Runtime.Serialization.StreamingContext"/>.
+            </summary>
+            <param name="info">
+            A <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object containing the information required to
+            serialize the <see cref="T:System.Collections.Generic.SingleLinkedList`1.Enumerator"/>.
+            </param>
+            <param name="context">
+            A <see cref="T:System.Runtime.Serialization.StreamingContext"/> object containing the source and destination of the
+            serialized stream associated with the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </param>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedList`1.Enumerator.Current">
+            <summary>
+            Gets the element at the current position of the enumerator.
+            </summary>
+            <value>
+            The element in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> at the current position of the enumerator.
+            </value>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedList`1.Enumerator.System#Collections#IEnumerator#Current">
+            <summary>
+            Gets the element at the current position of the enumerator.
+            </summary>
+            <value>The element in the collection at the current position of the enumerator.</value>
+            <exception cref="T:System.InvalidOperationException">
+            The enumerator is positioned before the first element of the collection or after the
+            last element.
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Enumerator.Dispose">
+            <summary>
+            Releases all resources used by the <see cref="T:System.Collections.Generic.SingleLinkedList`1.Enumerator"/>.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Enumerator.MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <returns>
+            <c>true</c> if the enumerator was successfully advanced to the next element;
+            <c>false</c> if the enumerator has passed the end of the collection.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">
+            The collection was modified after the enumerator was created.
+            </exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Enumerator.System#Runtime#Serialization#ISerializable#GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Implements the <see cref="T:System.Runtime.Serialization.ISerializable"/> interface and returns the data needed to
+            serialize the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> instance.
+            </summary>
+            <param name="info">
+            A <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object that contains the information required to
+            serialize the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> instance.
+            </param>
+            <param name="context">
+            A <see cref="T:System.Runtime.Serialization.StreamingContext"/> object that contains the source and destination of
+            the serialized stream associated with the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> instance.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><c>info</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Enumerator.System#Runtime#Serialization#IDeserializationCallback#OnDeserialization(System.Object)">
+            <summary>
+            Implements the <see cref="T:System.Runtime.Serialization.ISerializable"/> interface and raises the deserialization
+            event when the deserialization is complete.
+            </summary>
+            <param name="sender">The source of the deserialization event.</param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedList`1.Enumerator.System#Collections#IEnumerator#Reset">
+            <summary>
+            Sets the enumerator to its initial position, which is before the first element in the collection.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            The collection was modified after the enumerator was created.
+            </exception>
+        </member>
+        <member name="T:System.Collections.Generic.SingleLinkedListNode`1">
+            <summary>
+            Represents a node in a <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <typeparam name="T">Specifies the element type of the single linked list.</typeparam>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedListNode`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> class, containing
+            the specified value.
+            </summary>
+            <param name="value">The value to contain in the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/>.</param>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedListNode`1.#ctor(System.Collections.Generic.SingleLinkedList{`0},`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> class, containing
+            the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> that the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/>
+            belongs to and the specified value.
+            </summary>
+            <param name="list">
+            The <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> that the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/>
+            belongs to.
+            </param>
+            <param name="value">The value to contain in the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/>.</param>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedListNode`1.List">
+            <summary>
+            Gets the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> that the <see cref="T:System.Collections.Generic.SingleLinkedListNode`1"/>
+            belongs to.
+            </summary>
+            <value>
+            A reference to the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/> that the <see
+            cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> belongs to, or <c>null</c> if the <see
+            cref="T:System.Collections.Generic.SingleLinkedListNode`1"/> is not linked.
+            </value>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedListNode`1.Next">
+            <summary>
+            Gets the next node in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </summary>
+            <value>
+            A reference to the next node in the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>, or <c>null</c> if
+            the current node is the last element of the <see cref="T:System.Collections.Generic.SingleLinkedList`1"/>.
+            </value>
+        </member>
+        <member name="P:System.Collections.Generic.SingleLinkedListNode`1.Value">
+            <summary>
+            Gets the value contained in the node.
+            </summary>
+            <value>The value contained in the node.</value>
+        </member>
+        <member name="M:System.Collections.Generic.SingleLinkedListNode`1.Invalidate">
+            <summary>
+            Invalidates this node.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.TreeNode`1.Invalidate">
+            <summary>
+            Invalidates this node.
+            </summary>
+        </member>
+        <member name="T:System.Collections.Generic.GenericCollectionExtensions">
+            <summary>
+            Extension methods for generic collection classes.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.GenericCollectionExtensions.AddUnique``1(System.Collections.Generic.ICollection{``0},``0)">
+            <summary>
+            Adds a unique item to the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <param name="source">A <see cref="T:System.Collections.Generic.ICollection`1"/> to add unique item.</param>
+            <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+        </member>
+        <member name="T:System.Collections.CollectionExtensions">
+            <summary>
+            Extension methods for collection classes.
+            </summary>
+        </member>
+        <member name="M:System.Collections.CollectionExtensions.AddUnique(System.Collections.IList,System.Object)">
+            <summary>
+            Adds a unique item to the <see cref="T:System.Collections.IList"/>.
+            </summary>
+            <param name="source">A <see cref="T:System.Collections.IList"/> to add unique item.</param>
+            <param name="value">The object to add to the <see cref="T:System.Collections.IList"/>.</param>
+            <returns>
+            The position into which the new element was inserted, or -1 to indicate that the item was
+            not inserted into the collection.
+            </returns>
+        </member>
+        <member name="M:System.Collections.CollectionExtensions.CopyTo(System.Collections.IList,System.Collections.IList,System.Int32)">
+            <summary>
+            Copies all the elements of the <see cref="T:System.Collections.IList"/> to the specific <see cref="T:System.Collections.IList"/>.
+            </summary>
+            <param name="source">The source object of the <see cref="T:System.Collections.IList"/>.</param>
+            <param name="target">The target object of the <see cref="T:System.Collections.IList"/>.</param>
+            <param name="index">
+            A 32-bit integer that represents the index in <see cref="T:System.Collections.IList"/> at which copying begins.
+            </param>
+        </member>
+        <member name="M:System.Collections.CollectionExtensions.IndexOfMax(System.Collections.IList,System.Int32)">
+            <summary>
+            Searches for the maximum object and returns the index of object in the <see cref="T:System.Collections.IList"/>.
+            </summary>
+            <param name="source">The <see cref="T:System.Collections.IList"/> to search.</param>
+            <param name="count">The number of objects in the section to search.</param>
+            <returns>The index of maximum object in the <see cref="T:System.Collections.IList"/>.</returns>
+        </member>
+        <member name="M:System.Collections.CollectionExtensions.Swap(System.Collections.IList,System.Int32,System.Int32)">
+            <summary>
+            Swaps a element in one index with another element in another index.
+            </summary>
+            <param name="source">The <see cref="T:System.Collections.IList"/> to swap elements.</param>
+            <param name="a">The first index of element in the <see cref="T:System.Collections.IList"/> to swap.</param>
+            <param name="b">The second index of element in the <see cref="T:System.Collections.IList"/> to swap.</param>
+        </member>
+        <member name="M:System.Collections.CollectionExtensions.ToArrayString(System.Collections.IList)">
+            <summary>
+            Converts the value of the current <see cref="T:System.Collections.IList"/> to its equivalent array string representation.
+            </summary>
+            <param name="source">The source <see cref="T:System.Collections.IList"/> object.</param>
+            <returns>The array string representation of the value of <see cref="T:System.Collections.IList"/>.</returns>
+        </member>
+        <member name="T:System.EnumUtility">
+            <summary>
+            Provides utilities to deal with <see cref="T:System.Enum"/>.
+            </summary>
+        </member>
+        <member name="M:System.EnumUtility.ConvertToEnum``1(System.String,System.Boolean)">
+            <summary>
+            Converts the <see cref="T:System.String"/> to the sepecified <see cref="T:System.Enum"/> value.
+            </summary>
+            <typeparam name="TEnum">The type of the sepecified <see cref="T:System.Enum"/>.</typeparam>
+            <param name="value">The <see cref="T:System.String"/> of the value of <see cref="T:System.Enum"/>.</param>
+            <param name="ignoreCase"><c>true</c> to ignore case; <c>false</c> to regard case.</param>
+            <returns>The <see cref="T:System.Enum"/> value.</returns>
+        </member>
+        <member name="T:System.Int16Extensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.Int16"/>.
+            </summary>
+        </member>
+        <member name="M:System.Int16Extensions.Reverse(System.Int16)">
+            <summary>
+            Reverse and advances the position of the source by two bytes.
+            </summary>
+            <param name="source">The <see cref="T:System.Int16"/> to reverse.</param>
+            <returns>A 2-byte signed short integer in reverse.</returns>
+        </member>
+        <member name="T:System.Int32Extensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.Int32"/>.
+            </summary>
+        </member>
+        <member name="M:System.Int32Extensions.Reverse(System.Int32)">
+            <summary>
+            Reverse and advances the position of the source by four bytes.
+            </summary>
+            <param name="source">The <see cref="T:System.Int32"/> to reverse.</param>
+            <returns>A 4-byte signed integer in reverse.</returns>
+        </member>
+        <member name="T:System.Int64Extensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.Int64"/>.
+            </summary>
+        </member>
+        <member name="M:System.Int64Extensions.Reverse(System.Int64)">
+            <summary>
+            Reverse and advances the position of the source by eight bytes.
+            </summary>
+            <param name="source">The <see cref="T:System.Int64"/> to reverse.</param>
+            <returns>A 8-byte signed long integer in reverse.</returns>
+        </member>
+        <member name="T:System.IO.BinaryReaderExtensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.IO.BinaryReader"/>.
+            </summary>
+        </member>
+        <member name="M:System.IO.BinaryReaderExtensions.ReadBytesReverse(System.IO.BinaryReader,System.Int32)">
+            <summary>
+            Reads the specified number of bytes in reverse from the current stream into a byte array
+            and advances the current position by that number of bytes.
+            </summary>
+            <param name="reader">The <see cref="T:System.IO.BinaryReader"/> to read byte array.</param>
+            <param name="count">
+            The number of bytes to read. This value must be 0 or a non-negative number or an
+            exception will occur.
+            </param>
+            <returns>
+            A byte array containing data in reverse read from the underlying stream. This might be
+            less than the number of bytes requested if the end of the stream is reached.
+            </returns>
+        </member>
+        <member name="M:System.IO.BinaryReaderExtensions.ReadInt16Reverse(System.IO.BinaryReader)">
+            <summary>
+            Reads a 2-byte signed integer in reverse from the current stream and advances the current
+            position of the stream by two bytes.
+            </summary>
+            <param name="reader">The <see cref="T:System.IO.BinaryReader"/> to read signed short integer.</param>
+            <returns>A 2-byte signed short integer in reverse read from the current stream.</returns>
+        </member>
+        <member name="M:System.IO.BinaryReaderExtensions.ReadInt32Reverse(System.IO.BinaryReader)">
+            <summary>
+            Reads a 4-byte signed integer in reverse from the current stream and advances the current
+            position of the stream by four bytes.
+            </summary>
+            <param name="reader">The <see cref="T:System.IO.BinaryReader"/> to read signed integer.</param>
+            <returns>A 4-byte signed integer in reverse read from the current stream.</returns>
+        </member>
+        <member name="M:System.IO.BinaryReaderExtensions.ReadInt64Reverse(System.IO.BinaryReader)">
+            <summary>
+            Reads an 8-byte signed integer in reverse from the current stream and advances the
+            current position of the stream by eight bytes.
+            </summary>
+            <param name="reader">The <see cref="T:System.IO.BinaryReader"/> to read signed long integer.</param>
+            <returns>A 8-byte signed long integer in reverse read from the current stream.</returns>
+        </member>
+        <member name="M:System.IO.BinaryReaderExtensions.ReadUInt16Reverse(System.IO.BinaryReader)">
+            <summary>
+            Reads a 2-byte unsigned integer in reverse from the current stream and advances the
+            position of the stream by two bytes.
+            </summary>
+            <param name="reader">The <see cref="T:System.IO.BinaryReader"/> to read unsigned short integer.</param>
+            <returns>A 2-byte unsigned short integer in reverse read from this stream.</returns>
+        </member>
+        <member name="M:System.IO.BinaryReaderExtensions.ReadUInt32Reverse(System.IO.BinaryReader)">
+            <summary>
+            Reads a 4-byte unsigned integer in reverse from the current stream and advances the
+            position of the stream by four bytes.
+            </summary>
+            <param name="reader">The <see cref="T:System.IO.BinaryReader"/> to read unsigned integer.</param>
+            <returns>A 4-byte unsigned integer in reverse read from this stream.</returns>
+        </member>
+        <member name="M:System.IO.BinaryReaderExtensions.ReadUInt64Reverse(System.IO.BinaryReader)">
+            <summary>
+            Reads an 8-byte unsigned integer in reverse from the current stream and advances the
+            position of the stream by eight bytes.
+            </summary>
+            <param name="reader">The <see cref="T:System.IO.BinaryReader"/> to read unsigned long integer.</param>
+            <returns>A 8-byte unsigned long integer in reverse read from this stream.</returns>
+        </member>
+        <member name="T:System.IO.StreamExtensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.IO.Stream"/>.
+            </summary>
+        </member>
+        <member name="M:System.IO.StreamExtensions.ToByteArray(System.IO.Stream)">
+            <summary>
+            Convert a <see cref="T:System.IO.Stream"/> to a byte array.
+            </summary>
+            <param name="input">The input <see cref="T:System.IO.Stream"/>.</param>
+            <returns>The byte array converted.</returns>
+        </member>
+        <member name="T:System.IO.FileInfoExtensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.IO.FileInfo"/>.
+            </summary>
+        </member>
+        <member name="M:System.IO.FileInfoExtensions.Rename(System.IO.FileInfo,System.String)">
+            <summary>
+            Renames the file.
+            </summary>
+            <param name="source">The source object of FileInfo.</param>
+            <param name="newFileName">The new file name.</param>
+        </member>
+        <member name="T:System.IO.PathUtility">
+            <summary>
+            Provides methods for processing directory strings in an ideally cross-platform manner.
+            </summary>
+        </member>
+        <member name="M:System.IO.PathUtility.Combine(System.String[])">
+            <summary>
+            Combines an array of strings into a path.
+            </summary>
+            <param name="paths">An array of parts of the path.</param>
+            <returns>The combined paths.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            One of the strings in the array is <c>null</c>.
+            </exception>
+        </member>
+        <member name="T:System.MathUtility">
+            <summary>
+            Provides constants and static methods for trigonometric, logarithmic, and other common
+            mathematical functions. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="M:System.MathUtility.GenGaussianRandomNumber">
+            <summary>
+            Generate Gaussian Random Number.
+            </summary>
+            <returns>The Gaussian Random Number.</returns>
+        </member>
+        <member name="M:System.MathUtility.GetRandomSeed">
+            <summary>
+            Gets the random seed.
+            </summary>
+            <returns>The random seed.</returns>
+        </member>
+        <member name="M:System.MathUtility.GetReciprocal(System.Single)">
+            <summary>
+            Gets the reciprocal of a number.
+            </summary>
+            <param name="number">The number.</param>
+            <returns>The reciprocal of the number.</returns>
+        </member>
+        <member name="M:System.MathUtility.IsOdd(System.Int32)">
+            <summary>
+            Determines whether the specific <see cref="T:System.Int32"/> is odd.
+            </summary>
+            <param name="n">The <see cref="T:System.Int32"/>.</param>
+            <returns><c>true</c> if the specific <see cref="T:System.Int32"/> is odd; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:System.MathUtility.IsOdd(System.Single)">
+            <summary>
+            Determines whether the specific <see cref="T:System.Single"/> is odd.
+            </summary>
+            <param name="n">The <see cref="T:System.Single"/>.</param>
+            <returns><c>true</c> if the specific <see cref="T:System.Single"/> is odd; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="T:System.ObjectExtensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.Object"/>.
+            </summary>
+        </member>
+        <member name="M:System.ObjectExtensions.DeepClone(System.Object)">
+            <summary>
+            Creates a deep copy of the current <see cref="T:System.Object"/>.
+            </summary>
+            <param name="source">The current <see cref="T:System.Object"/>.</param>
+            <returns>A deep copy of the current <see cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="M:System.ObjectExtensions.GetEventInvocationList(System.Object,System.Reflection.EventInfo)">
+            <summary>
+            Returns the invocation list of the specific <see cref="T:System.Reflection.EventInfo"/> of the target <see cref="T:System.Object"/>.
+            </summary>
+            <param name="target">The target <see cref="T:System.Object"/>.</param>
+            <param name="eventInfo">The specific <see cref="T:System.Reflection.EventInfo"/>.</param>
+            <returns>
+            The invocation list of the specific <see cref="T:System.Reflection.EventInfo"/> of the target <see cref="T:System.Object"/>
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><c>eventInfo</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.ObjectExtensions.GetFieldValue(System.Object,System.String)">
+            <summary>
+            Gets the normal field value by a given field name.
+            </summary>
+            <param name="source">The object whose field value will be returned.</param>
+            <param name="fieldName">The string containing the name of the data field to get.</param>
+            <returns>An object containing the value of the field reflected by this instance.</returns>
+        </member>
+        <member name="M:System.ObjectExtensions.GetFieldValue(System.Object,System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Gets the field value by a given field name and a bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/>.
+            </summary>
+            <param name="source">The object whose field value will be returned.</param>
+            <param name="fieldName">The string containing the name of the data field to get.</param>
+            <param name="bindingAttr">
+            A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search
+            is conducted.
+            </param>
+            <returns>An object containing the value of the field reflected by this instance.</returns>
+        </member>
+        <member name="M:System.ObjectExtensions.GetPropertyValue(System.Object,System.String,System.Object[])">
+            <summary>
+            Gets the property value of by a given property name and index values for indexed properties.
+            </summary>
+            <param name="source">The object whose property value will be returned.</param>
+            <param name="propertyName">The name of the property.</param>
+            <param name="index">
+            Optional index values for indexed properties. The indexes of indexed properties are
+            zero-based. This value should be null for non-indexed properties.
+            </param>
+            <returns>An object containing the value of the property reflected by this instance.</returns>
+        </member>
+        <member name="M:System.ObjectExtensions.GetPropertyValue(System.Object,System.String,System.Reflection.BindingFlags,System.Object[])">
+            <summary>
+            Gets the property value of by a given property name, a bitmask comprised of one or more
+            <see cref="T:System.Reflection.BindingFlags"/> and index values for indexed properties.
+            </summary>
+            <param name="source">The object whose property value will be returned.</param>
+            <param name="propertyName">The name of the property.</param>
+            <param name="bindingAttr">
+            A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search
+            is conducted.
+            </param>
+            <param name="index">
+            Optional index values for indexed properties. The indexes of indexed properties are
+            zero-based. This value should be null for non-indexed properties.
+            </param>
+            <returns>An object containing the value of the property reflected by this instance.</returns>
+        </member>
+        <member name="M:System.ObjectExtensions.HasMethod(System.Object,System.String)">
+            <summary>
+            Determines whether has the specified method by a given name with the default instance of
+            bitmask comprised of <see cref="T:System.Reflection.BindingFlags"/>.
+            </summary>
+            <param name="source">The object to search.</param>
+            <param name="methodName">Name of the method.</param>
+            <returns><c>true</c> if this object has the specified method; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:System.ObjectExtensions.HasMethod(System.Object,System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Determines whether has the specified method by a given name and a bitmask comprised of
+            one or more <see cref="T:System.Reflection.BindingFlags"/>.
+            </summary>
+            <param name="source">The object to search.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="bindingAttr">
+            A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search
+            is conducted.
+            </param>
+            <returns><c>true</c> if this object has the specified method; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:System.ObjectExtensions.InvokeGenericMethod(System.Object,System.String,System.Type,System.Object[])">
+            <summary>
+            Invokes the generic method by a given name, the type to be substituted for the type
+            parameters of the current generic method definition and parameters for the method with
+            the default instance bitmask comprised of <see cref="T:System.Reflection.BindingFlags"/>.
+            </summary>
+            <param name="source">The object on which to invoke the method.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="genericType">
+            Type to be substituted for the type parameters of the current generic method definition.
+            </param>
+            <param name="parameters">The parameters for the method.</param>
+            <returns>An object containing the return value of the invoked method.</returns>
+        </member>
+        <member name="M:System.ObjectExtensions.InvokeGenericMethod(System.Object,System.String,System.Type,System.Reflection.BindingFlags,System.Object[])">
+            <summary>
+            Invokes the generic method by a given name, the type to be substituted for the type
+            parameters of the current generic method definition, a bitmask comprised of one or more
+            <see cref="T:System.Reflection.BindingFlags"/> and parameters for the method.
+            </summary>
+            <param name="source">The object on which to invoke the method.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="genericType">
+            Type to be substituted for the type parameters of the current generic method definition.
+            </param>
+            <param name="bindingAttr">
+            A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search
+            is conducted.
+            </param>
+            <param name="parameters">The parameters for the method.</param>
+            <returns>An object containing the return value of the invoked method.</returns>
+        </member>
+        <member name="M:System.ObjectExtensions.InvokeMethod(System.Object,System.String,System.Object[])">
+            <summary>
+            Invokes the method by a given name and parameters for the method with the default
+            instance bitmask comprised of <see cref="T:System.Reflection.BindingFlags"/>.
+            </summary>
+            <param name="source">The object on which to invoke the method.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="parameters">The parameters for the method.</param>
+            <returns>An object containing the return value of the invoked method.</returns>
+        </member>
+        <member name="M:System.ObjectExtensions.InvokeMethod(System.Object,System.String,System.Reflection.BindingFlags,System.Object[])">
+            <summary>
+            Invokes the method by a given name, a bitmask comprised of one or more <see
+            cref="T:System.Reflection.BindingFlags"/> and parameters for the method.
+            </summary>
+            <param name="source">The object on which to invoke the method.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="bindingAttr">
+            A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search
+            is conducted.
+            </param>
+            <param name="parameters">The parameters for the method.</param>
+            <returns>An object containing the return value of the invoked method.</returns>
+        </member>
+        <member name="M:System.ObjectExtensions.RemoveAllEventHandlers(System.Object)">
+            <summary>
+            Removes all event handlers from an event source.
+            </summary>
+            <param name="source">The event source.</param>
+        </member>
+        <member name="M:System.ObjectExtensions.RemoveEventHandlers(System.Object,System.String)">
+            <summary>
+            Removes event handlers from an event source by given name of event.
+            </summary>
+            <param name="source">The event source.</param>
+            <param name="eventName">The name of the event.</param>
+        </member>
+        <member name="M:System.ObjectExtensions.SetObjectFieldValue(System.Object,System.String,System.Object)">
+            <summary>
+            Sets the object field value by a given field name and the value to set with the default
+            instance attribute of <see cref="T:System.Reflection.BindingFlags"/>.
+            </summary>
+            <param name="source">The object whose field value to set.</param>
+            <param name="fieldName">Name of the field.</param>
+            <param name="value">The value to set.</param>
+        </member>
+        <member name="M:System.ObjectExtensions.SetObjectFieldValue(System.Object,System.String,System.Reflection.BindingFlags,System.Object)">
+            <summary>
+            Sets the object field value by a given field name, a bitmask comprised of one or more
+            <see cref="T:System.Reflection.BindingFlags"/> and the value to set.
+            </summary>
+            <param name="source">The object whose field value to set.</param>
+            <param name="fieldName">Name of the field.</param>
+            <param name="bindingAttr">
+            A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search
+            is conducted.
+            </param>
+            <param name="value">The value to set.</param>
+        </member>
+        <member name="M:System.ObjectExtensions.SetObjectPropertyValue(System.Object,System.String,System.Object)">
+            <summary>
+            Sets the object property value by a given property name and the value to set with the
+            default instance attribute of <see cref="T:System.Reflection.BindingFlags"/>.
+            </summary>
+            <param name="source">The object whose property value to set.</param>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value to set.</param>
+        </member>
+        <member name="M:System.ObjectExtensions.SetObjectPropertyValue(System.Object,System.String,System.Reflection.BindingFlags,System.Object)">
+            <summary>
+            Sets the object property value by a given property name, a bitmask comprised of one or
+            more <see cref="T:System.Reflection.BindingFlags"/> and the value to set.
+            </summary>
+            <param name="source">The object whose property value to set.</param>
+            <param name="propertyName">Name of the property.</param>
+            <param name="bindingAttr">
+            A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search
+            is conducted.
+            </param>
+            <param name="value">The value to set.</param>
+        </member>
+        <member name="T:System.RandomExtensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.Random"/>.
+            </summary>
+        </member>
+        <member name="M:System.RandomExtensions.NextDouble(System.Random,System.Double,System.Double)">
+            <summary>
+            Returns a random double that is within a specific range.
+            </summary>
+            <param name="source">The <see cref="T:System.Random"/> to return a randome double.</param>
+            <param name="minValue">The inclusive lower bound of the random number returned.</param>
+            <param name="maxValue">
+            The exclusive upper bound of the random number returned. <c>maxValue</c> must be greater
+            than or equal to <c>minValue</c>.
+            </param>
+            <returns>
+            A double greater than or equal to <c>minValue</c> and less than <c>maxValue</c>; that is,
+            the range of return values includes <c>minValue</c> but not <c>maxValue</c>. If
+            <c>minValue</c> equals <c>maxValue</c>, <c>minValue</c> is returned.
+            </returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"><c>minValue</c> is greater than <c>maxValue</c>.</exception>
+        </member>
+        <member name="M:System.RandomExtensions.NextLong(System.Random,System.Int64,System.Int64)">
+            <summary>
+            Returns a random 64-bit signed integer that is within a specific range.
+            </summary>
+            <param name="source">The <see cref="T:System.Random"/> to return a randome 64-bit signed integer.</param>
+            <param name="minValue">The inclusive lower bound of the random number returned.</param>
+            <param name="maxValue">
+            The exclusive upper bound of the random number returned. <c>maxValue</c> must be greater
+            than or equal to <c>minValue</c>.
+            </param>
+            <returns>
+            A 64-bit signed integer greater than or equal to <c>minValue</c> and less than
+            <c>maxValue</c>; that is, the range of return values includes <c>minValue</c> but not
+            <c>maxValue</c>. If <c>minValue</c> equals <c>maxValue</c>, <c>minValue</c> is returned.
+            </returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"><c>minValue</c> is greater than <c>maxValue</c>.</exception>
+        </member>
+        <member name="M:System.RandomExtensions.NextSingle(System.Random,System.Single,System.Single)">
+            <summary>
+            Returns a random single that is within a specific range.
+            </summary>
+            <param name="source">The <see cref="T:System.Random"/> to return a single double.</param>
+            <param name="minValue">The inclusive lower bound of the random number returned.</param>
+            <param name="maxValue">
+            The exclusive upper bound of the random number returned. <c>maxValue</c> must be greater
+            than or equal to <c>minValue</c>.
+            </param>
+            <returns>
+            A single greater than or equal to <c>minValue</c> and less than <c>maxValue</c>; that is,
+            the range of return values includes <c>minValue</c> but not <c>maxValue</c>. If
+            <c>minValue</c> equals <c>maxValue</c>, <c>minValue</c> is returned.
+            </returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"><c>minValue</c> is greater than <c>maxValue</c>.</exception>
+        </member>
+        <member name="T:System.Reflection.ReflectionUtility">
+            <summary>
+            Provides methods for doing something about reflection.
+            </summary>
+        </member>
+        <member name="F:System.Reflection.ReflectionUtility.DefaultBindingAttr">
+            <summary>
+            The default binding attribute.
+            </summary>
+        </member>
+        <member name="F:System.Reflection.ReflectionUtility.DefaultInstanceBindingAttr">
+            <summary>
+            The default instance binding attribute.
+            </summary>
+        </member>
+        <member name="F:System.Reflection.ReflectionUtility.DefaultStaticBindingAttr">
+            <summary>
+            The default static binding attribute.
+            </summary>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.GetStaticFieldValue``1(System.String)">
+            <summary>
+            Gets the static field value of the target class.
+            </summary>
+            <typeparam name="T">The type of the target class.</typeparam>
+            <param name="fieldName">Name of the field.</param>
+            <returns>The value of the static field.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.GetStaticFieldValue(System.Type,System.String)">
+            <summary>
+            Gets the static field value of the <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to get static field value.</param>
+            <param name="fieldName">Name of the field.</param>
+            <returns>The value of the static field.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.GetStaticPropertyValue``1(System.String)">
+            <summary>
+            Gets the static property value of the target class.
+            </summary>
+            <typeparam name="T">The type of the target class.</typeparam>
+            <param name="propertyName">Name of the property.</param>
+            <returns>The value of the static property.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.GetStaticPropertyValue(System.Type,System.String)">
+            <summary>
+            Gets the static property value of the <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to get static property value.</param>
+            <param name="propertyName">Name of the property.</param>
+            <returns>The value of the static property.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.HasStaticMethod``1(System.String)">
+            <summary>
+            Determines whether the specified class has the method by a given name.
+            </summary>
+            <typeparam name="T">The type to search.</typeparam>
+            <param name="methodName">Name of the method.</param>
+            <returns><c>true</c> if the specified class has the static method; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.HasStaticMethod(System.Type,System.String)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Type"/> has the method by a given name.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to search.</param>
+            <param name="methodName">Name of the method.</param>
+            <returns>
+            <c>true</c> if the specified <see cref="T:System.Type"/> has the static method; otherwise, <c>false</c>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><c>type</c> is <c>null</c>.</exception>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.InvokeConstructor``1(System.Object[])">
+            <summary>
+            Invokes the constructor of the target class by the parameters for the constructor.
+            </summary>
+            <typeparam name="T">The type of the target class.</typeparam>
+            <param name="parameters">
+            An array of values that matches the number, order and type (under the constraints of the
+            default binder) of the parameters for this constructor.
+            </param>
+            <returns>An instance of the class associated with the constructor.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.InvokeConstructor``1(System.Reflection.BindingFlags,System.Object[])">
+            <summary>
+            Invokes the constructor of the target class by a bitmask comprised of one or more <see
+            cref="T:System.Reflection.BindingFlags"/> and the parameters for the constructor.
+            </summary>
+            <typeparam name="T">The type of the target class.</typeparam>
+            <param name="bindingAttr">
+            A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search
+            is conducted.
+            </param>
+            <param name="parameters">
+            An array of values that matches the number, order and type (under the constraints of the
+            default binder) of the parameters for this constructor.
+            </param>
+            <returns>An instance of the class associated with the constructor.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.InvokeConstructor``1(System.Type[],System.Object[])">
+            <summary>
+            Invokes the constructor of the target class by an array of <see cref="T:System.Type"/> objects
+            representing the number, order, and type of the parameters for the constructor to get and
+            the parameters for the constructor.
+            </summary>
+            <typeparam name="T">The type of the target class.</typeparam>
+            <param name="types">
+            An array of <see cref="T:System.Type"/> objects representing the number, order, and type of the
+            parameters for the constructor to get.
+            </param>
+            <param name="parameters">
+            An array of values that matches the number, order and type (under the constraints of the
+            default binder) of the parameters for this constructor.
+            </param>
+            <returns>An instance of the class associated with the constructor.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.InvokeConstructor``1(System.Reflection.BindingFlags,System.Type[],System.Object[])">
+            <summary>
+            Invokes the constructor of the target class by a bitmask comprised of one or more <see
+            cref="T:System.Reflection.BindingFlags"/>, an array of <see cref="T:System.Type"/> objects representing the number,
+            order, and type of the parameters for the constructor to get and the parameters for the constructor.
+            </summary>
+            <typeparam name="T">The type of the target class.</typeparam>
+            <param name="bindingAttr">
+            A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search
+            is conducted.
+            </param>
+            <param name="types">
+            An array of <see cref="T:System.Type"/> objects representing the number, order, and type of the
+            parameters for the constructor to get.
+            </param>
+            <param name="parameters">
+            An array of values that matches the number, order and type (under the constraints of the
+            default binder) of the parameters for this constructor.
+            </param>
+            <returns>An instance of the class associated with the constructor.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.InvokeConstructor(System.Type,System.Object[])">
+            <summary>
+            Invokes the constructor of the <see cref="T:System.Type"/> by a given <see cref="T:System.Type"/> and the
+            parameters for the constructor with the default instance bitmask comprised of <see cref="T:System.Reflection.BindingFlags"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to invoke constructor.</param>
+            <param name="parameters">
+            An array of values that matches the number, order and type (under the constraints of the
+            default binder) of the parameters for this constructor.
+            </param>
+            <returns>An instance of the class associated with the constructor.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.InvokeConstructor(System.Type,System.Reflection.BindingFlags,System.Object[])">
+            <summary>
+            Invokes the constructor of the <see cref="T:System.Type"/> by a given <see cref="T:System.Type"/>, a
+            bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> and the parameters for the constructor.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to invoke constructor.</param>
+            <param name="bindingAttr">
+            A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search
+            is conducted.
+            </param>
+            <param name="parameters">
+            An array of values that matches the number, order and type (under the constraints of the
+            default binder) of the parameters for this constructor.
+            </param>
+            <returns>An instance of the class associated with the constructor.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.InvokeConstructor(System.Type,System.Type[],System.Object[])">
+            <summary>
+            Invokes the constructor of the <see cref="T:System.Type"/> by a given <see cref="T:System.Type"/>, an array
+            of <see cref="T:System.Type"/> objects representing the number, order, and type of the parameters
+            for the constructor to get and the parameters for the constructor.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to invoke constructor.</param>
+            <param name="types">
+            An array of <see cref="T:System.Type"/> objects representing the number, order, and type of the
+            parameters for the constructor to get.
+            </param>
+            <param name="parameters">
+            An array of values that matches the number, order and type (under the constraints of the
+            default binder) of the parameters for this constructor.
+            </param>
+            <returns>An instance of the class associated with the constructor.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.InvokeConstructor(System.Type,System.Reflection.BindingFlags,System.Type[],System.Object[])">
+            <summary>
+            Invokes the constructor of the <see cref="T:System.Type"/> by a given <see cref="T:System.Type"/>, a
+            bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/>, an array of <see
+            cref="T:System.Type"/> objects representing the number, order, and type of the parameters for the
+            constructor to get and the parameters for the constructor.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to invoke constructor.</param>
+            <param name="bindingAttr">
+            A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search
+            is conducted.
+            </param>
+            <param name="types">
+            An array of <see cref="T:System.Type"/> objects representing the number, order, and type of the
+            parameters for the constructor to get.
+            </param>
+            <param name="parameters">
+            An array of values that matches the number, order and type (under the constraints of the
+            default binder) of the parameters for this constructor.
+            </param>
+            <returns>An instance of the class associated with the constructor.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.InvokeGenericStaticMethod``1(System.String,System.Type,System.Object[])">
+            <summary>
+            Invokes the generic static method of the target class by a given name, a generic <see
+            cref="T:System.Type"/> and the parameters for the static method.
+            </summary>
+            <typeparam name="T">The type of the target class.</typeparam>
+            <param name="methodName">Name of the method.</param>
+            <param name="genericType">
+            Type to be substituted for the type parameters for the current generic method definition.
+            </param>
+            <param name="parameters">The parameters for the generic static method.</param>
+            <returns>The object of the method return.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.InvokeGenericStaticMethod(System.Type,System.String,System.Type,System.Object[])">
+            <summary>
+            Invokes the generic static method of the <see cref="T:System.Type"/> by the given <see
+            cref="T:System.Type"/>, a given name, a generic <see cref="T:System.Type"/> and the parameters for the
+            static method.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to invoke generic static method.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="genericType">
+            Type to be substituted for the type parameters for the current generic method definition.
+            </param>
+            <param name="parameters">The parameters for the generic static method.</param>
+            <returns>The object of the method return.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.InvokeStaticMethod``1(System.String,System.Object[])">
+            <summary>
+            Invokes the static method of the target class by a given name and the parameters for the
+            static method.
+            </summary>
+            <typeparam name="T">The type of the target class.</typeparam>
+            <param name="methodName">Name of the method.</param>
+            <param name="parameters">The parameters for the static method.</param>
+            <returns>The object of static method return.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.InvokeStaticMethod``1(System.String,System.Type[],System.Object[])">
+            <summary>
+            Invokes the static method of the target class by a given name, an array of <see
+            cref="T:System.Type"/> objects representing the number, order, and type of the parameters for the
+            constructor to get and the parameters for the static method.
+            </summary>
+            <typeparam name="T">The type of the target class.</typeparam>
+            <param name="methodName">Name of the method.</param>
+            <param name="types">
+            An array of <see cref="T:System.Type"/> objects representing the number, order, and type of the
+            parameters for the static method to get.
+            </param>
+            <param name="parameters">
+            An array of values that matches the number, order and type (under the constraints of the
+            default binder) of the parameters for this static method.
+            </param>
+            <returns>The object of static method return.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.InvokeStaticMethod(System.Type,System.String,System.Object[])">
+            <summary>
+            Invokes the static method of the <see cref="T:System.Type"/> by a given <see cref="T:System.Type"/>, a
+            given name of method and the parameters for the static method.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to invoke static method.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="parameters">The parameters for the static method.</param>
+            <returns>The object of static method return.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.InvokeStaticMethod(System.Type,System.String,System.Type[],System.Object[])">
+            <summary>
+            Invokes the static method by a given <see cref="T:System.Type"/>, a given name of method, an array
+            of <see cref="T:System.Type"/> objects representing the number, order, and type of the parameters
+            for the static method to get and the parameters for the static method.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to invoke static method.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="types">
+            An array of <see cref="T:System.Type"/> objects representing the number, order, and type of the
+            parameters for the static method to get.
+            </param>
+            <param name="parameters">The parameters for the static method.</param>
+            <returns>The object of static method return.</returns>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.SetStaticFieldValue``1(System.String,System.Object)">
+            <summary>
+            Sets the static field value of the target class.
+            </summary>
+            <typeparam name="T">The type of the target class.</typeparam>
+            <param name="fieldName">Name of the field.</param>
+            <param name="value">The value of the static field to set.</param>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.SetStaticFieldValue(System.Type,System.String,System.Object)">
+            <summary>
+            Sets the static field value of the <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to set static field value.</param>
+            <param name="fieldName">Name of the field.</param>
+            <param name="value">The value of the static field to set.</param>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.SetStaticPropertyValue``1(System.String,System.Object)">
+            <summary>
+            Sets the static property value of the target class.
+            </summary>
+            <typeparam name="T">The type of the target class.</typeparam>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value of the static property.</param>
+        </member>
+        <member name="M:System.Reflection.ReflectionUtility.SetStaticPropertyValue(System.Type,System.String,System.Object)">
+            <summary>
+            Sets the static property value of the <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to set static property value.</param>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value of the static property.</param>
+        </member>
+        <member name="T:System.StringExtensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="F:System.StringExtensions.whitespaceChars">
+            <summary>
+            The whitespace chars definitions.
+            </summary>
+        </member>
+        <member name="M:System.StringExtensions.HasValue(System.String)">
+            <summary>
+            Determines whether the specified <see cref="T:System.String"/> has value.
+            </summary>
+            <param name="source">The <see cref="T:System.String"/> to check.</param>
+            <returns>
+            <c>true</c> if the specified <see cref="T:System.String"/> has value; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:System.StringExtensions.KmpIndexOf(System.String,System.String)">
+            <summary>
+            Reports the zero-based index of the first occurrence of the specified string in this
+            instance by KMP algorithm.
+            </summary>
+            <param name="source">The source string.</param>
+            <param name="value">The string to seek.</param>
+            <returns>
+            The zero-based index position of <b>value</b> if that string is found, or -1 if it is
+            not. If <b>value</b> is <see cref="F:System.String.Empty"/>, the return value is 0.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><b>source</b> is <b>null</b>.</exception>
+        </member>
+        <member name="M:System.StringExtensions.Reverse(System.String)">
+            <summary>
+            Reverses the specified <see cref="T:System.String"/>.
+            </summary>
+            <param name="source">The specified <see cref="T:System.String"/>.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <b>source</b> is <b>null</b> or <see cref="F:System.String.Empty"/>.
+            </exception>
+        </member>
+        <member name="M:System.StringExtensions.TrimAll(System.String)">
+            <summary>
+            Trims all whitespace characters.
+            </summary>
+            <param name="source">The source string.</param>
+            <returns>The string with removing all whitespace characters.</returns>
+        </member>
+        <member name="M:System.StringExtensions.TrimAll(System.String,System.Char[])">
+            <summary>
+            Trims all characters assigned.
+            </summary>
+            <param name="source">The source string.</param>
+            <param name="trimChars">The trim characters assigned.</param>
+            <returns>The string with removing all characters assigned.</returns>
+        </member>
+        <member name="T:System.TimeUtility">
+            <summary>
+            Provides static methods to deal with objects about time.
+            </summary>
+        </member>
+        <member name="M:System.TimeUtility.GetUnixTimestamp">
+            <summary>
+            Gets the Unix timestamp for current time.
+            </summary>
+            <returns>The Unix timestamp of current time.</returns>
+        </member>
+        <member name="M:System.TimeUtility.GetUnixTimestamp(System.DateTime)">
+            <summary>
+            Gets the Unix timestamp for the specific <see cref="T:System.DateTime"/>.
+            </summary>
+            <param name="dateTime">The specific <see cref="T:System.DateTime"/>.</param>
+            <returns>The Unix timestamp of the specific <see cref="T:System.DateTime"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><c>dateTime</c> is <c>null</c>.</exception>
+        </member>
+        <member name="T:System.UInt16Extensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.UInt16"/>.
+            </summary>
+        </member>
+        <member name="M:System.UInt16Extensions.Reverse(System.UInt16)">
+            <summary>
+            Reverse and advances the position of the source by two bytes.
+            </summary>
+            <param name="source">The <see cref="T:System.UInt16"/> to reverse.</param>
+            <returns>A 2-byte unsigned short integer in reverse.</returns>
+        </member>
+        <member name="T:System.UInt32Extensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.UInt32"/>.
+            </summary>
+        </member>
+        <member name="M:System.UInt32Extensions.Reverse(System.UInt32)">
+            <summary>
+            Reverse and advances the position of the source by four bytes.
+            </summary>
+            <param name="source">The <see cref="T:System.UInt32"/> to reverse.</param>
+            <returns>A 4-byte unsigned integer in reverse.</returns>
+        </member>
+        <member name="T:System.UInt64Extensions">
+            <summary>
+            Extension methods collection of <see cref="T:System.UInt64"/>.
+            </summary>
+        </member>
+        <member name="M:System.UInt64Extensions.Reverse(System.UInt64)">
+            <summary>
+            Reverse and advances the position of the source by eight bytes.
+            </summary>
+            <param name="source">The <see cref="T:System.UInt64"/> to reverse.</param>
+            <returns>A 8-byte unsigned long integer in reverse.</returns>
+        </member>
+    </members>
+</doc>

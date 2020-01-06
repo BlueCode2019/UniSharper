@@ -17,25 +17,24 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\bin\Debug\UniSharper.Data\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\UniSharper.Data.XML</DocumentationFile>
+    <DocumentationFile>..\..\..\..\bin\Debug\UniSharper.Data\UniSharper.Data.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\..\..\bin\Release\UniSharper.Data\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\UniSharper.Data.XML</DocumentationFile>
+    <DocumentationFile>..\..\..\..\bin\Release\UniSharper.Data\UniSharper.Data.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="iBoxDB.NET2, Version=2.17.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\iBoxDB.2.17.1\lib\net20\iBoxDB.NET2.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="iBoxDB.NET2, Version=2.21.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\iBoxDB.2.21.0\lib\net20\iBoxDB.NET2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,23 +56,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>del "$(TargetDir)\*.*" /f/q</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>SET TargetPath="$(SolutionDir)tests\$(ProjectName).Tests\Assets\$(ProjectName)\Plugins"
-if not exist %25TargetPath%25 md %25TargetPath%25
-del "%25TargetPath%25\*.*" /f/q
-
-:: UniSharper.Tests
-xcopy "$(TargetDir)*.*" "%25TargetPath%25" /s /e /i /y
-
-:: Release
-SET ReleasePath="$(SolutionDir)bin\$(ProjectName)\Plugins"
-IF $(ConfigurationName) == Release (
-  IF NOT exist %25ReleasePath%25 md %25ReleasePath%25
-  del "%25ReleasePath%25\*.*" /f/q
-  xcopy "$(TargetDir)*.*" "%25ReleasePath%25" /s /e /i /y
-)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -124,17 +124,15 @@ namespace UniSharper.Data
 
         private static readonly Dictionary<BoxDBQueryOperator, string> queryOperators =
             new Dictionary<BoxDBQueryOperator, string>()
-{
-            { BoxDBQueryOperator.Equal, "==" },
-            { BoxDBQueryOperator.NotEqual, "!=" },
-            { BoxDBQueryOperator.GreaterThan, ">" },
-            { BoxDBQueryOperator.LessThan, "<" },
-            { BoxDBQueryOperator.GreaterThanOrEqual, ">=" },
-            { BoxDBQueryOperator.LessThanOrEqual, "<=" }
-};
+        {
+                { BoxDBQueryOperator.Equal, "==" },
+                { BoxDBQueryOperator.NotEqual, "!=" },
+                { BoxDBQueryOperator.GreaterThan, ">" },
+                { BoxDBQueryOperator.LessThan, "<" },
+                { BoxDBQueryOperator.GreaterThanOrEqual, ">=" },
+                { BoxDBQueryOperator.LessThanOrEqual, "<=" }
+        };
 
-        private AutoBox database;
-        private DB dbServer;
         private bool disposed = false;
 
         #endregion Fields
@@ -149,9 +147,9 @@ namespace UniSharper.Data
         public BoxDBAdapter(string dbPath, byte[] bin)
         {
             DB.Root(dbPath);
-            dbServer = new DB(bin);
-            dbServer.MinConfig();
-            dbServer.GetConfig().DBConfig.FileIncSize = 1;
+            DatabaseServer = new DB(bin);
+            DatabaseServer.MinConfig();
+            DatabaseServer.GetConfig().DBConfig.FileIncSize = 1;
         }
 
         /// <summary>
@@ -162,9 +160,9 @@ namespace UniSharper.Data
         public BoxDBAdapter(string dbPath, long dbDestAddr = 1)
         {
             DB.Root(dbPath);
-            dbServer = new DB(dbDestAddr, dbPath);
-            dbServer.MinConfig();
-            dbServer.GetConfig().DBConfig.FileIncSize = 1;
+            DatabaseServer = new DB(dbDestAddr, dbPath);
+            DatabaseServer.MinConfig();
+            DatabaseServer.GetConfig().DBConfig.FileIncSize = 1;
         }
 
         #endregion Constructors
@@ -189,16 +187,18 @@ namespace UniSharper.Data
         /// <value>The database.</value>
         public AutoBox Database
         {
-            get { return database; }
+            get;
+            private set;
         }
 
         /// <summary>
         /// Gets the database server.
         /// </summary>
         /// <value>The database server.</value>
-        public DB DbServer
+        public DB DatabaseServer
         {
-            get { return dbServer; }
+            get;
+            private set;
         }
 
         #endregion Properties
@@ -210,20 +210,7 @@ namespace UniSharper.Data
         /// </summary>
         public void Close()
         {
-            if (dbServer != null)
-            {
-                try
-                {
-                    if (!dbServer.IsClosed())
-                    {
-                        dbServer.Close();
-                    }
-                }
-                catch (Exception exception)
-                {
-                    Debug.LogException(exception);
-                }
-            }
+            Dispose(true);
         }
 
         /// <summary>
@@ -238,9 +225,9 @@ namespace UniSharper.Data
 
             try
             {
-                if (database != null && primaryKeyValues != null)
+                if (Database != null && primaryKeyValues != null)
                 {
-                    using (IBox box = database.Cube())
+                    using (IBox box = Database.Cube())
                     {
                         for (int i = 0, length = primaryKeyValues.Length; i < length; ++i)
                         {
@@ -291,9 +278,9 @@ namespace UniSharper.Data
 
             try
             {
-                if (dbServer != null)
+                if (DatabaseServer != null)
                 {
-                    return dbServer.GetConfig().EnsureTable<T>(tableName, names);
+                    return DatabaseServer.GetConfig().EnsureTable<T>(tableName, names);
                 }
             }
             catch (Exception exception)
@@ -317,9 +304,9 @@ namespace UniSharper.Data
 
             try
             {
-                if (database != null && values != null)
+                if (Database != null && values != null)
                 {
-                    using (IBox box = database.Cube())
+                    using (IBox box = Database.Cube())
                     {
                         for (int i = 0, length = values.Length; i < length; ++i)
                         {
@@ -356,9 +343,9 @@ namespace UniSharper.Data
         /// <returns>The new identifier.</returns>
         public long MakeNewId(byte name = 0, long step = 1)
         {
-            if (database != null)
+            if (Database != null)
             {
-                return database.NewId(name, step);
+                return Database.NewId(name, step);
             }
 
             return 0;
@@ -369,11 +356,11 @@ namespace UniSharper.Data
         /// </summary>
         public void Open()
         {
-            if (dbServer != null)
+            if (DatabaseServer != null)
             {
                 try
                 {
-                    database = dbServer.Open();
+                    Database = DatabaseServer.Open();
                 }
                 catch (Exception exception)
                 {
@@ -395,9 +382,9 @@ namespace UniSharper.Data
 
             try
             {
-                if (database != null)
+                if (Database != null)
                 {
-                    return database.SelectKey<T>(tableName, primaryKeyValue);
+                    return Database.SelectKey<T>(tableName, primaryKeyValue);
                 }
             }
             catch (Exception exception)
@@ -423,14 +410,14 @@ namespace UniSharper.Data
 
             try
             {
-                if (database != null)
+                if (Database != null)
                 {
                     object[] values;
                     string sql = GenerateMultiConditionQuerySQL(out values, tableName, conditions, multiConditionOperators);
 
                     if (!string.IsNullOrEmpty(sql))
                     {
-                        return database.Select<T>(sql, values);
+                        return Database.Select<T>(sql, values);
                     }
                 }
             }
@@ -454,14 +441,14 @@ namespace UniSharper.Data
 
             try
             {
-                if (database != null)
+                if (Database != null)
                 {
                     object[] values;
                     string sql = GenerateMultiConditionQuerySQL(out values, tableName);
 
                     if (!string.IsNullOrEmpty(sql))
                     {
-                        return database.Select<T>(sql, values);
+                        return Database.Select<T>(sql, values);
                     }
                 }
             }
@@ -482,9 +469,9 @@ namespace UniSharper.Data
         {
             try
             {
-                if (database != null)
+                if (Database != null)
                 {
-                    return database.SelectCount(string.Format("from {0}", tableName));
+                    return Database.SelectCount(string.Format("from {0}", tableName));
                 }
             }
             catch (Exception exception)
@@ -507,14 +494,14 @@ namespace UniSharper.Data
         {
             try
             {
-                if (database != null)
+                if (Database != null)
                 {
                     object[] values;
                     string sql = GenerateMultiConditionQuerySQL(out values, tableName, conditions, multiConditionOperators);
 
                     if (!string.IsNullOrEmpty(sql))
                     {
-                        return database.SelectCount(sql, values);
+                        return Database.SelectCount(sql, values);
                     }
                 }
             }
@@ -539,9 +526,9 @@ namespace UniSharper.Data
 
             try
             {
-                if (database != null && values != null)
+                if (Database != null && values != null)
                 {
-                    using (IBox box = database.Cube())
+                    using (IBox box = Database.Cube())
                     {
                         for (int i = 0, length = values.Length; i < length; ++i)
                         {
@@ -582,11 +569,28 @@ namespace UniSharper.Data
         {
             if (disposing && !disposed)
             {
-                Close();
-
-                if (dbServer != null)
+                if (Database != null)
                 {
-                    dbServer.Dispose();
+                    try
+                    {
+                        Database.GetDatabase().Dispose();
+                    }
+                    catch (Exception exception)
+                    {
+                        Debug.LogException(exception);
+                    }
+                }
+
+                if (DatabaseServer != null)
+                {
+                    try
+                    {
+                        DatabaseServer.Dispose();
+                    }
+                    catch (Exception exception)
+                    {
+                        Debug.LogException(exception);
+                    }
                 }
             }
         }

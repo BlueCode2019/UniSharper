@@ -73,7 +73,7 @@
             </summary>
             <value>The database.</value>
         </member>
-        <member name="P:UniSharper.Data.BoxDBAdapter.DbServer">
+        <member name="P:UniSharper.Data.BoxDBAdapter.DatabaseServer">
             <summary>
             Gets the database server.
             </summary>
