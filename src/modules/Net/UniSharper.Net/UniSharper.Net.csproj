@@ -11,7 +11,8 @@
     <AssemblyName>UniSharper.Net</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,7 +58,7 @@
     <ProjectReference Include="..\..\..\core\UniSharper\UniSharper.csproj">
       <Project>{098f0e93-3177-4923-88cd-596c96f6e907}</Project>
       <Name>UniSharper</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
